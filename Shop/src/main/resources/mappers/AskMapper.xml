@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="AskMapper"></mapper>
+<mapper namespace="AskMapper">
+	<resultMap type="com.project.shop.progress.vo.AskVO" id="askMap">
+		<id property="askNo" column="ask_no"/>
+		<result property="askUser" column="ask_user"/>
+		<result property="askDate" column="ask_date"/>
+		<result property="askStateFlag" column="ask_state_flag"/>
+		<result property="askDeleteFlag" column="ask_delete_flag"/>
+	</resultMap>
+</mapper>

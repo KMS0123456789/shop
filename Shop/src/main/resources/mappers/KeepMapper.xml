@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="KeepMapper"></mapper>
+<mapper namespace="KeepMapper">
+	<resultMap type="com.project.shop.progress.vo.keepVO" id="keepMap">
+		<id property="keepNo" column="keep_no"/>
+		<result property="keepUser" column="keep_user"/>
+		<result property="computerNo" column="computer_no"/>
+		<result property="peripheralNo" column="peripheral_no"/>
+		<result property="itemCategory" column="item_category"/>
+	</resultMap>
+</mapper>

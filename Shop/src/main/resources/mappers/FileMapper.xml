@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="CartMapper">
-	<resultMap type="com.project.shop.progress.vo.CartVO" id="cartMap">
-		<id property="cartNo" column="cart_no"/>
-		<result property="cartUser" column="cart_user"/>
+<mapper namespace="FileMapper">
+	<resultMap type="com.project.shop.progress.vo.FileVO" id="fileMap">
+		<id property="fileNo" column="file_no"/>
 		<result property="computerNo" column="computer_no"/>
 		<result property="peripheralNo" column="peripheral_no"/>
-		<result property="optNo" column="opt_no"/>
-		<result property="item_count" column="itemCount"/>
+		<result property="fileName" column="file_name"/>
+		<result property="filePath" column="file_path"/>
+		<result property="fileSize" column="file_size"/>
 		<result property="itemCategory" column="item_category"/>
 	</resultMap>
 </mapper>

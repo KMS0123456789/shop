@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="AskDetailMapper"></mapper>
+<mapper namespace="AskDetailMapper">
+	<resultMap type="com.project.shop.progress.vo.AskDetailVO" id="askDetailMap">
+		<id property="" column=""/>
+		<result property="askDetailNo" column="ask_detail_no"/>
+		<result property="askNo" column="ask_no"/>
+		<result property="askDetailUser" column="ask_detail_user"/>
+		<result property="computerNo" column="computer_no"/>
+		<result property="peripheralNo" column="peripheral_no"/>
+		<result property="optNo" column="opt_no"/>
+		<result property="itemCount" column="item_count"/>
+		<result property="itemCategory" column="item_category"/>
+	</resultMap>
+</mapper>
