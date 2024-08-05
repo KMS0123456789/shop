@@ -1,3 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="OptMapper"></mapper>
+<mapper namespace="OptMapper">
+	<resultMap type="com.project.shop.computer.vo.OptVO" id="optMap">
+		<id property="optNo" column="opt_no"/>
+		<result property="optCategory" column="opt_category"/>
+		<result property="optName" column="opt_name"/>
+		<result property="optStock" column="opt_stock"/>
+		<result property="optSalePrice" column="opt_sale_price"/>
+		<result property="optOutFlag" column="opt_out_flag"/>
+		<result property="optSaleDate" column="opt_sale_date"/>
+	</resultMap>
+</mapper>

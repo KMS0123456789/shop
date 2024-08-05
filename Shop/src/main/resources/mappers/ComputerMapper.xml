@@ -1,3 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ComputerMapper"></mapper>
+<mapper namespace="ComputerMapper">
+	<resultMap type="com.project.shop.computer.vo.ComputerVO" id="computerMap">
+		<id property="computerNo" column="computer_no"/>
+		<result property="computerTitle" column="computer_title"/>
+		<result property="computerBody" column="computer_body"/>
+		<result property="computerSalePrice" column="computer_sale_price"/>
+		<result property="cpu" column="cpu"/>
+		<result property="ssd" column="ssd"/>
+		<result property="mainBoard" column="main_board"/>
+		<result property="gpu" column="gpu"/>
+		<result property="power" column="power"/>
+		<result property="bCase" column="b_case"/>
+		<result property="ram" column="ram"/>
+		<result property="cooler" column="cooler"/>
+		<result property="computerStock" column="computer_stock"/>
+		<result property="computerOutFlag" column="computer_out_flag"/>
+		<result property="computerSaleDate" column="computer_sale_date"/>
+		<result property="computerCreateDate" column="computer_create_date"/>
+	</resultMap>
+</mapper>
