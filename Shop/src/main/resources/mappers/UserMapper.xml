@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="UserMapper"></mapper>
+<mapper namespace="UserMapper">
+	<resultMap type="com.project.shop.progress.vo.UserVO" id="userMap">
+		<id property="email" column="email"/>
+		<result property="pw" column="pw"/>
+		<result property="name" column="name"/>
+		<result property="phoneNum" column="phone_num"/>
+		<result property="userType" column="user_type"/>
+		<result property="creatDate" column="creat_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="deleteDate" column="delete_date"/>
+		<result property="blackListDate" column="black_list_date"/>
+	</resultMap>
+</mapper>

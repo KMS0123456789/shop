@@ -1,3 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ReviewMapper"></mapper>
+<mapper namespace="ReviewMapper">
+	<resultMap type="com.project.shop.progress.vo.ReviewVO" id="reviewMap">
+		<id property="reviewNo" column="review_no"/>
+		<result property="reviewUser" column="review_user"/>
+		<result property="computerNo" column="computer_no"/>
+		<result property="peripheralNo" column="peripheral_no"/>
+		<result property="reviewBody" column="review_body"/>
+		<result property="reviewCreateDate" column="review_create_date"/>
+		<result property="itemCategory" column="item_category"/>
+	</resultMap>
+</mapper>
