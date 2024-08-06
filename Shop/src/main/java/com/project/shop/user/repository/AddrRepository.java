@@ -1,5 +1,13 @@
 package com.project.shop.user.repository;
 
-public class AddrRepository {
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
+public class AddrRepository {
+	
+	@Autowired
+	private SqlSessionTemplate template;
+	private final String NAME_SPACE = "AddrMapper";
 }
