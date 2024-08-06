@@ -3,10 +3,11 @@ package com.project.shop.progress.vo;
 public class CartVO {
 	private int cartNo;
 	private String cartUser;
-	private int conputerNo;
+	private int computerNo;
 	private int peripheralNo;
 	private int optNo;
 	private int itemCount;
+	
 	public int getCartNo() {
 		return cartNo;
 	}
@@ -20,10 +21,10 @@ public class CartVO {
 		this.cartUser = cartUser;
 	}
 	public int getConputerNo() {
-		return conputerNo;
+		return computerNo;
 	}
 	public void setConputerNo(int conputerNo) {
-		this.conputerNo = conputerNo;
+		this.computerNo = conputerNo;
 	}
 	public int getPeripheralNo() {
 		return peripheralNo;

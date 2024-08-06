@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="AddrMapper">
-	<resultMap type="com.project.shop.progress.vo.AddrVO" id="addrMap">
+	<resultMap type="com.project.shop.user.vo.AddrVO" id="addrMap">
 		<id property="addrNo" column="addr_no"/>
 		<result property="addrUser" column="addr_user"/>
 		<result property="address" column="address"/>

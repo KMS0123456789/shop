@@ -6,7 +6,7 @@ public class UserVO {
 	private String name;
 	private String phoneNum;
 	private int userType;
-	private String creatDate;
+	private String createDate;
 	private String updateDate;
 	private String deleteDate;
 	private String blackListDate;
@@ -27,7 +27,7 @@ public class UserVO {
 		return userType;
 	}
 	public String getCreatDate() {
-		return creatDate;
+		return createDate;
 	}
 	public String getUpdateDate() {
 		return updateDate;
@@ -54,7 +54,7 @@ public class UserVO {
 		this.userType = userType;
 	}
 	public void setCreatDate(String creatDate) {
-		this.creatDate = creatDate;
+		this.createDate = creatDate;
 	}
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;

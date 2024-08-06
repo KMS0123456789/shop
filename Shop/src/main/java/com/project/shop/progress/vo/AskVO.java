@@ -5,7 +5,7 @@ public class AskVO {
 	private String askUser;
 	private String askDate;
 	private int askStateFlag;
-	private int askDeleteflag;
+	private int askDeleteFlag;
 	public int getAskNo() {
 		return askNo;
 	}
@@ -31,9 +31,9 @@ public class AskVO {
 		this.askStateFlag = askStateFlag;
 	}
 	public int getAskDeleteflag() {
-		return askDeleteflag;
+		return askDeleteFlag;
 	}
 	public void setAskDeleteflag(int askDeleteflag) {
-		this.askDeleteflag = askDeleteflag;
+		this.askDeleteFlag = askDeleteflag;
 	}
 }

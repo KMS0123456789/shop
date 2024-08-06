@@ -1,68 +1,69 @@
 package com.project.shop.user.vo;
 
 public class QnAVO {
-	private int QnANo;
-	private String QnAUser;
+	private int qnaNo;
+	private String qnaUser;
 	private int computerNo;
 	private int peripheralNo;
-	private String QnATitle;
-	private String QnABody;
-	private String QnACreateDate;
-	private int QnAFlag;
+	private String qnaTitle;
+	private String qnaBody;
+	private String qnaCreateDate;
+	private int qnaFlag;
 	private int itemCategory;
-	
-	public int getQnANo() {
-		return QnANo;
+	public int getQnaNo() {
+		return qnaNo;
 	}
-	public String getQnAUser() {
-		return QnAUser;
+	public void setQnaNo(int qnaNo) {
+		this.qnaNo = qnaNo;
+	}
+	public String getQnaUser() {
+		return qnaUser;
+	}
+	public void setQnaUser(String qnaUser) {
+		this.qnaUser = qnaUser;
 	}
 	public int getComputerNo() {
 		return computerNo;
 	}
-	public int getPeripheralNo() {
-		return peripheralNo;
-	}
-	public String getQnATitle() {
-		return QnATitle;
-	}
-	public String getQnABody() {
-		return QnABody;
-	}
-	public String getQnACreateDate() {
-		return QnACreateDate;
-	}
-	public int getQnAFlag() {
-		return QnAFlag;
-	}
-	public int getItemCategory() {
-		return itemCategory;
-	}
-	public void setQnANo(int qnANo) {
-		QnANo = qnANo;
-	}
-	public void setQnAUser(String qnAUser) {
-		QnAUser = qnAUser;
-	}
 	public void setComputerNo(int computerNo) {
 		this.computerNo = computerNo;
+	}
+	public int getPeripheralNo() {
+		return peripheralNo;
 	}
 	public void setPeripheralNo(int peripheralNo) {
 		this.peripheralNo = peripheralNo;
 	}
-	public void setQnATitle(String qnATitle) {
-		QnATitle = qnATitle;
+	public String getQnaTitle() {
+		return qnaTitle;
 	}
-	public void setQnABody(String qnABody) {
-		QnABody = qnABody;
+	public void setQnaTitle(String qnaTitle) {
+		this.qnaTitle = qnaTitle;
 	}
-	public void setQnACreateDate(String qnACreateDate) {
-		QnACreateDate = qnACreateDate;
+	public String getQnaBody() {
+		return qnaBody;
 	}
-	public void setQnAFlag(int qnAFlag) {
-		QnAFlag = qnAFlag;
+	public void setQnaBody(String qnaBody) {
+		this.qnaBody = qnaBody;
+	}
+	public String getQnaCreateDate() {
+		return qnaCreateDate;
+	}
+	public void setQnaCreateDate(String qnaCreateDate) {
+		this.qnaCreateDate = qnaCreateDate;
+	}
+	public int getQnaFlag() {
+		return qnaFlag;
+	}
+	public void setQnaFlag(int qnaFlag) {
+		this.qnaFlag = qnaFlag;
+	}
+	public int getItemCategory() {
+		return itemCategory;
 	}
 	public void setItemCategory(int itemCategory) {
 		this.itemCategory = itemCategory;
 	}
+	
+	
 }
