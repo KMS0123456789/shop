@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="QuestionMapper">
+	<resultMap type="com.project.shop.user.vo.QuestionVO" id="questionMap">
+		<id property="questionNo" column="question_no"/>
+		<result property="questionUser" column="question_user"/>
+		<result property="computerNo" column="computer_no"/>
+		<result property="peripheralNo" column="peripheral_no"/>
+		<result property="questionTitle" column="question_title"/>
+		<result property="questionBody" column="question_body"/>
+		<result property="questionCreateDate" column="question_create_date"/>
+		<result property="questionFlag" column="question_flag"/>
+		<result property="itemCategory" column="item_category"/>
+	</resultMap>
+</mapper>

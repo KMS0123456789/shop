@@ -2,7 +2,6 @@ package com.project.shop.user.vo;
 
 public class UserVO {
 	private String email;
-	private String pw;
 	private String name;
 	private String phoneNum;
 	private int userType;
@@ -13,9 +12,6 @@ public class UserVO {
 	
 	public String getEmail() {
 		return email;
-	}
-	public String getPw() {
-		return pw;
 	}
 	public String getName() {
 		return name;
@@ -40,9 +36,6 @@ public class UserVO {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public void setPw(String pw) {
-		this.pw = pw;
 	}
 	public void setName(String name) {
 		this.name = name;
