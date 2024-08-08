@@ -10,5 +10,22 @@
 		<result property="updateDate" column="update_date"/>
 		<result property="deleteDate" column="delete_date"/>
 		<result property="blackListDate" column="black_list_date"/>
+		<collection property="keeps" ofType="com.project.shop.progress.vo.KeepVO">
+			<id property="keepNo" column="keep_no"/>
+			<result property="keepUser" column="keep_user"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="itemCategory" column="item_category"/>
+		</collection>
+		<collection property="carts" ofType="com.project.shop.progress.vo.CartVO">
+			<id property="cartNo" column="cart_no"/>
+			<result property="cartUser" column="cart_user"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="optNo" column="opt_no"/>
+			<result property="item_count" column="itemCount"/>
+			<result property="itemCategory" column="item_category"/>
+		</collection>
 	</resultMap>
+	
 </mapper>
