@@ -29,5 +29,11 @@ public class ComputerServiceImpl implements ComputerService{
 		return repository.count(searchType, keyword); //ComputerRepository의 메서드 count 실행
 	}
 	
+	//완제품 단건 조회
+	@Override
+	public ComputerVO computerPost(int computerNo) {
+		return repository.computerPost(computerNo);
+	}
+	
 	
 }

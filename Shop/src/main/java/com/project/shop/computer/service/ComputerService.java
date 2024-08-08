@@ -14,4 +14,7 @@ public interface ComputerService {
 	
 	//완제품 전체 개수 조회
 	int count(String searchType, String keyword);
+	
+	//완제품 단건 조회
+	ComputerVO computerPost(int computerNo);
 }

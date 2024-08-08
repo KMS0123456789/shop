@@ -1,5 +1,11 @@
 package com.project.shop.computer.vo;
 
+import java.util.List;
+
+import com.project.shop.user.vo.AnswerVO;
+import com.project.shop.user.vo.QuestionVO;
+import com.project.shop.user.vo.ReviewVO;
+
 public class ComputerVO {
 	private int computerNo;
 	private String computerTitle;
@@ -17,6 +23,27 @@ public class ComputerVO {
 	private int computerOutFlag;
 	private String computerSaleDate;
 	private String computerCreateDate;
+	private List<ReviewVO> reviews;
+	private List<QuestionVO> questions;
+	private List<AnswerVO> answers;
+	public List<ReviewVO> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<ReviewVO> reviews) {
+		this.reviews = reviews;
+	}
+	public List<QuestionVO> getQuestions() {
+		return questions;
+	}
+	public void setQuestions(List<QuestionVO> questions) {
+		this.questions = questions;
+	}
+	public List<AnswerVO> getAnswers() {
+		return answers;
+	}
+	public void setAnswers(List<AnswerVO> answers) {
+		this.answers = answers;
+	}
 	public int getComputerNo() {
 		return computerNo;
 	}

@@ -18,6 +18,31 @@
 		<result property="computerOutFlag" column="computer_out_flag"/>
 		<result property="computerSaleDate" column="computer_sale_date"/>
 		<result property="computerCreateDate" column="computer_create_date"/>
+		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
+			<id property="reviewNo" column="review_no"/>
+			<result property="reviewUser" column="review_user"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="reviewBody" column="review_body"/>
+			<result property="reviewCreateDate" column="review_create_date"/>
+			<result property="itemCategory" column="item_category"/>
+		</collection>
+		<collection property="questions" ofType="com.project.shop.user.vo.QuestionVO">
+			<id property="questionNo" column="question_no"/>
+			<result property="questionUser" column="question_user"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="questionTitle" column="question_title"/>
+			<result property="questionBody" column="question_body"/>
+			<result property="questionCreateDate" column="question_create_date"/>
+			<result property="questionFlag" column="question_flag"/>
+			<result property="itemCategory" column="item_category"/>
+		</collection>
+		<collection property="answers" ofType="com.project.shop.user.vo.AnswerVO">
+			<id property="questionNo" column="question_no"/>
+			<result property="answerBody" column="answer_body"/>
+			<result property="answerDate" column="answer_date"/>
+		</collection>
 	</resultMap>
 	
 	<!-- 완제품 전체 조회 -->
@@ -41,5 +66,16 @@
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
+	</select>
+	
+	<!-- 완제품 단건 조회 -->
+	<select id="computerPost" parameterType="int" resultMap="computerMap">
+		select * 
+		from computer 
+		left join review on computer.computer_no = review.computer_no
+		left join question on computer.computer_no = question.computer_no
+		left join answer on question.question_no = answer.question_no
+		where computer.computer_no = #{computerNo}
+		
 	</select>
 </mapper>

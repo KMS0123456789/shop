@@ -40,4 +40,9 @@ public class ComputerRepository {
 		map.put("keyword", keyword);
 		return template.selectOne(NAME_SPACE + ".count", map); //ComputerMapper의 count 메서드 실행
 	}
+	
+	//완제품 단건 조회
+	public ComputerVO computerPost(int computerNo) {
+		return template.selectOne(NAME_SPACE + ".computerPost", computerNo);
+	}
 }

@@ -34,7 +34,7 @@
 		<div>
 			<c:forEach items="${computer}" var="computer">
 				<div>본체 이미지</div>
-				${computer.computerTitle}
+				<a href="<c:url value="/computer/computer.do/${computer.computerNo}"/>">${computer.computerTitle}</a>
 			</c:forEach>
 		</div>
 		<div>
