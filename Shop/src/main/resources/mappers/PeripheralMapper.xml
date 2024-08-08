@@ -13,4 +13,66 @@
 		<result property="peripheralSaleDate" column="peripheral_sale_date"/>
 		<result property="peripheralCreateDate" column="peripheral_create_date"/>
 	</resultMap>
+	
+	<!-- 마우스 전체 조회 -->
+	<select id="mouse" resultMap="peripheralMap">
+		select * from peripheral 
+		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
+		<where>
+			and peripheral_category = 0
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by peripheral_no desc
+		limit #{offset}, #{limit}
+	</select>
+	
+	<!-- 키보드 전체 조회 -->
+	<select id="keyboard" resultMap="peripheralMap">
+		select * from peripheral 
+		<where>
+			and peripheral_category = 1
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by peripheral_no desc
+		limit #{offset}, #{limit}
+	</select>
+	
+	<!-- 모니터 전체 조회 -->
+	<select id="monitor" resultMap="peripheralMap">
+		select * from peripheral 
+		<where>
+			and peripheral_category = 2
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by peripheral_no desc
+		limit #{offset}, #{limit}
+	</select>
+	
+	<!-- 마우스, 키보드, 마우스 전체 개수 조회 -->
+	<select id="count" resultType="int">
+		select count(*) from peripheral
+		<!-- where태그 이용해서 조건문 3개 걸기 -->
+		<where>
+			<choose>
+				<when test="peripheralCategory==0">
+					and peripheral_category=0
+				</when>
+				<when test="peripheralCategory==1">
+					and peripheral_category=1
+				</when>
+				<when test="peripheralCategory==2">
+					and peripheral_category=2
+				</when>
+			</choose>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
 </mapper>
