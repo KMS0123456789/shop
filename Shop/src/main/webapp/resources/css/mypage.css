@@ -1,0 +1,164 @@
+div{
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+#menu{
+    display: inline-block;
+}
+#mytitle{
+    text-align: center;
+    margin-bottom: 5rem;
+}
+body{
+    margin-top: 0px;
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+#mymenu li{
+    list-style: none;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 160px;
+    height: 150px;
+    padding: 0 10px;
+    
+}
+#mymenu,.mymenu{
+    position: relative;
+    margin: 0px auto;
+    text-align: center;
+    margin-bottom: 5rem;
+}
+#first{
+    background-color: black;
+    color: white;
+}
+.mymenu{
+    left: -3px;
+}
+.mymenu a{
+    display: block;
+    border: 1px solid black;
+    height: 120px;
+}
+.mymenu h5{
+    font-size: 15px;
+    font-weight: 300;
+    margin-top: 2.5rem;
+    margin-bottom: 10px;
+}
+.mymenu h4{
+    font-size: 13px;
+    font-weight: 200;
+    margin-top: 0px;
+}
+.mymenu a{
+    text-decoration: none;
+    color: black;
+}
+#main_content{
+    background-color: black;
+    margin: 0px auto;
+    padding: 25px 0px;
+    width: 80%;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 3rem;
+}
+#mywish,#mycart{
+    color: white;
+    float: left;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+    padding: 0px 15px;
+}
+#mywish h5{
+    margin-bottom: 20px;
+}
+#mycart h4{
+    font-size: 50px;
+    font-weight: 500;
+    margin: 0px;
+}
+#mywish h4{
+    font-size: 50px;
+    font-weight: 500;
+    margin: 0px;
+}
+
+#mywish::after{
+    content: '';
+    width: 1px;
+    height: 100%;
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#mycart::after{
+    content: '';
+    width: 1px;
+    height: 100%;
+    background: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#order_case{
+    margin-top: 60px;
+    border: 1px solid black;
+    width: 80%;
+    margin: 0px auto;
+}
+#title{
+    padding: 15px 24px;
+    border-bottom: 1px solid black;
+}
+#state{
+    overflow: hidden;
+    padding: 20px 0px;
+}
+#d_state{
+    list-style: none;
+    float: left;
+    padding: 0 0 4px;
+    width: 25%;
+    border-right: 1px dotted;
+    text-align: center;
+    margin: 0 -1px 0 0;
+}
+#re{
+    float: left;
+    width: 20%;
+    padding: 0;
+}
+#re li{
+    list-style: none;
+    margin: 0 0 5px 50px;
+    letter-spacing: 0.07em;
+    word-spacing: 5px;
+}
+#d_state strong{
+    display: block;
+    margin: 3px 0 10px;
+}
+#d_state a{
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+}
+#re strong{
+    font-weight: normal;
+    font-size: 15px;
+}
+#re a{
+    padding: 0 0 0 4px;
+    color: black;
+    font-weight: bold;
+}
+#re span:hover,#d_state span:hover{
+    text-decoration: underline;
+}
