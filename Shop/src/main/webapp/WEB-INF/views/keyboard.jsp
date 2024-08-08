@@ -34,7 +34,7 @@
 	<div>
 		<c:forEach items="${keyboard}" var="keyboard">
 			<div>키보드 이미지</div>
-			${keyboard.peripheralTitle}
+			<a href='<c:url value="/peripheral/keyboard.do/${keyboard.peripheralNo}"/>'>${keyboard.peripheralTitle}</a>
 		</c:forEach>
 	</div>
 	<div>

@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import com.project.shop.computer.vo.ComputerVO;
 import com.project.shop.computer.vo.PeripheralVO;
 
 
@@ -67,5 +68,10 @@ public class PeripheralRepository {
 		map.put("keyword", keyword);
 		map.put("peripheralCategory", peripheralCategory);
 		return template.selectOne(NAME_SPACE + ".count", map); //PeripheralMapper의 count 메서드 실행
+	}
+	
+	//마우스, 키보드, 모니터 단건 조회
+	public PeripheralVO peripheralPost(int peripheralNo) {
+		return template.selectOne(NAME_SPACE + ".peripheralPost", peripheralNo);
 	}
 }

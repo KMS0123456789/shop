@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,5 +79,13 @@ public class PeripheralController {
 		model.addAttribute("pageSize", 10);//pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
 		
 		return "monitor";//monitor.jsp로 보냄
+	}
+	
+	@RequestMapping(value="/*.do/{peripheralNo}", method = RequestMethod.GET)
+	public String computerPost(@PathVariable int peripheralNo, Model model) {
+		//PeripheralNo에 해당하는 데이터 조회
+		PeripheralVO peripheral = service.peripheralPost(peripheralNo); //컴퓨터에 service.computerPost 값 넣기
+		model.addAttribute("peripheral", peripheral); //포워딩할 때 키 computer에 값 넣어 보내기
+		return "peripheralPost";
 	}
 }

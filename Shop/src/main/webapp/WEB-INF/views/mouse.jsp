@@ -34,7 +34,7 @@
 	<div>
 		<c:forEach items="${mouse}" var="mouse">
 			<div>마우스 이미지</div>
-			${mouse.peripheralTitle}
+			<a href='<c:url value="/peripheral/mouse.do/${mouse.peripheralNo}"/>'>${mouse.peripheralTitle}</a>
 		</c:forEach>
 	</div>
 	<div>

@@ -34,7 +34,7 @@
 	<div>
 		<c:forEach items="${monitor}" var="monitor">
 			<div>모니터 이미지</div>
-			${monitor.peripheralTitle}
+			<a href='<c:url value="/peripheral/monitor.do/${monitor.peripheralNo}"/>'>${monitor.peripheralTitle}</a>
 		</c:forEach>
 	</div>
 	<div>

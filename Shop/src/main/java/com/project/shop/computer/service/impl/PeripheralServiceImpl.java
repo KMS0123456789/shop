@@ -40,6 +40,12 @@ public class PeripheralServiceImpl implements PeripheralService{
 	public int count(String searchType, String keyword, int peripheralCategory) {
 		return repository.count(searchType, keyword, peripheralCategory);
 	}
+	
+	//마우스, 키보드, 모니터 단건 조회
+	@Override
+	public PeripheralVO peripheralPost(int peripheralNo) {
+		return repository.peripheralPost(peripheralNo);
+	}
 
 	
 }
