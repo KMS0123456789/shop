@@ -23,9 +23,16 @@
 			<result property="computerNo" column="computer_no"/>
 			<result property="peripheralNo" column="peripheral_no"/>
 			<result property="optNo" column="opt_no"/>
-			<result property="item_count" column="itemCount"/>
+			<result property="itemCount"  column="item_count"/>
 			<result property="itemCategory" column="item_category"/>
 		</collection>
 	</resultMap>
-	
+	<select id="userAll" resultMap="userMap">
+		select * from user where user_type != 0; <!-- 유저테이블 전체 조회 쿼리 -->
+	</select>
+		
+	<!-- email = #{email}일 때 유저테이블의 user_type을 2로 수정하는 쿼리 -->
+ 	<update id="blackList"  parameterType="com.project.shop.user.vo.UserVO">
+		update user set user_type = 2 , black_list_date =now() where email = #{email};  
+	</update>
 </mapper>
