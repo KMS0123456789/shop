@@ -14,6 +14,8 @@
 				<div class="top">
 					<h1><a>컴퓨터 사이트</a></h1>
 					<ul class="toplink">
+						<li><a>장바구니</a></li>
+						<li><a>마이페이지</a></li>
 						<li><a><div class="login-btn"><span>로그인</span></div></a></li>
 					</ul>
 					<div class="search">
@@ -27,10 +29,6 @@
 						    </fieldset>
 					    </form>
 					</div>
-					<ul class="mymenu">
-						<li class="l1"><a>마이 페이지</a></li>
-						<li class="l2"><a>장바구니</a></li>
-					</ul>
 				</div>
 				<nav id="gnb" class="bottom">
 					<ul class="menu">
@@ -60,7 +58,7 @@
 									<ul class="item rows admSortTable">
 										<c:forEach items="${monitor}" var="monitor">
 											<li>
-												<div class="item-image"><a><img>이미지</a></div>
+												<div class="item-image"><a href='<c:url value="/peripheral/monitor.do/${monitor.peripheralNo}"/>'><img>이미지</a></div>
 												<div class="item-content">
 													<div class="subject"><a href='<c:url value="/peripheral/monitor.do/${monitor.peripheralNo}"/>'>${monitor.peripheralTitle}</a></div>
 												</div>

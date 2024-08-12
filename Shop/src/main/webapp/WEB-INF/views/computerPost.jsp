@@ -6,163 +6,239 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Insert title here</title>
+		<link href="<c:url value='/resources/css/computer.css' />" rel="stylesheet">
 	</head>
 	<body>
-		완제품 상세 페이지
-		<table border="1">
-			<thead>
-				<tr>
-				<th><a href="<c:url value='/peripheral/keyboard.do'/>">키보드</a></th>
-				<th><a href="<c:url value='/peripheral/mouse.do'/>">마우스</a></th>
-				<th><a href="<c:url value='/computer/computer.do'/>">컴퓨터</a></th>
-				<th><a href="<c:url value='/peripheral/monitor.do'/>">모니터</a></th>
-			</tr>
-			</thead>
-		</table>
-		<div>
-			상품 이미지
-		</div>
-		<div>
-			상품 이름 : ${computer.computerTitle}<br>
-			상품 가격 : ${computer.computerSalePrice}<br>
-			<select>
-				<option> SSD
-				<option> SSD1
-				<option> SSD2
-				<option> SSD3
-		    </select>
-		    <br>
-		    <select>
-				<option> OS
-				<option> OS1
-				<option> OS2
-				<option> OS3
-		    </select>
-		    <br>
-		    <select>
-				<option> HDD
-				<option> HDD1
-				<option> HDD2
-				<option> HDD3
-		    </select>
-		    <br>
-			총 가격 : ${computer.computerSalePrice}
-			<br>
-			<button>구매하기</button>
-			<br>
-			<button>찜하기</button><button>장바구니</button><button>문의</button>
-		</div>
-		<br>
-		<div>
-			<button>상세정보</button><button>리뷰</button><button>QnA</button>
-		</div>
-		<div>
-			상품 정보
-			<table border="1">
-				<tbody>
-					<tr>
-						<td>상품 번호</td>
-						<td>${computer.computerNo}</td>
-						<td>상품 상태</td>
-						<td>신상품</td>
-					</tr>
-					<tr>
-						<td>제조사</td>
-						<td>우리</td>
-						<td>브랜드</td>
-						<td>우리</td>
-					</tr>
-					<tr>
-						<td>원산지</td>
-						<td>국산</td>
-						<td>제조일자</td>
-						<td>${computer.computerCreateDate}</td>
-					</tr>
-				</tbody>
-			</table>
-			자세한 문의는 QnA를 통해서 해주세요
-			<table border="1">
-				<tbody>
-					<tr>
-						<td>CPU</td>
-						<td>${computer.cpu}</td>
-						<td>메인보드</td>
-						<td>${computer.mainBoard}</td>
-					</tr>
-					<tr>
-						<td>SSD</td>
-						<td>${computer.ssd}</td>
-						<td>RAM</td>
-						<td>${computer.ram}</td>
-					</tr>
-					<tr>
-						<td>POWER</td>
-						<td>${computer.power}</td>
-						<td>GPU</td>
-						<td>${computer.gpu}</td>
-					</tr>
-					<tr>
-						<td>CASE</td>
-						<td>${computer.bCase}</td>
-						<td>COOLER</td>
-						<td>${computer.cooler}</td>
-					</tr>
-					<tr>
-						<td>OS</td>
-						<td>OS 미포함</td>
-						<td>무상AS</td>
-						<td>1년</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<br>
-		<div>
-			상품 리뷰
-			<c:forEach items="${computer.reviews}" var="review">
-				<table border="1">
-					<tbody>
-						<tr>
-							<td>★★★★★</td>
-						</tr>
-						<tr>
-							<td>작성자 : ${review.reviewUser}</td>
-							<td>작성일 : ${review.reviewCreateDate}</td>
-						</tr>
-						<tr>
-							<td>${review.reviewBody}</td>
-						</tr>
-					</tbody>
-				</table>
-			</c:forEach>
-		</div>
-		<div>
-			QnA
-			<table border="1">
-				<thead>
-					<tr>
-						<th>답변 상태</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>작성일</th>
-					</tr>
-				</thead>
-				<c:forEach items="${computer.questions}" var="question">
-				<tbody>
-					<tr>
-						<c:if test="${question.questionFlag == 0}">
-							<td>답변 전</td>
-						</c:if>
-						<c:if test="${question.questionFlag == 1}">
-							<td>답변 완료</td>
-						</c:if>
-						<td>${question.questionTitle}</td>
-						<td>${question.questionUser}</td>
-						<td>${question.questionCreateDate}</td>
-					</tr>
-				</tbody>
-				</c:forEach>
-			</table>
+		<div class="wrap">
+			<header id="header">
+				<div class="top">
+					<h1><a>컴퓨터 사이트</a></h1>
+					<ul class="toplink">
+						<li><a>장바구니</a></li>
+						<li><a>마이페이지</a></li>
+						<li><a><div class="login-btn"><span>로그인</span></div></a></li>
+					</ul>
+				</div>
+				<nav id="gnb" class="bottom">
+					<ul class="menu">
+						<li><a href="<c:url value="/computer/computer.do"/>">컴퓨터</a></li>
+						<li><a href="<c:url value="/peripheral/mouse.do"/>">마우스</a></li>
+						<li><a href="<c:url value="/peripheral/keyboard.do"/>">키보드</a></li>
+						<li><a href="<c:url value="/peripheral/monitor.do"/>">모니터</a></li>
+					</ul>
+				</nav>
+			</header>
+			<section id="container" class="subpage">
+				<div class="contents">
+					<div class="product-view">
+						<div class="detail-top">
+							<div class="left">
+								<div class="photo-slide">
+									<div class="large" style="position: relative;">
+										<div class="mainImg">
+											<img class="mainImg2">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="right">
+								<div class="txt-box">
+									<div class="tit">${computer.computerTitle}</div>
+								</div>
+								<div class="fixed-box">
+									<div class="inner">
+										<div class="inner-box">
+											<div class="price-box">
+												<div class="pull-left">
+													<span class="p1"><em>${computer.computerSalePrice}</em>원</span>
+												</div>
+											</div>
+											<form class="select-form">
+												<ul class="info-list">
+													<li>
+														<div class="tit">SSD</div>
+														<div class="ssd">
+															<select class="selectbox">
+																<option>SSD 추가 구매
+																<option>SSD1
+																<option>SSD2
+															</select>
+														</div>
+													</li>
+													<li>
+														<div class="tit">HDD</div>
+														<div class="hdd">
+															<select class="selectbox">
+																<option>HDD 추가 구매
+																<option>HDD1
+																<option>HDD2
+															</select>
+														</div>
+													</li>
+													<li>
+														<div class="tit">OS</div>
+														<div class="os">
+															<select class="selectbox">
+																<option>OS 추가 구매
+																<option>OS1
+																<option>OS2
+															</select>
+														</div>
+													</li>
+												</ul>
+											</form>
+											<div class="add-list">
+												<ul class="list">
+													<li class="goods-form"></li>
+												</ul>
+											</div>
+											<div class="total">
+												<span class="t1">총 결제금액</span>
+												<span class="t2">
+													<strong id="toal-price">${computer.computerSalePrice}</strong>원
+												</span>
+											</div>
+											<ul class="btnbox">
+												<li>
+													<button class="btn-l-black">
+														<span>찜하기</span>
+													</button>
+												</li>
+												<li>
+													<button class="btn-l-red">
+														<span>장바구니</span>
+													</button>
+												</li>
+												<li>
+													<button class="btn-l-white">
+														<span>QnA</span>
+													</button>
+												</li>
+											</ul>
+											<ul class="btnbox2">
+												<li>
+													<button class="btn-l-yellow">
+														<span>카카오페이로 구매하기</span>
+													</button>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<ul class="tabmenu">
+							<li class="on"><a>상품 정보</a></li>
+							<li><a>리뷰</a></li>
+							<li><a>QnA</a></li>
+						</ul>
+						<div class="detail-info">
+							<div class="detail-info2">
+								<div class="detail-info3">
+									<div class="table-box">
+										<table>
+											<tbody>
+												<tr>
+													<td>CPU</td>
+													<td>${computer.cpu}</td>
+													<td>메인보드</td>
+													<td>${computer.mainBoard}</td>
+												</tr>
+												<tr>
+													<td>SSD</td>
+													<td>${computer.ssd}</td>
+													<td>RAM</td>
+													<td>${computer.ram}</td>
+												</tr>
+												<tr>
+													<td>POWER</td>
+													<td>${computer.power}</td>
+													<td>GPU</td>
+													<td>${computer.gpu}</td>
+												</tr>
+												<tr>
+													<td>CASE</td>
+													<td>${computer.bCase}</td>
+													<td>COOLER</td>
+													<td>${computer.cooler}</td>
+												</tr>
+												<tr>
+													<td>OS</td>
+													<td>OS 미포함</td>
+													<td>무상AS</td>
+													<td>1년</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="review-tab">
+							<div class="tab-title"></div>
+							<div class="review">
+								<div class="review-list">
+									<ul>
+										<li>
+											<div class="review-user">
+												<div class="review-user-info">
+													<div>
+														<span class="star">
+															<span class="star-bg">★</span>
+														</span>
+													</div>
+													<div style="padding-left: 5px;">
+														<span class="review-user-name">이름</span>
+														<span class="review-date">작성일</span>
+													</div>
+												</div>
+											</div>
+											<div class="review-text">
+												<p>리뷰 내용</p>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="qna">
+							<div class="tab-title"></div>
+							<div class="top">
+								<p class="tit">상품 QnA</p>
+							</div>
+							<div class="qna-box">
+								<div>
+									<table>
+										<thead>
+											<tr>
+												<th>답변 상태</th>
+												<th>제목</th>
+												<th>작성자</th>
+												<th>작성일</th>
+											</tr>
+										</thead>
+										<c:forEach items="${computer.questions}" var="question">
+											<tbody>
+												<tr>
+													<c:if test="${question.questionFlag == 0}">
+														<td>답변 전</td>
+													</c:if>
+													<c:if test="${question.questionFlag == 1}">
+														<td>답변 완료</td>
+													</c:if>
+													<td>${question.questionTitle}</td>
+													<td>${question.questionUser}</td>
+													<td>${question.questionCreateDate}</td>
+												</tr>
+											</tbody>
+										</c:forEach>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
 		</div>
 	</body>
 </html>
