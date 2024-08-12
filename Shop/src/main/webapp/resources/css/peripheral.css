@@ -1,0 +1,500 @@
+@charset "UTF-8";
+body {
+    position: relative;
+    min-width: 1400px;
+    font-family: 'Noto-R', 'Dotum', sans-serif;
+    font-size: 13px;
+    color: #000;
+    line-height: 1.1;
+    display: block;
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+html, body {
+    overflow-x: hidden;
+}
+#header{
+	border-bottom: solid 1px #cdcdcd !important;
+	padding: 44px 0 0 0;
+    font-size: 0;
+    text-align: center;
+    unicode-bidi: isolate;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+#header .top {
+    height: 131px;
+}
+#header .top h1 {
+    padding: 16px 0 0 0;
+    min-height: 60px;
+    font-family: 'Noto-B';
+    font-size: 30px;
+    color: #ff7d9e;
+    text-align: center;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    unicode-bidi: isolate;
+    margin-right: 1200px;
+    width: 400px;
+}
+#header .top > * {
+    display: inline-block;
+    vertical-align: middle;
+}
+#header .top .toplink {
+    position: absolute;
+    right: 50%;
+    top: 8px;
+    margin: 0 -600px 0 0;
+    font-family: 'Noto-M';
+}
+#header .top .toplink li {
+    display: inline-block;
+    margin: 0 0 0 28px;
+    font-size: 12px;
+    color: #272727;
+    vertical-align: middle;
+}
+#header .bottom {
+    height: 70px;
+}
+#header .bottom .menu {
+    margin: 0 130px 0 0;
+}
+#header .bottom .btn-all, #header .bottom .menu, #header .bottom .cateogry {
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+}
+#header .bottom .menu > li:first-child {
+    margin: 0;
+}
+#header .bottom .menu > li {
+    position: relative;
+    float: left;
+}
+#header .bottom .menu > li > a {
+    display: block;
+    position: relative;
+    padding: 0 8px;
+    height: 34px;
+    font-size: 16px;
+    line-height: 32px;
+    font-family: 'Noto-M';
+    margin-left: 100px;
+}
+.wrap {
+    position: relative;
+}
+div {
+    display: block;
+    unicode-bidi: isolate;
+}
+#container {
+    position: relative;
+}
+.subpage {
+    margin: 74px 0 0 0;
+}
+section {
+    display: block;
+    unicode-bidi: isolate;
+}
+.subpage .contents {
+    margin: 0 auto;
+    width: 1400px;
+}
+.product-view {
+    font-size: 14px;
+    color: #000;
+}
+.product-view .detail-top {
+    margin: 0 0 46px 0;
+}
+.product-view .detail-top > .left {
+    float: left;
+    width: 647px;
+}
+.product-view .detail-top > .left .photo-slide {
+    position: relative;
+}
+.mainImg {
+    text-align: center;
+    border-radius: 10px;
+    min-height: 647px;
+    height: 647px !important;
+}
+.product-view .detail-top > .left .photo-slide img {
+    border-radius: 10px;
+}
+img {
+    vertical-align: middle;
+    font-size: 11px;
+}
+.mainImg2 {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+.product-view .detail-top > .right {
+    padding: 2px 0 0 0;
+    margin-left: 782px;
+    min-height: 700px;
+}
+.product-view .detail-top > .right .txt-box {
+    padding: 0;
+    border-bottom: 0;
+    position: relative;
+    margin: 0 0 32px 0;
+}
+.product-view .detail-top > .right .txt-box .tit {
+    line-height: 1.4;
+    margin-bottom: 17px;
+}
+.product-view .detail-top > .right .txt-box .tit {
+    font-family: 'Noto-B';
+    font-size: 26px;
+}
+.product-view .detail-top > .right .price-box {
+    height: 41px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+}
+.product-view .detail-top > .right .price-box .pull-left {
+    display: inline-block;
+    float: left;
+}
+.product-view .detail-top > .right .price-box .p1 {
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-block;
+    margin-left: 5px;
+}
+.product-view .detail-top > .right .price-box .p1 em {
+    font-size: 22px;
+}
+form {
+    display: block;
+    margin-top: 0em;
+    unicode-bidi: isolate;
+}
+a {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: inherit;
+    text-decoration: none;
+    font: inherit;
+    vertical-align: baseline;
+}
+ul {
+    list-style: none;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    unicode-bidi: isolate;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+.product-view .detail-top > .right .add-list {
+    margin: 0 0 34px 0;
+    padding: 10px 0 28px;
+    font-size: 16px;
+    border-top: solid 1px #c8c8c8;
+    border-bottom: solid 1px #000;
+}
+.list {
+    margin: 0;
+}
+.product-view .detail-top > .right .add-list .list > li {
+    position: relative;
+    padding: 0 50px 0 20px;
+    display: none;
+}
+.product-view .detail-top > .right .total {
+    margin: 0 0 36px 0;
+    font-family: 'Noto-M';
+    font-size: 20px;
+    text-align: right;
+}
+.product-view .detail-top > .right .total .t1 {
+    float: left;
+    padding: 2px 0 0 0;
+}
+.product-view .detail-top > .right .total .t2 {
+    color: #ff7d9e;
+}
+.product-view .detail-top > .right .total .t2 strong {
+    font-size: 24px;
+}
+strong {
+    font-family: 'Noto-B';
+}
+.product-view .detail-top > .right .btnbox {
+    margin: 0 0 36px 0;
+}
+.btnbox {
+    font-size: 0;
+    text-align: center;
+}
+.product-view .detail-top > .right .btnbox li {
+    margin: 0;
+    display: inline-block;
+}
+[class^="btn-l"] {
+    width: 100%;
+}
+[class^="btn-"] {
+    display: inline-block;
+    line-height: 1;
+    vertical-align: top;
+    border: none;
+    background: none;
+}
+button {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+.product-view .detail-top > .right .btnbox button span {
+    width: 200px;
+    height: 78px;
+    font-size: 26px;
+    line-height: 78px;
+}
+.btn-l-black span {
+    color: #fff;
+    background: #39373a;
+}
+[class^="btn-l"] span {
+    padding: 0 10px;
+    font-family: 'Noto-M';
+    text-align: center;
+    border-radius: 6px;
+}
+[class^="btn-"] span {
+    display: block;
+    box-sizing: border-box;
+    vertical-align: top;
+    position: relative;
+}
+.product-view .detail-top > .right .btnbox li + li {
+    margin: 0 0 0 8px;
+}
+.btn-l-red span {
+    color: #fff;
+    background: #ff7d9e;
+}
+.btn-l-white span {
+    color: balck;
+    background: #fff;
+    border: 1px solid black;
+}
+.product-view .detail-top > .right .btnbox2 {
+    margin: 0 0 36px 0;
+}
+.product-view .detail-top > .right .btnbox2 li {
+    margin: 0;
+    display: inline-block;
+    width:100%;
+}
+.btn-l-yellow span{
+    color: #371d1e;
+    background: #fae300;
+    width:100%;
+    height: 78px;
+    font-size: 26px;
+    line-height: 78px;
+}
+.tit{
+	font-size: 26px;
+    line-height: 78px;
+}
+.selectbox{
+	width:100%;
+    height: 50px;
+    font-size: 20px;
+    line-height: 78px;
+}
+.product-view .tabmenu {
+    position: relative;
+    left: 0px;
+    transform: none;
+    top: 0;
+    width: 100%;
+    max-width: 1400px;
+    z-index: 100;
+    background: #fff;
+    margin: 0 0 60px 0;
+    height: 50px;
+    font-size: 0;
+    text-align: center;
+    border-bottom: solid 4px #dcdcdc;
+}
+.product-view .tabmenu > li {
+    display: inline-block;
+    position: relative;
+    margin: 0 13px;
+}
+.product-view .tabmenu > li a {
+    color: #000;
+    display: block;
+    padding: 0 30px;
+    height: 54px;
+    font-family: 'Noto-B';
+    font-size: 24px;
+    line-height: 50px;
+}
+.product-view .tabmenu > .on a {
+    color: #ff7d9e;
+}
+.product-view .detail-info {
+    margin: 0 0 188px 0;
+    text-align: center;
+}
+.product-view .detail-info .detail-info2 {
+    margin: 0 0 120px 0;
+}
+.product-view .detail-info .detail-info2 .detail-info3 {
+    margin: 0 auto 170px auto;
+    width: 1000px;
+}
+.product-view .detail-info .detail-info2 .detail-info3 .table-box {
+    margin-top: 64px;
+    border-top: solid 2px #a6a6a6;
+    border-bottom: solid 1px #9d9d9d;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+tbody {
+    display: table-row-group;
+    unicode-bidi: isolate;
+}
+tr {
+    display: table-row;
+    unicode-bidi: isolate;
+}
+.table-box table tbody tr:first-child > * {
+    border-top: 0;
+}
+.product-view .detail-info .detail-info2 .detail-info3 .table-box tbody td {
+    padding-right: 5px;
+}
+.table-box table tbody td {
+    font-size: 12px;
+    padding: 15px 28px;
+    height: 28px;
+    text-align: left;
+    line-height: 1.5;
+    border-left: solid 1px #eaeaea;
+    border-top: solid 1px #eaeaea;
+    vertical-align: middle;
+}
+.table-box table tbody td:nth-child(odd) {
+   background-color: lightgray; 
+}
+.review-tab {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.review-tab .review .review-list ul > li {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 40px 0;
+}
+.review-tab .review .review-list ul > li .review-user {
+    margin-bottom: 30px;
+}
+.review-tab .review .review-list ul > li .reviewuser > div.review-user-info {
+    margin-left: 7px;
+}
+.review-tab .review .review-list ul > li .reviewuser > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+.star {
+    float: left;
+    z-index: 1;
+    width: 134px;
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    height: 24px;
+}
+.star .star-bg {
+    display: inline-block;
+    position: relative;
+    top: 0;
+    height: 24px;
+}
+.review-tab .review .review-list ul > li .reviewuser > div.review-user-info .review-user-name, .review-tab .review .review-list ul > li .reviewuser > div.review-user-info .review-date {
+    display: inline-block;
+    font-size: 12px;
+    color: #656565;
+    position: relative;
+    top: 8px;
+}
+.review-tab .review .review-list ul > li .reviewuser ul > li .review-text {
+    color: #222;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-top: 10px;
+}
+.review-tab .review .review-list ul > li .reviewuser ul > li .review-text.off p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    line-height: 1.4em;
+    height: 2.9em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.tab-title {
+    text-indent: -9999px;
+    height: 10px;
+    background: #eee;
+    margin-bottom: 50px;
+}
+.product-view .qna .top {
+    position: relative;
+    margin: 0 0 28px 0;
+}
+.product-view .qna .top .tit {
+    font-family: 'Noto-M';
+    font-size: 20px;
+}
+.qna .qna-box table {
+	border-top: solid 2px #a6a6a6;
+    border-bottom: solid 1px #9d9d9d;
+}
+.qna .qna-box table td, th{
+	text-align: left;
+	font-size: 12px;
+    padding: 15px 28px;
+    height: 28px;
+    line-height: 1.5;
+    vertical-align: middle;
+}
+.qna .qna-box table th{
+	background: pink;
+}
