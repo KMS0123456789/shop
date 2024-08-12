@@ -23,4 +23,8 @@ public class UserRepository {
 	public int blackList(UserVO vo) {
 		return template.update(NAME_SPACE + ".blackList", vo);
 	}
+	
+	public void saveUser(UserVO user) {
+        template.insert(NAME_SPACE + ".saveUser", user);
+    }
 }

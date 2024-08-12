@@ -35,4 +35,9 @@
  	<update id="blackList"  parameterType="com.project.shop.user.vo.UserVO">
 		update user set user_type = 2 , black_list_date =now() where email = #{email};  
 	</update>
+	
+	<insert id="saveUser" parameterType="com.project.shop.user.vo.UserVO">
+	    INSERT INTO user (email, name, phone_num, user_type)
+	    VALUES (#{email}, #{name}, #{phoneNum}, 1)
+	</insert>
 </mapper>
