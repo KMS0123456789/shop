@@ -12,7 +12,7 @@
 		<div class="wrap">
 			<header id="header">
 				<div class="top">
-					<h1><a>컴퓨터 사이트</a></h1>
+					<h1><a href="<c:url value="/"/>">컴퓨터 사이트</a></h1>
 					<ul class="toplink">
 						<li><a>장바구니</a></li>
 						<li><a>마이페이지</a></li>
@@ -220,12 +220,14 @@
 										<c:forEach items="${computer.questions}" var="question">
 											<tbody>
 												<tr>
-													<c:if test="${question.questionFlag == 0}">
-														<td>답변 전</td>
-													</c:if>
-													<c:if test="${question.questionFlag == 1}">
-														<td>답변 완료</td>
-													</c:if>
+													<c:choose>
+														<c:when test="${question.questionFlag == 0}">
+															<td>답변 전</td>
+														</c:when>
+														<c:when test="${question.questionFlag == 1}">
+															<td>답변 완료</td>
+														</c:when>
+													</c:choose>
 													<td>${question.questionTitle}</td>
 													<td>${question.questionUser}</td>
 													<td>${question.questionCreateDate}</td>

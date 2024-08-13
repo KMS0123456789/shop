@@ -333,7 +333,6 @@ fieldset {
     position: relative;
     width: 363px;
     height: 44px;
-    background: url(../img/common/header/search_bg.png) no-repeat 0 0;
 }
 #header .top .search .inform input {
     text-indent: 10px;

@@ -12,7 +12,7 @@
 		<div class="wrap">
 			<header id="header">
 				<div class="top">
-					<h1><a>컴퓨터 사이트</a></h1>
+					<h1><a href="<c:url value="/"/>">컴퓨터 사이트</a></h1>
 					<ul class="toplink">
 						<li><a>장바구니</a></li>
 						<li><a>마이페이지</a></li>
