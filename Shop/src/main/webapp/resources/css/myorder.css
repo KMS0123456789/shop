@@ -1,0 +1,239 @@
+@charset "UTF-8";
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    margin-top: 0px;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    min-width: 900px;
+    font: 13px Pretendard, 맑은 고딕, Nanum Gothic, Verdana, Dotum, AppleGothic, sans-serif;
+    border-top: 7px solid #cbe2dd;
+}
+#mycontents{
+    position: relative;
+    width: 100%;
+    margin: 0px auto 0;
+}
+#myortitle{
+    text-align: center;
+    margin: 40px 0 30px;
+}
+#myordermenu{
+    display: block;
+    position: relative;
+}
+.myordermenu{
+    margin: 0 0 20px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin-bottom: 30px;
+    padding: 0px;
+}
+.myordermenu::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+#ormenu{
+    float: left;
+    list-style: none;
+}
+#order,#order2,#order3{
+    display: block;
+    min-width: 187px;
+    margin: 0 0 0 -1px;
+    padding: 12px 5px 11px;
+    border: 1px solid #cbcdce;
+    color: #707070;
+    text-decoration: none;
+    outline: 0;
+    text-align: center;
+}
+#datecase{
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 5px solid #e8e8e8;
+    color: #000;
+    vertical-align: top;
+}
+legend{
+    visibility: hidden;
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    width: 0;
+    height: 0;
+    line-height: 0;
+}
+.stateSelect{
+    display: inline-block;
+    padding: 0 12px 0 0;
+    margin: 0 5px 0 2px;
+    background: url('./image/ico_bar.gif') no-repeat 100% 6px;
+}
+#order_status{
+    height: 24px;
+    border: 1px solid #e6e6e6;
+    padding-left: 3px;
+    font-size: 100%;
+    color: #000000;
+    vertical-align: middle;
+    outline: none;
+}
+#date{
+    padding: 0;
+    border: 0;
+    display: inline-block;
+    margin: 0 2px;
+    vertical-align: middle;
+}
+.btnNormal{
+    display: inline-block;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 19px;
+    font-weight: normal;
+    text-decoration: none;
+    vertical-align: middle;
+    word-spacing: -0.5px;
+    letter-spacing: 0;
+    text-align: center;
+    white-space: nowrap;
+    color: #000;
+    background-color: #fff;
+}
+.btnNormal img{
+    margin: 0 0 0 -1px;
+    vertical-align: middle;
+}
+#start_date,#end_date{
+    width: 72px;
+    height: 22px;
+    margin: 0 0 0 2px;
+    padding: 0 6px;
+    border: 1px solid #d5d5d5;
+    line-height: 22px;
+    font-size: 12px;
+}
+.start_date_btn,.end_date_btn{
+    width: 14px;
+    height: 14px;
+    margin: 0 5px 0 2px;
+    background: none;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    cursor: pointer;
+    vertical-align: middle;
+}
+#order_btn{
+    font-size: 100%;
+    color: #000000;
+    vertical-align: middle;
+    outline: none;
+}
+#order_infor{
+    margin: 10px 0 0;
+    color: #939393;
+    line-height: 1.5;
+    padding: 0px;
+}
+#order_infor li{
+    padding: 0 0 0 9px;
+    list-style: none;
+    background: url('./image/ico_square2.gif');
+}
+#order_infor a{
+    color: black;
+    text-decoration: none;
+}
+#term,#mode{
+    font-size: 100%;
+    color: #000000;
+    vertical-align: middle;
+    outline: none;
+}
+#order_title{
+    margin: 40px 0 10px 10px;
+}
+#order_title h3{
+    color: #353535;
+    font-size: 12px;
+}
+#or_table{
+    position: relative;
+    margin: 10px 0 0;
+    border-bottom: 1px solid #d7d5d5;
+    border-top: 0;
+    color: #fff;
+    line-height: 1.5;
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+#or_table th:first-child{
+    border-left: 0;
+}
+#or_table th{
+    padding: 11px 0 10px;
+    border-bottom: 1px solid #dfdfdf;
+    color: #000;
+    vertical-align: middle;
+    font-weight: normal;
+    background: #fbfafa;
+}
+#or_table td{
+    padding: 11px 10px 10px;
+    border-top: 1px solid #dfdfdf;
+    color: #000;
+    vertical-align: middle;
+    word-break: break-all;
+    word-wrap: break-word;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+}
+#or_table td:nth-child(3){
+    text-align: left;
+    padding: 0px 15px;
+}
+.message{
+    border-bottom: 1px solid #d7d5d5;
+    padding: 50px 0;
+    text-align: center;
+    color: #757575;
+    font-weight: bold;
+}
+#page{
+    list-style: none;
+    text-align: center;
+    padding: 0px;
+    cursor: pointer;
+}
+#page li{
+    display: inline-block;
+    border-radius: 10px;
+    padding: 0.5rem 0.8rem;
+}
+#search_year{
+    height: 24px;
+    border: 1px solid #e6e6e6;
+    padding-left: 3px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+#selectcase{
+    display: inline-block;
+    margin: 0 5px 0 2px;
+}
+#selectcase::after{
+    content: "년";
+    position: relative;
+    top: 1px;
+}

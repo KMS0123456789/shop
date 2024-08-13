@@ -22,9 +22,63 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
-    public String mypage() {
+    public String mypage(UserVO vo, Model model) {
+    	
+    	int keepCount = userService.keepCount(vo);
+    	int cartCount = userService.cartCount(vo);
+    	int payCount = userService.payCount(vo);
+    	int dReadyCount = userService.dReadyCount(vo);
+    	int clearCount = userService.clearCount(vo);
+    	int orcancelCount = userService.orcancelCount(vo);
+    	int orchangeCount = userService.orchangeCount(vo);
+    	
+    	model.addAttribute("keepCount", keepCount);
+    	model.addAttribute("cartCount", cartCount);
+    	model.addAttribute("payCount", payCount);
+    	model.addAttribute("dReadyCount", dReadyCount);
+    	model.addAttribute("clearCount", clearCount);
+    	model.addAttribute("orcancelCount", orcancelCount);
+    	model.addAttribute("orchangeCount", orchangeCount);
+    	
         return "mypage";
     }
+    
+    @RequestMapping(value = "/myorder_cancel.do", method = RequestMethod.GET)
+    public String myorder_cancel() {
+        return "myorder_cancel";
+    }
+    
+    @RequestMapping(value = "/myorder_past.do", method = RequestMethod.GET)
+    public String myorder_past() {
+        return "myorder_past";
+    }
+    
+    @RequestMapping(value = "/myorder.do", method = RequestMethod.GET)
+    public String myorder() {
+        return "myorder";
+    }
+    
+    @RequestMapping(value = "/mymodify.do", method = RequestMethod.GET)
+    public String mymodify() {
+        return "mymodify";
+    }
+    
+    @RequestMapping(value = "/myaddrlist.do", method = RequestMethod.GET)
+    public String myaddrlist() {
+        return "myaddrlist";
+    }
+    
+    @RequestMapping(value = "/myaddradd.do", method = RequestMethod.GET)
+    public String myaddradd() {
+        return "myaddradd";
+    }
+    
+    @RequestMapping(value = "/myboard.do", method = RequestMethod.GET)
+    public String myboard() {
+        return "myboard";
+    }
+    
+    
 
     @RequestMapping(value = "/manager.do", method = RequestMethod.GET)
     public String manage(Model model) {
@@ -74,5 +128,6 @@ public class UserController {
         session.invalidate();  // 세션 무효화 (로그아웃)
         return "redirect:/user/login.do";  // 로그아웃 후 로그인 페이지로 리다이렉트
     }
+    
 }
 

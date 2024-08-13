@@ -103,5 +103,47 @@ public class UserServiceImpl implements UserService {
     public UserVO findUserByEmail(String email) {
         return repository.findUserByEmail(email);  // 이메일로 사용자 검색 메서드 호출
     }
+
+	@Override
+	public int keepCount(UserVO vo) {
+		// TODO Auto-generated method stub
+		return repository.keepCount();
+	}
+
+	@Override
+	public int cartCount(UserVO vo) {
+		// TODO Auto-generated method stub
+		return repository.cartCount();
+	}
+    
+	@Override
+	public int payCount(UserVO vo) {
+		// TODO Auto-generated method stub
+		return repository.payCount();
+	}
+	
+	@Override
+	public int dReadyCount(UserVO vo) {
+		// TODO Auto-generated method stub
+		return repository.dReadyCount();
+	}
+
+	@Override
+	public int clearCount(UserVO vo) {
+		// TODO Auto-generated method stub
+		return repository.clearCount();
+	}
+	
+	@Override
+	public int orcancelCount(UserVO vo) {
+		// TODO Auto-generated method stub
+		return repository.orcancelCount();
+	}
+	
+	@Override
+	public int orchangeCount(UserVO vo) {
+		// TODO Auto-generated method stub
+		return repository.orchangeCount();
+	}
 }
 

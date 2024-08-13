@@ -36,4 +36,32 @@ public class UserRepository {
         // "findUserByEmail" 쿼리를 실행하고, 결과로 UserVO 객체를 반환
         return template.selectOne(NAME_SPACE + ".findUserByEmail", email);
     }
+    
+    public int keepCount() {
+    	return template.selectOne(NAME_SPACE + ".keepCount");
+    }
+    
+    public int cartCount() {
+    	return template.selectOne(NAME_SPACE + ".cartCount");
+    }
+    
+    public int payCount() {
+    	return template.selectOne(NAME_SPACE + ".payCount");
+    }
+    
+    public int dReadyCount() {
+    	return template.selectOne(NAME_SPACE + ".dReadyCount");
+    }
+    
+    public int clearCount() {
+    	return template.selectOne(NAME_SPACE + ".clearCount");
+    }
+    
+    public int orcancelCount() {
+    	return template.selectOne(NAME_SPACE + ".orcancelCount");
+    }
+    
+    public int orchangeCount() {
+    	return template.selectOne(NAME_SPACE + ".orchangeCount");
+    }
 }

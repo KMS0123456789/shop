@@ -26,7 +26,15 @@
 			<result property="itemCount"  column="item_count"/>
 			<result property="itemCategory" column="item_category"/>
 		</collection>
+		<collection property="asks" ofType="com.project.shop.progress.vo.AskVO">
+			<id property="askNo" column="ask_no"/>
+			<result property="askUser" column="ask_user"/>
+			<result property="askDate" column="ask_date"/>
+			<result property="askStateFlag" column="ask_state_flag"/>
+			<result property="askDeleteFlag" column="ask_delete_flag"/>
+		</collection>
 	</resultMap>
+	
 	<select id="userAll" resultMap="userMap">
 		select * from user where user_type != 0; <!-- 유저테이블 전체 조회 쿼리 -->
 	</select>
@@ -45,6 +53,67 @@
 	<!-- 이메일로 사용자를 검색하는 쿼리 -->
 	<select id="findUserByEmail" parameterType="string" resultType="com.project.shop.user.vo.UserVO">
 	    SELECT * FROM user WHERE email = #{email}  <!-- 'user' 테이블에서 주어진 이메일과 일치하는 사용자 정보를 조회 -->
+	</select>
+	
+	<select id="keepCount" resultType="int">
+		select count(*) from user left join keep on email = keep_user
+			<where>
+				and keep_no;
+			</where>
+	</select>
+	
+	<select id="cartCount" resultType="int">
+		select count(*) from user left join cart on email = cart_user
+			<where>
+				and cart_no;
+			</where>
+	</select>
+	
+	<select id="orderCount" resultType="int">
+		select count(*) from user left join ask on email = ask_user
+		<where>
+			and ask_no;
+		</where>
+	</select>
+	
+	<select id="payCount" resultType="int">
+		select count(*) from user left join ask on email = ask_user
+			<where>
+				and ask_no 
+				and ask_state_flag = 0;
+			</where>
+	</select>
+	
+	<select id="dReadyCount" resultType="int">
+		select count(*) from user left join ask on email = ask_user
+			<where>
+				and ask_no 
+				and ask_state_flag = 1;
+			</where>
+	</select>
+	
+	<select id="clearCount" resultType="int">
+		select count(*) from user left join ask on email = ask_user
+			<where>
+				and ask_no 
+				and ask_state_flag = 2;
+			</where>
+	</select>
+	
+	<select id="orcancelCount" resultType="int">
+		select count(*) from user left join ask on email = ask_user
+			<where>
+				and ask_no 
+				and ask_delete_flag = 1;
+			</where>
+	</select>
+	
+	<select id="orchangeCount" resultType="int">
+		select count(*) from user left join ask on email = ask_user
+			<where>
+				and ask_no 
+				and ask_delete_flag = 2;
+			</where>
 	</select>
 	
 </mapper>

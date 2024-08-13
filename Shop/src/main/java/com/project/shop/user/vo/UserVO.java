@@ -2,6 +2,7 @@ package com.project.shop.user.vo;
 
 import java.util.List;
 
+import com.project.shop.progress.vo.AskVO;
 import com.project.shop.progress.vo.CartVO;
 import com.project.shop.progress.vo.KeepVO;
 
@@ -17,8 +18,14 @@ public class UserVO {
 	private String blackListDate;
 	private List<KeepVO> keeps;
 	private List<CartVO> carts;
+	private List<AskVO> asks;
 	
-	
+	public List<AskVO> getAsks() {
+		return asks;
+	}
+	public void setAsks(List<AskVO> asks) {
+		this.asks = asks;
+	}
 	public List<CartVO> getCarts() {
 		return carts;
 	}

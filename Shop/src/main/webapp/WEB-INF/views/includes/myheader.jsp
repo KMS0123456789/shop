@@ -6,13 +6,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&family=Noto+Serif+KR:wght@200..900&display=swap');
 		body{
             margin-top: 0px;
             margin-left: 10rem;
             margin-right: 10rem;
+            min-width: 1220px;
         }
         header{
-            margin-top: 0;
+            margin-top: 20px;
+            margin-bottom: 5rem;
         }
         li a{
             text-decoration: none;
@@ -29,6 +32,7 @@
         #menu li{
             list-style: none;
             display: inline-block;
+            margin-left: 1rem;
         }
         #menu2{
             float: right;
@@ -37,15 +41,22 @@
         }
         #menu2 li{
             display: inline-block;
+            margin-left: 1rem;
         }
         #menu{
             display: inline-block;
+        }
+        a{
+            color: black;
+            font-family: "Noto Serif KR", serif;
+            font-optical-sizing: auto;
+            font-style: normal;
         }
 	</style>
 </head>
 <body>
 	<header>
-        <h2 id="main"><a href="#">커스텀 PC Shop</a></h2>
+        <h2 id="main"><a href="#">커스텀PC Shop</a></h2>
         <nav id="menu">    
             <ul id="menu">
                 <li><a href="<c:url value='/peripheral/keyboard.do'/>">키보드</a></li>

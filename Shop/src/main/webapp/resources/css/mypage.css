@@ -76,17 +76,22 @@ body{
     padding: 0px 15px;
 }
 #mywish h5{
+	margin-left: 4rem;
+    margin-bottom: 20px;
+}
+#mycart h5{
+	margin-left: 4rem;
     margin-bottom: 20px;
 }
 #mycart h4{
+	margin: 0 0 0 4rem;
     font-size: 50px;
     font-weight: 500;
-    margin: 0px;
 }
 #mywish h4{
+	margin: 0 0 0 4rem;
     font-size: 50px;
     font-weight: 500;
-    margin: 0px;
 }
 
 #mywish::after{
