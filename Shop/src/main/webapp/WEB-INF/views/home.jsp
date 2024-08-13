@@ -47,22 +47,82 @@
 				<div class="product-box" id="main-recommend">
 					<div class="box recomend">
 						<ul class="item">
-							<li>
-								<div class="item-image">
-									<a><img class="image">이미지</a>
-								</div>
-								<div class="item-content">
-									<div class="subject">
-										<a>제목</a>
-									</div>
-								</div>
-								<div class="info">
-									<div class="pull-left">
-										<span>가격</span>
-									</div>
-								</div>
-								<div class="txt"></div>
-							</li>	
+							<c:forEach items="${home}" var="home">
+								<c:choose>
+									<c:when test="${home.mainFlag == 0}">
+										<li>
+											<div class="item-image">
+												<a href='<c:url value="/computer/computer.do/${home.computerNo}"/>'><img class="image">이미지</a>
+											</div>
+											<div class="item-content">
+												<div class="subject">
+													<a href='<c:url value="/computer/computer.do/${home.computerNo}"/>'>${home.computerTitle}</a>
+												</div>
+											</div>
+											<div class="info">
+												<div class="pull-left">
+													<span>${home.computerSalePrice}</span>
+												</div>
+											</div>
+											<div class="txt"></div>
+										</li>	
+									</c:when>
+									<c:when test="${home.mainFlag == 1}">
+										<li>
+											<div class="item-image">
+												<a href='<c:url value="/peripheral/mouse.do/${home.computerNo}"/>'><img class="image">이미지</a>
+											</div>
+											<div class="item-content">
+												<div class="subject">
+													<a href='<c:url value="/peripheral/mouse.do/${home.computerNo}"/>'>${home.computerTitle}</a>
+												</div>
+											</div>
+											<div class="info">
+												<div class="pull-left">
+													<span>${home.computerSalePrice}</span>
+												</div>
+											</div>
+											<div class="txt"></div>
+										</li>	
+									</c:when>
+									<c:when test="${home.mainFlag == 2}">
+										<li>
+											<div class="item-image">
+												<a href='<c:url value="/peripheral/keyboard.do/${home.computerNo}"/>'><img class="image">이미지</a>
+											</div>
+											<div class="item-content">
+												<div class="subject">
+													<a href='<c:url value="/peripheral/keyboard.do/${home.computerNo}"/>'>${home.computerTitle}</a>
+												</div>
+											</div>
+											<div class="info">
+												<div class="pull-left">
+													<span>${home.computerSalePrice}</span>
+												</div>
+											</div>
+											<div class="txt"></div>
+										</li>	
+									</c:when>
+									<c:when test="${home.mainFlag == 3}">
+										<li>
+											<div class="item-image">
+												<a href='<c:url value="/peripheral/monitor.do/${home.computerNo}"/>'><img class="image">이미지</a>
+											</div>
+											<div class="item-content">
+												<div class="subject">
+													<a href='<c:url value="/peripheral/monitor.do/${home.computerNo}"/>'>${home.computerTitle}</a>
+												</div>
+											</div>
+											<div class="info">
+												<div class="pull-left">
+													<span>${home.computerSalePrice}</span>
+												</div>
+											</div>
+											<div class="txt"></div>
+										</li>	
+									</c:when>
+								</c:choose>	
+							</c:forEach>							
 						</ul>
 					</div>
 				</div>

@@ -12,6 +12,7 @@
 		<result property="peripheralOutFlag" column="peripheral_out_flag"/>
 		<result property="peripheralSaleDate" column="peripheral_sale_date"/>
 		<result property="peripheralCreateDate" column="peripheral_create_date"/>
+		<result property="mainFlag" column="main_flag"/>
 		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
 			<id property="reviewNo" column="review_no"/>
 			<result property="reviewUser" column="review_user"/>

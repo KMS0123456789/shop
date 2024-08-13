@@ -16,7 +16,7 @@
 					<ul class="toplink">
 						<li><a>장바구니</a></li>
 						<li><a>마이페이지</a></li>
-						<li><a><div class="login-btn"><span>로그인</span></div></a></li>
+						<li><a>로그인</a></li>
 					</ul>
 					<div class="search">
 						<form action="<c:url value="/peripheral/monitor.do" />" method="get" id="form">

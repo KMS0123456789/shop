@@ -26,6 +26,20 @@ public class ComputerVO {
 	private List<ReviewVO> reviews;
 	private List<QuestionVO> questions;
 	private List<AnswerVO> answers;
+	private List<PeripheralVO> peripherals; 
+	private int mainFlag;
+	public int getMainFlag() {
+		return mainFlag;
+	}
+	public void setMainFlag(int mainFlag) {
+		this.mainFlag = mainFlag;
+	}
+	public List<PeripheralVO> getPeripherals() {
+		return peripherals;
+	}
+	public void setPeripherals(List<PeripheralVO> peripherals) {
+		this.peripherals = peripherals;
+	}
 	public List<ReviewVO> getReviews() {
 		return reviews;
 	}
