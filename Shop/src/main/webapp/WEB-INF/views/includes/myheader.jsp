@@ -57,7 +57,7 @@
             <ul id="menu2">
                 <li><a href="<c:url value='/user/mypage.do'/>">마이페이지</a></li>
                 <li><a href="#">장바구니</a></li>
-                <li><a href="<c:url value='/user/logout'/>">로그아웃</a></li>
+                <li><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
             </ul>
     </header>
 </body>
