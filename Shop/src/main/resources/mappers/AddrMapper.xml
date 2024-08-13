@@ -3,8 +3,12 @@
 <mapper namespace="AddrMapper">
 	<resultMap type="com.project.shop.user.vo.AddrVO" id="addrMap">
 		<id property="addrNo" column="addr_no"/>
-		<result property="addrUser" column="addr_user"/>
+		<result property="addrUserEmail" column="addr_user_email"/>
 		<result property="address" column="address"/>
+		<result property="dAddrName" column="d_addr_name"/>
+		<result property="addrUserName" column="addr_user_name"/>
+		<result property="addrLandLine" column="addr_land_line"/>
+		<result property="addrUserPhoneNum" column="addr_user_phone_num"/>
 		<result property="addrFlag" column="addr_flag"/>
 	</resultMap>
 </mapper>
