@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.shop.computer.service.ComputerService;
+import com.project.shop.computer.service.OptService;
 import com.project.shop.computer.vo.ComputerVO;
+import com.project.shop.computer.vo.OptVO;
 
 @Controller
 @RequestMapping("/computer")
@@ -24,6 +26,9 @@ public class ComputerController {
 	
 	@Autowired
 	private ComputerService service;
+	
+	@Autowired
+	private OptService optService;
 	
 	//완제품 전제 조회
 	@RequestMapping(value="/computer.do", method=RequestMethod.GET)
@@ -46,7 +51,13 @@ public class ComputerController {
 	public String computerPost(@PathVariable int computerNo, Model model) {
 		//computerNo에 해당하는 데이터 조회
 		ComputerVO computer = service.computerPost(computerNo); //컴퓨터에 service.computerPost 값 넣기
+		List<OptVO> opt = optService.computerPost();
+		//opt에 service.computerPost 값 넣기 
+		//computer 테이블과 opt 테이블은 foreign 키 관계가 아니므로 join을 할 수가 없음
+		//select 쿼리를 각각의 mapper에서 한 번 씩 한 후 값을 가져와 포워딩 할 때 같이 보내준다.
 		model.addAttribute("computer", computer); //포워딩할 때 키 computer에 값 넣어 보내기
+		model.addAttribute("opt", opt); //포워딩할 때 키 opt에 값 넣어 보내기
+		
 		return "computerPost";
 	}
 }

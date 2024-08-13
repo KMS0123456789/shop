@@ -60,8 +60,11 @@
 														<div class="ssd">
 															<select class="selectbox">
 																<option>SSD 추가 구매
-																<option>SSD1
-																<option>SSD2
+																<c:forEach items="${opt}" var="opt">
+																	<c:if test="${opt.optCategory == 0}">
+																		<option>${opt.optName}
+																	</c:if>
+																</c:forEach>
 															</select>
 														</div>
 													</li>
@@ -70,8 +73,11 @@
 														<div class="hdd">
 															<select class="selectbox">
 																<option>HDD 추가 구매
-																<option>HDD1
-																<option>HDD2
+																<c:forEach items="${opt}" var="opt">
+																	<c:if test="${opt.optCategory == 1}">
+																		<option>${opt.optName}
+																	</c:if>
+																</c:forEach>
 															</select>
 														</div>
 													</li>
@@ -80,8 +86,11 @@
 														<div class="os">
 															<select class="selectbox">
 																<option>OS 추가 구매
-																<option>OS1
-																<option>OS2
+																<c:forEach items="${opt}" var="opt">
+																	<c:if test="${opt.optCategory == 2}">
+																		<option>${opt.optName}
+																	</c:if>
+																</c:forEach>
 															</select>
 														</div>
 													</li>

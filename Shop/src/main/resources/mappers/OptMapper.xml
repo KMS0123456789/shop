@@ -10,4 +10,8 @@
 		<result property="optOutFlag" column="opt_out_flag"/>
 		<result property="optSaleDate" column="opt_sale_date"/>
 	</resultMap>
+	
+	<select id="computerPost" resultMap="optMap">
+		select * from opt;
+	</select>
 </mapper>

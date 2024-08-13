@@ -111,4 +111,13 @@
 		left join answer on question.question_no = answer.question_no
 		where peripheral.peripheral_no = #{peripheralNo}
 	</select>
+	
+	<!-- 메인 페이지 조회를 위한 주변 기기 조회 -->
+	<select id="home" resultMap="peripheralMap">
+		(select * from peripheral where peripheral_category = 0 order by peripheral_no desc limit 0,5)
+		union
+		(select * from peripheral where peripheral_category = 1 order by peripheral_no desc limit 0,5)
+		union
+		(select * from peripheral where peripheral_category = 2 order by peripheral_no desc limit 0,5)
+	</select>
 </mapper>

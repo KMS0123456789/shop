@@ -90,13 +90,9 @@
 		left join answer on question.question_no = answer.question_no
 		where computer.computer_no = #{computerNo}	
 	</select>
+	
+	<!-- 메인 페이지를 위한 완제품 조회 -->
 	<select id="home" resultMap="computerMap">
-		(select computer_no, computer_title, computer_sale_price, 0 as main_flag from computer  order by computer_no desc limit 0, 5)
-		union 
-		(select peripheral_no, peripheral_title, peripheral_sale_price, 1 as main_flag from peripheral where peripheral_category = 0 order by peripheral_no desc limit 0, 5)
-		union
-		(select peripheral_no, peripheral_title, peripheral_sale_price, 2 as main_flag from peripheral  where peripheral_category = 1 order by peripheral_no desc limit 0, 5)
-		union
-		(select peripheral_no, peripheral_title, peripheral_sale_price, 3 as main_flag from peripheral  where peripheral_category = 2 order by peripheral_no desc limit 0, 5)
+		select * from computer  order by computer_no desc limit 0, 5
 	</select>
 </mapper>
