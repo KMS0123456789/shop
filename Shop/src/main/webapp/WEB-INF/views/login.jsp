@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title>Confirmation</title>
+    <title>Login</title>
 </head>
 <body>
 	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91452e14d92a8c67875cd1e2ec08fdd2
