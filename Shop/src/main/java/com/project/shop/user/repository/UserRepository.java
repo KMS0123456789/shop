@@ -36,31 +36,37 @@ public class UserRepository {
         // "findUserByEmail" 쿼리를 실행하고, 결과로 UserVO 객체를 반환
         return template.selectOne(NAME_SPACE + ".findUserByEmail", email);
     }
-    
+    // 내가 찜한 개수 찾는 메서드
     public int keepCount() {
     	return template.selectOne(NAME_SPACE + ".keepCount");
     }
     
+    // 장바구니에 담은 개수 찾는 메서드
     public int cartCount() {
     	return template.selectOne(NAME_SPACE + ".cartCount");
     }
     
+    // 결제 완료한 개수 찾는 메서드
     public int payCount() {
     	return template.selectOne(NAME_SPACE + ".payCount");
     }
     
+    // 배송 준비중 인 개수 찾는 메서드
     public int dReadyCount() {
     	return template.selectOne(NAME_SPACE + ".dReadyCount");
     }
     
+    // 배송완료 된 개수 찾는 메서드
     public int clearCount() {
     	return template.selectOne(NAME_SPACE + ".clearCount");
     }
     
+    // 상품 주문 취소한 개수 찾는 메서드
     public int orcancelCount() {
     	return template.selectOne(NAME_SPACE + ".orcancelCount");
     }
     
+    // 상품 교환 요청한 개수 찾는 메서드
     public int orchangeCount() {
     	return template.selectOne(NAME_SPACE + ".orchangeCount");
     }

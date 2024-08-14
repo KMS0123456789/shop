@@ -23,7 +23,6 @@ body{
     width: 160px;
     height: 150px;
     padding: 0 10px;
-    
 }
 #mymenu,.mymenu{
     position: relative;
@@ -93,7 +92,9 @@ body{
     font-size: 50px;
     font-weight: 500;
 }
-
+#mywish a,#mycart a{
+	color: white;
+}
 #mywish::after{
     content: '';
     width: 1px;

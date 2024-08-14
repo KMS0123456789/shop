@@ -107,43 +107,43 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int keepCount(UserVO vo) {
 		// TODO Auto-generated method stub
-		return repository.keepCount();
+		return repository.keepCount(); // 해당 사용자의 찜한 개수 찾는 메서드 호출
 	}
 
 	@Override
 	public int cartCount(UserVO vo) {
 		// TODO Auto-generated method stub
-		return repository.cartCount();
+		return repository.cartCount();  // 해당 사용자의 장바구니에 담은 개수 찾는 메서드 호출
 	}
     
 	@Override
 	public int payCount(UserVO vo) {
 		// TODO Auto-generated method stub
-		return repository.payCount();
+		return repository.payCount();  // 해당 사용자의 결제완료한 개수 찾는 메서드 호출
 	}
 	
 	@Override
 	public int dReadyCount(UserVO vo) {
 		// TODO Auto-generated method stub
-		return repository.dReadyCount();
+		return repository.dReadyCount();  // 배송준비중인 개수 찾는 메서드 호출
 	}
 
 	@Override
 	public int clearCount(UserVO vo) {
 		// TODO Auto-generated method stub
-		return repository.clearCount();
+		return repository.clearCount(); // 배송완료된 개수 찾는 메서드 호출
 	}
 	
 	@Override
 	public int orcancelCount(UserVO vo) {
 		// TODO Auto-generated method stub
-		return repository.orcancelCount();
+		return repository.orcancelCount(); // 주문 취소한 개수 찾는 메서드 호출
 	}
 	
 	@Override
 	public int orchangeCount(UserVO vo) {
 		// TODO Auto-generated method stub
-		return repository.orchangeCount();
+		return repository.orchangeCount(); // 상품 교환한 개수 찾는 메서드 호출
 	}
 }
 

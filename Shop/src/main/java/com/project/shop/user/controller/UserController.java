@@ -24,21 +24,21 @@ public class UserController {
     @RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
     public String mypage(UserVO vo, Model model) {
     	
-    	int keepCount = userService.keepCount(vo);
-    	int cartCount = userService.cartCount(vo);
-    	int payCount = userService.payCount(vo);
-    	int dReadyCount = userService.dReadyCount(vo);
-    	int clearCount = userService.clearCount(vo);
-    	int orcancelCount = userService.orcancelCount(vo);
-    	int orchangeCount = userService.orchangeCount(vo);
+    	int keepCount = userService.keepCount(vo); // 내가 찜한 개수 불러옴.
+    	int cartCount = userService.cartCount(vo); // 내가 장바구니에 담은 개수 불러옴.
+    	int payCount = userService.payCount(vo); // 내가 결제완료한 개수 불러옴.
+    	int dReadyCount = userService.dReadyCount(vo); // 상품 배송 준비중인 개수 불러옴.
+    	int clearCount = userService.clearCount(vo); // 배송 완료된 개수 불러옴.
+    	int orcancelCount = userService.orcancelCount(vo); // 상품교환한 개수 불러옴.
+    	int orchangeCount = userService.orchangeCount(vo); // 상품 주문 취소한 개수 불러옴.
     	
-    	model.addAttribute("keepCount", keepCount);
-    	model.addAttribute("cartCount", cartCount);
-    	model.addAttribute("payCount", payCount);
-    	model.addAttribute("dReadyCount", dReadyCount);
-    	model.addAttribute("clearCount", clearCount);
-    	model.addAttribute("orcancelCount", orcancelCount);
-    	model.addAttribute("orchangeCount", orchangeCount);
+    	model.addAttribute("keepCount", keepCount); // 찜한 개수를 모델에 담아 화면에 출력할수 있게 함.
+    	model.addAttribute("cartCount", cartCount); // 장바구니에 담은 개수를 모델에 담아 화면에 출력할수 있게 함.
+    	model.addAttribute("payCount", payCount); // 결제완료된 개수를 모델에 담아 화면에 출력할수 있게 함.
+    	model.addAttribute("dReadyCount", dReadyCount); // 배송준비중인 개수를 모델에 담아 화면에 출력할수 있게 함.
+    	model.addAttribute("clearCount", clearCount); // 배송 완료된 개수를 모델에 담아 화면에 출력할수 있게 함.
+    	model.addAttribute("orcancelCount", orcancelCount); // 상품 교환한 개수를 모델에 담아 화면에 출력할수 있게 함.
+    	model.addAttribute("orchangeCount", orchangeCount); // 상품 취소한 개수를 모델에 담아 화면에 출력할수 있게 함.
     	
         return "mypage";
     }

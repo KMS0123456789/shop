@@ -55,6 +55,7 @@
 	    SELECT * FROM user WHERE email = #{email}  <!-- 'user' 테이블에서 주어진 이메일과 일치하는 사용자 정보를 조회 -->
 	</select>
 	
+	<!-- 유저가 찜한 개수 찾는 쿼리-->
 	<select id="keepCount" resultType="int">
 		select count(*) from user left join keep on email = keep_user
 			<where>
@@ -62,6 +63,7 @@
 			</where>
 	</select>
 	
+	<!-- 유저가 장바구니에 담은 개수 찾는 쿼리-->
 	<select id="cartCount" resultType="int">
 		select count(*) from user left join cart on email = cart_user
 			<where>
@@ -69,6 +71,7 @@
 			</where>
 	</select>
 	
+	<!-- 유저가 주문한 개수 찾는 쿼리-->
 	<select id="orderCount" resultType="int">
 		select count(*) from user left join ask on email = ask_user
 		<where>
@@ -76,6 +79,7 @@
 		</where>
 	</select>
 	
+	<!-- 유저가 결제완료한 개수 찾는 쿼리-->
 	<select id="payCount" resultType="int">
 		select count(*) from user left join ask on email = ask_user
 			<where>
@@ -84,6 +88,7 @@
 			</where>
 	</select>
 	
+	<!-- 배송준비중인  개수 찾는 쿼리-->
 	<select id="dReadyCount" resultType="int">
 		select count(*) from user left join ask on email = ask_user
 			<where>
@@ -92,6 +97,7 @@
 			</where>
 	</select>
 	
+	<!-- 상품 배송 완료된 개수 찾는 쿼리-->
 	<select id="clearCount" resultType="int">
 		select count(*) from user left join ask on email = ask_user
 			<where>
@@ -100,6 +106,7 @@
 			</where>
 	</select>
 	
+	<!-- 상품 취소된 개수 찾는 쿼리-->
 	<select id="orcancelCount" resultType="int">
 		select count(*) from user left join ask on email = ask_user
 			<where>
@@ -108,6 +115,7 @@
 			</where>
 	</select>
 	
+	<!-- 상품 교환한 개수 찾는 쿼리-->
 	<select id="orchangeCount" resultType="int">
 		select count(*) from user left join ask on email = ask_user
 			<where>

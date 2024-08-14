@@ -23,11 +23,11 @@
             </div>
             <div id="main_content">
                 <div id="mywish">
-                    <h5> 나의 위시리스트 > </h5>
+                    <h5> <a href="#">나의 위시리스트 ></a> </h5>
                     <h4> ${keepCount}</h4>
                 </div>
                 <div id="mycart">
-                    <h5> 장바구니 > </h5>
+                    <h5> <a href="#"> 장바구니 > </a> </h5>
                     <h4> ${cartCount} </h4>
                 </div>
             </div>

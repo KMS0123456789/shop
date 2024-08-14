@@ -57,7 +57,7 @@
                 <ul id="order_infor">
                     <li class="displaynone">기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
                     <li class=" ">기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 주문처리완료 후 36개월 이내의 주문내역을 조회하실 수 있습니다.</li>
-                    <li class=" ">완료 후 36개월 이상 경과한 주문은 <a href="javascript:OrderHistory.searchPast(false)">[과거주문내역]</a>에서 확인할 수 있습니다.</li>
+                    <li class=" ">완료 후 36개월 이상 경과한 주문은 <a href="<c:url value='/user/myorder_past.do'/>">[과거주문내역]</a>에서 확인할 수 있습니다.</li>
                     <li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
                     <li class="">취소/교환/반품 신청은 배송완료일 기준 7일까지 가능합니다.</li>
                 </ul>
