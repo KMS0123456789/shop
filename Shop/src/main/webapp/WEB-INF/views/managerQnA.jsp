@@ -5,8 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="<c:url value='/resources/css/manager.css' />" rel="stylesheet">
 </head>
 <body>
+<%@ include file="./includes/myheader.jsp" %>
 	<div>상품 QnA 목록</div>
 	<table border="1">
 		<thead>

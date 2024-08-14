@@ -79,18 +79,26 @@ public class UserController {
     }
     
     
-
-    @RequestMapping(value = "/manager.do", method = RequestMethod.GET)
-    public String manage(Model model) {
+    //user 전체 조회
+    @RequestMapping(value = "/blacklist.do", method = RequestMethod.GET)
+    public String manageuser(Model model) {
+    	//user에 대한 모든 유저 조회
         List<UserVO> userList = userService.userAll();
-        model.addAttribute("user", userList);
-        return "manager";
+        //userList에 service.userAll 값 넣기
+        model.addAttribute("user", userList);//포워딩할 때 키 user에 값 넣어 보내기
+        return "blacklist";
     }
 
+    //유저 타입을 블랙리스트로 변경
     @RequestMapping(value = "/blackList.do", method = RequestMethod.POST)
     public String blackList(UserVO vo) {
+    	//result에 userService.blackList 값 넣기
         int result = userService.blackList(vo);
-        return "redirect:/user/manager.do";
+        return "redirect:/user/blacklist.do"; //블랙리스트 추가 후 관리자 페이지로 리다이렉트
+    }
+    @RequestMapping(value="/manager.do", method = RequestMethod.GET)
+    public String manager() {
+    	return "manager";
     }
 
     @RequestMapping(value = "/kakao/callback.do", produces = "application/json;charset=UTF-8")

@@ -5,9 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="<c:url value='/resources/css/manager.css' />" rel="stylesheet">
 </head>
 <body>
-			<div>주문 상품 목록</div>
+<%@ include file="./includes/myheader.jsp" %>
+			<h2>주문 상품 목록</h2>
 			<form action="<c:url value='/AskDetail/deliveryC.do' />" method="POST">
 				<table border="1">
 					<thead>
@@ -41,7 +43,7 @@
 						</tbody>
 					</c:forEach>
 					<input type="submit" value="변경완료" >
-					<input type=" button" value="취소"> 
+					<input type="submit" value="취소"> 
 				</table>
 			</form>
 </body>

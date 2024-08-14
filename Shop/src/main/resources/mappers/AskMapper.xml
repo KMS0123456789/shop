@@ -9,6 +9,7 @@
 		<result property="askDeleteFlag" column="ask_delete_flag"/>
 	</resultMap>
 	
+	<!-- 주문을 전체 조회하는 쿼리 -->
 	<select id="askAll" resultMap="askMap">		
 		select * from ask;
 	</select>

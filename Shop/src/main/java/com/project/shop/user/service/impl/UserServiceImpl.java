@@ -28,12 +28,12 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public List<UserVO> userAll() {
-        return repository.userAll();  
+        return repository.userAll();  //모든 유저 조회하는 메서드 호출
     }
     
     @Override
     public int blackList(UserVO vo) {
-        return repository.blackList(vo); 
+        return repository.blackList(vo); //유저의 타입을 블랙리스트로 바꾸는 메서드 호출
     }
 
     @Override

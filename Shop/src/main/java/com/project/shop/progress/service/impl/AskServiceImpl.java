@@ -15,8 +15,9 @@ public class AskServiceImpl implements AskService{
 	@Autowired
 	private AskRepository repository;
 	
+	//ask 전체 조회
 	@Override
 	public List<AskVO> askAll(){
-		return repository.askAll();
+		return repository.askAll(); //askRepository에서 askAll 메서드 실행
 	}
 }

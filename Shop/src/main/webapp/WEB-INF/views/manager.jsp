@@ -5,53 +5,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="<c:url value='/resources/css/manager.css' />" rel="stylesheet">
 </head>
 <body>
-		<div id="btn-list">
-			<button class="btn"><a href="#">등록된 상품 목록</a></button>
-			<button class="btn"><a href="#">상품등록</a></button>
-			<button class="btn"><a href="<c:url value="/question/managerQnA.do"/>">Q&A 목록</a></button>
-			<button class="btn"><a href="<c:url value="/user/manager.do"/>">유저 관리</a></button>
-			<button class="btn"><a href="<c:url value="/ask/managerAsk.do"/>">주문 목록</a></button>
-			<button class="btn"><a href="#">취소/교환/반품 목록</a></button>
-			<button class="btn"><a href="#">배송 관리</a></button>
-		</div>
-		<div>
-			<table border="1">
-				<tbody>
-					<tr>
-						<td>회원구분</td>
-						<td>이름</td>
-						<td>이메일</td>
-						<td>관리</td>
-					</tr>
-				</tbody>
-				 	<tbody>
-						 <tr>
-			             	<c:forEach items="${user}" var="user">
-			             		<tr>
-			             			<c:if test="${user.userType == 0}">
-			             				<td>관리자</td>
-			             			</c:if>
-			             			<c:if test="${user.userType == 1}">
-			             				<td>일반유저</td>
-			             			</c:if>
-			             			<c:if test="${user.userType == 2}">
-			             				<td>블랙리스트 유저</td>
-			             			</c:if>
-					             		<td>${user.name}</td>
-					                	<td>${user.email}</td>
-					                	<td>
-				              			<form action='<c:url value="/user/blackList.do"/>'  method="post">
-											<input type="hidden" name="email" value="${user.email}">
-								        	<button type="submit" >블랙리스트</button>
-								        </form>
-							        </td>
-							    </tr>
-			             	</c:forEach>		             		    	
-			            </tr>
-			        </tbody>
-			</table>
-		</div>
+<%@ include file="./includes/myheader.jsp" %>
+		<div class="container">
+        <div class="header">MANAGER</div>
+        <div class="sub-header">등록된 상품</div>
+        <ul class="menu-list">
+            <li class="menu-item"><a>상품등록</a></li>
+            <li class="menu-item"><a href="<c:url value="/question/managerQnA.do"/>">Q&A 목록</a></li>
+            <li class="menu-item"><a href="<c:url value="/user/blacklist.do"/>">유저 관리</a></li>
+            <li class="menu-item"><a href="<c:url value="/ask/managerAsk.do"/>">주문 목록</a></li>
+            <li class="menu-item"><a>취소/교환</a></li>
+            <li class="menu-item"><a>배송 관리</a></li>
+        </ul>
+    </div>
+
 </body>
 </html>

@@ -15,7 +15,8 @@ public class AskRepository {
 	private SqlSessionTemplate template;
 	private final String NAME_SPACE = "AskMapper";
 	
+	//ask 전체 조회
 	public List<AskVO> askAll(){
-		return template.selectList(NAME_SPACE + ".askAll");
+		return template.selectList(NAME_SPACE + ".askAll"); //askmapper에서 askAll 실행
 	}
 }

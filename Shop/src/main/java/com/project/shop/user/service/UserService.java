@@ -5,8 +5,11 @@ import java.util.List;
 import com.project.shop.user.vo.UserVO;
 
 public interface UserService {
+	//모든 유저 조회하는 메서드
 	List<UserVO> userAll();
+	//유저 타입을 블랙리스트로 바꾸는 메서드
 	int blackList(UserVO vo);
+	
 	UserVO handleKakaoCallback(String code) throws Exception;
 	// 카카오 로그인 콜백 처리 메서드, 카카오에서 받은 인증 코드를 사용하여 사용자 정보를 가져옴
 	UserVO findUserByEmail(String email); 

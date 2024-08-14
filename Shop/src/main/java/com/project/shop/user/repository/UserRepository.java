@@ -16,10 +16,12 @@ public class UserRepository {
 
     private final String NAME_SPACE = "UserMapper";
 
+    //유저를 전체 조회하는 메서드
     public List<UserVO> userAll() { 
         return template.selectList(NAME_SPACE + ".userAll");
     }
-
+    
+    //유저 타입을 변경하는 메서드
     public int blackList(UserVO vo) {
         return template.update(NAME_SPACE + ".blackList", vo);
     }

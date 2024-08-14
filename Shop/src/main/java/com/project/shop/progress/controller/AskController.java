@@ -18,11 +18,13 @@ public class AskController {
 	@Autowired
 	private AskService service;
 	
+	//주문 전체 조회
 	@RequestMapping(value="/managerAsk.do",method =RequestMethod.GET)
 		public String managerask(Model model) {
 			List<AskVO> askList = service.askAll();
+			//askList에 service.askAll();의 값을 담는다.
 			model.addAttribute("ask",askList);
-			return"managerAsk";
+			return"managerAsk"; //managerAsk.jsp로 리턴
 		}
 		
 }

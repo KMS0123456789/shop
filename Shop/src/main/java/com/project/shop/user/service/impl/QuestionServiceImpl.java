@@ -15,8 +15,9 @@ public class QuestionServiceImpl implements QuestionService{
 	@Autowired
 	private QuestionRepository repository;
 	
+	//question 전체 조회
 	@Override
     public List<QuestionVO> questionAll() {
-        return repository.questionAll();  
+        return repository.questionAll();   //QuestionRepository에서 questionAll 메서드 실행
     }
 }

@@ -15,7 +15,8 @@ public class QuestionRepository {
 	private SqlSessionTemplate template;
 	private final String NAME_SPACE = "QuestionMapper";
 	
+	//question 전체 조회
 	public List<QuestionVO> questionAll() { 
-        return template.selectList(NAME_SPACE + ".questionAll");
+        return template.selectList(NAME_SPACE + ".questionAll"); //question mapper에서 questionAll 실행
     }
 }

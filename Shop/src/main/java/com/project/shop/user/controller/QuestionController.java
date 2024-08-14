@@ -19,10 +19,13 @@ public class QuestionController {
 	@Autowired
 	private QuestionService service;
 	
+	//QnA 전체 조회
 	@RequestMapping(value="/managerQnA.do",method = RequestMethod.GET)
 	public String managerQnA(Model model) {
+		//question에 대한 모든 데이터 조회
 	        List<QuestionVO> questionList = service.questionAll();
-	        model.addAttribute("question", questionList);
+	        //questionList에 service.questionAll 값 넣기
+	        model.addAttribute("question", questionList);//포워딩할 때 키 question에 값 넣어 보내기
 	        return "managerQnA";
 	    }
 }
