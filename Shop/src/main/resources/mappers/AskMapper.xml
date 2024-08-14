@@ -8,4 +8,8 @@
 		<result property="askStateFlag" column="ask_state_flag"/>
 		<result property="askDeleteFlag" column="ask_delete_flag"/>
 	</resultMap>
+	
+	<select id="askAll" resultMap="askMap">		
+		select * from ask;
+	</select>
 </mapper>

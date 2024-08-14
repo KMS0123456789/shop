@@ -10,5 +10,6 @@
 		<result property="optNo" column="opt_no"/>
 		<result property="itemCount" column="item_count"/>
 		<result property="itemCategory" column="item_category"/>
+		<result property="askDate" column="ask_date" />
 	</resultMap>
 </mapper>

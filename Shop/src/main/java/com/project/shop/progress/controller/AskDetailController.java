@@ -13,4 +13,7 @@ public class AskDetailController {
 	
 	@Autowired
 	private AskDetailService service;
+	
+
+
 }
