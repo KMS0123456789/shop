@@ -7,6 +7,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Insert title here</title>
 		<link href="<c:url value='/resources/css/computer.css' />" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
 	<body>
 		<div class="wrap">
@@ -14,8 +15,12 @@
 				<div class="top">
 					<h1><a href="<c:url value="/"/>">컴퓨터 사이트</a></h1>
 					<ul class="toplink">
-						<li><a>장바구니</a></li>
-						<li><a>마이페이지</a></li>
+						<c:choose>
+							<c:when test="${sessionScope.user.email != null}">
+								<li><a>장바구니</a></li>
+								<li><a>마이페이지</a></li>
+							</c:when>
+						</c:choose>
 						<li><a>로그인</a></li>
 					</ul>
 				</div>
@@ -58,11 +63,11 @@
 													<li>
 														<div class="tit">SSD</div>
 														<div class="ssd">
-															<select class="selectbox">
-																<option>SSD 추가 구매
+															<select id="selectbox1" class="selectbox" onchange="onSelectChange1()">
+																<option value="0">SSD 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 0}">
-																		<option>${opt.optName}
+																		<option value="${opt.optSalePrice}">${opt.optName}+${opt.optSalePrice}원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -71,11 +76,11 @@
 													<li>
 														<div class="tit">HDD</div>
 														<div class="hdd">
-															<select class="selectbox">
-																<option>HDD 추가 구매
+															<select id="selectbox2" class="selectbox" onchange="onSelectChange2()">
+																<option value="0">HDD 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 1}">
-																		<option>${opt.optName}
+																		<option value="${opt.optSalePrice}">${opt.optName}+${opt.optSalePrice}원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -84,11 +89,11 @@
 													<li>
 														<div class="tit">OS</div>
 														<div class="os">
-															<select class="selectbox">
-																<option>OS 추가 구매
+															<select id="selectbox3" class="selectbox" onchange="onSelectChange3()">
+																<option value="0">OS 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 2}">
-																		<option>${opt.optName}
+																		<option value="${opt.optSalePrice}">${opt.optName}+${opt.optSalePrice}원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -96,22 +101,21 @@
 													</li>
 												</ul>
 											</form>
-											<div class="add-list">
-												<ul class="list">
-													<li class="goods-form"></li>
-												</ul>
-											</div>
 											<div class="total">
 												<span class="t1">총 결제금액</span>
 												<span class="t2">
-													<strong id="toal-price">${computer.computerSalePrice}</strong>원
+														<strong id="total-price">${computer.computerSalePrice}</strong>원
 												</span>
 											</div>
 											<ul class="btnbox">
 												<li>
-													<button class="btn-l-black">
-														<span>찜하기</span>
-													</button>
+													<form>
+														<input type="hidden" value="computerNo">
+														<input type="hidden" value="">
+														<button class="btn-l-black" type="submit">
+															<span>찜하기</span>
+														</button>
+													</form>
 												</li>
 												<li>
 													<button class="btn-l-red">
@@ -251,5 +255,34 @@
 				</div>
 			</section>
 		</div>
+		<script>
+			function onSelectChange1(){ 
+			    let selected = $("select option:selected");
+			    let beforePrice = parseInt($(".p1 > em").text());
+			    let totalPrice = beforePrice;
+			    for(var i = 0; i < selected.length; i++){
+			  		totalPrice += parseInt(selected.eq(i).val());
+			    }
+			    $("#total-price").text(totalPrice);
+			}  	 
+			function onSelectChange2(){ 
+			 	let selected = $("select option:selected");
+			    let beforePrice = parseInt($(".p1 > em").text());
+			    let totalPrice = beforePrice;
+			    for(var i = 0; i < selected.length; i++){
+			   		totalPrice += parseInt(selected.eq(i).val());
+			    }
+			    $("#total-price").text(totalPrice);
+			}  
+			function onSelectChange3(){ 
+				let selected = $("select option:selected");
+				let beforePrice = parseInt($(".p1 > em").text());
+				let totalPrice = beforePrice;
+				for(var i = 0; i < selected.length; i++){
+				   totalPrice += parseInt(selected.eq(i).val());
+				}
+				$("#total-price").text(totalPrice);
+			}  ﻿
+		</script>
 	</body>
 </html>

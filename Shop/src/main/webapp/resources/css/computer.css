@@ -132,8 +132,8 @@ section {
 .mainImg {
     text-align: center;
     border-radius: 10px;
-    min-height: 647px;
-    height: 647px !important;
+    min-height: 1000px;
+    height: 1000px !important;
 }
 .product-view .detail-top > .left .photo-slide img {
     border-radius: 10px;
@@ -144,7 +144,7 @@ img {
 }
 .mainImg2 {
     width: 100%;
-    height: 1000px;
+    height: 700px;
     object-fit: cover;
 }
 .product-view .detail-top > .right {
@@ -211,13 +211,6 @@ ul {
     border: 0;
     font: inherit;
     vertical-align: baseline;
-}
-.product-view .detail-top > .right .add-list {
-    margin: 0 0 34px 0;
-    padding: 10px 0 28px;
-    font-size: 16px;
-    border-top: solid 1px #c8c8c8;
-    border-bottom: solid 1px #000;
 }
 .list {
     margin: 0;
