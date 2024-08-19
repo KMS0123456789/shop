@@ -1,5 +1,7 @@
 package com.project.shop.progress.service;
 
-public interface CartService {
+import java.util.HashMap;
 
+public interface CartService {
+	int cartComputer(HashMap<String, Object> map);
 }

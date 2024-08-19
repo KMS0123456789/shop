@@ -6,8 +6,15 @@
 		<result property="cartUser" column="cart_user"/>
 		<result property="computerNo" column="computer_no"/>
 		<result property="peripheralNo" column="peripheral_no"/>
-		<result property="optNo" column="opt_no"/>
+		<result property="optSsd" column="opt_ssd"/>
+		<result property="optHdd" column="opt_hdd"/>
+		<result property="optOs" column="opt_os"/>
 		<result property="itemCount" column="item_count"/>
 		<result property="itemCategory" column="item_category"/>
 	</resultMap>
+	
+	<insert id="cartComputer" parameterType="HashMap">
+		insert into cart(cart_user, computer_no, opt_ssd, opt_hdd, opt_os, item_count, item_category)
+					values(#{cartUser}, #{computerNo}, #{optSsd}, #{optHdd}, #{optOs}, 1, 0)
+	</insert>
 </mapper>

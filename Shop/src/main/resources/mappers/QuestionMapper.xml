@@ -13,7 +13,12 @@
 		<result property="itemCategory" column="item_category"/>
 	</resultMap>
 	
-<select id="questionAll" resultMap="questionMap">
-		select * from question;
-</select>
+	<select id="questionAll" resultMap="questionMap">
+			select * from question;
+	</select>
+	
+	<insert id="questionComputer" parameterType="com.project.shop.user.vo.QuestionVO">
+		insert into question(question_user, computer_no, question_title, question_body, item_category)
+					values(#{questionUser}, #{computerNo}, #{questionTitle}, #{questionBody}, 0)
+	</insert>
 </mapper>

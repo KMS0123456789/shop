@@ -19,4 +19,8 @@ public class QuestionRepository {
 	public List<QuestionVO> questionAll() { 
         return template.selectList(NAME_SPACE + ".questionAll"); //question mapper에서 questionAll 실행
     }
+	
+	public int questionComputer(QuestionVO vo) {
+		return template.insert(NAME_SPACE + ".questionComputer", vo);
+	}
 }

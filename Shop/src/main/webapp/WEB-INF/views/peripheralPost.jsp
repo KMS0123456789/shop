@@ -14,9 +14,16 @@
 				<div class="top">
 					<h1><a href="<c:url value="/"/>">컴퓨터 사이트</a></h1>
 					<ul class="toplink">
-						<li><a>장바구니</a></li>
-						<li><a>마이페이지</a></li>
-						<li><a>로그인</a></li>
+						<c:choose>
+							<c:when test="${sessionScope.user.email != null}">
+								<li><a>장바구니</a></li>
+								<li><a>마이페이지</a></li>
+								<li><a>로그아웃</a></li>	
+							</c:when>
+							<c:when test="${sessionScope.user.email == null}">
+								<li><a>로그인</a></li>
+							</c:when>
+						</c:choose>
 					</ul>
 				</div>
 				<nav id="gnb" class="bottom">
@@ -65,18 +72,33 @@
 												</span>
 											</div>
 											<ul class="btnbox">
+												<c:choose>
+													<c:when test="${peripheral.keepFlag == 0}">
+														<li>
+															<button class="btn-l-white" onclick="Keep()">
+																<span>찜하기♡</span>
+															</button>
+														</li>
+													</c:when>
+													<c:when test="${peripheral.keepFlag == 1}">
+														<li>
+														<form action="<c:url value="/keep/keepDeleteComputer.do"/>">
+															<input type="hidden" value="${peripheral.peripheralNo}" name="peripheralNo">
+															<input type="hidden" value="${sessionScope.user.email}" name="keepUser">
+															<button class="btn-l-white">
+																<span>찜하기♥</span>
+															</button>
+														</form>	
+														</li>
+													</c:when>
+												</c:choose>
 												<li>
-													<button class="btn-l-black">
-														<span>찜하기</span>
-													</button>
-												</li>
-												<li>
-													<button class="btn-l-red">
+													<button class="btn-l-red" onclick="Cart()">
 														<span>장바구니</span>
 													</button>
 												</li>
 												<li>
-													<button class="btn-l-white">
+													<button class="btn-l-white" onclick="openModal()">
 														<span>QnA</span>
 													</button>
 												</li>
@@ -196,5 +218,69 @@
 				</div>
 			</section>
 		</div>
+			<div id="qnaModal" class="modal" style="display: none;">
+			    <div class="modal-content">
+			        <h2>QnA 작성 페이지입니다.</h2>
+			        <form id="question" action='<c:url value="/question/questionPeripheral.do"/>' method="post">
+			            <input type="hidden" name="peripheralNo" value="${peripheral.peripheralNo}">
+			            <input type="hidden" name="questionUser" value="${sessionScope.user.email}">
+		            	제목<br>
+                      	<input type="text" name="questionTitle" class="qnatitle"><br>
+			                        본문<br>
+			            <textarea rows="20px" cols="40px" name="questionBody" style="resize: none;"></textarea><br><br>
+			            <button type="submit" style="margin-left: 200px">작성하기</button>
+			            <button type="button" onclick="closeModal()" style="text-align: right">취소</button>
+			        </form>
+			    </div>
+			</div>
+		<script>
+			function Keep(){
+				let session = "${sessionScope.user.email}"
+				if(session == null || session == ""){
+					alert("로그인 해주세요");
+					return;
+				};
+				$.ajax({
+					url : "<c:url value='/keep/keepPeripheral.do'/>",
+					type : "post",
+					data : {
+						"keepUser" : "${sessionScope.user.email}",
+						"peripheralNo" : ${peripheral.peripheralNo}
+					},
+					success : function(data){
+						document.location.href = document.location.href;
+					}
+				})
+			}
+			function Cart(){
+				let session = "${sessionScope.user.email}"
+				if(session == null || session == ""){
+					alert("로그인 해주세요");
+					return;
+				};
+				$.ajax({
+					url : "<c:url value='/cart/cartPeripheral.do'/>",
+					type : "post",
+					data : {
+						"cartUser" : "${sessionScope.user.email}",
+						"peripheralNo" : ${peripheral.peripheralNo},
+					},
+					success : function(data){
+						document.location.href = document.location.href;
+					}
+				})
+			}
+			function openModal() {
+				let session = "${sessionScope.user.email}"
+					if(session == null || session == ""){
+						alert("로그인 해주세요");
+						return;
+				};
+		        document.getElementById('qnaModal').style.display = 'block';
+		    }
+			function closeModal() {
+		        document.getElementById('qnaModal').style.display = 'none';
+		    }﻿
+		</script>
 	</body>
 </html>

@@ -5,7 +5,27 @@ public class CartVO {
 	private String cartUser;
 	private int computerNo;
 	private int peripheralNo;
-	private int optNo;
+	private int optSsd;
+	private int optHdd;
+	private int optOs;
+	public int getOptSsd() {
+		return optSsd;
+	}
+	public void setOptSsd(int optSsd) {
+		this.optSsd = optSsd;
+	}
+	public int getOptHdd() {
+		return optHdd;
+	}
+	public void setOptHdd(int optHdd) {
+		this.optHdd = optHdd;
+	}
+	public int getOptOs() {
+		return optOs;
+	}
+	public void setOptOs(int optOs) {
+		this.optOs = optOs;
+	}
 	private int itemCount;
 	
 	public int getCartNo() {
@@ -31,12 +51,6 @@ public class CartVO {
 	}
 	public void setPeripheralNo(int peripheralNo) {
 		this.peripheralNo = peripheralNo;
-	}
-	public int getOptNo() {
-		return optNo;
-	}
-	public void setOptNo(int optNo) {
-		this.optNo = optNo;
 	}
 	public int getItemCount() {
 		return itemCount;

@@ -19,17 +19,12 @@
 							<c:when test="${sessionScope.user.email != null}">
 								<li><a>장바구니</a></li>
 								<li><a>마이페이지</a></li>
-							</c:when>
-						</c:choose>
-						<c:choose>
-							<c:when test="${sessionScope.user.email != null}">
-								<li><a>로그아웃</a></li>
+								<li><a>로그아웃</a></li>	
 							</c:when>
 							<c:when test="${sessionScope.user.email == null}">
 								<li><a>로그인</a></li>
 							</c:when>
 						</c:choose>
-						
 					</ul>
 				</div>
 				<nav id="gnb" class="bottom">
@@ -72,10 +67,10 @@
 														<div class="tit">SSD</div>
 														<div class="ssd">
 															<select id="selectbox1" class="selectbox" onchange="onSelectChange1()">
-																<option value="0">SSD 추가 구매</option>
+																<option value="0" value2="0">SSD 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 0}">
-																		<option value="${opt.optSalePrice}">${opt.optName}+${opt.optSalePrice}원
+																		<option value="${opt.optSalePrice}" value2="${opt.optNo}">${opt.optName}+${opt.optSalePrice}원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -85,10 +80,10 @@
 														<div class="tit">HDD</div>
 														<div class="hdd">
 															<select id="selectbox2" class="selectbox" onchange="onSelectChange2()">
-																<option value="0">HDD 추가 구매</option>
+																<option value="0" value2="0">HDD 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 1}">
-																		<option value="${opt.optSalePrice}">${opt.optName}+${opt.optSalePrice}원
+																		<option value="${opt.optSalePrice}" value2="${opt.optNo}">${opt.optName}+${opt.optSalePrice}원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -98,10 +93,10 @@
 														<div class="tit">OS</div>
 														<div class="os">
 															<select id="selectbox3" class="selectbox" onchange="onSelectChange3()">
-																<option value="0">OS 추가 구매</option>
+																<option value="0" value2="0">OS 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 2}">
-																		<option value="${opt.optSalePrice}">${opt.optName}+${opt.optSalePrice}원
+																		<option value="${opt.optSalePrice}" value2="${opt.optNo}">${opt.optName}+${opt.optSalePrice}원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -137,12 +132,12 @@
 													</c:when>
 												</c:choose>
 												<li>
-													<button class="btn-l-red">
+													<button class="btn-l-red" onclick="Cart()">
 														<span>장바구니</span>
 													</button>
 												</li>
 												<li>
-													<button class="btn-l-white">
+													<button class="btn-l-white" onclick="openModal()">
 														<span>QnA</span>
 													</button>
 												</li>
@@ -274,6 +269,21 @@
 				</div>
 			</section>
 		</div>
+		<div id="qnaModal" class="modal" style="display: none;">
+			    <div class="modal-content">
+			        <h2>QnA 작성 페이지입니다.</h2>
+			        <form id="question" action='<c:url value="/question/questionComputer.do"/>' method="post">
+			            <input type="hidden" name="computerNo" value="${computer.computerNo}">
+			            <input type="hidden" name="questionUser" value="${sessionScope.user.email}">
+		            	제목<br>
+                      	<input type="text" name="questionTitle" class="qnatitle"><br>
+			                        본문<br>
+			            <textarea rows="20px" cols="40px" name="questionBody" style="resize: none;"></textarea><br><br>
+			            <button type="submit" style="margin-left: 200px">작성하기</button>
+			            <button type="button" onclick="closeModal()" style="text-align: right">취소</button>
+			        </form>
+			    </div>
+			</div>
 		<script>
 			function onSelectChange1(){ 
 			    let selected = $("select option:selected");
@@ -314,9 +324,45 @@
 					data : {
 						"keepUser" : "${sessionScope.user.email}",
 						"computerNo" : ${computer.computerNo}
+					},
+					success : function(data){
+						document.location.href = document.location.href;
 					}
 				})
-			}﻿
+			}
+			function Cart(){
+				let session = "${sessionScope.user.email}"
+				let selected = $("select option:selected");
+				if(session == null || session == ""){
+					alert("로그인 해주세요");
+					return;
+				};
+				$.ajax({
+					url : "<c:url value='/cart/cartComputer.do'/>",
+					type : "post",
+					data : {
+						"cartUser" : "${sessionScope.user.email}",
+						"computerNo" : ${computer.computerNo},
+						"optSsd" : parseInt(selected.eq(0).attr("value2")),
+						"optHdd" : parseInt(selected.eq(1).attr("value2")),
+						"optOs" : parseInt(selected.eq(2).attr("value2"))
+					},
+					success : function(data){
+						document.location.href = document.location.href;
+					}
+				})
+			}
+			function openModal() {
+				let session = "${sessionScope.user.email}"
+					if(session == null || session == ""){
+						alert("로그인 해주세요");
+						return;
+				};
+		        document.getElementById('qnaModal').style.display = 'block';
+		    }
+			function closeModal() {
+		        document.getElementById('qnaModal').style.display = 'none';
+		    }﻿
 		</script>
 	</body>
 </html>

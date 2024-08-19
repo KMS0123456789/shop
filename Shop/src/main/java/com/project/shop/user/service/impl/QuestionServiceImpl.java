@@ -20,4 +20,9 @@ public class QuestionServiceImpl implements QuestionService{
     public List<QuestionVO> questionAll() {
         return repository.questionAll();   //QuestionRepository에서 questionAll 메서드 실행
     }
+
+	@Override
+	public int questionComputer(QuestionVO vo) {
+		return repository.questionComputer(vo);
+	}
 }
