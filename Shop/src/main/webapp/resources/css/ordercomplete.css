@@ -1,0 +1,120 @@
+.icon-bag:before {
+    content: '\1F6CD';
+    font-size: 50px;
+}
+
+.icon-card:before {
+    content: '\1F4B3';
+    font-size: 50px;
+}
+
+.icon-check:before {
+    content: '\2714';
+    font-size: 50px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.order-complete-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #ff7bac;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.cart-step {
+    text-align: center;
+    margin: 0 20px;
+    color: #999;
+    font-weight: bold;
+}
+
+.cart-step.active {
+    color: #ff4081;
+}
+
+.cart-step i {
+    font-size: 50px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.order-summary {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.order-summary th, .order-summary td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.order-summary th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.total-amount {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.total-amount strong {
+    font-size: 24px;
+    color: #ff6b6b;
+}
+
+.back-to-shop {
+	font-family: Arial, sans-serif;
+	display: flex;
+    margin-top: 30px;
+    padding: 15px 20px;
+    background-color: #ff6b6b;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 18px;
+    text-align: center;
+    align-items: center;
+    width: 120px;
+    cursor: pointer;
+}
+
+.back-to-shop:hover {
+    background-color: #ff4081;
+}
