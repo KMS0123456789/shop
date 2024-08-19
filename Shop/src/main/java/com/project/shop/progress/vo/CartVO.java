@@ -20,10 +20,10 @@ public class CartVO {
 	public void setCartUser(String cartUser) {
 		this.cartUser = cartUser;
 	}
-	public int getConputerNo() {
+	public int getComputerNo() {
 		return computerNo;
 	}
-	public void setConputerNo(int conputerNo) {
+	public void setComputerNo(int conputerNo) {
 		this.computerNo = conputerNo;
 	}
 	public int getPeripheralNo() {

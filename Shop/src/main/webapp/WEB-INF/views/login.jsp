@@ -8,6 +8,6 @@
 <body>
 	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91452e14d92a8c67875cd1e2ec08fdd2
 	&redirect_uri=http://localhost:8080/shop/user/kakao/callback.do">
-	<img height="50px" src="${pageContext.request.contextPath}/resources/image/kakaoLogin.png"/></a>
+	<img height="30px" src="${pageContext.request.contextPath}/resources/image/kakaoLogin.png"/></a>
 </body>
 </html>

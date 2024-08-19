@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVO handleKakaoCallback(String code) throws Exception {
+    public UserVO join(String code) throws Exception {
         RestTemplate restTemplate = new RestTemplate();  // HTTP 요청을 보낼 RestTemplate 객체 생성
 
         HttpHeaders headers = new HttpHeaders();  // HTTP 요청 헤더를 설정할 객체 생성
@@ -93,7 +93,7 @@ public class UserServiceImpl implements UserService {
             user.setName(kakaoUser.getKakaoAccount().getName());  // 이름 설정
             user.setPhoneNum(kakaoUser.getKakaoAccount().getPhoneNumber());  // 전화번호 설정
 
-            repository.saveUser(user);  // 새로운 사용자 정보를 DB에 저장
+            repository.join(user);  // 새로운 사용자 정보를 DB에 저장
         }
 
         return user;  // 최종적으로 사용자를 반환
@@ -102,6 +102,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO findUserByEmail(String email) {
         return repository.findUserByEmail(email);  // 이메일로 사용자 검색 메서드 호출
+    }
+    
+    @Override
+    public UserVO login(UserVO vo) {
+        return repository.login(vo);  // 로그인 처리 후 사용자 정보를 반환
     }
 
 	@Override
