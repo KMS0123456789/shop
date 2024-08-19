@@ -21,7 +21,15 @@
 								<li><a>마이페이지</a></li>
 							</c:when>
 						</c:choose>
-						<li><a>로그인</a></li>
+						<c:choose>
+							<c:when test="${sessionScope.user.email != null}">
+								<li><a>로그아웃</a></li>
+							</c:when>
+							<c:when test="${sessionScope.user.email == null}">
+								<li><a>로그인</a></li>
+							</c:when>
+						</c:choose>
+						
 					</ul>
 				</div>
 				<nav id="gnb" class="bottom">
@@ -108,15 +116,26 @@
 												</span>
 											</div>
 											<ul class="btnbox">
-												<li>
-													<form>
-														<input type="hidden" value="computerNo">
-														<input type="hidden" value="">
-														<button class="btn-l-black" type="submit">
-															<span>찜하기</span>
-														</button>
-													</form>
-												</li>
+												<c:choose>
+													<c:when test="${computer.keepFlag == 0}">
+														<li>
+															<button class="btn-l-white" onclick="Keep()">
+																<span>찜하기♡</span>
+															</button>
+														</li>
+													</c:when>
+													<c:when test="${computer.keepFlag == 1}">
+														<li>
+														<form action="<c:url value="/keep/keepDeleteComputer.do"/>">
+															<input type="hidden" value="${computer.computerNo}" name="computerNo">
+															<input type="hidden" value="${sessionScope.user.email}" name="keepUser">
+															<button class="btn-l-white">
+																<span>찜하기♥</span>
+															</button>
+														</form>	
+														</li>
+													</c:when>
+												</c:choose>
 												<li>
 													<button class="btn-l-red">
 														<span>장바구니</span>
@@ -141,11 +160,11 @@
 							</div>
 						</div>
 						<ul class="tabmenu">
-							<li class="on"><a>상품 정보</a></li>
-							<li><a>리뷰</a></li>
-							<li><a>QnA</a></li>
+							<li class="on"><a href="#info">상품 정보</a></li>
+							<li><a href="#review">리뷰</a></li>
+							<li><a href="#qna">QnA</a></li>
 						</ul>
-						<div class="detail-info">
+						<div class="detail-info" id="info">
 							<div class="detail-info2">
 								<div class="detail-info3">
 									<div class="table-box">
@@ -187,7 +206,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="review-tab">
+						<div class="review-tab" id="review">
 							<div class="tab-title"></div>
 							<div class="review">
 								<div class="review-list">
@@ -214,7 +233,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="qna">
+						<div class="qna" id="qna">
 							<div class="tab-title"></div>
 							<div class="top">
 								<p class="tit">상품 QnA</p>
@@ -282,7 +301,22 @@
 				   totalPrice += parseInt(selected.eq(i).val());
 				}
 				$("#total-price").text(totalPrice);
-			}  ﻿
+			} 
+			function Keep(){
+				let session = "${sessionScope.user.email}"
+				if(session == null || session == ""){
+					alert("로그인 해주세요");
+					return;
+				};
+				$.ajax({
+					url : "<c:url value='/keep/keepComputer.do'/>",
+					type : "post",
+					data : {
+						"keepUser" : "${sessionScope.user.email}",
+						"computerNo" : ${computer.computerNo}
+					}
+				})
+			}﻿
 		</script>
 	</body>
 </html>

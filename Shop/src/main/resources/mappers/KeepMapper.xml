@@ -8,4 +8,13 @@
 		<result property="peripheralNo" column="peripheral_no"/>
 		<result property="itemCategory" column="item_category"/>
 	</resultMap>
+	
+	<insert id="keepComputer" parameterType="HashMap">
+		insert into keep(keep_user,computer_no,item_category)
+					values(#{keepUser},#{computerNo},0)
+	</insert>
+	
+	<delete id="keepDeleteComputer">
+		delete from keep where keep_user =#{keepUser} and computer_no = #{computerNo}
+	</delete>
 </mapper>

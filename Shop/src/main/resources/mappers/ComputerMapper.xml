@@ -4,7 +4,6 @@
 	<resultMap type="com.project.shop.computer.vo.ComputerVO" id="computerMap">
 		<id property="computerNo" column="computer_no"/>
 		<result property="computerTitle" column="computer_title"/>
-		<result property="computerBody" column="computer_body"/>
 		<result property="computerSalePrice" column="computer_sale_price"/>
 		<result property="cpu" column="cpu"/>
 		<result property="ssd" column="ssd"/>
@@ -18,7 +17,7 @@
 		<result property="computerOutFlag" column="computer_out_flag"/>
 		<result property="computerSaleDate" column="computer_sale_date"/>
 		<result property="computerCreateDate" column="computer_create_date"/>
-		<result property="mainFlag" column="main_flag"/>
+		<result property="keepFlag" column="keep_flag"/>
 		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
 			<id property="reviewNo" column="review_no"/>
 			<result property="reviewUser" column="review_user"/>
@@ -48,7 +47,6 @@
 			<id property="peripheralNo" column="peripheral_no"/>
 			<result property="peripheralCategory" column="peripheral_category"/>
 			<result property="peripheralTitle" column="peripheral_title"/>
-			<result property="peripheralBody" column="peripheral_body"/>
 			<result property="peripheralName" column="peripheral_name"/>
 			<result property="peripheralStock" column="peripheral_stock"/>
 			<result property="peripheralSalePrice" column="peripheral_sale_price"/>
@@ -83,7 +81,8 @@
 	
 	<!-- 완제품 단건 조회 -->
 	<select id="computerPost" parameterType="int" resultMap="computerMap">
-		select * 
+		select *,
+		(select count(keep_user) from keep where computer.computer_no = keep.computer_no) as keep_flag 
 		from computer 
 		left join review on computer.computer_no = review.computer_no
 		left join question on computer.computer_no = question.computer_no

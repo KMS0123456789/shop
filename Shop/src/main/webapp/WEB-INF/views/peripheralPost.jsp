@@ -94,11 +94,11 @@
 							</div>
 						</div>
 						<ul class="tabmenu">
-							<li class="on"><a>상품 정보</a></li>
-							<li><a>리뷰</a></li>
-							<li><a>QnA</a></li>
+							<li class="on"><a href="#info">상품 정보</a></li>
+							<li><a href="#review">리뷰</a></li>
+							<li><a href="#qna">QnA</a></li>
 						</ul>
-						<div class="detail-info">
+						<div class="detail-info" id="info">
 							<div class="detail-info2">
 								<div class="detail-info3">
 									<div class="table-box">
@@ -128,7 +128,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="review-tab">
+						<div class="review-tab" id="review">
 							<div class="tab-title"></div>
 							<div class="review">
 								<div class="review-list">
@@ -155,7 +155,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="qna">
+						<div class="qna" id="qna">
 							<div class="tab-title"></div>
 							<div class="top">
 								<p class="tit">상품 QnA</p>

@@ -4,7 +4,9 @@
 	<resultMap type="com.project.shop.user.vo.AddrVO" id="addrMap">
 		<id property="addrNo" column="addr_no"/>
 		<result property="addrUserEmail" column="addr_user_email"/>
+		<result property="addressCode" column="address_code"/>
 		<result property="address" column="address"/>
+		<result property="addressDetail" column="address_detail"/>
 		<result property="dAddrName" column="d_addr_name"/>
 		<result property="addrUserName" column="addr_user_name"/>
 		<result property="addrLandLine" column="addr_land_line"/>

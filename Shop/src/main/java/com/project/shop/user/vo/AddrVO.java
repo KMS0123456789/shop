@@ -9,6 +9,20 @@ public class AddrVO {
 	private String addrUserName;
 	private String addrUserPhoneNum;
 	private String addrUserLandLinel;
+	private int addressCode;
+	private String adressDetail;
+	public int getAddressCode() {
+		return addressCode;
+	}
+	public void setAddressCode(int addressCode) {
+		this.addressCode = addressCode;
+	}
+	public String getAdressDetail() {
+		return adressDetail;
+	}
+	public void setAdressDetail(String adressDetail) {
+		this.adressDetail = adressDetail;
+	}
 	public int getAddrNo() {
 		return addrNo;
 	}

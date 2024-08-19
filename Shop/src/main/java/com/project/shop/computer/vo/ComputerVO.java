@@ -2,6 +2,7 @@ package com.project.shop.computer.vo;
 
 import java.util.List;
 
+import com.project.shop.progress.vo.KeepVO;
 import com.project.shop.user.vo.AnswerVO;
 import com.project.shop.user.vo.QuestionVO;
 import com.project.shop.user.vo.ReviewVO;
@@ -9,7 +10,6 @@ import com.project.shop.user.vo.ReviewVO;
 public class ComputerVO {
 	private int computerNo;
 	private String computerTitle;
-	private String computerBody;
 	private int computerSalePrice;
 	private String cpu;
 	private String ssd;
@@ -27,12 +27,12 @@ public class ComputerVO {
 	private List<QuestionVO> questions;
 	private List<AnswerVO> answers;
 	private List<PeripheralVO> peripherals; 
-	private int mainFlag;
-	public int getMainFlag() {
-		return mainFlag;
+	private int keepFlag;
+	public int getKeepFlag() {
+		return keepFlag;
 	}
-	public void setMainFlag(int mainFlag) {
-		this.mainFlag = mainFlag;
+	public void setKeepFlag(int keepFlag) {
+		this.keepFlag = keepFlag;
 	}
 	public List<PeripheralVO> getPeripherals() {
 		return peripherals;
@@ -69,12 +69,6 @@ public class ComputerVO {
 	}
 	public void setComputerTitle(String computerTitle) {
 		this.computerTitle = computerTitle;
-	}
-	public String getComputerBody() {
-		return computerBody;
-	}
-	public void setComputerBody(String computerBody) {
-		this.computerBody = computerBody;
 	}
 	public int getComputerSalePrice() {
 		return computerSalePrice;
