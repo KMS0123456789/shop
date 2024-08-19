@@ -5,7 +5,6 @@
 		<id property="peripheralNo" column="peripheral_no"/>
 		<result property="peripheralCategory" column="peripheral_category"/>
 		<result property="peripheralTitle" column="peripheral_title"/>
-		<result property="peripheralBody" column="peripheral_body"/>
 		<result property="peripheralName" column="peripheral_name"/>
 		<result property="peripheralStock" column="peripheral_stock"/>
 		<result property="peripheralSalePrice" column="peripheral_sale_price"/>
@@ -120,4 +119,8 @@
 		union
 		(select * from peripheral where peripheral_category = 2 order by peripheral_no desc limit 0,5)
 	</select>
+	<insert id="peripheralInsert" parameterType="com.project.shop.computer.vo.PeripheralVO"  useGeneratedKeys="true" keyProperty="peripheralNo">
+		insert into peripheral(peripheral_category,peripheral_title,peripheral_sale_price,peripheral_stock,peripheral_name)
+		values(#{peripheralCategory},#{peripheralTitle},#{peripheralSalePrice},#{peripheralStock},#{peripheralName});
+	</insert>
 </mapper>

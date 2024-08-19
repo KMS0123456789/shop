@@ -74,4 +74,7 @@ public class PeripheralRepository {
 	public PeripheralVO peripheralPost(int peripheralNo) {
 		return template.selectOne(NAME_SPACE + ".peripheralPost", peripheralNo);
 	}
+	public int peripheralInsert(PeripheralVO vo) {
+		return template.insert(NAME_SPACE + ".peripheralInsert", vo);
+	}
 }

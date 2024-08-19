@@ -23,4 +23,6 @@ public interface PeripheralService {
 	
 	//마우스, 키보드, 모니터 단건 조회
 	PeripheralVO peripheralPost(int peripheralNo);
+	
+	int peripheralInsert(PeripheralVO vo);
 }

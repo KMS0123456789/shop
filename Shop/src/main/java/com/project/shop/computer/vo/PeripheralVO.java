@@ -10,7 +10,6 @@ public class PeripheralVO {
 	private int peripheralNo;
 	private int peripheralCategory;
 	private String peripheralTitle;
-	private String peripheralBody;
 	private String peripheralName;
 	private int peripheralStock;
 	private int peripheralSalePrice;
@@ -61,12 +60,6 @@ public class PeripheralVO {
 	}
 	public void setPeripheralTitle(String peripheralTitle) {
 		this.peripheralTitle = peripheralTitle;
-	}
-	public String getPeripheralBody() {
-		return peripheralBody;
-	}
-	public void setPeripheralBody(String peripheralBody) {
-		this.peripheralBody = peripheralBody;
 	}
 	public String getPeripheralName() {
 		return peripheralName;

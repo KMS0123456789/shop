@@ -46,6 +46,9 @@ public class PeripheralServiceImpl implements PeripheralService{
 	public PeripheralVO peripheralPost(int peripheralNo) {
 		return repository.peripheralPost(peripheralNo);
 	}
-
 	
+	@Override
+	public int peripheralInsert(PeripheralVO vo) {
+		return repository.peripheralInsert(vo);
+	}
 }

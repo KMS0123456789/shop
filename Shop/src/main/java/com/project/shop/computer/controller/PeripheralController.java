@@ -1,7 +1,11 @@
 package com.project.shop.computer.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +13,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.project.shop.computer.repository.PeripheralRepository;
 import com.project.shop.computer.service.PeripheralService;
 import com.project.shop.computer.vo.PeripheralVO;
+import com.project.shop.progress.repository.FileRepository;
+import com.project.shop.progress.vo.FileVO;
 
 
 
@@ -26,6 +35,12 @@ public class PeripheralController {
 	
 	@Autowired
 	private PeripheralService service;
+	
+	@Autowired
+	ServletContext servletContext;
+	
+	@Autowired
+	PeripheralRepository repository;
 	
 	//마우스 전체 조회
 	@RequestMapping(value="/mouse.do", method=RequestMethod.GET)
@@ -81,11 +96,63 @@ public class PeripheralController {
 		return "monitor";//monitor.jsp로 보냄
 	}
 	
-	@RequestMapping(value="/*.do/{peripheralNo}", method = RequestMethod.GET)
+	@RequestMapping(value="/peripheral.do/{peripheralNo}", method = RequestMethod.GET)
 	public String computerPost(@PathVariable int peripheralNo, Model model) {
 		//PeripheralNo에 해당하는 데이터 조회
 		PeripheralVO peripheral = service.peripheralPost(peripheralNo); //컴퓨터에 service.computerPost 값 넣기
 		model.addAttribute("peripheral", peripheral); //포워딩할 때 키 computer에 값 넣어 보내기
 		return "peripheralPost";
 	}
+	
+	@RequestMapping(value="/peripheralwrite.do", method=RequestMethod.GET)
+	public String peripheralwrite() {
+		return "peripheralwrite";
+	}
+	@RequestMapping(value="/peripheralwrite.do", method=RequestMethod.POST)
+	public String peripheralwriteOk(PeripheralVO peripheralVO, 
+	        @RequestParam("file") MultipartFile[] files) {
+		
+		repository.peripheralInsert(peripheralVO);
+	    int result =peripheralVO.getPeripheralNo();
+	    
+	    if(result > 0) {
+	        String uploadDir = servletContext.getRealPath("/uploads/");
+	        File dir = new File(uploadDir);
+	        if(!dir.exists()) {
+	            dir.mkdirs();
+	        }
+	        
+	        List<FileVO> fileList = new ArrayList<>();
+	        for(MultipartFile file : files) {
+	            if(!file.isEmpty()) {
+	                String originFileName = file.getOriginalFilename();
+	                String uniqueFileName = UUID.randomUUID().toString() + "_" + originFileName;
+	                String filePath = "/uploads/" + uniqueFileName;
+	                
+	                try {
+	                    file.transferTo(new File(uploadDir + uniqueFileName));
+	                    FileVO fileVO = new FileVO();
+	                    fileVO.setPeripheralNo(peripheralVO.getPeripheralNo());
+	                    fileVO.setFileName(originFileName);
+	                    fileVO.setFilePath(filePath);
+	                    fileVO.setFileSize(String.valueOf(file.getSize()));
+	                    fileList.add(fileVO);
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+
+	                }
+	            }
+	        }
+
+	        return "redirect:/peripheral/peripheral.do/" + peripheralVO.getPeripheralNo();
+	    } else {
+	        return "redirect:/user/manager.do";
+	    }
+	}
 }
+	
+
+
+	
+		
+
