@@ -23,8 +23,8 @@ public class CartVO {
 	public int getComputerNo() {
 		return computerNo;
 	}
-	public void setComputerNo(int conputerNo) {
-		this.computerNo = conputerNo;
+	public void setComputerNo(int computerNo) {
+		this.computerNo = computerNo;
 	}
 	public int getPeripheralNo() {
 		return peripheralNo;
