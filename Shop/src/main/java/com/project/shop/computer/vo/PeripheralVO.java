@@ -18,12 +18,13 @@ public class PeripheralVO {
 	private List<ReviewVO> reviews;
 	private List<QuestionVO> questions;
 	private List<AnswerVO> answers;
-	private int mainFlag;
-	public int getMainFlag() {
-		return mainFlag;
+	private int keepFlag;
+
+	public int getKeepFlag() {
+		return keepFlag;
 	}
-	public void setMainFlag(int mainFlag) {
-		this.mainFlag = mainFlag;
+	public void setKeepFlag(int keepFlag) {
+		this.keepFlag = keepFlag;
 	}
 	public List<ReviewVO> getReviews() {
 		return reviews;

@@ -24,5 +24,15 @@ public class KeepServiceImpl implements KeepService{
 	public int keepDeleteComputer(HashMap<String, Object> map) {
 		return repository.keepDeleteComputer(map);
 	}
+	
+	@Override
+	public int keepPeripheral(HashMap<String, Object> map) {
+		return repository.keepPeripheral(map);
+	}
+
+	@Override
+	public int keepDeletePeripheral(HashMap<String, Object> map) {
+		return repository.keepDeletePeripheral(map);
+	}
 
 }

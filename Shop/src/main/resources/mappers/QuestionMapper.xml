@@ -21,4 +21,9 @@
 		insert into question(question_user, computer_no, question_title, question_body, item_category)
 					values(#{questionUser}, #{computerNo}, #{questionTitle}, #{questionBody}, 0)
 	</insert>
+	
+	<insert id="questionPeripheral" parameterType="com.project.shop.user.vo.QuestionVO">
+		insert into question(question_user, peripheral_no, question_title, question_body, item_category)
+					values(#{questionUser}, #{peripheralNo}, #{questionTitle}, #{questionBody}, 1)
+	</insert>
 </mapper>

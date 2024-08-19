@@ -17,4 +17,13 @@
 	<delete id="keepDeleteComputer">
 		delete from keep where keep_user =#{keepUser} and computer_no = #{computerNo}
 	</delete>
+	
+	<insert id="keepPeripheral" parameterType="HashMap">
+		insert into keep(keep_user,peripheral_no,item_category)
+					values(#{keepUser},#{peripheralNo},1)
+	</insert>
+	
+	<delete id="keepDeletePeripheral">
+		delete from keep where keep_user =#{keepUser} and peripheral_no = #{peripheralNo}
+	</delete>
 </mapper>

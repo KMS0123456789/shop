@@ -11,7 +11,7 @@
 		<result property="peripheralOutFlag" column="peripheral_out_flag"/>
 		<result property="peripheralSaleDate" column="peripheral_sale_date"/>
 		<result property="peripheralCreateDate" column="peripheral_create_date"/>
-		<result property="mainFlag" column="main_flag"/>
+		<result property="keepFlag" column="keep_flag"/>
 		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
 			<id property="reviewNo" column="review_no"/>
 			<result property="reviewUser" column="review_user"/>
@@ -103,7 +103,8 @@
 	
 	<!-- 마우스, 키보드, 모니터 단건 조회 -->
 	<select id="peripheralPost" parameterType="int" resultMap="peripheralMap">
-		select * 
+		select *,
+		(select count(keep_user) from keep where peripheral.peripheral_no = keep.peripheral_no) as keep_flag 
 		from peripheral 
 		left join review on peripheral.peripheral_no = review.peripheral_no
 		left join question on peripheral.peripheral_no = question.peripheral_no

@@ -7,6 +7,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Insert title here</title>
 		<link href="<c:url value='/resources/css/peripheral.css' />" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
 	<body>
 		<div class="wrap">
@@ -263,9 +264,10 @@
 					type : "post",
 					data : {
 						"cartUser" : "${sessionScope.user.email}",
-						"peripheralNo" : ${peripheral.peripheralNo},
+						"peripheralNo" : ${peripheral.peripheralNo}
 					},
 					success : function(data){
+						alert("장바구니에 추가되었습니다.");
 						document.location.href = document.location.href;
 					}
 				})

@@ -16,4 +16,8 @@ public class CartRepository {
 	public int cartComputer(HashMap<String, Object> map) {
 		return template.insert(NAME_SPACE + ".cartComputer", map);
 	}
+	
+	public int cartPeripheral(HashMap<String, Object> map) {
+		return template.insert(NAME_SPACE + ".cartPeripheral", map);
+	}
 }

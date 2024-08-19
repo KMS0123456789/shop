@@ -25,4 +25,9 @@ public class QuestionServiceImpl implements QuestionService{
 	public int questionComputer(QuestionVO vo) {
 		return repository.questionComputer(vo);
 	}
+	
+	@Override
+	public int questionPeripheral(QuestionVO vo) {
+		return repository.questionPeripheral(vo);
+	}
 }

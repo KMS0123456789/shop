@@ -348,6 +348,7 @@
 						"optOs" : parseInt(selected.eq(2).attr("value2"))
 					},
 					success : function(data){
+						alert("장바구니에 추가되었습니다.");
 						document.location.href = document.location.href;
 					}
 				})

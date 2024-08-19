@@ -58,9 +58,9 @@
 									<ul class="item rows admSortTable">
 										<c:forEach items="${monitor}" var="monitor">
 											<li>
-												<div class="item-image"><a href='<c:url value="/peripheral/monitor.do/${monitor.peripheralNo}"/>'><img>이미지</a></div>
+												<div class="item-image"><a href='<c:url value="/peripheral/peripheral.do/${monitor.peripheralNo}"/>'><img>이미지</a></div>
 												<div class="item-content">
-													<div class="subject"><a href='<c:url value="/peripheral/monitor.do/${monitor.peripheralNo}"/>'>${monitor.peripheralTitle}</a></div>
+													<div class="subject"><a href='<c:url value="/peripheral/peripheral.do/${monitor.peripheralNo}"/>'>${monitor.peripheralTitle}</a></div>
 												</div>
 												<div class="info">
 													<div class="pull-left">

@@ -23,4 +23,8 @@ public class QuestionRepository {
 	public int questionComputer(QuestionVO vo) {
 		return template.insert(NAME_SPACE + ".questionComputer", vo);
 	}
+	
+	public int questionPeripheral(QuestionVO vo) {
+		return template.insert(NAME_SPACE + ".questionPeripheral", vo);
+	}
 }

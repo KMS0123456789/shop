@@ -21,4 +21,12 @@ public class KeepRepository {
 	public int keepDeleteComputer(HashMap<String, Object> map) {
 		return template.delete(NAME_SPACE + ".keepDeleteComputer", map);
 	}
+	
+	public int keepPeripheral(HashMap<String, Object> map) {
+		return template.insert(NAME_SPACE + ".keepPeripheral", map);
+	}
+	
+	public int keepDeletePeripheral(HashMap<String, Object> map) {
+		return template.delete(NAME_SPACE + ".keepDeletePeripheral", map);
+	}
 }

@@ -39,4 +39,26 @@ public class KeepController {
 		service.keepDeleteComputer(map);
 		return "redirect:/computer/computer.do/"+computerNo;
 	}
+	
+	@RequestMapping(value="/keepPeripheral.do", method = RequestMethod.POST)
+	public String keepPeripheral(
+			@RequestParam("peripheralNo") int peripheralNo,
+			@RequestParam("keepUser") String keepUser) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("peripheralNo", peripheralNo);
+		map.put("keepUser", keepUser);
+		service.keepPeripheral(map);
+		return "redirect:/peripheral/peripheral.do/"+peripheralNo;
+	}
+	
+	@RequestMapping("keepDeletePeripheral.do")
+	public String keepDeletePeripheral(
+			@RequestParam("peripheralNo") int peripheralNo,
+			@RequestParam("keepUser") String keepUser) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("peripheralNo", peripheralNo);
+		map.put("keepUser", keepUser);
+		service.keepDeletePeripheral(map);
+		return "redirect:/peripheral/peripheral.do/"+peripheralNo;
+	}
 }

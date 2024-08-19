@@ -17,4 +17,9 @@
 		insert into cart(cart_user, computer_no, opt_ssd, opt_hdd, opt_os, item_count, item_category)
 					values(#{cartUser}, #{computerNo}, #{optSsd}, #{optHdd}, #{optOs}, 1, 0)
 	</insert>
+	
+	<insert id="cartPeripheral" parameterType="HashMap">
+		insert into cart(cart_user, peripheral_no, item_count, item_category)
+					values(#{cartUser}, #{peripheralNo}, 1, 1)
+	</insert>
 </mapper>

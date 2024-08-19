@@ -70,11 +70,11 @@
 									<c:when test="${peripheral.peripheralCategory == 0}">
 										<li>
 											<div class="item-image">
-												<a href='<c:url value="/peripheral/mouse.do/${peripheral.peripheralNo}"/>'><img class="image">이미지</a>
+												<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image">이미지</a>
 											</div>
 											<div class="item-content">
 												<div class="subject">
-													<a href='<c:url value="/peripheral/mouse.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
+													<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
 												</div>
 											</div>
 											<div class="info">
@@ -88,11 +88,11 @@
 									<c:when test="${peripheral.peripheralCategory == 1}">
 										<li>
 											<div class="item-image">
-												<a href='<c:url value="/peripheral/keyboard.do/${peripheral.peripheralNo}"/>'><img class="image">이미지</a>
+												<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image">이미지</a>
 											</div>
 											<div class="item-content">
 												<div class="subject">
-													<a href='<c:url value="/peripheral/keyboard.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
+													<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
 												</div>
 											</div>
 											<div class="info">
@@ -106,11 +106,11 @@
 									<c:when test="${peripheral.peripheralCategory == 2}">
 										<li>
 											<div class="item-image">
-												<a href='<c:url value="/peripheral/monitor.do/${peripheral.peripheralNo}"/>'><img class="image">이미지</a>
+												<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image">이미지</a>
 											</div>
 											<div class="item-content">
 												<div class="subject">
-													<a href='<c:url value="/peripheral/monitor.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
+													<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
 												</div>
 											</div>
 											<div class="info">

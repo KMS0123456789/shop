@@ -36,4 +36,11 @@ public class QuestionController {
 		service.questionComputer(vo);
 		return "redirect:/computer/computer.do/"+computerNo;
 	}
+	
+	@RequestMapping(value="/questionPeripheral", method=RequestMethod.POST)
+	public String questionPeripheral(QuestionVO vo,
+			@RequestParam("peripheralNo") int peripheralNo) {
+		service.questionPeripheral(vo);
+		return "redirect:/peripheral/peripheral.do/"+peripheralNo;
+	}
 }

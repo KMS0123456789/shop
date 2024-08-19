@@ -35,4 +35,15 @@ public class CartController {
 		service.cartComputer(map);
 		return "redirect:/computer/computer.do/"+computerNo;
 	}
+	
+	@RequestMapping(value="/cartPeripheral.do", method=RequestMethod.POST)
+	public String cartPeripheral(
+			@RequestParam("peripheralNo") int peripheralNo,
+			@RequestParam("cartUser") String cartUser){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("cartUser", cartUser);
+		map.put("peripheralNo", peripheralNo);
+		service.cartPeripheral(map);
+		return "redirect:/peripheral/peripheral.do/"+peripheralNo;
+	}
 }

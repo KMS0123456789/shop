@@ -18,4 +18,9 @@ public class CartServiceImpl implements CartService{
 	public int cartComputer(HashMap<String, Object> map) {
 		return repository.cartComputer(map);
 	}
+	
+	@Override
+	public int cartPeripheral(HashMap<String, Object> map) {
+		return repository.cartPeripheral(map);
+	}
 }
