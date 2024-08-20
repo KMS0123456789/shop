@@ -20,4 +20,10 @@ public interface ComputerService {
 	
 	//완제품 인서트
 	int computerInsert(ComputerVO vo);
+	
+	//완제품 높은 가격순 조회
+	Page<ComputerVO> computerHighPrice(Pageable pageable, String searchType, String keyword);
+	
+	//완제품 낮은 가격순 조회
+	Page<ComputerVO> computerLowPrice(Pageable pageable, String searchType, String keyword);
 }

@@ -50,4 +50,28 @@ public class ComputerRepository {
 	public int computerInsert(ComputerVO vo) {
 		return template.insert(NAME_SPACE + ".computerInsert", vo);
 	}
+	
+	//완제품 높은 가격순 조회
+	public Page<ComputerVO> computerHighPrice(Pageable pageable, String searchType, String keyword){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = count(searchType, keyword);
+		List<ComputerVO> computers = template.selectList(NAME_SPACE + ".computerHighPrice", map); //ComputerMapper의 computerHighPrice 메서드 실행
+		return new PageImpl<ComputerVO>(computers, pageable, total);
+	}
+	
+	//완제품 낮은 가격순 조회
+	public Page<ComputerVO> computerLowPrice(Pageable pageable, String searchType, String keyword){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = count(searchType, keyword);
+		List<ComputerVO> computers = template.selectList(NAME_SPACE + ".computerLowPrice", map); //ComputerMapper의 computerLowPrice 메서드 실행
+		return new PageImpl<ComputerVO>(computers, pageable, total);
+	}
 }

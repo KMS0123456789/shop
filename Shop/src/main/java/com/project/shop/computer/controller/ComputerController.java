@@ -116,5 +116,35 @@ public class ComputerController {
 		        return "redirect:/user/manager.do"; //실패시 /user/manager.do로 이동
 		}
 	}
+	
+	@RequestMapping(value="/computerHighPrice.do", method=RequestMethod.GET)
+	public String computerHighPrice(Model model, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword,
+			HttpSession session) {
+		Pageable pageable = PageRequest.of(page-1, 20); //한 페이지에 뜰 게시물 갯수(20개)
+		Page<ComputerVO> data = service.computerHighPrice(pageable, searchType, keyword);//data에 service.computerHighPrice 값 넣기
+		model.addAttribute("computer", data.getContent()); //computer키에 조회할 페이지 정보 넣어 보내기
+		model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", data.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+		return "computer"; //computer.jsp로 보냄
+	}
+	
+	@RequestMapping(value="/computerLowPrice.do", method=RequestMethod.GET)
+	public String computerLowPrice(Model model, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword,
+			HttpSession session) {
+		Pageable pageable = PageRequest.of(page-1, 20); //한 페이지에 뜰 게시물 갯수(20개)
+		Page<ComputerVO> data = service.computerLowPrice(pageable, searchType, keyword);//data에 service.computerLowPrice 값 넣기
+		model.addAttribute("computer", data.getContent()); //computer키에 조회할 페이지 정보 넣어 보내기
+		model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", data.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+		return "computer"; //computer.jsp로 보냄
+	}
 }
 

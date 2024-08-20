@@ -46,10 +46,9 @@
 					<div class="category-product">
 						<div class="list-info-box">
 							<ul class="list-sort">
-								<li class="on"><a>인기 순</a></li>
-								<li><a>높은 가격</a></li>
-								<li><a>낮은 가격</a></li>
-								<li><a>최신 순</a></li>
+								<li class="on"><a href="<c:url value='/computer/computer.do'/>">최신순</a></li>
+								<li><a href="<c:url value='/computer/computerHighPrice.do'/>">높은 가격</a></li>
+								<li><a href="<c:url value='/computer/computerLowPrice.do'/>">낮은 가격</a></li>
 							</ul>
 						</div>
 						<div class="product-box" style="padding-top: 0 !important;">
