@@ -17,4 +17,7 @@ public interface ComputerService {
 	
 	//완제품 단건 조회
 	ComputerVO computerPost(int computerNo);
+	
+	//완제품 인서트
+	int computerInsert(ComputerVO vo);
 }

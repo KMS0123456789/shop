@@ -45,4 +45,9 @@ public class ComputerRepository {
 	public ComputerVO computerPost(int computerNo) {
 		return template.selectOne(NAME_SPACE + ".computerPost", computerNo);
 	}
+	
+	//완제품 인서트
+	public int computerInsert(ComputerVO vo) {
+		return template.insert(NAME_SPACE + ".computerInsert", vo);
+	}
 }

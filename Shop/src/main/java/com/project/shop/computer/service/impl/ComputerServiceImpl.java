@@ -35,5 +35,9 @@ public class ComputerServiceImpl implements ComputerService{
 		return repository.computerPost(computerNo);
 	}
 	
-	
+	//완제품 인서트
+	@Override
+	public int computerInsert(ComputerVO vo) {
+		return repository.computerInsert(vo);
+	}
 }

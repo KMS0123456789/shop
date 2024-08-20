@@ -1,7 +1,11 @@
 package com.project.shop.computer.controller;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +18,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.project.shop.computer.repository.ComputerRepository;
 import com.project.shop.computer.service.ComputerService;
 import com.project.shop.computer.service.OptService;
 import com.project.shop.computer.vo.ComputerVO;
 import com.project.shop.computer.vo.OptVO;
+import com.project.shop.progress.vo.FileVO;
 
 @Controller
 @RequestMapping("/computer")
@@ -29,6 +36,12 @@ public class ComputerController {
 	
 	@Autowired
 	private OptService optService;
+	
+	@Autowired
+	ComputerRepository repository;
+	
+	@Autowired
+	ServletContext servletContext;
 	
 	//완제품 전제 조회
 	@RequestMapping(value="/computer.do", method=RequestMethod.GET)
@@ -60,4 +73,48 @@ public class ComputerController {
 		
 		return "computerPost";
 	}
+	
+	@RequestMapping(value="/computerwrite.do", method=RequestMethod.GET)
+	public String computerwrite() {
+		return "computerwrite";
+	}
+	@RequestMapping(value="/computerwrite.do", method=RequestMethod.POST)
+	public String computerwriteOk(ComputerVO computerVO,
+			@RequestParam("file") MultipartFile[] files) {
+		
+		repository.computerInsert(computerVO);
+		int result = computerVO.getComputerNo();
+		
+		if(result > 0) {
+			String uploadDir = servletContext.getRealPath("/uploads/");
+			File dir = new File(uploadDir);
+			if(!dir.exists()) {
+				dir.mkdirs();
+			}
+			
+			List<FileVO> fileList = new ArrayList<>();
+			for(MultipartFile file : files) {
+				if(!file.isEmpty()) {
+					String originFileName = file.getOriginalFilename();
+	                String uniqueFileName = UUID.randomUUID().toString() + "_" + originFileName;
+	                String filePath = "/uploads/" + uniqueFileName;
+	            try {
+	            	file.transferTo(new File(uploadDir + uniqueFileName));
+	            	FileVO fileVO = new FileVO();
+	            	fileVO.setComputerNo(computerVO.getComputerNo()); //filevo에 있는 ComputerNo에 computerVO.getComputerNo()값을 넣어주기
+	            	fileVO.setFileName(originFileName); 	//filevo에 있는 FileName에 originFileName값을 넣어주기
+                    fileVO.setFilePath(filePath);		//filevo에 있는 FilePath에 filepath값 넣어주기
+                    fileVO.setFileSize(String.valueOf(file.getSize()));
+                    fileList.add(fileVO);
+                } catch (Exception e) {
+                    e.printStackTrace();		// 파일 업로드 실패 시 처리 (예: 에러 메시지 설정)	            
+				}
+			}
+		}
+			return "redirect:/computer/computer.do/" + computerVO.getComputerNo(); //성공 시 /computer/computer.do/" + 생성된 ComputerNO로 이동한다
+		}else {
+		        return "redirect:/user/manager.do"; //실패시 /user/manager.do로 이동
+		}
+	}
 }
+
