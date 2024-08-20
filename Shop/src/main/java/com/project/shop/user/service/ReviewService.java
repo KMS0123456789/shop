@@ -1,5 +1,7 @@
 package com.project.shop.user.service;
 
-public interface ReviewService {
+import com.project.shop.user.vo.ReviewVO;
 
+public interface ReviewService {
+	int reviewComputer(ReviewVO vo);
 }

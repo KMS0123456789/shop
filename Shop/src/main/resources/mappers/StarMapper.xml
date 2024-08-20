@@ -9,4 +9,9 @@
 		<result property="starCount" column="star_count"/>
 		<result property="itemCategory" column="item_category"/>
 	</resultMap>
+	
+	<insert id="starComputer" parameterType="com.project.shop.user.vo.StarVO">
+		insert into star(star_user, computer_no, star_count, item_category)
+					values(#{starUser}, #{computerNo}, #{starCount}, 0)
+	</insert>
 </mapper>

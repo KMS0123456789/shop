@@ -77,7 +77,7 @@
 													<c:when test="${peripheral.keepFlag == 0}">
 														<li>
 															<button class="btn-l-white" onclick="Keep()">
-																<span>찜하기♡</span>
+																<span>찜하기🤍</span>
 															</button>
 														</li>
 													</c:when>
@@ -87,7 +87,7 @@
 															<input type="hidden" value="${peripheral.peripheralNo}" name="peripheralNo">
 															<input type="hidden" value="${sessionScope.user.email}" name="keepUser">
 															<button class="btn-l-white">
-																<span>찜하기♥</span>
+																<span>찜하기❤️</span>
 															</button>
 														</form>	
 														</li>
@@ -99,7 +99,7 @@
 													</button>
 												</li>
 												<li>
-													<button class="btn-l-white" onclick="openModal()">
+													<button class="btn-l-gray" onclick="openModal()">
 														<span>QnA</span>
 													</button>
 												</li>
@@ -198,10 +198,10 @@
 											<tbody>
 												<tr>
 													<c:choose>
-														<c:when test="${question.questionFlag == 0}">
+														<c:when test="${question.questionFlag == 1}">
 															<td>답변 전</td>
 														</c:when>
-														<c:when test="${question.questionFlag == 1}">
+														<c:when test="${question.questionFlag == 2}">
 															<td>답변 완료</td>
 														</c:when>
 													</c:choose>

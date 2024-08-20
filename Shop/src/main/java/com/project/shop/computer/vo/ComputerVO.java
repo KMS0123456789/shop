@@ -6,6 +6,7 @@ import com.project.shop.progress.vo.KeepVO;
 import com.project.shop.user.vo.AnswerVO;
 import com.project.shop.user.vo.QuestionVO;
 import com.project.shop.user.vo.ReviewVO;
+import com.project.shop.user.vo.StarVO;
 
 public class ComputerVO {
 	private int computerNo;
@@ -28,6 +29,13 @@ public class ComputerVO {
 	private List<AnswerVO> answers;
 	private List<PeripheralVO> peripherals; 
 	private int keepFlag;
+	public List<StarVO> getStars() {
+		return stars;
+	}
+	public void setStars(List<StarVO> stars) {
+		this.stars = stars;
+	}
+	private List<StarVO> stars;
 	public int getKeepFlag() {
 		return keepFlag;
 	}

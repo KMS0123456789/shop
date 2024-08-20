@@ -1,5 +1,7 @@
 package com.project.shop.user.service;
 
-public interface StarService {
+import com.project.shop.user.vo.StarVO;
 
+public interface StarService {
+	int starComputer(StarVO vo);
 }

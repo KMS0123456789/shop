@@ -519,4 +519,15 @@ tr {
 .qnatitle{
 	width: 295px;
 }
+.btn-l-white-red span {
+    color: balck;
+    background: #fff;
+    border: 1px solid red;
+}
+
+.btn-l-gray span {
+    color: balck;
+    background: #e2e2e2;
+    border: 1px solid black;
+}
 

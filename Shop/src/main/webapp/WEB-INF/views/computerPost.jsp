@@ -115,7 +115,7 @@
 													<c:when test="${computer.keepFlag == 0}">
 														<li>
 															<button class="btn-l-white" onclick="Keep()">
-																<span>찜하기♡</span>
+																<span>찜하기🤍</span>
 															</button>
 														</li>
 													</c:when>
@@ -124,8 +124,8 @@
 														<form action="<c:url value="/keep/keepDeleteComputer.do"/>">
 															<input type="hidden" value="${computer.computerNo}" name="computerNo">
 															<input type="hidden" value="${sessionScope.user.email}" name="keepUser">
-															<button class="btn-l-white">
-																<span>찜하기♥</span>
+															<button class="btn-l-white-red">
+																<span>찜하기❤️</span>
 															</button>
 														</form>	
 														</li>
@@ -137,7 +137,7 @@
 													</button>
 												</li>
 												<li>
-													<button class="btn-l-white" onclick="openModal()">
+													<button class="btn-l-gray" onclick="openModal()">
 														<span>QnA</span>
 													</button>
 												</li>
@@ -203,27 +203,48 @@
 						</div>
 						<div class="review-tab" id="review">
 							<div class="tab-title"></div>
+							<div>
+								<button class="" onclick="reviewModal()">리뷰 작성</button>
+							</div>
 							<div class="review">
 								<div class="review-list">
 									<ul>
+										<c:forEach items="${computer.reviews}" var="review">
 										<li>
 											<div class="review-user">
 												<div class="review-user-info">
-													<div>
-														<span class="star">
-															<span class="star-bg">★</span>
-														</span>
-													</div>
+													<c:forEach items="${computer.stars}" var="star">
+														<div class="star_rating">
+															<c:choose>
+																<c:when test="${star.starCount == 1}">
+																	<span class="star_filled" style="font-size: 30px; color: red;">★☆☆☆☆</span>
+																</c:when>
+																<c:when test="${star.starCount == 2}">
+													        	 <span class="star_filled" style="font-size: 30px; color: red;">★★☆☆☆</span>
+														        </c:when>
+														        <c:when test="${star.starCount == 3}">
+														        	 <span class="star_filled" style="font-size: 30px; color: red;">★★★☆☆</span>
+														        </c:when>
+														        <c:when test="${star.starCount == 4}">
+														        	 <span class="star_filled" style="font-size: 30px; color: red;">★★★★☆</span>
+														        </c:when>
+														        <c:when test="${star.starCount == 5}">
+														        	 <span class="star_filled" style="font-size: 30px; color: red;">★★★★★</span>
+														        </c:when>
+															</c:choose>
+													    </div>
+													</c:forEach>
 													<div style="padding-left: 5px;">
-														<span class="review-user-name">이름</span>
-														<span class="review-date">작성일</span>
+														<span class="review-user-name">${review.reviewUser}</span>
+														<span class="review-date">${review.reviewCreateDate}</span>
 													</div>
 												</div>
 											</div>
 											<div class="review-text">
-												<p>리뷰 내용</p>
+												<p>${review.reviewBody}</p>
 											</div>
 										</li>
+										</c:forEach>
 									</ul>
 								</div>
 							</div>
@@ -248,10 +269,10 @@
 											<tbody>
 												<tr>
 													<c:choose>
-														<c:when test="${question.questionFlag == 0}">
+														<c:when test="${question.questionFlag == 1}">
 															<td>답변 전</td>
 														</c:when>
-														<c:when test="${question.questionFlag == 1}">
+														<c:when test="${question.questionFlag == 2}">
 															<td>답변 완료</td>
 														</c:when>
 													</c:choose>
@@ -270,20 +291,47 @@
 			</section>
 		</div>
 		<div id="qnaModal" class="modal" style="display: none;">
-			    <div class="modal-content">
-			        <h2>QnA 작성 페이지입니다.</h2>
-			        <form id="question" action='<c:url value="/question/questionComputer.do"/>' method="post">
-			            <input type="hidden" name="computerNo" value="${computer.computerNo}">
-			            <input type="hidden" name="questionUser" value="${sessionScope.user.email}">
-		            	제목<br>
-                      	<input type="text" name="questionTitle" class="qnatitle"><br>
-			                        본문<br>
-			            <textarea rows="20px" cols="40px" name="questionBody" style="resize: none;"></textarea><br><br>
-			            <button type="submit" style="margin-left: 200px">작성하기</button>
-			            <button type="button" onclick="closeModal()" style="text-align: right">취소</button>
-			        </form>
-			    </div>
-			</div>
+		    <div class="modal-content">
+		        <h2>QnA 작성 페이지입니다.</h2>
+		        <form id="question" action='<c:url value="/question/questionComputer.do"/>' method="post">
+		            <input type="hidden" name="computerNo" value="${computer.computerNo}">
+		            <input type="hidden" name="questionUser" value="${sessionScope.user.email}">
+	            	제목<br>
+                     	<input type="text" name="questionTitle" class="qnatitle"><br>
+		                        본문<br>
+		            <textarea rows="20px" cols="40px" name="questionBody" style="resize: none;"></textarea><br><br>
+		            <button type="submit" style="margin-left: 200px">작성하기</button>
+		            <button type="button" onclick="closeModal()" style="text-align: right">취소</button>
+		        </form>
+		    </div>
+		</div>
+		<div id="reviewModal" class="reviewModal" style="display: none;">
+		    <div class="modal-content">
+		        <h2>별점 및 리뷰 작성</h2>
+		        <form id="review" action='<c:url value="/review/reviewComputer.do"/>' method="post">
+		            <input type="hidden" name="computerNo" value="${computer.computerNo}">
+		            <input type="hidden" name="reviewUser" value="${sessionScope.user.email}">
+		            <input type="hidden" name="starUser" value="${sessionScope.user.email}">
+		            <br>
+	            	별점
+                     	<div id="star_rating">
+						    <fieldset>
+						        <input type="radio" name="starCount" value="1" id="star1"><label for="star1">⭐</label>
+						        <input type="radio" name="starCount" value="2" id="star2"><label for="star2">⭐</label>
+						        <input type="radio" name="starCount" value="3" id="star3"><label for="star3">⭐</label>
+						        <input type="radio" name="starCount" value="4" id="star4"><label for="star4">⭐</label>
+						        <input type="radio" name="starCount" value="5" id="star5"><label for="star5">⭐</label>
+						    </fieldset>
+						</div>
+		                        본문
+                   	<br>
+		            <textarea rows="20px" cols="40px" name="reviewBody" style="resize: none;"></textarea>
+		            <br><br>
+		            <button type="submit" style="margin-left: 200px">작성하기</button>
+		            <button type="button" onclick="reviewCloseModal()" style="text-align: right">취소</button>
+		        </form>
+		    </div>
+		</div>
 		<script>
 			function onSelectChange1(){ 
 			    let selected = $("select option:selected");
@@ -363,6 +411,13 @@
 		    }
 			function closeModal() {
 		        document.getElementById('qnaModal').style.display = 'none';
+		    }
+			
+			function reviewModal() {
+		        document.getElementById('reviewModal').style.display = 'block';
+		    }
+			function reviewCloseModal() {
+		        document.getElementById('reviewModal').style.display = 'none';
 		    }﻿
 		</script>
 	</body>

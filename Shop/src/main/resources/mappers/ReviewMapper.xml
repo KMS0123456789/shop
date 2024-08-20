@@ -10,4 +10,9 @@
 		<result property="reviewCreateDate" column="review_create_date"/>
 		<result property="itemCategory" column="item_category"/>
 	</resultMap>
+	
+	<insert id="reviewComputer" parameterType="com.project.shop.user.vo.ReviewVO">
+		insert into review(review_user, computer_no, review_body, item_category)
+					values(#{reviewUser}, #{computerNo}, #{reviewBody}, 0)
+	</insert>
 </mapper>
