@@ -20,11 +20,16 @@ public class QuestionRepository {
         return template.selectList(NAME_SPACE + ".questionAll"); //question mapper에서 questionAll 실행
     }
 	
+	//완제품 상세페이지에서 문의글 쓰기
 	public int questionComputer(QuestionVO vo) {
+		//QuestionMapper의 questionComputer 메서드 실행 파라미터로 QuestionVO vo 같이 보내기
 		return template.insert(NAME_SPACE + ".questionComputer", vo);
+		
 	}
 	
+	//주변기기 상세페이지에서 문의글 쓰기
 	public int questionPeripheral(QuestionVO vo) {
+		//QuestionMapper의 questionPeripheral 메서드 실행 파라미터로 QuestionVO vo 같이 보내기
 		return template.insert(NAME_SPACE + ".questionPeripheral", vo);
 	}
 }

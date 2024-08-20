@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.shop.progress.vo.CartVO;
+
 @Repository
 public class CartRepository {
 	
@@ -13,11 +15,15 @@ public class CartRepository {
 	private SqlSessionTemplate template;
 	private final String NAME_SPACE = "CartMapper";
 	
-	public int cartComputer(HashMap<String, Object> map) {
-		return template.insert(NAME_SPACE + ".cartComputer", map);
+	//완제품 상세 페이지에서 장바구니 담기
+	public int cartComputer(CartVO vo) {
+		//CartMapper의 cartComputer 메서드 실행 CartVO vo 파라미터로 같이 보냄
+		return template.insert(NAME_SPACE + ".cartComputer", vo);
 	}
 	
-	public int cartPeripheral(HashMap<String, Object> map) {
-		return template.insert(NAME_SPACE + ".cartPeripheral", map);
+	//주변기기 상세 페이지에서 장바구니 담기
+	public int cartPeripheral(CartVO vo) {
+		//CartMapper의 cartPeripheral 메서드 실행 CartVO vo 파라미터로 같이 보냄
+		return template.insert(NAME_SPACE + ".cartPeripheral", vo);
 	}
 }

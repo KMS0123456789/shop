@@ -17,11 +17,13 @@
 			select * from question;
 	</select>
 	
+	<!-- 완제품 상세페이지에서 문의글 쓰기 -->
 	<insert id="questionComputer" parameterType="com.project.shop.user.vo.QuestionVO">
 		insert into question(question_user, computer_no, question_title, question_body, item_category)
 					values(#{questionUser}, #{computerNo}, #{questionTitle}, #{questionBody}, 0)
 	</insert>
 	
+	<!-- 주변기기 상세페이지에서 문의글 쓰기 -->
 	<insert id="questionPeripheral" parameterType="com.project.shop.user.vo.QuestionVO">
 		insert into question(question_user, peripheral_no, question_title, question_body, item_category)
 					values(#{questionUser}, #{peripheralNo}, #{questionTitle}, #{questionBody}, 1)

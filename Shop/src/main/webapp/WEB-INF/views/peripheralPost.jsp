@@ -83,7 +83,7 @@
 													</c:when>
 													<c:when test="${peripheral.keepFlag == 1}">
 														<li>
-														<form action="<c:url value="/keep/keepDeleteComputer.do"/>">
+														<form action="<c:url value="/keep/keepDeletePeripheral.do"/>">
 															<input type="hidden" value="${peripheral.peripheralNo}" name="peripheralNo">
 															<input type="hidden" value="${sessionScope.user.email}" name="keepUser">
 															<button class="btn-l-white">

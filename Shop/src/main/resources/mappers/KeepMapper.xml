@@ -9,21 +9,25 @@
 		<result property="itemCategory" column="item_category"/>
 	</resultMap>
 	
-	<insert id="keepComputer" parameterType="HashMap">
+	<!-- 완제품 상세페이지에서 찜하기 -->
+	<insert id="keepComputer" parameterType="com.project.shop.progress.vo.KeepVO">
 		insert into keep(keep_user,computer_no,item_category)
 					values(#{keepUser},#{computerNo},0)
 	</insert>
 	
-	<delete id="keepDeleteComputer">
+	<!-- 완제품 상세페이지에서 찜하기 취소 -->
+	<delete id="keepDeleteComputer" parameterType="com.project.shop.progress.vo.KeepVO">
 		delete from keep where keep_user =#{keepUser} and computer_no = #{computerNo}
 	</delete>
 	
-	<insert id="keepPeripheral" parameterType="HashMap">
+	<!-- 주변기기 상세페이지에서 찜하기 -->
+	<insert id="keepPeripheral" parameterType="com.project.shop.progress.vo.KeepVO">
 		insert into keep(keep_user,peripheral_no,item_category)
 					values(#{keepUser},#{peripheralNo},1)
 	</insert>
 	
-	<delete id="keepDeletePeripheral">
+	<!-- 주변기기 상세페이지에서 찜하기 취소 -->
+	<delete id="keepDeletePeripheral" parameterType="com.project.shop.progress.vo.KeepVO">
 		delete from keep where keep_user =#{keepUser} and peripheral_no = #{peripheralNo}
 	</delete>
 </mapper>

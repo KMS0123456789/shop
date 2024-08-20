@@ -2,13 +2,19 @@ package com.project.shop.progress.service;
 
 import java.util.HashMap;
 
+import com.project.shop.progress.vo.KeepVO;
+
 
 public interface KeepService {
-	int keepComputer(HashMap<String, Object> map);
+	//완제품 찜하기
+	int keepComputer(KeepVO vo);
 	
-	int keepDeleteComputer(HashMap<String, Object> map);
+	//완제품 찜하기 취소
+	int keepDeleteComputer(KeepVO vo);
 	
-	int keepPeripheral(HashMap<String, Object> map);
+	//주변기기 찜하기
+	int keepPeripheral(KeepVO vo);
 	
-	int keepDeletePeripheral(HashMap<String, Object> map);
+	//주변기기 찜하기 취소
+	int keepDeletePeripheral(KeepVO vo);
 }

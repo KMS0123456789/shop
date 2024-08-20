@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.shop.progress.repository.CartRepository;
 import com.project.shop.progress.service.CartService;
+import com.project.shop.progress.vo.CartVO;
 
 @Service
 public class CartServiceImpl implements CartService{
@@ -15,12 +16,14 @@ public class CartServiceImpl implements CartService{
 	private CartRepository repository;
 
 	@Override
-	public int cartComputer(HashMap<String, Object> map) {
-		return repository.cartComputer(map);
+	public int cartComputer(CartVO vo) {
+		//CartRepository의 cartComputer 메서드 실행 CartVO vo 파라미터로 같이 보냄
+		return repository.cartComputer(vo);
 	}
 	
 	@Override
-	public int cartPeripheral(HashMap<String, Object> map) {
-		return repository.cartPeripheral(map);
+	public int cartPeripheral(CartVO vo) {
+		//CartRepository의 cartPeripheral 메서드 실행 CartVO vo 파라미터로 같이 보냄
+		return repository.cartPeripheral(vo);
 	}
 }
