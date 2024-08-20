@@ -25,4 +25,22 @@ public interface PeripheralService {
 	PeripheralVO peripheralPost(int peripheralNo);
 	
 	int peripheralInsert(PeripheralVO vo);
+	
+	//마우스 높은 가격순 조회
+	Page<PeripheralVO> mouseHighPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory);
+	
+	//마우스 낮은 가격순 조회
+	Page<PeripheralVO> mouseLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory);
+	
+	//키보드 높은 가격순 조회
+	Page<PeripheralVO> keyboardHighPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory);
+	
+	//키보드 낮은 가격순 조회
+	Page<PeripheralVO> keyboardLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory);
+	
+	//모니터 높은 가격순 조회
+	Page<PeripheralVO> monitorHighPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory);
+	
+	//모니터 낮은 가격순 조회
+	Page<PeripheralVO> monitorLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory);
 }

@@ -23,6 +23,7 @@ public class PeripheralRepository {
 	private SqlSessionTemplate template;
 	private final String NAME_SPACE = "PeripheralMapper";
 	
+	//마우스 전체 조회
 	public Page<PeripheralVO> mouse(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -31,7 +32,7 @@ public class PeripheralRepository {
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
 		int total = count(searchType, keyword, peripheralCategory);
-		List<PeripheralVO> mouses = template.selectList(NAME_SPACE + ".mouse", map);//PeripheralMapper의 mouser 메서드 실행
+		List<PeripheralVO> mouses = template.selectList(NAME_SPACE + ".mouse", map);//PeripheralMapper의 mouse 메서드 실행
 		return new PageImpl<PeripheralVO>(mouses, pageable, total);
 	}
 	
@@ -76,5 +77,83 @@ public class PeripheralRepository {
 	}
 	public int peripheralInsert(PeripheralVO vo) {
 		return template.insert(NAME_SPACE + ".peripheralInsert", vo);
+	}
+	
+	//마우스 높은 가격순 조회
+	public Page<PeripheralVO> mouseHighPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = count(searchType, keyword, peripheralCategory);
+		List<PeripheralVO> mouses = template.selectList(NAME_SPACE + ".mouseHighPrice", map);//PeripheralMapper의 mouseHighPrice 메서드 실행
+		return new PageImpl<PeripheralVO>(mouses, pageable, total);
+	}
+	
+	//마우스 낮은 가격순 조회
+	public Page<PeripheralVO> mouseLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = count(searchType, keyword, peripheralCategory);
+		List<PeripheralVO> mouses = template.selectList(NAME_SPACE + ".mouseLowPrice", map);//PeripheralMapper의 mouseLowPrice 메서드 실행
+		return new PageImpl<PeripheralVO>(mouses, pageable, total);
+	}
+	
+	//키보드 높은 가격순 조회
+	public Page<PeripheralVO> keyboardHighPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = count(searchType, keyword, peripheralCategory);
+		List<PeripheralVO> keyboards = template.selectList(NAME_SPACE + ".keyboardHighPrice", map);//PeripheralMapper의 keyboardHighPrice 메서드 실행
+		return new PageImpl<PeripheralVO>(keyboards, pageable, total);
+	}
+	
+	//키보드 낮은 가격순 조회
+	public Page<PeripheralVO> keyboardLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = count(searchType, keyword, peripheralCategory);
+		List<PeripheralVO> keyboards = template.selectList(NAME_SPACE + ".keyboardLowPrice", map);//PeripheralMapper의 keyboardLowPrice 메서드 실행
+		return new PageImpl<PeripheralVO>(keyboards, pageable, total);
+	}
+	
+	//키보드 높은 가격순 조회
+	public Page<PeripheralVO> monitorHighPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = count(searchType, keyword, peripheralCategory);
+		List<PeripheralVO> monitors = template.selectList(NAME_SPACE + ".monitorHighPrice", map);//PeripheralMapper의 monitorHighPrice 메서드 실행
+		return new PageImpl<PeripheralVO>(monitors, pageable, total);
+	}
+	
+	//키보드 낮은 가격순 조회
+	public Page<PeripheralVO> monitorLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = count(searchType, keyword, peripheralCategory);
+		List<PeripheralVO> monitors = template.selectList(NAME_SPACE + ".monitorLowPrice", map);//PeripheralMapper의monitorLowPrice 메서드 실행
+		return new PageImpl<PeripheralVO>(monitors, pageable, total);
 	}
 }

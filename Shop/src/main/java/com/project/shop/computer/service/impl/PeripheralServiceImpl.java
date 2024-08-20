@@ -51,4 +51,40 @@ public class PeripheralServiceImpl implements PeripheralService{
 	public int peripheralInsert(PeripheralVO vo) {
 		return repository.peripheralInsert(vo);
 	}
+	
+	//마우스 가격 높은순 조회
+	@Override
+	public Page<PeripheralVO> mouseHighPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		return repository.mouseHighPrice(pageable, searchType, keyword, peripheralCategory);
+	}
+	
+	//마우스 가격 낮은순 조회
+	@Override
+	public Page<PeripheralVO> mouseLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		return repository.mouseLowPrice(pageable, searchType, keyword, peripheralCategory);
+	}
+	
+	//키보드 가격 높은순 조회
+	@Override
+	public Page<PeripheralVO> keyboardHighPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		return repository.keyboardHighPrice(pageable, searchType, keyword, peripheralCategory);
+	}
+	
+	//키보드 가격 낮은순 조회
+	@Override
+	public Page<PeripheralVO> keyboardLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		return repository.keyboardLowPrice(pageable, searchType, keyword, peripheralCategory);
+	}
+	
+	//모니터 가격 높은순 조회
+	@Override
+	public Page<PeripheralVO> monitorHighPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		return repository.monitorHighPrice(pageable, searchType, keyword, peripheralCategory);
+	}
+	
+	//모니터 가격 낮은순 조회
+	@Override
+	public Page<PeripheralVO> monitorLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
+		return repository.monitorLowPrice(pageable, searchType, keyword, peripheralCategory);
+	}
 }

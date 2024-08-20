@@ -149,6 +149,108 @@ public class PeripheralController {
 	        return "redirect:/user/manager.do";
 	    }
 	}
+	
+	//마우스 가격 높은순 조회
+	@RequestMapping("/mouseHighPrice.do")
+	public String mouseHighPrice(Model model, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword) {
+		Pageable pageable = PageRequest.of(page-1, 20);//한 페이지에 뜰 게시물 갯수(20개)
+		int peripheralCategory = 0;//count 조회시 필요하기 때문에 카테고리를 지정해서 보냄(mouse이기 때문에 0번)
+		Page<PeripheralVO> data = service.mouseHighPrice(pageable, searchType, keyword, peripheralCategory);//data에 service.mouseHighPrice 값 넣기
+		model.addAttribute("mouse", data.getContent());//mouse키에 조회할 페이지 정보 넣어 보내기
+		model.addAttribute("currentPage", page);//currentPage 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", data.getTotalPages());//totalPage 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("pageSize", 10);//pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+		
+		return "mouse";//mouse.jsp로 보냄
+	}
+	
+	//마우스 가격 낮은순 조회
+	@RequestMapping("/mouseLowPrice.do")
+	public String mouseLowPrice(Model model, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword) {
+		Pageable pageable = PageRequest.of(page-1, 20);//한 페이지에 뜰 게시물 갯수(20개)
+		int peripheralCategory = 0;//count 조회시 필요하기 때문에 카테고리를 지정해서 보냄(mouse이기 때문에 0번)
+		Page<PeripheralVO> data = service.mouseLowPrice(pageable, searchType, keyword, peripheralCategory);//data에 service.mouseLowPrice 값 넣기
+		model.addAttribute("mouse", data.getContent());//mouse키에 조회할 페이지 정보 넣어 보내기
+		model.addAttribute("currentPage", page);//currentPage 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", data.getTotalPages());//totalPage 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("pageSize", 10);//pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+		
+		return "mouse";//mouse.jsp로 보냄
+	}
+	
+	//키보드 가격 높은순 조회
+	@RequestMapping("/keyboardHighPrice.do")
+	public String keyboardHighPrice(Model model, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword) {
+		Pageable pageable = PageRequest.of(page-1, 20);//한 페이지에 뜰 게시물 갯수(20개)
+		int peripheralCategory = 1;//count 조회시 필요하기 때문에 카테고리를 지정해서 보냄(keyboard이기 때문에 1번)
+		Page<PeripheralVO> data = service.keyboardHighPrice(pageable, searchType, keyword, peripheralCategory);//data에 service.keyboardHighPrice 값 넣기
+		model.addAttribute("keyboard", data.getContent());//keyboard키에 조회할 페이지 정보 넣어 보내기
+		model.addAttribute("currentPage", page);//currentPage 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", data.getTotalPages());//totalPage 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("pageSize", 10);//pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+		
+		return "keyboard";//keyboard.jsp로 보냄
+	}
+	
+	//키보드 가격 낮은순 조회
+	@RequestMapping("/keyboardLowPrice.do")
+	public String keyboardLowPrice(Model model, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword) {
+		Pageable pageable = PageRequest.of(page-1, 20);//한 페이지에 뜰 게시물 갯수(20개)
+		int peripheralCategory = 1;//count 조회시 필요하기 때문에 카테고리를 지정해서 보냄(keyboard이기 때문에 1번)
+		Page<PeripheralVO> data = service.keyboardLowPrice(pageable, searchType, keyword, peripheralCategory);//data에 service.keyboardLowPrice 값 넣기
+		model.addAttribute("keyboard", data.getContent());//keyboard키에 조회할 페이지 정보 넣어 보내기
+		model.addAttribute("currentPage", page);//currentPage 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", data.getTotalPages());//totalPage 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("pageSize", 10);//pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+		
+		return "keyboard";//keyboard.jsp로 보냄
+	}
+	
+	//모니터 가격 높은순 조회
+	@RequestMapping("/monitorHighPrice.do")
+	public String monitorHighPrice(Model model, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword) {
+		Pageable pageable = PageRequest.of(page-1, 20);//한 페이지에 뜰 게시물 갯수(20개)
+		int peripheralCategory = 2;//count 조회시 필요하기 때문에 카테고리를 지정해서 보냄(monitor이기 때문에 2번)
+		Page<PeripheralVO> data = service.monitorHighPrice(pageable, searchType, keyword, peripheralCategory);//data에 service.monitorHighPrice 값 넣기
+		model.addAttribute("monitor", data.getContent());//monitor키에 조회할 페이지 정보 넣어 보내기
+		model.addAttribute("currentPage", page);//currentPage 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", data.getTotalPages());//totalPage 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("pageSize", 10);//pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+		
+		return "monitor";//monitor.jsp로 보냄
+	}
+	
+	//마우스 가격 낮은순 조회
+	@RequestMapping("/monitorLowPrice.do")
+	public String monitorLowPrice(Model model, 
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword) {
+		Pageable pageable = PageRequest.of(page-1, 20);//한 페이지에 뜰 게시물 갯수(20개)
+		int peripheralCategory = 2;//count 조회시 필요하기 때문에 카테고리를 지정해서 보냄(monitor이기 때문에 2번)
+		Page<PeripheralVO> data = service.monitorLowPrice(pageable, searchType, keyword, peripheralCategory);//data에 service.monitorLowPrice 값 넣기
+		model.addAttribute("monitor", data.getContent());//monitor키에 조회할 페이지 정보 넣어 보내기
+		model.addAttribute("currentPage", page);//currentPage 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", data.getTotalPages());//totalPage 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("pageSize", 10);//pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+		
+		return "monitor";//monitor.jsp로 보냄
+	}
 }
 	
 
