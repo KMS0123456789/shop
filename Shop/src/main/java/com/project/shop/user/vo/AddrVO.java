@@ -8,69 +8,79 @@ public class AddrVO {
 	private String dAddrName;
 	private String addrUserName;
 	private String addrUserPhoneNum;
-	private String addrUserLandLinel;
+	private String addrUserLandLine;
 	private int addressCode;
-	private String adressDetail;
-	public int getAddressCode() {
-		return addressCode;
-	}
-	public void setAddressCode(int addressCode) {
-		this.addressCode = addressCode;
-	}
-	public String getAdressDetail() {
-		return adressDetail;
-	}
-	public void setAdressDetail(String adressDetail) {
-		this.adressDetail = adressDetail;
-	}
+	private String addressDetail;
+	private String addressPlus;
 	public int getAddrNo() {
 		return addrNo;
-	}
-	public void setAddrNo(int addrNo) {
-		this.addrNo = addrNo;
 	}
 	public String getAddrUserEmail() {
 		return addrUserEmail;
 	}
-	public void setAddrUserEmail(String addrUserEmail) {
-		this.addrUserEmail = addrUserEmail;
-	}
 	public String getAddress() {
 		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	public int getAddrFlag() {
 		return addrFlag;
 	}
-	public void setAddrFlag(int addrFlag) {
-		this.addrFlag = addrFlag;
-	}
 	public String getdAddrName() {
 		return dAddrName;
-	}
-	public void setdAddrName(String dAddrName) {
-		this.dAddrName = dAddrName;
 	}
 	public String getAddrUserName() {
 		return addrUserName;
 	}
-	public void setAddrUserName(String addrUserName) {
-		this.addrUserName = addrUserName;
-	}
 	public String getAddrUserPhoneNum() {
 		return addrUserPhoneNum;
+	}
+	public String getAddrUserLandLine() {
+		return addrUserLandLine;
+	}
+	public int getAddressCode() {
+		return addressCode;
+	}
+	public String getAddressDetail() {
+		return addressDetail;
+	}
+	public String getAddressPlus() {
+		return addressPlus;
+	}
+	public void setAddrNo(int addrNo) {
+		this.addrNo = addrNo;
+	}
+	public void setAddrUserEmail(String addrUserEmail) {
+		this.addrUserEmail = addrUserEmail;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public void setAddrFlag(int addrFlag) {
+		this.addrFlag = addrFlag;
+	}
+	public void setdAddrName(String dAddrName) {
+		this.dAddrName = dAddrName;
+	}
+	public void setAddrUserName(String addrUserName) {
+		this.addrUserName = addrUserName;
 	}
 	public void setAddrUserPhoneNum(String addrUserPhoneNum) {
 		this.addrUserPhoneNum = addrUserPhoneNum;
 	}
-	public String getAddrUserLandLinel() {
-		return addrUserLandLinel;
+	public void setAddrUserLandLine(String addrUserLandLine) {
+		this.addrUserLandLine = addrUserLandLine;
 	}
-	public void setAddrUserLandLinel(String addrUserLandLinel) {
-		this.addrUserLandLinel = addrUserLandLinel;
+	public void setAddressCode(int addressCode) {
+		this.addressCode = addressCode;
 	}
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
+	}
+	public void setAddressPlus(String addressPlus) {
+		this.addressPlus = addressPlus;
+	}
+	
+	
+	
 	
 	
 

@@ -215,13 +215,14 @@ table .message{
 }
 .ec-base-help ol{
     margin: 15px 0 0 11px;
+    padding: 0px;
 }
 .ec-base-help ol .item1{
     background-position: -484px 0;
 }
 .ec-base-help ol li{
     padding: 0 0 0 25px;
-    background: url("./image/ico_number.png") no-repeat;
+    background: url("../image/ico_number.png") no-repeat;
     color: #707070;
 }
 .ec-base-help ol .item2{

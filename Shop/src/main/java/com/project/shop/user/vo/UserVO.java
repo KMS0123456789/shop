@@ -19,12 +19,33 @@ public class UserVO {
 	private List<KeepVO> keeps;
 	private List<CartVO> carts;
 	private List<AskVO> asks;
+	private List<AddrVO> addrs;
+	private List<QuestionVO> questions;
+	private List<ReviewVO> reviews;
 	
+	public List<QuestionVO> getQuestions() {
+		return questions;
+	}
+	public List<ReviewVO> getReviews() {
+		return reviews;
+	}
+	public void setQuestions(List<QuestionVO> questions) {
+		this.questions = questions;
+	}
+	public void setReviews(List<ReviewVO> reviews) {
+		this.reviews = reviews;
+	}
 	public List<AskVO> getAsks() {
 		return asks;
 	}
 	public void setAsks(List<AskVO> asks) {
 		this.asks = asks;
+	}
+	public List<AddrVO> getAddrs() {
+		return addrs;
+	}
+	public void setAddrs(List<AddrVO> addrs) {
+		this.addrs = addrs;
 	}
 	public List<CartVO> getCarts() {
 		return carts;

@@ -26,5 +26,11 @@ public class AskController {
 			model.addAttribute("ask",askList);
 			return"managerAsk"; //managerAsk.jsp로 리턴
 		}
+	@RequestMapping(value="/myOnedate.do",method =RequestMethod.GET)
+	public String myOnedate(Model model) {
+		List<AskVO> myOnedate = service.myOnedate();
+		model.addAttribute("date",myOnedate);
+		return "myorder";
+	}
 		
 }

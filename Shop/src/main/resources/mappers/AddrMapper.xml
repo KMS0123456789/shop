@@ -9,8 +9,17 @@
 		<result property="addressDetail" column="address_detail"/>
 		<result property="dAddrName" column="d_addr_name"/>
 		<result property="addrUserName" column="addr_user_name"/>
-		<result property="addrLandLine" column="addr_land_line"/>
+		<result property="addrUserLandLine" column="addr_user_landline"/>
 		<result property="addrUserPhoneNum" column="addr_user_phone_num"/>
 		<result property="addrFlag" column="addr_flag"/>
+		<result property="addressPlus" column="address_plus"/>
 	</resultMap>
+	
+	<insert id="myaddrplus"  parameterType="com.project.shop.user.vo.AddrVO" >
+		insert into addr(addr_user_email, address_code, address, address_detail,
+							 address_plus, d_addr_name, addr_user_name, 
+							 addr_user_landline, addr_user_phone_num, addr_flag)
+					values(#{addrUserEmail}, #{addressCode}, #{address}, #{addressDetail}, #{addressPlus},
+							#{dAddrName}, #{addrUserName}, #{addrUserLandLine}, #{addrUserPhoneNum}, #{addrFlag})
+	</insert>
 </mapper>

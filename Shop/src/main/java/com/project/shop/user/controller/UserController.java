@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.shop.user.service.UserService;
+import com.project.shop.user.vo.QuestionVO;
+import com.project.shop.user.vo.ReviewVO;
 import com.project.shop.user.vo.UserVO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,12 +65,18 @@ public class UserController {
     }
     
     @RequestMapping(value = "/mymodify.do", method = RequestMethod.GET)
-    public String mymodify() {
+    public String mymodify(Model model) {
+    	
+    	UserVO mymodify= userService.mymodify();
+        model.addAttribute("my", mymodify);
+    	
         return "mymodify";
     }
     
     @RequestMapping(value = "/myaddrlist.do", method = RequestMethod.GET)
-    public String myaddrlist() {
+    public String myaddrlist(Model model) {
+    	
+    	
         return "myaddrlist";
     }
     
@@ -78,8 +86,13 @@ public class UserController {
     }
     
     @RequestMapping(value = "/myboard.do", method = RequestMethod.GET)
-    public String myboard() {
+    public String myboard(Model model) {
         return "myboard";
+    }
+    
+    @RequestMapping(value = "/myaddradd.do")
+    public String myaddradd(Model model) {
+        return "myaddradd";
     }
     
     
@@ -114,7 +127,7 @@ public class UserController {
             if (user != null) {
                 // 로그인 처리
                 session.setAttribute("user", user);  // 세션에 사용자 정보를 저장
-                return "redirect:/user/mypage.do";  // 로그인 후 마이페이지로 리다이렉트
+                return "redirect:/";  // 로그인 후 마이페이지로 리다이렉트
             }
 
             return "redirect:/user/login.do";  // 가입되지 않은 사용자는 로그인 페이지로 리다이렉트

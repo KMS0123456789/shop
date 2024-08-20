@@ -37,4 +37,8 @@ public interface UserService {
 	
 	// 상품 교환한 개수 조회하는 메서드
 	int orchangeCount(UserVO vo);
+	
+	UserVO mymodify();
+	
+
 }

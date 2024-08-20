@@ -15,7 +15,7 @@
                 <h2>배송 주소록 관리</h2>
                 <p>자주 쓰는 배송지를 등록 관리하실 수 있습니다.</p>
             </div>
-            <form>
+            <form action="<c:url value='/addr/myaddrplus.do'/>" method="post">
                 <div id="new">
                     <div id="table">
                         <table border="1">
@@ -30,23 +30,24 @@
                                         <img src="../resources/image/ico_required_blue.gif" alt="필수">
                                     </th>
                                     <td>
-                                        <input id="ma_rcv_title" name="ma_rcv_title" fw-filter="isFill&amp;isMaxByte[90]" fw-label="배송지명" fw-msg="" class="inputTypeText" placeholder="" value="" type="text">
+                                        <input id="ma_rcv_title" name="dAddrName" fw-filter="isFill&amp;isMaxByte[90]" fw-label="배송지명" fw-msg="" class="inputTypeText" placeholder=""  type="text">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">성명 <img src="../resources/image/ico_required_blue.gif" alt="필수"></th>
                                     <td>
-                                        <input id="ma_rcv_name" name="ma_rcv_name" fw-filter="isFill&amp;isMaxByte[90]" fw-label="성명" fw-msg="" class="ec-member-name" placeholder="" value="" type="text">
+                                    	<input type="hidden" id="addr_user_email" name="addrUserEmail" value="${sessionScope.user.email}">
+                                        <input id="ma_rcv_name" name="addrUserName" fw-filter="isFill&amp;isMaxByte[90]" fw-label="성명" fw-msg="" class="ec-member-name" placeholder="" value="" type="text">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">주소 <img src="../resources/image/ico_required_blue.gif" alt="필수"></th>
                                     <td>
-                                        <input type="text" id="sample6_postcode" placeholder="우편번호">
+                                        <input type="text" id="sample6_postcode" placeholder="우편번호" name="addressCode">
                                         <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                                        <input type="text" id="sample6_address" placeholder="주소"><br>
-                                        <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-                                        <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+                                        <input type="text" id="sample6_address" placeholder="주소" name="address"><br>
+                                        <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addressDetail">
+                                        <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="addressPlus">
                                     </td>
                                 </tr>
                                 <tr>
@@ -54,41 +55,7 @@
                                     <span class="displaynone"></span>
                                 </th>
                                     <td>
-                                        <select id="ma_rcv_phone1" name="ma_rcv_phone[]" fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="">
-                                            <option value="02">02</option>
-                                            <option value="031">031</option>
-                                            <option value="032">032</option>
-                                            <option value="033">033</option>
-                                            <option value="041">041</option>
-                                            <option value="042">042</option>
-                                            <option value="043">043</option>
-                                            <option value="044">044</option>
-                                            <option value="051">051</option>
-                                            <option value="052">052</option>
-                                            <option value="053">053</option>
-                                            <option value="054">054</option>
-                                            <option value="055">055</option>
-                                            <option value="061">061</option>
-                                            <option value="062">062</option>
-                                            <option value="063">063</option>
-                                            <option value="064">064</option>
-                                            <option value="0502">0502</option>
-                                            <option value="0503">0503</option>
-                                            <option value="0504">0504</option>
-                                            <option value="0505">0505</option>
-                                            <option value="0506">0506</option>
-                                            <option value="0507">0507</option>
-                                            <option value="070">070</option>
-                                            <option value="010">010</option>
-                                            <option value="011">011</option>
-                                            <option value="016">016</option>
-                                            <option value="017">017</option>
-                                            <option value="018">018</option>
-                                            <option value="019">019</option>
-                                            <option value="0508">0508</option>
-                                        </select>
-                                        <input id="ma_rcv_phone2" name="ma_rcv_phone[]" maxlength="4" fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value="" type="text">
-                                        <input id="ma_rcv_phone3" name="ma_rcv_phone[]" maxlength="4" fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value="" type="text">
+                                        <input id="ma_rcv_phone" name="addrUserLandLine" maxlength="15" fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value="" type="text">
                                     </td>
                                 </tr>
                                 <tr>
@@ -96,21 +63,12 @@
                                         <span class=""><img src="../resources/image/ico_required_blue.gif" alt="필수"></span>
                                     </th>
                                     <td>
-                                        <select id="ma_rcv_mobile_no1" name="ma_rcv_mobile_no[]" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="">
-                                            <option value="010">010</option>
-                                            <option value="011">011</option>
-                                            <option value="016">016</option>
-                                            <option value="017">017</option>
-                                            <option value="018">018</option>
-                                            <option value="019">019</option>
-                                        </select>
-                                        <input id="ma_rcv_mobile_no2" name="ma_rcv_mobile_no[]" maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="" type="text">-
-                                        <input id="ma_rcv_mobile_no3" name="ma_rcv_mobile_no[]" maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="" type="text">
+                                        <input id="ma_rcv_mobile_no" name="addrUserPhoneNum" maxlength="13" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="" type="text">
                                     </td>
                                 </tr>
                                 <tr class="right">
                                     <td colspan="2">
-                                        <input id="ma_main_flag0" name="ma_main_flag" fw-filter="" fw-label="기본 배송지로 저장" fw-msg="" value="T" type="checkbox">
+                                        <input id="ma_main_flag0" name="addrFlag" fw-filter="" fw-label="기본 배송지로 저장" fw-msg="" value="0" type="checkbox">
                                         <label for="ma_main_flag0">기본 배송지로 저장</label>
                                     </td>
                                 </tr>
@@ -119,8 +77,8 @@
                     </div>
                     <div class="ec-base-button">
                         <span class="gRight">
-                            <a href="#none" class="btnSubmitFix sizeS" onclick="myshopAddr.formCheck();">등록</a>
-                            <a href="list.html" class="btnNormalFix sizeS">취소</a>
+                        	<button type="submit" class="btnSubmitFix sizeS" >등록</button>
+                            <a onclick="history.back()" class="btnNormalFix sizeS" >취소</a>
                         </span>
                     </div>
                 </div>

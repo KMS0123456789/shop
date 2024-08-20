@@ -7,10 +7,26 @@
 		<result property="askDate" column="ask_date"/>
 		<result property="askStateFlag" column="ask_state_flag"/>
 		<result property="askDeleteFlag" column="ask_delete_flag"/>
+		<collection property="askDetails" ofType="com.project.shop.progress.vo.AskDetailVO" >
+			<id property="askDetailNo" column="ask_detail_no"/>
+			<result property="askNo" column="ask_no"/>
+			<result property="askDetailUser" column="ask_detail_user"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="optNo" column="opt_no"/>
+			<result property="itemCount" column="item_count"/>
+			<result property="itemCategory" column="item_category"/>
+	</collection>
+	
 	</resultMap>
+	
 	
 	<!-- 주문을 전체 조회하는 쿼리 -->
 	<select id="askAll" resultMap="askMap">		
 		select * from ask;
+	</select>
+	
+	<select id="myOnedate" resultMap="askMap">
+		SELECT * FROM ask WHERE ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 DAY ) AND NOW();
 	</select>
 </mapper>

@@ -77,4 +77,10 @@ public class UserRepository {
     public int orchangeCount() {
     	return template.selectOne(NAME_SPACE + ".orchangeCount");
     }
+    
+    public UserVO mymodify() {
+    	return template.selectOne(NAME_SPACE + ".mymodify");
+    }
+    
+    
 }

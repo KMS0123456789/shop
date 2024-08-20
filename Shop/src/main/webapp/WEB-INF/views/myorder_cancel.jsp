@@ -12,6 +12,9 @@
 		color:white;
 	}
 </style>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 </head>
 <body>
 <%@ include file="./includes/myheader.jsp" %>
@@ -38,10 +41,8 @@
                         <a href="#none" class="btnNormal" days="180"><img src="../resources/image/btn_date5.gif" alt="6개월"></a>
                     </span>
                     <input id="start_date" name="history_start_date" class="start_date" readonly="readonly" size="10" value="2024-08-09" type="text">
-                    <button type="button" class="start_date_btn"><img src="../resources/image/ico_cal.gif" alt="..." title="..."></button>
                     ~ 
                     <input id="end_date" name="history_end_date"readonly="readonly" size="10" value="2024-08-09" type="text">
-                    <button type="button" class="end_date_btn"><img src="../resources/image/ico_cal.gif" alt="..." title="..."></button>
                     <input alt="조회" id="order_btn" type="image" src="../resources/image/btn_search.gif">
                 </fieldset>
                 <ul id="order_infor">
@@ -100,5 +101,48 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    	/* 설정 */
+    	$(function(){
+    		/* 캘린더 */
+	    	  $('#start_date').datepicker({
+	    			dateFormat: 'yy-mm-dd',
+	  	    		prevText: '이전 달',
+	  	   		    nextText: '다음 달',
+	  	   		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	  	   		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	  	   		    dayNames: ['일','월','화','수','목','금','토'],
+	  	   		    dayNamesShort: ['일','월','화','수','목','금','토'],
+	  	   		    dayNamesMin: ['일','월','화','수','목','금','토'],
+	  	   		    yearSuffix: '년',
+	  		    	changeMonth: true,
+	  		        changeYear: true,
+	  		      	maxDate: '0',
+	  		        showOn: "button",
+	  		      	buttonImage: '../resources/image/ico_cal.gif',
+	  		      	buttonImageOnly: true
+	    	  });
+	    	  $('#start_date').datepicker('setDate', '-3m');
+	    	  
+	    	  $('#end_date').datepicker({
+	    			dateFormat: 'yy-mm-dd',
+	  	    		prevText: '이전 달',
+	  	   		    nextText: '다음 달',
+	  	   		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	  	   		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	  	   		    dayNames: ['일','월','화','수','목','금','토'],
+	  	   		    dayNamesShort: ['일','월','화','수','목','금','토'],
+	  	   		    dayNamesMin: ['일','월','화','수','목','금','토'],
+	  	   		    yearSuffix: '년',
+	  		    	changeMonth: true,
+	  		        changeYear: true,
+	  		      	maxDate: '0',
+	  		      	showOn: "button",
+	  		      	buttonImage: '../resources/image/ico_cal.gif',
+	  		      	buttonImageOnly: true
+	    	  });
+	    	  $('#end_date').datepicker('setDate', 'today');
+    	});
+    </script>
 </body>
 </html>

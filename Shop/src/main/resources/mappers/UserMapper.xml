@@ -33,6 +33,37 @@
 			<result property="askStateFlag" column="ask_state_flag"/>
 			<result property="askDeleteFlag" column="ask_delete_flag"/>
 		</collection>
+		<collection property="addrs" ofType="com.project.shop.user.vo.AddrVO">
+			<id property="addrNo" column="addr_no"/>
+			<result property="addrUserEmail" column="addr_user_email"/>
+			<result property="address" column="address"/>
+			<result property="dAddrName" column="d_addr_name"/>
+			<result property="addrUserName" column="addr_user_name"/>
+			<result property="addrLandLine" column="addr_land_line"/>
+			<result property="addrUserPhoneNum" column="addr_user_phone_num"/>
+			<result property="addrFlag" column="addr_flag"/>
+		</collection>
+		<collection property="questions" ofType="com.project.shop.user.vo.QuestionVO">
+			<id property="questionNo" column="question_no"/>
+			<result property="questionUser" column="question_user"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="questionTitle" column="question_title"/>
+			<result property="questionBody" column="question_body"/>
+			<result property="questionCreateDate" column="question_create_date"/>
+			<result property="questionFlag" column="question_flag"/>
+			<result property="itemCategory" column="item_category"/>
+		</collection>
+		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
+			<id property="reviewNo" column="review_no"/>
+			<result property="reviewUser" column="review_user"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="reviewBody" column="review_body"/>
+			<result property="reviewCreateDate" column="review_create_date"/>
+			<result property="itemCategory" column="item_category"/>
+		</collection>
+
 	</resultMap>
 	
 	<!-- 유저 조회하는 쿼리 -->
@@ -128,6 +159,10 @@
 				and ask_no 
 				and ask_delete_flag = 2;
 			</where>
+	</select>
+	<!-- 회원정보 가져오는 쿼리 -->
+	<select id="mymodify" resultMap="userMap">
+		select user.email, user.name, user.phone_num, addr.address from user left join addr on email = addr_user_email;
 	</select>
 	
 </mapper>

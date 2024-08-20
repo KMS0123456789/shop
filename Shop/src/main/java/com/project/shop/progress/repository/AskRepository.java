@@ -19,4 +19,8 @@ public class AskRepository {
 	public List<AskVO> askAll(){
 		return template.selectList(NAME_SPACE + ".askAll"); //askmapper에서 askAll 실행
 	}
+	
+	public List<AskVO> myOnedate(){
+		return template.selectList(NAME_SPACE + ".myOnedate");
+	}
 }

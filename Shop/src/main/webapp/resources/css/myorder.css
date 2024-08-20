@@ -72,7 +72,7 @@ legend{
     display: inline-block;
     padding: 0 12px 0 0;
     margin: 0 5px 0 2px;
-    background: url('./image/ico_bar.gif') no-repeat 100% 6px;
+    background: url('../image/ico_bar.gif') no-repeat 100% 6px;
 }
 #order_status{
     height: 24px;
@@ -146,7 +146,7 @@ legend{
 #order_infor li{
     padding: 0 0 0 9px;
     list-style: none;
-    background: url('./image/ico_square2.gif');
+    background:  url(../image/ico_square2.gif) no-repeat 4px 7px;
 }
 #order_infor a{
     color: black;
@@ -236,4 +236,12 @@ legend{
     content: "년";
     position: relative;
     top: 1px;
+}
+.ui-datepicker-trigger {						/* 캘린더 css 설정 */
+    margin-left: 3px;
+    font-weight: 600;
+    background-color: #dfe8f5;
+    font-size: 15px;
+    cursor:pointer;
+    vertical-align: middle;
 }

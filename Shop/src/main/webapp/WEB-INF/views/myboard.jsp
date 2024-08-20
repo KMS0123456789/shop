@@ -33,7 +33,6 @@
                             <col style="width:auto;">
                             <col style="width:84px;">
                             <col style="width:90px;">
-                            <col style="width:55px;">
                         </colgroup>
                         <thead><tr>
                             <th scope="col">번호</th>
@@ -41,7 +40,6 @@
                             <th scope="col">제목</th>
                             <th scope="col">작성자</th>
                             <th scope="col">작성일</th>
-                            <th scope="col">조회</th>
                             </tr>
                         </thead>
                         <tbody class="displaynone center">

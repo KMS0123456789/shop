@@ -28,7 +28,7 @@
                                     아이디<img src="../resources/image/ico_required_blue.gif" alt="필수">
                                 </th>
                                 <td>
-                                    <input id="id" name="id" readonly="readonly" value type="text">
+                                    <input id="id" name="id" readonly="readonly" value="${my.email }" type="text">
                                     (영문소문자/숫자, 4~16자)
                                 </td>
                             </tr>
@@ -64,7 +64,7 @@
                                     이름 <img src="../resources/image/ico_required_blue.gif" alt="필수">
                                 </th>
                                 <td>
-                                    <input id="name" name="name" fw-filter="isFill&amp;isMax[30]" fw-label="이름" fw-msg="" class="ec-member-name" placeholder="" maxlength="30" readonly="readonly" value="" type="text">
+                                    <input id="name" name="name" fw-filter="isFill&amp;isMax[30]" fw-label="이름" fw-msg="" class="ec-member-name" placeholder="" maxlength="30" readonly="readonly" value="${my.name }" type="text">
                                 </td>
                             </tr>
                             <tr class="">
@@ -74,7 +74,7 @@
                                 <td>
                                     <input type="text" id="sample6_postcode" placeholder="우편번호">
                                     <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                                    <input type="text" id="sample6_address" placeholder="주소"><br>
+                                    <input type="text" id="sample6_address" placeholder="주소" value=""><br>
                                     <input type="text" id="sample6_detailAddress" placeholder="상세주소">
                                     <input type="text" id="sample6_extraAddress" placeholder="참고항목">
                                 </td>
@@ -84,41 +84,7 @@
                                     일반전화
                                 </th>
                                 <td>
-                                    <select id="phone1" name="phone[]" fw-filter="isNumber&amp;isNumber" fw-label="일반전화" fw-alone="N" fw-msg="">
-                                        <option value="02">02</option>
-                                        <option value="031">031</option>
-                                        <option value="032">032</option>
-                                        <option value="033">033</option>
-                                        <option value="041">041</option>
-                                        <option value="042">042</option>
-                                        <option value="043">043</option>
-                                        <option value="044">044</option>
-                                        <option value="051">051</option>
-                                        <option value="052">052</option>
-                                        <option value="053">053</option>
-                                        <option value="054">054</option>
-                                        <option value="055">055</option>
-                                        <option value="061">061</option>
-                                        <option value="062">062</option>
-                                        <option value="063">063</option>
-                                        <option value="064">064</option>
-                                        <option value="0502">0502</option>
-                                        <option value="0503">0503</option>
-                                        <option value="0504">0504</option>
-                                        <option value="0505">0505</option>
-                                        <option value="0506">0506</option>
-                                        <option value="0507">0507</option>
-                                        <option value="070">070</option>
-                                        <option value="010">010</option>
-                                        <option value="011">011</option>
-                                        <option value="016">016</option>
-                                        <option value="017">017</option>
-                                        <option value="018">018</option>
-                                        <option value="019">019</option>
-                                        <option value="0508">0508</option>
-                                </select>
-                                <input id="phone2" name="phone[]" maxlength="4" fw-filter="isNumber&amp;isNumber" fw-label="일반전화" fw-alone="N" fw-msg="" value="" type="text">
-                                <input id="phone3" name="phone[]" maxlength="4" fw-filter="isNumber&amp;isNumber" fw-label="일반전화" fw-alone="N" fw-msg="" value="" type="text">
+                                    <input id="num1" name="phone[]" maxlength="15" fw-filter="isNumber&amp;isNumber" fw-label="일반전화" fw-alone="N" fw-msg="" value="" type="text">
                                 </td>
                             </tr>
                             <tr class="">
@@ -126,15 +92,7 @@
                                     휴대전화 <img src="../resources/image/ico_required_blue.gif" class="" alt="필수">
                                 </th>
                                 <td>
-                                    <select id="mobile1" name="mobile[]" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="">
-                                        <option value="010">010</option>
-                                        <option value="011">011</option>
-                                        <option value="016">016</option>
-                                        <option value="017">017</option>
-                                        <option value="018">018</option>
-                                        <option value="019">019</option>
-                                    </select>
-                                    <input id="mobile2" name="mobile[]" maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="" type="text">-<input id="mobile3" name="mobile[]" maxlength="4" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="" type="text">
+                                    <input id="num1" name="mobile[]" maxlength="13" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="${my.phoneNum}" type="text">
                                     <button type="button" class="btnNormal displaynone" id="btn_action_verify_mobile" >인증번호받기</button>
                                     <p class="txtWarn gBlank5 displaynone" id="result_send_verify_mobile_fail"></p>
                                     <ul class="txtInfo gBlank5 displaynone" id="result_send_verify_mobile_success">
@@ -180,7 +138,7 @@
                 </div>
                 <div class="btns">
                     <a href="#" class="btn_submit">회원정보수정</a>
-                    <a href="#" class="btn_cancel">취소</a>
+                    <a href="<c:url value='/user/mypage.do'/>" class="btn_cancel">취소</a>
                     <span class="gRight">
                         <a href="#" class="btn_x">회원탈퇴</a>
                     </span>

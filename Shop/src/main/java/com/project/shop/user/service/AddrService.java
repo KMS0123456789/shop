@@ -1,5 +1,9 @@
 package com.project.shop.user.service;
 
-public interface AddrService {
+import com.project.shop.user.vo.AddrVO;
 
+public interface AddrService {
+	
+	int myaddrplus(AddrVO vo);
+	
 }

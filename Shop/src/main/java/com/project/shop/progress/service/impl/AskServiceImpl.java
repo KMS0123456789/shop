@@ -20,4 +20,10 @@ public class AskServiceImpl implements AskService{
 	public List<AskVO> askAll(){
 		return repository.askAll(); //askRepository에서 askAll 메서드 실행
 	}
+
+	@Override
+	public List<AskVO> myOnedate() {
+		// TODO Auto-generated method stub
+		return repository.myOnedate();
+	}
 }

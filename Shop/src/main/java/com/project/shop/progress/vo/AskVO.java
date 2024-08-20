@@ -1,11 +1,21 @@
 package com.project.shop.progress.vo;
 
+import java.util.List;
+
 public class AskVO {
 	private int askNo;
 	private String askUser;
 	private String askDate;
 	private int askStateFlag;
 	private int askDeleteFlag;
+	private List<AskDetailVO> askDetails;
+	
+	public List<AskDetailVO> getAskDetails() {
+		return askDetails;
+	}
+	public void setAskDetails(List<AskDetailVO> askDetails) {
+		this.askDetails = askDetails;
+	}
 	public int getAskNo() {
 		return askNo;
 	}

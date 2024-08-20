@@ -226,6 +226,7 @@ input[type=radio] + label, input[type=checkbox] + label {
     white-space: nowrap;
     color: #000;
     background-color: #fff;
+    cursor:pointer;
 }
 .btnBasic{
     cursor: pointer;
@@ -267,7 +268,7 @@ input[type=radio] + label, input[type=checkbox] + label {
 }
 .ec-base-help ol li{
     padding: 0 0 0 25px;
-    background: url(./image/ico_number.png) no-repeat;
+    background: url(../image/ico_number.png) no-repeat;
 }
 .ec-base-help .item1{
     background-position: -484px 0;
@@ -277,4 +278,12 @@ input[type=radio] + label, input[type=checkbox] + label {
 }
 .ec-base-help .item3{
     background-position: -384px -200px;
+}
+#ma_rcv_mobile_no, #ma_rcv_phone{
+	height: 18px;
+    line-height: 20px;
+    padding: 2px 4px;
+    border: 1px solid #e6e6e6;
+    color: #000000;
+    font-size: 11px;
 }

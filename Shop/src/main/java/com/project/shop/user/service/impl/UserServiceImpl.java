@@ -150,5 +150,13 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return repository.orchangeCount(); // 상품 교환한 개수 찾는 메서드 호출
 	}
+	
+	@Override
+	public UserVO mymodify() {
+		// TODO Auto-generated method stub
+		return repository.mymodify();
+	}
+
+	
 }
 

@@ -92,7 +92,7 @@
                             <a href="#" class="btn_del">선택 주소록 삭제</a>
                         </span>
                         <span class="gRight">
-                            <a href="#" class="btn_ins">배송지등록</a>
+                            <a href="<c:url value='/user/myaddradd.do'/>" class="btn_ins">배송지등록</a>
                         </span>
                     </div>
                 </form>
