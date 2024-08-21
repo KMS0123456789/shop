@@ -26,6 +26,21 @@ public class AskController {
 			model.addAttribute("ask",askList);
 			return"managerAsk"; //managerAsk.jsp로 리턴
 		}
+	//주문 수정
+	@	RequestMapping(value="/managercancel.do",method =RequestMethod.GET)
+		public String managercancel(Model model) {
+		List<AskVO> askList = service.askAll();
+		model.addAttribute("ask",askList);
+		return"managercancel";
+	}
+	@RequestMapping(value="/managerdelivery.do", method = RequestMethod.GET)
+		public String managerdeliver(Model model) {
+		List<AskVO> askList = service.askAll();
+		model.addAttribute("ask",askList);
+		return"managerdelivery";
+	}
+	
+	
 	@RequestMapping(value="/myOnedate.do",method =RequestMethod.GET)
 	public String myOnedate(Model model) {
 		List<AskVO> myOnedate = service.myOnedate();

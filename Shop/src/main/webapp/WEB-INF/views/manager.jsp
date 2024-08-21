@@ -13,14 +13,14 @@
         <div class="header">MANAGER</div>
         <div class="sub-header">등록된 상품</div>
         <ul class="menu-list">
-            <li class="menu-item"><a href="<c:url value="/peripheral/peripheralwrite.do"/>">상품등록</a></li>
+        	<li class="menu-item"><a href="<c:url value="/computer/computerwrite.do"/>">컴퓨터등록</a></li>
+            <li class="menu-item"><a href="<c:url value="/peripheral/peripheralwrite.do"/>">주변기기등록</a></li>
             <li class="menu-item"><a href="<c:url value="/question/managerQnA.do"/>">Q&A 목록</a></li>
             <li class="menu-item"><a href="<c:url value="/user/blacklist.do"/>">유저 관리</a></li>
             <li class="menu-item"><a href="<c:url value="/ask/managerAsk.do"/>">주문 목록</a></li>
-            <li class="menu-item"><a href="#">취소/교환</a></li>
-            <li class="menu-item"><a>배송 관리</a></li>
+            <li class="menu-item"><a href="<c:url value="/ask/managercancel.do"/>">취소/교환</a></li>
+            <li class="menu-item"><a href="<c:url value="/ask/managerdelivery.do"/>">배송 관리</a></li>
         </ul>
     </div>
-
 </body>
 </html>

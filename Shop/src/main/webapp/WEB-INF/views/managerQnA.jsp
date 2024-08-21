@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="<c:url value='/resources/css/manager.css' />" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 <%@ include file="./includes/myheader.jsp" %>
@@ -20,7 +21,7 @@
 				<th>작성일</th>
 			</tr>
 		</thead>
-		<c:forEach items="${question}" var="question">
+		<c:forEach items="${question}" var="question" >
 			<tbody>
 				<tr>
 					<td>${question.questionNo}</td>
@@ -30,7 +31,8 @@
 					<td>${question.questionCreateDate}</td>
 				</tr>
 			</tbody>
-		</c:forEach>
+		</c:forEach>			
 	</table>
+	
 </body>
 </html>

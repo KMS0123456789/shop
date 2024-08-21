@@ -11,9 +11,7 @@
 <div class="container">
         <a><h1>커스텀pc Shop</h1></a>
         <form action="peripheralwrite.do" method="post" enctype="multipart/form-data">
-       	 <%-- <input type="hidden" id="peripheralCategory" name="peripheralCategory" value="${param.peripheralCategory}"> --%>
-        
-            <select id="peripheralCategory" name="peripheralCategory" class="peripheralCategory" onchange="starview()">
+            <select id="peripheralCategory" name="peripheralCategory" class="peripheralCategory">
                 <option value="0">마우스</option>
                 <option value="1">키보드</option>
                 <option value="2">모니터</option>

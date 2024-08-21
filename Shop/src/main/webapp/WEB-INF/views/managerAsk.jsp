@@ -10,7 +10,7 @@
 <body>
 <%@ include file="./includes/myheader.jsp" %>
 			<h2>주문 상품 목록</h2>
-			<form action="<c:url value='/AskDetail/deliveryC.do' />" method="POST">
+			<form action="<c:url value='/ask/managerAskpost.do' />" method="GET">
 				<table border="1">
 					<thead>
 						<tr>
@@ -27,13 +27,20 @@
 						<tbody>
 							<tr>
 								<td>${ask.askNo}</td>
-								<td>
-								<select>
-									<option value="처리상태">처리상태</option>
-		                            <option value="배송중">배송중</option>
-		                            <option valeu="배송 완료">배송 완료</option>
-	                            </select>
-	                            </td>
+								<c:choose>
+									<c:when test="${ask.askStateFlag == 0 }">
+										<td>결제완료</td>
+									</c:when>
+									<c:when test="${ask.askStateFlag == 1 }">
+										<td>배송준비</td>
+									</c:when>
+									<c:when test="${ask.askStateFlag ==  2}">
+										<td>배송중</td>
+									</c:when>
+									<c:when test="${ask.askStateFlag== 3 }">
+										<td>배송완료</td>
+									</c:when>
+								</c:choose>								
 	                           	<td>${ask.askDate}</td>
 	                            <td>상품 이미지</td>
 	                            <td>1</td>
@@ -42,9 +49,8 @@
 							</tr>
 						</tbody>
 					</c:forEach>
-					<input type="submit" value="변경완료" >
-					<input type="submit" value="취소"> 
 				</table>
+				<input type="submit" value="수정">
 			</form>
 </body>
 </html>
