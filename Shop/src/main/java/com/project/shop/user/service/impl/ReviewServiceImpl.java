@@ -17,4 +17,9 @@ public class ReviewServiceImpl implements ReviewService{
 	public int reviewComputer(ReviewVO vo) {
 		return repository.reviewComputer(vo);
 	}
+	
+	@Override
+	public int reviewPeripheral(ReviewVO vo) {
+		return repository.reviewPeripheral(vo);
+	}
 }

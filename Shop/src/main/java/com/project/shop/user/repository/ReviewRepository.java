@@ -16,4 +16,8 @@ public class ReviewRepository {
 	public int reviewComputer(ReviewVO vo){
 		return template.insert(NAME_SPACE + ".reviewComputer", vo);
 	}
+	
+	public int reviewPeripheral(ReviewVO vo){
+		return template.insert(NAME_SPACE + ".reviewPeripheral", vo);
+	}
 }

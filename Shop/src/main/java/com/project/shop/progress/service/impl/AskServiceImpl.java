@@ -23,7 +23,16 @@ public class AskServiceImpl implements AskService{
 
 	@Override
 	public List<AskVO> myOnedate() {
-		// TODO Auto-generated method stub
 		return repository.myOnedate();
+	}
+
+	@Override
+	public List<AskVO> computerPost(int computerNo) {
+		return repository.computerPost(computerNo);
+	}
+
+	@Override
+	public List<AskVO> peripheralPost(int peripheralNo) {
+		return repository.peripheralPost(peripheralNo);
 	}
 }

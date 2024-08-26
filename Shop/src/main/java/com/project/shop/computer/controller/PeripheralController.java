@@ -25,6 +25,8 @@ import com.project.shop.computer.repository.PeripheralRepository;
 import com.project.shop.computer.service.PeripheralService;
 import com.project.shop.computer.vo.PeripheralVO;
 import com.project.shop.progress.repository.FileRepository;
+import com.project.shop.progress.service.AskService;
+import com.project.shop.progress.vo.AskVO;
 import com.project.shop.progress.vo.FileVO;
 
 
@@ -41,6 +43,9 @@ public class PeripheralController {
 	
 	@Autowired
 	PeripheralRepository repository;
+	
+	@Autowired
+	AskService askService;
 	
 	//마우스 전체 조회
 	@RequestMapping(value="/mouse.do", method=RequestMethod.GET)
@@ -100,7 +105,11 @@ public class PeripheralController {
 	public String computerPost(@PathVariable int peripheralNo, Model model) {
 		//PeripheralNo에 해당하는 데이터 조회
 		PeripheralVO peripheral = service.peripheralPost(peripheralNo); //컴퓨터에 service.computerPost 값 넣기
+		
+		List<AskVO> ask = askService.peripheralPost(peripheralNo);
+		
 		model.addAttribute("peripheral", peripheral); //포워딩할 때 키 computer에 값 넣어 보내기
+		model.addAttribute("ask", ask); //포워딩할 때 키 opt에 값 넣어 보내기
 		return "peripheralPost";
 	}
 	

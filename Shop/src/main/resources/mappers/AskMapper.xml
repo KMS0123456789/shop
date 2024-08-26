@@ -16,8 +16,7 @@
 			<result property="optNo" column="opt_no"/>
 			<result property="itemCount" column="item_count"/>
 			<result property="itemCategory" column="item_category"/>
-	</collection>
-	
+		</collection>
 	</resultMap>
 	
 	
@@ -28,5 +27,13 @@
 	
 	<select id="myOnedate" resultMap="askMap">
 		SELECT * FROM ask WHERE ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 DAY ) AND NOW();
+	</select>
+	
+	<select id="computerPost" parameterType="int" resultMap="askMap">
+		select ask_user from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask_detail.computer_no = #{computerNo} and ask.ask_state_flag = 2
+	</select>
+	
+	<select id="peripheralPost" parameterType="int" resultMap="askMap">
+		select ask_user from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask_detail.computer_no = #{peripheralNo} and ask.ask_state_flag = 2
 	</select>
 </mapper>

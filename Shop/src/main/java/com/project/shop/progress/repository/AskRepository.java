@@ -23,4 +23,12 @@ public class AskRepository {
 	public List<AskVO> myOnedate(){
 		return template.selectList(NAME_SPACE + ".myOnedate");
 	}
+	
+	public List<AskVO> computerPost(int computerNo){
+		return template.selectList(NAME_SPACE + ".computerPost", computerNo);
+	}
+	
+	public List<AskVO> peripheralPost(int perihperalNo){
+		return template.selectList(NAME_SPACE + ".peripheralPost", perihperalNo);
+	}
 }

@@ -12,6 +12,8 @@
 		<result property="peripheralSaleDate" column="peripheral_sale_date"/>
 		<result property="peripheralCreateDate" column="peripheral_create_date"/>
 		<result property="keepFlag" column="keep_flag"/>
+		<result property="reviewFlag" column="review_flag"/>
+		<result property="buyFlag" column="buy_flag"/>
 		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
 			<id property="reviewNo" column="review_no"/>
 			<result property="reviewUser" column="review_user"/>
@@ -36,6 +38,14 @@
 			<id property="questionNo" column="question_no"/>
 			<result property="answerBody" column="answer_body"/>
 			<result property="answerDate" column="answer_date"/>
+		</collection>
+		<collection property="stars" ofType="com.project.shop.user.vo.StarVO">
+			<id property="starNo" column="star_no"/>
+			<result property="starUser" column="star_user"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="starCount" column="star_count"/>
+			<result property="itemCategory" column="item_category"/>
 		</collection>
 	</resultMap>
 	
@@ -104,7 +114,9 @@
 	<!-- 마우스, 키보드, 모니터 단건 조회 -->
 	<select id="peripheralPost" parameterType="int" resultMap="peripheralMap">
 		select *,
-		(select count(keep_user) from keep where peripheral.peripheral_no = keep.peripheral_no) as keep_flag 
+		(select count(keep_user) from keep where peripheral.peripheral_no = keep.peripheral_no) as keep_flag,
+		(select count(review_user) from review where review.peripheral_no = peripheral.peripheral_no) as review_flag,
+		(select count(ask_user) from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask.ask_state_flag = 2 and peripheral_no = #{peripheralNo}) as buy_flag 
 		from peripheral 
 		left join review on peripheral.peripheral_no = review.peripheral_no
 		left join question on peripheral.peripheral_no = question.peripheral_no

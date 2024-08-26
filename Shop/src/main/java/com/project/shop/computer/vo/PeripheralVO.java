@@ -5,6 +5,7 @@ import java.util.List;
 import com.project.shop.user.vo.AnswerVO;
 import com.project.shop.user.vo.QuestionVO;
 import com.project.shop.user.vo.ReviewVO;
+import com.project.shop.user.vo.StarVO;
 
 public class PeripheralVO {
 	private int peripheralNo;
@@ -18,8 +19,32 @@ public class PeripheralVO {
 	private List<ReviewVO> reviews;
 	private List<QuestionVO> questions;
 	private List<AnswerVO> answers;
+	private List<StarVO> stars;
 	private int keepFlag;
+	private int reviewFlag;
+	private int buyFlag;
+	
+	
+	public List<StarVO> getStars() {
+		return stars;
+	}
+	public void setStars(List<StarVO> stars) {
+		this.stars = stars;
+	}
+	
 
+	public int getReviewFlag() {
+		return reviewFlag;
+	}
+	public void setReviewFlag(int reviewFlag) {
+		this.reviewFlag = reviewFlag;
+	}
+	public int getBuyFlag() {
+		return buyFlag;
+	}
+	public void setBuyFlag(int buyFlag) {
+		this.buyFlag = buyFlag;
+	}
 	public int getKeepFlag() {
 		return keepFlag;
 	}

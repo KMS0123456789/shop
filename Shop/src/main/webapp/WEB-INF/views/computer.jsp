@@ -57,9 +57,13 @@
 									<ul class="item rows admSortTable">
 										<c:forEach items="${computer}" var="computer">
 											<li>
-												<div class="item-image"><a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'><img>이미지</a></div>
+												<div class="item-image">
+													<a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'><img class="image">이미지</a>
+												</div>
 												<div class="item-content">
-													<div class="subject"><a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'>${computer.computerTitle}</a></div>
+													<div class="subject">
+														<a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'>${computer.computerTitle}</a>
+													</div>
 												</div>
 												<div class="info">
 													<div class="pull-left">

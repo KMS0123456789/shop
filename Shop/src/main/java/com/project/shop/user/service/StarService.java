@@ -4,4 +4,6 @@ import com.project.shop.user.vo.StarVO;
 
 public interface StarService {
 	int starComputer(StarVO vo);
+	
+	int starPeripheral(StarVO vo);
 }

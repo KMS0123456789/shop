@@ -16,4 +16,8 @@ public class StarRepository {
 	public int starComputer(StarVO vo) {
 		return template.insert(NAME_SPACE + ".starComputer", vo);
 	}
+	
+	public int starPeripheral(StarVO vo) {
+		return template.insert(NAME_SPACE + ".starPeripheral", vo);
+	}
 }

@@ -27,15 +27,31 @@ public class ComputerVO {
 	private List<ReviewVO> reviews;
 	private List<QuestionVO> questions;
 	private List<AnswerVO> answers;
-	private List<PeripheralVO> peripherals; 
+	private List<PeripheralVO> peripherals;
+	private List<StarVO> stars;
 	private int keepFlag;
+	private int reviewFlag;
+	private int buyFlag;
+	
+	
+	public int getBuyFlag() {
+		return buyFlag;
+	}
+	public void setBuyFlag(int buyFlag) {
+		this.buyFlag = buyFlag;
+	}
+	public int getReviewFlag() {
+		return reviewFlag;
+	}
+	public void setReviewFlag(int reviewFlag) {
+		this.reviewFlag = reviewFlag;
+	}
 	public List<StarVO> getStars() {
 		return stars;
 	}
 	public void setStars(List<StarVO> stars) {
 		this.stars = stars;
 	}
-	private List<StarVO> stars;
 	public int getKeepFlag() {
 		return keepFlag;
 	}

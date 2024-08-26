@@ -29,4 +29,12 @@ public class ReviewController {
 		starService.starComputer(svo);
 		return "redirect:/computer/computer.do/"+computerNo;
 	}
+	
+	@RequestMapping(value="/reviewPeripheral", method = RequestMethod.POST)
+	public String reviewPeripheral(ReviewVO rvo, StarVO svo,
+			@RequestParam("peripheralNo") int peripheralNo) {
+		reviewService.reviewPeripheral(rvo);
+		starService.starPeripheral(svo);
+		return "redirect:/peripheral/peripheral.do/"+peripheralNo;
+	}
 }

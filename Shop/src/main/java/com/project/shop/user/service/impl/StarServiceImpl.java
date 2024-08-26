@@ -18,4 +18,9 @@ public class StarServiceImpl implements StarService{
 		return repository.starComputer(vo);
 	}
 	
+	@Override
+	public int starPeripheral(StarVO vo) {
+		return repository.starPeripheral(vo);
+	}
+	
 }

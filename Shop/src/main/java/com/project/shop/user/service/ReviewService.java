@@ -4,4 +4,6 @@ import com.project.shop.user.vo.ReviewVO;
 
 public interface ReviewService {
 	int reviewComputer(ReviewVO vo);
+	
+	int reviewPeripheral(ReviewVO vo);
 }

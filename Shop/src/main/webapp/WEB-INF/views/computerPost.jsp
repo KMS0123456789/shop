@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -203,47 +204,55 @@
 						</div>
 						<div class="review-tab" id="review">
 							<div class="tab-title"></div>
-							<div>
-								<button class="" onclick="reviewModal()">리뷰 작성</button>
-							</div>
+							<c:if test="${(computer.reviewFlag < 1) && (computer.buyFlag > 0)}">
+								<c:forEach items="${ask}" var="ask">
+									<c:if test="${ask.askUser == sessionScope.user.email}">
+										<div>
+											<button class="" onclick="reviewModal()">리뷰 작성</button>
+										</div>
+									</c:if>
+								</c:forEach>
+							</c:if>
 							<div class="review">
 								<div class="review-list">
 									<ul>
 										<c:forEach items="${computer.reviews}" var="review">
-										<li>
-											<div class="review-user">
-												<div class="review-user-info">
-													<c:forEach items="${computer.stars}" var="star">
-														<div class="star_rating">
-															<c:choose>
-																<c:when test="${star.starCount == 1}">
-																	<span class="star_filled" style="font-size: 30px; color: red;">★☆☆☆☆</span>
-																</c:when>
-																<c:when test="${star.starCount == 2}">
-													        	 <span class="star_filled" style="font-size: 30px; color: red;">★★☆☆☆</span>
-														        </c:when>
-														        <c:when test="${star.starCount == 3}">
-														        	 <span class="star_filled" style="font-size: 30px; color: red;">★★★☆☆</span>
-														        </c:when>
-														        <c:when test="${star.starCount == 4}">
-														        	 <span class="star_filled" style="font-size: 30px; color: red;">★★★★☆</span>
-														        </c:when>
-														        <c:when test="${star.starCount == 5}">
-														        	 <span class="star_filled" style="font-size: 30px; color: red;">★★★★★</span>
-														        </c:when>
-															</c:choose>
-													    </div>
-													</c:forEach>
-													<div style="padding-left: 5px;">
-														<span class="review-user-name">${review.reviewUser}</span>
-														<span class="review-date">${review.reviewCreateDate}</span>
+											<li>
+												<div class="review-user">
+													<div class="review-user-info">
+														<c:forEach items="${computer.stars}" var="star">
+															<div id="review_star_rating">
+															    <fieldset>
+															    	<c:choose>
+															    		<c:when test="${(star.starCount == 1) && (star.starUser == review.reviewUser)}">
+															    			<span>⭐</span>
+															    		</c:when>
+															    		<c:when test="${(star.starCount == 2) && (star.starUser == review.reviewUser)}">
+															    			<span>⭐⭐</span>
+															    		</c:when>
+															    		<c:when test="${(star.starCount == 3) && (star.starUser == review.reviewUser)}">
+															    			<span>⭐⭐⭐</span>
+															    		</c:when>
+															    		<c:when test="${(star.starCount == 4) && (star.starUser == review.reviewUser)}">
+															    			<span>⭐⭐⭐⭐</span>
+															    		</c:when>
+															    		<c:when test="${(star.starCount == 5) && (star.starUser == review.reviewUser)}">
+															    			<span>⭐⭐⭐⭐⭐</span>
+															    		</c:when>
+															    	</c:choose>
+															    </fieldset>
+															</div>
+														</c:forEach>
+														<div style="padding-left: 5px;">
+															<span class="review-user-name">${review.reviewUser}</span>
+															<span class="review-date">${review.reviewCreateDate}</span>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div class="review-text">
-												<p>${review.reviewBody}</p>
-											</div>
-										</li>
+												<div class="review-text">
+													<p>${review.reviewBody}</p>
+												</div>
+											</li>
 										</c:forEach>
 									</ul>
 								</div>
@@ -316,11 +325,11 @@
 	            	별점
                      	<div id="star_rating">
 						    <fieldset>
-						        <input type="radio" name="starCount" value="1" id="star1"><label for="star1">⭐</label>
-						        <input type="radio" name="starCount" value="2" id="star2"><label for="star2">⭐</label>
+						        <input type="radio" name="starCount" value="5" id="star1"><label for="star1">⭐</label>
+						        <input type="radio" name="starCount" value="4" id="star2"><label for="star2">⭐</label>
 						        <input type="radio" name="starCount" value="3" id="star3"><label for="star3">⭐</label>
-						        <input type="radio" name="starCount" value="4" id="star4"><label for="star4">⭐</label>
-						        <input type="radio" name="starCount" value="5" id="star5"><label for="star5">⭐</label>
+						        <input type="radio" name="starCount" value="2" id="star4"><label for="star4">⭐</label>
+						        <input type="radio" name="starCount" value="1" id="star5"><label for="star5">⭐</label>
 						    </fieldset>
 						</div>
 		                        본문

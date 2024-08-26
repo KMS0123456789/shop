@@ -153,27 +153,56 @@
 						</div>
 						<div class="review-tab" id="review">
 							<div class="tab-title"></div>
+							<c:if test="${(peripheral.reviewFlag < 1) && (peripheral.buyFlag > 0)}">
+								<c:forEach items="${ask}" var="ask">
+									<c:if test="${ask.askUser == sessionScope.user.email}">
+										<div>
+											<button class="" onclick="reviewModal()">리뷰 작성</button>
+										</div>
+									</c:if>
+								</c:forEach>
+							</c:if>
 							<div class="review">
 								<div class="review-list">
 									<ul>
-										<li>
-											<div class="review-user">
-												<div class="review-user-info">
-													<div>
-														<span class="star">
-															<span class="star-bg">★</span>
-														</span>
-													</div>
-													<div style="padding-left: 5px;">
-														<span class="review-user-name">이름</span>
-														<span class="review-date">작성일</span>
+										<c:forEach items="${peripheral.reviews}" var="review">
+											<li>
+												<div class="review-user">
+													<div class="review-user-info">
+														<c:forEach items="${peripheral.stars}" var="star">
+															<div id="review_star_rating">
+															    <fieldset>
+															    	<c:choose>
+															    		<c:when test="${(star.starCount == 1) && (star.starUser == review.reviewUser)}">
+															    			<span>⭐</span>
+															    		</c:when>
+															    		<c:when test="${(star.starCount == 2) && (star.starUser == review.reviewUser)}">
+															    			<span>⭐⭐</span>
+															    		</c:when>
+															    		<c:when test="${(star.starCount == 3) && (star.starUser == review.reviewUser)}">
+															    			<span>⭐⭐⭐</span>
+															    		</c:when>
+															    		<c:when test="${(star.starCount == 4) && (star.starUser == review.reviewUser)}">
+															    			<span>⭐⭐⭐⭐</span>
+															    		</c:when>
+															    		<c:when test="${(star.starCount == 5) && (star.starUser == review.reviewUser)}">
+															    			<span>⭐⭐⭐⭐⭐</span>
+															    		</c:when>
+															    	</c:choose>
+															    </fieldset>
+															</div>
+														</c:forEach>
+														<div style="padding-left: 5px;">
+															<span class="review-user-name">${review.reviewUser}</span>
+															<span class="review-date">${review.reviewCreateDate}</span>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div class="review-text">
-												<p>리뷰 내용</p>
-											</div>
-										</li>
+												<div class="review-text">
+													<p>${review.reviewBody}</p>
+												</div>
+											</li>
+										</c:forEach>
 									</ul>
 								</div>
 							</div>
@@ -219,21 +248,48 @@
 				</div>
 			</section>
 		</div>
-			<div id="qnaModal" class="modal" style="display: none;">
-			    <div class="modal-content">
-			        <h2>QnA 작성 페이지입니다.</h2>
-			        <form id="question" action='<c:url value="/question/questionPeripheral.do"/>' method="post">
-			            <input type="hidden" name="peripheralNo" value="${peripheral.peripheralNo}">
-			            <input type="hidden" name="questionUser" value="${sessionScope.user.email}">
-		            	제목<br>
-                      	<input type="text" name="questionTitle" class="qnatitle"><br>
-			                        본문<br>
-			            <textarea rows="20px" cols="40px" name="questionBody" style="resize: none;"></textarea><br><br>
-			            <button type="submit" style="margin-left: 200px">작성하기</button>
-			            <button type="button" onclick="closeModal()" style="text-align: right">취소</button>
-			        </form>
-			    </div>
-			</div>
+		<div id="qnaModal" class="modal" style="display: none;">
+		    <div class="modal-content">
+		        <h2>QnA 작성 페이지입니다.</h2>
+		        <form id="question" action='<c:url value="/question/questionPeripheral.do"/>' method="post">
+		            <input type="hidden" name="peripheralNo" value="${peripheral.peripheralNo}">
+		            <input type="hidden" name="questionUser" value="${sessionScope.user.email}">
+	            	제목<br>
+                     	<input type="text" name="questionTitle" class="qnatitle"><br>
+		                        본문<br>
+		            <textarea rows="20px" cols="40px" name="questionBody" style="resize: none;"></textarea><br><br>
+		            <button type="submit" style="margin-left: 200px">작성하기</button>
+		            <button type="button" onclick="closeModal()" style="text-align: right">취소</button>
+		        </form>
+		    </div>
+		</div>	
+		<div id="reviewModal" class="reviewModal" style="display: none;">
+		    <div class="modal-content">
+		        <h2>별점 및 리뷰 작성</h2>
+		        <form id="review" action='<c:url value="/review/reviewPeripheral.do"/>' method="post">
+		            <input type="hidden" name="peripheralNo" value="${peripheral.peripheralNo}">
+		            <input type="hidden" name="reviewUser" value="${sessionScope.user.email}">
+		            <input type="hidden" name="starUser" value="${sessionScope.user.email}">
+		            <br>
+	            	별점
+                     	<div id="star_rating">
+						    <fieldset>
+						        <input type="radio" name="starCount" value="5" id="star1"><label for="star1">⭐</label>
+						        <input type="radio" name="starCount" value="4" id="star2"><label for="star2">⭐</label>
+						        <input type="radio" name="starCount" value="3" id="star3"><label for="star3">⭐</label>
+						        <input type="radio" name="starCount" value="2" id="star4"><label for="star4">⭐</label>
+						        <input type="radio" name="starCount" value="1" id="star5"><label for="star5">⭐</label>
+						    </fieldset>
+						</div>
+		                        본문
+                   	<br>
+		            <textarea rows="20px" cols="40px" name="reviewBody" style="resize: none;"></textarea>
+		            <br><br>
+		            <button type="submit" style="margin-left: 200px">작성하기</button>
+		            <button type="button" onclick="reviewCloseModal()" style="text-align: right">취소</button>
+		        </form>
+		    </div>
+		</div>
 		<script>
 			function Keep(){
 				let session = "${sessionScope.user.email}"
@@ -282,6 +338,13 @@
 		    }
 			function closeModal() {
 		        document.getElementById('qnaModal').style.display = 'none';
+		    }
+			
+			function reviewModal() {
+		        document.getElementById('reviewModal').style.display = 'block';
+		    }
+			function reviewCloseModal() {
+		        document.getElementById('reviewModal').style.display = 'none';
 		    }﻿
 		</script>
 	</body>

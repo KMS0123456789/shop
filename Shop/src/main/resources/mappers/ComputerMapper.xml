@@ -18,6 +18,8 @@
 		<result property="computerSaleDate" column="computer_sale_date"/>
 		<result property="computerCreateDate" column="computer_create_date"/>
 		<result property="keepFlag" column="keep_flag"/>
+		<result property="reviewFlag" column="review_flag"/>
+		<result property="buyFlag" column="buy_flag"/>
 		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
 			<id property="reviewNo" column="review_no"/>
 			<result property="reviewUser" column="review_user"/>
@@ -90,7 +92,9 @@
 	<!-- 완제품 단건 조회 -->
 	<select id="computerPost" parameterType="int" resultMap="computerMap">
 		select *,
-		(select count(keep_user) from keep where computer.computer_no = keep.computer_no) as keep_flag 
+		(select count(keep_user) from keep where computer.computer_no = keep.computer_no) as keep_flag,
+		(select count(review_user) from review where review.computer_no = computer.computer_no) as review_flag,
+		(select count(ask_user) from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask.ask_state_flag = 2 and computer_no = #{computerNo}) as buy_flag
 		from computer 
 		left join review on computer.computer_no = review.computer_no
 		left join question on computer.computer_no = question.computer_no

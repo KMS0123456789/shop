@@ -14,4 +14,9 @@
 		insert into star(star_user, computer_no, star_count, item_category)
 					values(#{starUser}, #{computerNo}, #{starCount}, 0)
 	</insert>
+	
+	<insert id="starPeripheral" parameterType="com.project.shop.user.vo.StarVO">
+		insert into star(star_user, peripheral_no, star_count, item_category)
+					values(#{starUser}, #{peripheralNo}, #{starCount}, 1)
+	</insert>
 </mapper>
