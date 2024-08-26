@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.shop.progress.vo.KeepVO;
+import com.project.shop.user.vo.AddrVO;
 import com.project.shop.user.vo.UserVO;
 
 @Repository
@@ -44,43 +46,12 @@ public class UserRepository {
 
     
     // 내가 찜한 개수 찾는 메서드
-    public int keepCount() {
-    	return template.selectOne(NAME_SPACE + ".keepCount");
+    public UserVO mylist(UserVO vo) {
+    	return template.selectOne(NAME_SPACE + ".mylist", vo);
     }
     
-    // 장바구니에 담은 개수 찾는 메서드
-    public int cartCount() {
-    	return template.selectOne(NAME_SPACE + ".cartCount");
-    }
-    
-    // 결제 완료한 개수 찾는 메서드
-    public int payCount() {
-    	return template.selectOne(NAME_SPACE + ".payCount");
-    }
-    
-    // 배송 준비중 인 개수 찾는 메서드
-    public int dReadyCount() {
-    	return template.selectOne(NAME_SPACE + ".dReadyCount");
-    }
-    
-    // 배송완료 된 개수 찾는 메서드
-    public int clearCount() {
-    	return template.selectOne(NAME_SPACE + ".clearCount");
-    }
-    
-    // 상품 주문 취소한 개수 찾는 메서드
-    public int orcancelCount() {
-    	return template.selectOne(NAME_SPACE + ".orcancelCount");
-    }
-    
-    // 상품 교환 요청한 개수 찾는 메서드
-    public int orchangeCount() {
-    	return template.selectOne(NAME_SPACE + ".orchangeCount");
-    }
-    
-    public UserVO mymodify() {
-    	return template.selectOne(NAME_SPACE + ".mymodify");
-    }
-    
-    
+    // 배송주소 가져오는 메서드
+    public List<AddrVO> myaddrlist(){
+		return template.selectList(NAME_SPACE+ ".myaddrlist");
+	}
 }

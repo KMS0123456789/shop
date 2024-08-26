@@ -12,6 +12,7 @@ public class AddrVO {
 	private int addressCode;
 	private String addressDetail;
 	private String addressPlus;
+	
 	public int getAddrNo() {
 		return addrNo;
 	}
@@ -79,10 +80,5 @@ public class AddrVO {
 		this.addressPlus = addressPlus;
 	}
 	
-	
-	
-	
-	
 
-	
 }

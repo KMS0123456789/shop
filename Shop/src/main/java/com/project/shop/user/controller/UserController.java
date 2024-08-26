@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.shop.progress.vo.KeepVO;
 import com.project.shop.user.service.UserService;
+import com.project.shop.user.vo.AddrVO;
 import com.project.shop.user.vo.QuestionVO;
 import com.project.shop.user.vo.ReviewVO;
 import com.project.shop.user.vo.UserVO;
@@ -28,24 +31,10 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
-    public String mypage(UserVO vo, Model model) {
+    public String mypage(UserVO vo, Model model, KeepVO kvo) {
     	
-    	int keepCount = userService.keepCount(vo); // 내가 찜한 개수 불러옴.
-    	int cartCount = userService.cartCount(vo); // 내가 장바구니에 담은 개수 불러옴.
-    	int payCount = userService.payCount(vo); // 내가 결제완료한 개수 불러옴.
-    	int dReadyCount = userService.dReadyCount(vo); // 상품 배송 준비중인 개수 불러옴.
-    	int clearCount = userService.clearCount(vo); // 배송 완료된 개수 불러옴.
-    	int orcancelCount = userService.orcancelCount(vo); // 상품교환한 개수 불러옴.
-    	int orchangeCount = userService.orchangeCount(vo); // 상품 주문 취소한 개수 불러옴.
-    	
-    	model.addAttribute("keepCount", keepCount); // 찜한 개수를 모델에 담아 화면에 출력할수 있게 함.
-    	model.addAttribute("cartCount", cartCount); // 장바구니에 담은 개수를 모델에 담아 화면에 출력할수 있게 함.
-    	model.addAttribute("payCount", payCount); // 결제완료된 개수를 모델에 담아 화면에 출력할수 있게 함.
-    	model.addAttribute("dReadyCount", dReadyCount); // 배송준비중인 개수를 모델에 담아 화면에 출력할수 있게 함.
-    	model.addAttribute("clearCount", clearCount); // 배송 완료된 개수를 모델에 담아 화면에 출력할수 있게 함.
-    	model.addAttribute("orcancelCount", orcancelCount); // 상품 교환한 개수를 모델에 담아 화면에 출력할수 있게 함.
-    	model.addAttribute("orchangeCount", orchangeCount); // 상품 취소한 개수를 모델에 담아 화면에 출력할수 있게 함.
-    	
+    	UserVO mylist = userService.mylist(vo); // 내가 찜한 개수 불러옴.
+    	model.addAttribute("my", mylist); // 찜한 개수를 모델에 담아 화면에 출력할수 있게 함.
         return "mypage";
     }
     
@@ -64,21 +53,15 @@ public class UserController {
         return "myorder";
     }
     
-    @RequestMapping(value = "/mymodify.do", method = RequestMethod.GET)
-    public String mymodify(Model model) {
-    	
-    	UserVO mymodify= userService.mymodify();
-        model.addAttribute("my", mymodify);
-    	
-        return "mymodify";
-    }
     
     @RequestMapping(value = "/myaddrlist.do", method = RequestMethod.GET)
     public String myaddrlist(Model model) {
     	
-    	
+    	List<AddrVO> myaddrlist = userService.myaddrlist();
+    	model.addAttribute("my", myaddrlist);
         return "myaddrlist";
     }
+    
     
     @RequestMapping(value = "/myaddradd.do", method = RequestMethod.GET)
     public String myaddradd() {

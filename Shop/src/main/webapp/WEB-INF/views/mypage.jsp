@@ -16,36 +16,35 @@
                 <ul class="mymenu">
                     <li><a href="<c:url value='/user/mypage.do'/>" id="first"> <h5> MY ACCOUNT</h5> <h4>내 계정</h4></a></li>
                     <li><a href="<c:url value='/user/myorder.do'/>" > <h5> ORDER </h5> <h4>주문내역 조회</h4> </a></li>
-                    <li><a href="<c:url value='/user/mymodify.do'/>" > <h5> PROFILE </h5> <h4>회원 정보 관리</h4></a></li>
                     <li><a href="<c:url value='/user/myaddrlist.do'/>" > <h5> ADDRESS </h5> <h4>배송 주소록 관리</h4></a></li>
                     <li><a href="<c:url value='/user/myboard.do'/>" > <h5> BOARD </h5> <h4>내가 쓴 게시물</h4></a></li>
                 </ul>
             </div>
-            <div id="main_content">
-                <div id="mywish">
-                    <h5> <a href="#">나의 위시리스트 ></a> </h5>
-                    <h4> ${keepCount}</h4>
-                </div>
-                <div id="mycart">
-                    <h5> <a href="#"> 장바구니 > </a> </h5>
-                    <h4> ${cartCount} </h4>
-                </div>
-            </div>
-            <div id="order_case">
-                <div id="title"><h3> 나의 주문 현황</h3></div>
-                <div id="state">
-                    <ul>
-                        <li id="d_state"><strong>결제 완료</strong><a href="<c:url value='/user/myorder.do'/>"><span>${payCount}</span></a></li>
-                        <li id="d_state"><strong>배송 준비중</strong><a href="<c:url value='/user/myorder.do'/>"><span>${dReadyCount}</span></a></li>
-                        <li id="d_state"><strong>배송 완료</strong><a href="<c:url value='/user/myorder.do'/>"><span>${clearCount}</span></a></li>
-                    </ul>
-                    <ul id="re">
-                        <li><strong>취소 : </strong><a href="<c:url value='/user/myorder.do'/>"><span>${orcancelCount}</span></a></li>
-                        <li><strong>교환 : </strong><a href="<c:url value='/user/myorder.do'/>"><span>${orchangeCount}</span></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+	            <div id="main_content">
+					<div id="mywish">
+	                   <h5> <a href="#">나의 위시리스트 ></a> </h5>
+	                   <h4> ${my.keepCount}</h4>
+	               	</div>
+	                <div id="mycart">
+	                    <h5> <a href="#"> 장바구니 > </a> </h5>
+	                    <h4> ${my.cartCount} </h4>
+	                </div>
+	            </div>
+	            <div id="order_case">
+	                <div id="title"><h3> 나의 주문 현황</h3></div>
+	                <div id="state">
+	                    <ul>
+	                        <li id="d_state"><strong>결제 완료</strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.payCount}</span></a></li>
+	                        <li id="d_state"><strong>배송 준비중</strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.dReadyCount}</span></a></li>
+	                        <li id="d_state"><strong>배송 완료</strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.clearCount}</span></a></li>
+	                    </ul>
+	                    <ul id="re">
+	                        <li><strong>취소 : </strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.orcancelCount}</span></a></li>
+	                        <li><strong>교환 : </strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.orchangeCount}</span></a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
     </section>
 </body>
 </html>

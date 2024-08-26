@@ -15,6 +15,7 @@
 		<result property="addressPlus" column="address_plus"/>
 	</resultMap>
 	
+	<!-- 배송주소 등록 쿼리 -->
 	<insert id="myaddrplus"  parameterType="com.project.shop.user.vo.AddrVO" >
 		insert into addr(addr_user_email, address_code, address, address_detail,
 							 address_plus, d_addr_name, addr_user_name, 
@@ -22,4 +23,8 @@
 					values(#{addrUserEmail}, #{addressCode}, #{address}, #{addressDetail}, #{addressPlus},
 							#{dAddrName}, #{addrUserName}, #{addrUserLandLine}, #{addrUserPhoneNum}, #{addrFlag})
 	</insert>
+	
+	<select id="myaddr_modify">
+		select * from addr where addr_no = #{addr_no}
+	</select>
 </mapper>

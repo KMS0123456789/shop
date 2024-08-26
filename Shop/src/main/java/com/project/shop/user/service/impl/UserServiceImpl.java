@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.shop.user.repository.UserRepository;
 import com.project.shop.user.service.UserService;
+import com.project.shop.user.vo.AddrVO;
 import com.project.shop.user.vo.KakaoUser;
 import com.project.shop.user.vo.OAuthToken;
 import com.project.shop.user.vo.UserVO;
@@ -110,53 +111,15 @@ public class UserServiceImpl implements UserService {
     }
 
 	@Override
-	public int keepCount(UserVO vo) {
+	public UserVO mylist(UserVO vo) {
 		// TODO Auto-generated method stub
-		return repository.keepCount(); // 해당 사용자의 찜한 개수 찾는 메서드 호출
+		return repository.mylist(vo); // 해당 사용자의 찜한 개수 찾는 메서드 호출
 	}
 
 	@Override
-	public int cartCount(UserVO vo) {
+	public List<AddrVO> myaddrlist() {
 		// TODO Auto-generated method stub
-		return repository.cartCount();  // 해당 사용자의 장바구니에 담은 개수 찾는 메서드 호출
+		return repository.myaddrlist(); // 배송주소 가져오는 메서드 호출.
 	}
-    
-	@Override
-	public int payCount(UserVO vo) {
-		// TODO Auto-generated method stub
-		return repository.payCount();  // 해당 사용자의 결제완료한 개수 찾는 메서드 호출
-	}
-	
-	@Override
-	public int dReadyCount(UserVO vo) {
-		// TODO Auto-generated method stub
-		return repository.dReadyCount();  // 배송준비중인 개수 찾는 메서드 호출
-	}
-
-	@Override
-	public int clearCount(UserVO vo) {
-		// TODO Auto-generated method stub
-		return repository.clearCount(); // 배송완료된 개수 찾는 메서드 호출
-	}
-	
-	@Override
-	public int orcancelCount(UserVO vo) {
-		// TODO Auto-generated method stub
-		return repository.orcancelCount(); // 주문 취소한 개수 찾는 메서드 호출
-	}
-	
-	@Override
-	public int orchangeCount(UserVO vo) {
-		// TODO Auto-generated method stub
-		return repository.orchangeCount(); // 상품 교환한 개수 찾는 메서드 호출
-	}
-	
-	@Override
-	public UserVO mymodify() {
-		// TODO Auto-generated method stub
-		return repository.mymodify();
-	}
-
-	
 }
 

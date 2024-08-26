@@ -5,6 +5,7 @@ import java.util.List;
 import com.project.shop.progress.vo.AskVO;
 import com.project.shop.progress.vo.CartVO;
 import com.project.shop.progress.vo.KeepVO;
+import com.project.shop.user.vo.AddrVO;
 
 
 public class UserVO {
@@ -22,6 +23,58 @@ public class UserVO {
 	private List<AddrVO> addrs;
 	private List<QuestionVO> questions;
 	private List<ReviewVO> reviews;
+	private int keepCount;
+	private int cartCount;
+	private int payCount;
+	private int dReadyCount;
+	private int clearCount;
+	private int orchangeCount;
+	
+	public int getOrchangeCount() {
+		return orchangeCount;
+	}
+	public void setOrchangeCount(int orchangeCount) {
+		this.orchangeCount = orchangeCount;
+	}
+	public int getKeepCount() {
+		return keepCount;
+	}
+	public int getCartCount() {
+		return cartCount;
+	}
+	public int getPayCount() {
+		return payCount;
+	}
+	
+	public int getClearCount() {
+		return clearCount;
+	}
+	public int getOrcancelCount() {
+		return orcancelCount;
+	}
+	public void setKeepCount(int keepCount) {
+		this.keepCount = keepCount;
+	}
+	public void setCartCount(int cartCount) {
+		this.cartCount = cartCount;
+	}
+	public void setPayCount(int payCount) {
+		this.payCount = payCount;
+	}
+	
+	public int getdReadyCount() {
+		return dReadyCount;
+	}
+	public void setdReadyCount(int dReadyCount) {
+		this.dReadyCount = dReadyCount;
+	}
+	public void setClearCount(int clearCount) {
+		this.clearCount = clearCount;
+	}
+	public void setOrcancelCount(int orcancelCount) {
+		this.orcancelCount = orcancelCount;
+	}
+	private int orcancelCount;
 	
 	public List<QuestionVO> getQuestions() {
 		return questions;

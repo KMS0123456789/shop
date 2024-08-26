@@ -2,6 +2,7 @@ package com.project.shop.user.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,4 +27,11 @@ public class AddrController {
 			return "redirect:/user/myaddradd.do";
 		}
 	}
+	
+	@RequestMapping(value = "/myaddr_modify.do", method = RequestMethod.GET)
+    public String myaddrmodify(Model model) {
+		
+        return "myaddr_modify";
+    }
+	
 }

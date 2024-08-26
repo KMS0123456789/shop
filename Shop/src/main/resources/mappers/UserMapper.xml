@@ -10,6 +10,13 @@
 		<result property="updateDate" column="update_date"/>
 		<result property="deleteDate" column="delete_date"/>
 		<result property="blackListDate" column="black_list_date"/>
+		<result property="keepCount" column="keep_count"/>
+		<result property="cartCount" column="cart_count"/>
+		<result property="payCount" column="pay_count"/>
+		<result property="dReadyCount" column="dready_count"/>
+		<result property="clearCount" column="clear_count"/>
+		<result property="orcancelCount" column="orcancel_count"/>
+		<result property="orchangeCount" column="orchange_count"/>
 		<collection property="keeps" ofType="com.project.shop.progress.vo.KeepVO">
 			<id property="keepNo" column="keep_no"/>
 			<result property="keepUser" column="keep_user"/>
@@ -36,12 +43,15 @@
 		<collection property="addrs" ofType="com.project.shop.user.vo.AddrVO">
 			<id property="addrNo" column="addr_no"/>
 			<result property="addrUserEmail" column="addr_user_email"/>
+			<result property="addressCode" column="address_code"/>
 			<result property="address" column="address"/>
+			<result property="addressDetail" column="address_detail"/>
 			<result property="dAddrName" column="d_addr_name"/>
 			<result property="addrUserName" column="addr_user_name"/>
-			<result property="addrLandLine" column="addr_land_line"/>
+			<result property="addrUserLandLine" column="addr_User_landline"/>
 			<result property="addrUserPhoneNum" column="addr_user_phone_num"/>
 			<result property="addrFlag" column="addr_flag"/>
+			<result property="addressPlus" column="address_plus"/>
 		</collection>
 		<collection property="questions" ofType="com.project.shop.user.vo.QuestionVO">
 			<id property="questionNo" column="question_no"/>
@@ -93,11 +103,16 @@
 	</select>
 	
 	<!-- 유저가 찜한 개수 찾는 쿼리-->
-	<select id="keepCount" resultType="int">
-		select count(*) from user left join keep on email = keep_user
-			<where>
-				and keep_no;
-			</where>
+	<select id="mylist" resultType="int" resultMap="userMap">
+		select *,
+		(select count(keep_user) from keep where keep_user = #{email}) as keep_count,
+		(select count(cart_user) from cart where cart_user = #{email}) as cart_count,
+		(select count(ask_user) from ask where ask_state_flag = 0 and ask_user = #{email}) as pay_count,
+		(select count(ask_user) from ask where ask_state_flag = 1 and ask_user = #{email}) as dready_count,
+		(select count(ask_user) from ask where ask_state_flag = 2 and ask_user = #{email}) as clear_count,
+		(select count(ask_user) from ask where ask_delete_flag = 1 and ask_user = #{email}) as orcancel_count,
+		(select count(ask_user) from ask where ask_delete_flag = 2 and ask_user = #{email}) as orchange_count
+		from user where user.email = #{email};
 	</select>
 	
 	<!-- 유저가 장바구니에 담은 개수 찾는 쿼리-->
@@ -111,9 +126,6 @@
 	<!-- 유저가 주문한 개수 찾는 쿼리-->
 	<select id="orderCount" resultType="int">
 		select count(*) from user left join ask on email = ask_user
-		<where>
-			and ask_no;
-		</where>
 	</select>
 	
 	<!-- 유저가 결제완료한 개수 찾는 쿼리-->
@@ -160,9 +172,13 @@
 				and ask_delete_flag = 2;
 			</where>
 	</select>
-	<!-- 회원정보 가져오는 쿼리 -->
-	<select id="mymodify" resultMap="userMap">
-		select user.email, user.name, user.phone_num, addr.address from user left join addr on email = addr_user_email;
+
+	<!-- 회원 배송지 목록 가져오는 쿼리 -->
+	<select id="myaddrlist" resultType="com.project.shop.user.vo.AddrVO">
+		(select * from user left join addr on user.email = addr.addr_user_email)
+			union
+		(select * from user right join addr on user.email = addr.addr_user_email)
 	</select>
+	
 	
 </mapper>

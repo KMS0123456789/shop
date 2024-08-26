@@ -231,3 +231,17 @@ table .message{
 .ec-base-help ol .item3{
     background-position: -384px -200px;
 }
+input[type=radio], input[type=checkbox] {
+    width: 13px;
+    height: 13px;
+    border: 0;
+}
+input, select, textarea {
+    font-size: 100%;
+    color: #000000;
+    vertical-align: middle;
+    outline: none;
+}
+table img {
+    vertical-align: middle;
+}

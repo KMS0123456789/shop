@@ -33,7 +33,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">
-                                    <span class="displaynone">
+                                    <span class="">
                                         <input id="allCheck" onclick="myshopAddr.checkAll(this)" value="" type="checkbox">
                                     </span>
                                 </th>
@@ -46,46 +46,41 @@
                                 <th scope="col">수정</th>
                             </tr>
                         </thead>
-                        <tbody class="displaynone center">
-                            <tr class="">
-                                <td></td>
-                                <td>
-                                    <a href="" class="btnNormal displaynone">해제</a>
-                                    <a href="" class="btnEm displaynone">고정</a>
-                                    <span class="displaynone">-</span>
-                                </td>
-                                <td>
-                                    <img src="../resources/image/ico_addr_default.gif" class="displaynone" alt="기본"> </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="left">() </td>
-                                    <td>
-                                        <a href="#" class="btnNormal ">수정</a>
-                                    </td>
-                            </tr>
-                            <tr class="">
-                                <td></td>
-                                <td>
-                                    <a href="" class="btnNormal displaynone">해제</a>
-                                    <a href="" class="btnEm displaynone">고정</a>
-                                    <span class="displaynone">-</span>
-                                </td>
-                                <td>
-                                    <img src="../resources/image/ico_addr_default.gif" class="displaynone" alt="기본">
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td class="left">() </td>
-                                <td><a href="#" class="btnNormal ">수정</a></td>
-                            </tr>
-                        </tbody>
-                        <tbody class="">
-                            <tr>
-                                <td colspan="8" class="message">등록된 주소가 없습니다.</td>
-                            </tr>
-                        </tbody>
+                        <tbody class="displaynones center">
+                      	<c:forEach items="${my}" var="my">
+                      		<c:if test="${sessionScope.user.email == my.addrUserEmail }">
+	                        	<tr class="">
+	                                <td>
+	                                	<span class="">
+	                                        <input id="allCheck" onclick="myshopAddr.checkAll(this)" value="" type="checkbox">
+	                                    </span>
+	                                </td>
+	                                <td style="text-align: center;">
+	                                    <span class="displaynones">-</span>
+	                                </td>
+	                                <td>
+	                                	<c:if test="${my.addrFlag == 0}">
+	                                		<img src="../resources/image/ico_addr_default.gif" class="displaynones" alt="기본"> 
+	                                	</c:if>
+	                                  	${my.dAddrName}
+	                                </td>
+	                                <td>${my.addrUserName}</td>
+	                                <td style="text-align: center;">${my.addrUserLandLine}</td>
+	                                <td>${my.addrUserPhoneNum}</td>
+	                                <td class="left">(${my.addressCode})${my.address} ${my.addressDetail}</td>
+	                                <td>
+	                                    <a href="<c:url value='/addr/myaddr_modify.do'/>" class="btnNormal ">수정</a>
+	                                </td>
+	                            </tr>
+                            </c:if>
+                            <c:if test="${my == null}">
+		                        <tbody class="">
+		                            <tr>
+		                                <td colspan="8" class="message">등록된 주소가 없습니다.</td>
+		                            </tr>
+		                        </tbody>
+                        	</c:if>
+                         </c:forEach>  
                     </table>
                     <div class="ec-base-button">
                         <span class="gLeft displaynone">
