@@ -5,11 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="<c:url value='/resources/css/table.css' />" rel="stylesheet">
 </head>
 <body>
-		<h2>주문 상품 목록</h2>
-			<form action="<c:url value='/ask/managerAskpost.do' />" method="GET">
-				<table border="1">
+<%@ include file="./includes/myheader.jsp" %>
+		<h2>주문 취소 목록</h2>
+				<table>
 					<thead>
 						<tr>
 							<th>주문 번호</th>
@@ -25,15 +26,15 @@
 						<tbody>
 							<tr>
 								<td>${ask.askNo}</td>
-								<%-- <c:choose>
-									<c:when test="${ask.askDeleteFlag == 1}">
+								<c:choose>
+									<c:when test="${ask.askDeleteFlag == 0}">
 										<td>주문 취소 안함</td>
 									</c:when>
-									<c:when test="${ask.askStateFlag == 1 }">
+									<c:when test="${ask.askDeleteFlag == 1 }">
 										<td>주문 취소 요청</td>
 									</c:when>
-								</c:choose> 					
-	                           	<td>${ask.askDate}</td> --%>
+								</c:choose>									
+	                           	<td>${ask.askDate}</td>
 	                            <td>상품 이미지</td>
 	                            <td>1</td>
 	                            <td>1</td>
@@ -42,7 +43,5 @@
 						</tbody>
 					</c:forEach>
 				</table>
-				<input type="submit" value="수정">
-			</form>
 </body>
 </html>

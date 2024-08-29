@@ -9,7 +9,7 @@
 </head>
 <body>
 <%@ include file="./includes/myheader.jsp" %>
-			<h2>주문 상품 목록</h2>
+		<h2>배송 관리 페이지</h2>
 				<table>
 					<thead>
 						<tr>
@@ -23,27 +23,26 @@
 						</tr>
 					</thead>
 					<c:forEach items="${ask}" var="ask">
-						<tbody>
-							<tr>
-								<td>${ask.askNo}</td>
-								<c:choose>
-									<c:when test="${ask.askStateFlag == 0 }">
-										<td>결제완료</td>
-									</c:when>
-									<c:when test="${ask.askStateFlag ==  1}">
-										<td>배송 준비중</td>
-									</c:when>
-									<c:when test="${ask.askStateFlag== 2 }">
-										<td>배송완료</td>
-									</c:when>
-								</c:choose>								
-	                           	<td>${ask.askDate}</td>
-	                            <td>상품 이미지</td>
-	                            <td>1</td>
-	                            <td>1</td>
-	                            <td>판매가</td>                                                        
-							</tr>
-						</tbody>
+						<c:if test="${askStateFlag== 0}">
+							<tbody>
+								<tr>
+									<td>${ask.askNo}</td>
+									<c:choose>
+										<c:when test="${ask.askStateFlag == 1}">
+											<td>배송중</td>
+										</c:when>
+										<c:when test="${ask.askStateFlag == 2 }">
+											<td>배송완료</td>
+										</c:when>
+									</c:choose>						
+		                           	<td>${ask.askDate}</td>
+		                            <td>상품 이미지</td>
+		                            <td>1</td>
+		                            <td>1</td>
+		                            <td>판매가</td>                                                        
+								</tr>
+							</tbody>
+						</c:if>
 					</c:forEach>
 				</table>
 </body>

@@ -1,5 +1,9 @@
 package com.project.shop.user.service;
 
-public interface AnswerService {
+import com.project.shop.user.vo.AnswerVO;
 
+
+public interface AnswerService {
+	//QnA 답변
+	int answerwrite(AnswerVO vo);
 }
