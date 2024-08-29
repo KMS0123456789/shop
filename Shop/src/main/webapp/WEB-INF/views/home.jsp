@@ -11,36 +11,8 @@
 	</head>
 	<body>
 		<div class="wrap">
-			<header id="header">
-				<div class="top">
-					<h1><a href="<c:url value="/"/>">커스텀 PC Shop</a></h1>
-					<ul class="toplink">
-						<c:if test="${sessionScope.user.email != null}">
-							<li><a href="<c:url value='/cart/view.do'/>">장바구니</a></li>
-						</c:if>
-						<c:if test="${sessionScope.user.email != null}">
-							<li><a href="<c:url value='/user/mypage.do'/>">마이페이지</a></li>
-						</c:if>
-    					<c:if test="${sessionScope.user.email == null}">
-							<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91452e14d92a8c67875cd1e2ec08fdd2
-							&redirect_uri=http://localhost:8080/shop/user/kakao/callback.do">
-							<img height="30px" src="<c:url value='/resources/image/kakaoLogin.png'/>"></a></li>
-						</c:if>
-						<c:if test="${sessionScope.user.email != null}">
-    						<li><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
-    					</c:if>
-					</ul>
-				</div>
-				<nav id="gnb" class="bottom">
-					<ul class="menu">
-						<li><a href="<c:url value="/computer/computer.do"/>">컴퓨터</a></li>
-						<li><a href="<c:url value="/peripheral/mouse.do"/>">마우스</a></li>
-						<li><a href="<c:url value="/peripheral/keyboard.do"/>">키보드</a></li>
-						<li><a href="<c:url value="/peripheral/monitor.do"/>">모니터</a></li>
-					</ul>
-				</nav>
-			</header>
-			<div style="position: relative; display: inline-block; width: 80%; margin-left: 200px">
+			<%@ include file="./includes/homeheader.jsp" %>
+			<div style="position: relative; display: inline-block; width: 80%; margin-left :8rem;">
 				<div class="main-slide slick-initialized slick-slider">
 					<div aria-live="polite" class="slick-list draggable">
 						<div class="slick-track" role="listbox">

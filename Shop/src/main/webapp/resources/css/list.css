@@ -1,12 +1,12 @@
 @charset "UTF-8";
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+/* html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
     font: inherit;
     font-size: 100%;
     vertical-align: baseline;
-}
+}  */
 div {
     display: block;
     unicode-bidi: isolate;
@@ -28,19 +28,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 .wrap{
 	position: relative;
 }
-
-#header{
-	border-bottom: solid 1px #cdcdcd !important;
-	padding: 44px 0 0 0;
-    font-size: 0;
-    text-align: center;
-    unicode-bidi: isolate;
-    margin: 0;
-    border: 0;
-    font: inherit;
-    vertical-align: baseline;
-}
-
 #container {
     position: relative;
 }
@@ -61,14 +48,13 @@ section{
     margin: 0 auto;
     width: 1400px;
     display: inline-block;
-    margin-left: 200px;
 }
 .subpage .contents > h2 {
     padding: 0 0 45px 0;
     min-height: 60px;
     font-family: 'Noto-B';
     font-size: 40px;
-    color: #ff7d9e;
+    color: black;
     text-align: center;
     margin-block-start: 0.83em;
     margin-block-end: 0.83em;
@@ -104,20 +90,14 @@ section{
     margin-bottom: -57px;
     font-size: 0;
 }
-
 ul {
     list-style: none;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-    unicode-bidi: isolate;
     padding: 0;
     border: 0;
-    font: inherit;
+    font: inherit; 
     vertical-align: baseline;
 }
+
 .paging {
     font-size: 0;
     text-align: center;
@@ -222,7 +202,6 @@ a:-webkit-any-link {
     font-weight: 500;
 }
 
-}
 .product-box .box .item li .item-content .info .pull-left {
     float: left;
 }
@@ -398,8 +377,6 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
 input[type="text" i] {
     padding-block: 1px;
     padding-inline: 2px;
-}
-input:not([type="file" i], [type="image" i], [type="checkbox" i], [type="radio" i]) {
 }
 #header .top .search .inform .btn-search {
     position: absolute;

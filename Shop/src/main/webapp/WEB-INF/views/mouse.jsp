@@ -11,35 +11,7 @@
 	</head>
 	<body>
 		<div class="wrap">
-			<header id="header">
-				<div class="top">
-					<h1><a href="<c:url value="/"/>">컴퓨터 사이트</a></h1>
-					<ul class="toplink">
-						<li><a>장바구니</a></li>
-						<li><a>마이페이지</a></li>
-						<li><a>로그인</a></li>
-					</ul>
-					<div class="search">
-						<form action="<c:url value="/peripheral/mouse.do" />" method="get" id="form">
-						    <fieldset>
-							    <div class="inform">
-									<input type="hidden" name="searchType" value="peripheral_title" ${param.searchType == 'peripheral_title'  ? 'selected' : ''}>
-							        <input type="text" name="keyword" value="${param.keyword}">
-							        <button type="submit" class="btn-search"></button>
-							    </div>
-						    </fieldset>
-					    </form>
-					</div>
-				</div>
-				<nav id="gnb" class="bottom">
-					<ul class="menu">
-						<li><a href="<c:url value="/computer/computer.do"/>">컴퓨터</a></li>
-						<li><a href="<c:url value="/peripheral/mouse.do"/>">마우스</a></li>
-						<li><a href="<c:url value="/peripheral/keyboard.do"/>">키보드</a></li>
-						<li><a href="<c:url value="/peripheral/monitor.do"/>">모니터</a></li>
-					</ul>
-				</nav>
-			</header>
+			<%@ include file="./includes/computerheader.jsp" %>
 			<section id="container" class="subpage">
 				<div class="contents">
 					<div style="text-align: center; position: relative; display: none; margin-bottom: 80px;"></div>

@@ -9,90 +9,15 @@ body {
     display: block;
 }
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    margin: 0;
+   /*  margin: 0;
     padding: 0;
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline;
+    vertical-align: baseline; */
 }
 html{
     overflow-x: hidden;
-}
-#header{
-	border-bottom: solid 1px #cdcdcd !important;
-	padding: 44px 0 0 0;
-    font-size: 0;
-    text-align: center;
-    unicode-bidi: isolate;
-    margin: 0;
-    border: 0;
-    font: inherit;
-    vertical-align: baseline;
-}
-#header .top {
-    height: 131px;
-}
-#header .top h1 {
-    padding: 16px 0 0 0;
-    min-height: 60px;
-    font-family: 'Noto-B';
-    font-size: 30px;
-    color: #ff7d9e;
-    text-align: center;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    unicode-bidi: isolate;
-    margin-right: 1200px;
-    width: 400px;
-}
-#header .top > * {
-    display: inline-block;
-    vertical-align: middle;
-}
-#header .top .toplink {
-    position: absolute;
-    right: 50%;
-    top: 8px;
-    margin: 0 -600px 0 0;
-    font-family: 'Noto-M';
-}
-#header .top .toplink li {
-    display: inline-block;
-    margin: 0 0 0 28px;
-    font-size: 12px;
-    color: #272727;
-    vertical-align: middle;
-}
-#header .bottom {
-    height: 70px;
-}
-#header .bottom .menu {
-    margin: 0 130px 0 0;
-}
-#header .bottom .btn-all, #header .bottom .menu, #header .bottom .cateogry {
-    display: inline-block;
-    font-size: 14px;
-    vertical-align: top;
-}
-#header .bottom .menu > li:first-child {
-    margin: 0;
-}
-#header .bottom .menu > li {
-    position: relative;
-    float: left;
-}
-#header .bottom .menu > li > a {
-    display: block;
-    position: relative;
-    padding: 0 8px;
-    height: 34px;
-    font-size: 16px;
-    line-height: 32px;
-    font-family: 'Noto-M';
-    margin-left: 100px;
 }
 .wrap {
     position: relative;
@@ -101,7 +26,7 @@ div {
     display: block;
     unicode-bidi: isolate;
 }
-ul {
+/* ul {
     list-style: none;
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -113,7 +38,7 @@ ul {
     border: 0;
     font: inherit;
     vertical-align: baseline;
-}
+} */
 a {
     color: inherit;
     text-decoration: none;
@@ -126,7 +51,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 section {
     unicode-bidi: isolate;
-}
 }
 .product-box {
     padding: 86px 0;
@@ -238,10 +162,10 @@ img {
 .slick-slide {
     float: center;
     height: 500px;
+    margin: 0 auto;
 }
 .main-slide li {
     padding: 0 14px;
-    float: center;
     border-radius: 10px;
     overflow: hidden;
     position: relative;
@@ -263,7 +187,7 @@ img {
 	display: inline-block;
 	box-sizing: border-box;
     position: fixed;
-    margin-right: 100px;
+    margin-left: 7rem;
 }
 
 .right .history_box {
