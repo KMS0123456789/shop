@@ -15,6 +15,14 @@ public class AddrRepository {
 	private SqlSessionTemplate template;
 	private final String NAME_SPACE = "AddrMapper";
 	
+    public AddrVO getAddress(String userEmail) {
+        return template.selectOne(NAME_SPACE + ".getAddress", userEmail);
+    }
+    
+    public List<AddrVO> getAddressesByUserEmail(String userEmail) {
+        return template.selectList(NAME_SPACE + ".getAddressesByUserEmail", userEmail);
+    }
+	
 	// 배송주소 등록하는 메서드
 	public int myaddrplus(AddrVO vo) {
 		return template.insert(NAME_SPACE + ".myaddrplus", vo);

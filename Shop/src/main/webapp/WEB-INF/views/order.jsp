@@ -1,7 +1,9 @@
+<%@page import="com.project.shop.user.vo.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +12,16 @@
     <!-- 포트원 결제 -->
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <!-- iamport.payment.js -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script type="text/javascript">
+	<script type="text/javascript">
         var useremail = "${sessionScope.user.email}";
         var username = "${sessionScope.user.name}";
+        var userEmail = useremail;
     </script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
     <%@ include file="./includes/myheader.jsp" %>
@@ -47,48 +51,33 @@
                 </tr>
             </thead>
             <tbody>
-            	<tr>
-                	<td>
-                        <img src="../resources/image/product1.png" alt="product1.png" class="product-image">
-                        <div class="product-info">
-                            <p>마인 러블리 퍼프 더블버튼 블라우스(BL)</p>
-                            <p>아이보리 / ONE SIZE</p>
-                            <button class="option-change">옵션변경</button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="quantity-control">
-                            <input type="text" value="1">
-                        </div>
-                    </td>
-                    <td>
-                        <p class="original-price" style="text-align: center">20,000원</p>
-                    </td>
-                </tr>
+                <c:forEach var="item" items="${cartItems}">
                 <tr>
                     <td>
-                        <img src="../resources/image/product2.png" alt="product2" class="product-image">
+                        <img src="<c:url value='/resources/image/${item.itemCategory == 1 ? "computer.png" : "peripheral.png"}' />" alt="Product" class="product-image">
                         <div class="product-info">
-                            <p>시원한 여름원단 핀턱 스판 뒷밴딩 와이드 반바지 슬랙스[P]</p>
-                            <p>블랙 / S(숏)</p>
+                            <h3>
+                                ${item.itemCategory == 1 ? '컴퓨터' : '주변기기'} - 
+                                ${item.itemCategory == 1 ? item.computerNo : item.peripheralNo}
+                            </h3>
+                            <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 1 ? '포함' : '미포함'}</p>
                             <button class="option-change">옵션변경</button>
                         </div>
                     </td>
                     <td>
                         <div class="quantity-control">
-                            <input type="text" value="1">
+                            <p>${item.itemCount}</p>
                         </div>
                     </td>
-                    <td>
-                        <p class="original-price" style="text-align: center">20,000원</p>
-                    </td>
+                    <td class="price" style="text-align: center">
+					    <strong>
+					        <fmt:formatNumber value="${item.itemCategory == 1 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
+					    </strong>
+					</td>
                 </tr>
-                
+                </c:forEach>
             </tbody>
         </table>
-        <div class="total-price">
-        	총상품가격 : 40,000 원 + 배송비 : 3,000 원 = 합계 : <span>43,000원</span>
-        </div>
         <h2>주문정보</h2>
         <div class="order-info-summary">
             <div class="order-info">
@@ -96,190 +85,402 @@
                 <form>
                     <div class="form-group">
                         <label for="name">이름</label>
-                        <input type="text" id="name">
+                        <input type="text" id="name" value="${sessionScope.user.name}">
                     </div>
                     <div class="form-group">
                         <label for="email">이메일</label>
-                        <input type="email" id="email">
-                    </div>
-                    <div class="form-group">
-					    <label for="phone">휴대전화</label>
-					    <div>
-					        <input type="tel" id="phone">-
-					        <input type="tel">-
-					        <input type="tel">
-					    </div>
-					</div><br>
-                </form>
-                <h3>02. 받는사람 정보</h3>
-                <form>
-                    <div class="shipping-options">
-                        <label><input type="radio" name="shipping" checked> 주문자 정보와 동일</label>
-                        <label><input type="radio" name="shipping"> 직접입력</label>
-                        <input type="button" class="option-change" value="배송지 목록">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name">이름</label>
-                        <input type="text" id="recipient-name">
-                    </div>
-                    <div class="form-group">
-                        <label>주소</label>
-                        <div class="address-inputs">
-					        <input Id="postal-code" placeholder="우편번호">
-					        <input type="button" class="postcode" onclick="DaumPostcode()" value="우편번호"><br>
-					        <input type="text" Id="address-basic" placeholder="기본주소"><br>
-					        <input type="text" Id="address-detail" placeholder="상세주소">
-					        <input type="text" Id="address-extra" placeholder="추가입력">
-					    </div>
+                        <input type="email" id="email" value="${sessionScope.user.email}">
                     </div>
                     <div class="form-group">
                         <label for="phone">휴대전화</label>
                         <div>
-	                        <input type="tel" id="phone">-
-	                        <input type="tel">-
-	                        <input type="tel">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="delivery-msg">배송메모</label>
-                        <input type="text" id="delivery-msg">
-                    </div>
-                </form><br>
+						    <c:if test="${not empty sessionScope.user}">
+							    <c:set var="phoneNum" value="${sessionScope.user.phoneNum}" />
+							    
+							    <c:if test="${not empty phoneNum}">
+							        <c:choose>
+							            <c:when test="${fn:startsWith(phoneNum, '+82 ')}">
+							                <c:set var="phoneNum" value="0${fn:substring(phoneNum, 4, fn:length(phoneNum))}" />
+							            </c:when>
+							        </c:choose>
+							        
+							        <c:set var="phoneParts" value="${fn:split(phoneNum, '-')}" />
+							    </c:if>
+							</c:if>
+							<c:if test="${empty phoneParts}">
+							    <c:set var="phoneParts" value="${fn:split('--', '-')}" />
+							</c:if>
+						    <input type="tel" id="phone" name="phone1" value="${phoneParts[0]}">-
+						    <input type="tel" name="phone2" value="${phoneParts[1]}">-
+						    <input type="tel" name="phone3" value="${phoneParts[2]}">
+						</div>
+                    </div><br>
+                </form>
+                <h3>02. 받는사람 정보</h3>
+				<form>
+				    <div class="shipping-options">
+				        <label><input type="radio" name="shipping" value="same"> 주문자 정보와 동일</label>
+				        <label><input type="radio" name="shipping" value="new"> 직접입력</label>
+				        <button type="button" id="address-list-btn" class="option-change">배송지 목록</button>
+				    </div>
+				    <div class="form-group">
+				        <label for="recipient-name">이름</label>
+				        <input type="text" id="recipient-name" value="">
+				    </div>
+				    <div class="form-group">
+				        <label>주소</label>
+				        <div class="address-inputs">
+				            <input id="postal-code" placeholder="우편번호" value="">
+				            <input type="button" class="postcode" onclick="DaumPostcode()" value="우편번호"><br>
+				            <input type="text" id="address-basic" placeholder="기본주소" value=""><br>
+				            <input type="text" id="address-detail" placeholder="상세주소" value="">
+				            <input type="text" id="address-extra" placeholder="추가입력" value="">
+				        </div>
+				    </div>
+				    <div class="form-group">
+				        <label for="recipient-phone">휴대전화</label>
+				        <div>
+				            <input type="tel" id="recipient-phone" name="recipient-phone1" value="">-
+				            <input type="tel" name="recipient-phone2" value="">-
+				            <input type="tel" name="recipient-phone3" value="">
+				        </div>
+				    </div>
+				    <div class="form-group">
+				        <label for="delivery-msg">배송메모</label>
+				        <input type="text" id="delivery-msg" value="">
+				    </div>
+				</form><br>
+				
+				<!-- 배송지 목록 모달 -->
+				<div id="address-modal" class="modal" style="display: none;">
+				    <div class="modal-content">
+				        <span class="close">&times;</span>
+				        <h2>배송지 목록</h2>
+				        <ul id="address-list"></ul>
+				    </div>
+				</div>
+				
                 <h3>03. 결제 수단</h3>
                 <div class="payment-methods">
                     <h4><span class="highlight">카카오페이 결제하기</span></h4>
-                    <button class=kakaoPay><img height="40px" src="../resources/image/kakaoPay.png" alt="카카오페이"></button>
+                    <button class="kakaoPay"><img height="40px" src="<c:url value='/resources/image/kakaoPay.png'/>" alt="카카오페이"></button>
                 </div>
             </div><br><br>
             <div class="payment-summary">
                 <h3>결제정보</h3>
-                <p class="total">43,000원</p>
-                <p>총 상품가격 40,000원</p>
-                <p>+ 배송비 3,000원</p>
-                <button class="order-button" id="payment">주문하기</button>
+                <p class="total">0원</p>
+                <span>총 상품가격</span>
+                <span id="total-product-price">0원</span> + 
+                <span>배송비</span>
+                <span id="shipping-fee">0원</span>
+                <button class="order-button" id="payment">결제하기</button>
             </div>
         </div>
     </div>
 </body>
-	 <script>
-	 document.getElementById('payment').addEventListener('click', function() {
+	<script>
+	/* 결제금액 계산 */
+	document.addEventListener('DOMContentLoaded', function() {
+	    const itemRows = document.querySelectorAll('.order-items tbody tr');
+	    const totalProductPriceElement = document.getElementById('total-product-price');
+	    const totalPaymentPriceElement = document.querySelector('.payment-summary .total');
+	    const shippingFeeElement = document.getElementById('shipping-fee');
+	    
+	    const SHIPPING_FEE_THRESHOLD = 50000; // 배송비 무료 기준금액
+	    const SHIPPING_FEE = 3000; // 기본 배송비
+	
+	    function updateTotalPrice() {
+	        let totalProductPrice = 0;
+	        
+	        itemRows.forEach(row => {
+	            const priceElement = row.querySelector('.price strong');
+	            const quantityElement = row.querySelector('.quantity-control p');
+	            
+	            if (priceElement && quantityElement) {
+	                const price = parseInt(priceElement.textContent.replace(/[^0-9]/g, ''));
+	                const quantity = parseInt(quantityElement.textContent);
+	                totalProductPrice += price * quantity;
+	            }
+	        });
+	        
+	        // 배송비 계산
+	        const shippingFee = totalProductPrice >= SHIPPING_FEE_THRESHOLD ? 0 : SHIPPING_FEE;
+	        
+	        // 총 결제금액 계산
+	        const totalPaymentPrice = totalProductPrice + shippingFee;
+	        
+	        // 화면에 표시
+	        totalProductPriceElement.textContent = totalProductPrice.toLocaleString() + "원";
+	        shippingFeeElement.textContent = shippingFee.toLocaleString() + "원";
+	        totalPaymentPriceElement.textContent = totalPaymentPrice.toLocaleString() + "원";
+	        
+	        // 주문 요약 섹션 업데이트
+	        document.querySelector('.total-price').innerHTML = `${totalPaymentPrice.toLocaleString()} 원`;
+	    }
+	    
+	    // 페이지 로드 시 초기 계산
+	    updateTotalPrice();
+	});
+	
+	
+	/* 주소록 불러오기*/
+	$('#address-list-btn').click(function() {
+	    $.ajax({
+	        url: "<c:url value='/cart/addr.do'/>",
+	        type: 'GET',
+	        dataType: 'json',
+	        success: function(data) {
+	            if (Array.isArray(data)) {
+	                showAddressModal(data);
+	            } else {
+	                showAddressModal([data]); // 단일 객체인 경우 배열로 감싸서 처리
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            console.error('Error fetching addresses:', xhr.responseText);
+	            alert('주소 목록을 불러오는데 실패했습니다. 오류: ' + xhr.status + ' ' + error);
+	        }
+	    });
+	});
+
+    $(document).on('click', '.close', function() {
+        $('#address-modal').hide();
+    });
+
+    $(document).on('click', '#address-list li', function() {
+        const selectedAddress = $(this).data('address');
+        fillAddressForm(selectedAddress);
+        $('#address-modal').hide();
+    });
+	
+    function showAddressModal(addresses) {
+        const addressList = $('#address-list');
+        addressList.empty();
+
+        if (Array.isArray(addresses)) {
+            if (addresses.length > 0) {
+                addresses.forEach(function(address) {
+                    const li = $('<li>')
+                        .text(address.addrUserName + ' - ' + address.address)
+                        .data('address', address);
+                    addressList.append(li);
+                });
+            } else {
+                addressList.append('<li>저장된 주소가 없습니다.</li>');
+            }
+        } else {
+            console.error('주소 데이터가 배열이 아닙니다:', addresses);
+            addressList.append('<li>주소 데이터 오류</li>');
+        }
+
+        $('#address-modal').show();
+    }
+	
+    function fillAddressForm(address) {
+        $('#recipient-name').val(address.addrUserName);  // 사용자 이름
+        $('#postal-code').val(address.addressCode);     // 우편번호
+        $('#address-basic').val(address.address);        // 기본 주소
+        $('#address-detail').val(address.addressDetail); // 상세 주소
+        $('#address-extra').val(address.addressPlus);    // 추가 주소
+
+        // 전화번호를 3개로 나눠서 입력
+        var phoneParts = address.addrUserPhoneNum.split('-'); // 전화번호를 '-'로 분리
+        $('input[name="recipient-phone1"]').val(phoneParts[0]); // 첫 번째 부분
+        $('input[name="recipient-phone2"]').val(phoneParts[1]); // 두 번째 부분
+        $('input[name="recipient-phone3"]').val(phoneParts[2]); // 세 번째 부분
+    }
+
+    
+ 	/* 주소 선택 입력 */
+    document.addEventListener('DOMContentLoaded', function() {
+   	    var shippingOptions = document.querySelectorAll('input[name="shipping"]');
+   	    var addressInputs = document.querySelectorAll('#postal-code, #address-basic, #address-detail, #address-extra');
+   	    var phoneInputs = document.querySelectorAll('input[name^="recipient-phone"]');
+   	    var recipientNameInput = document.getElementById('recipient-name');
+
+   	    // 주문자 정보
+   	    var orderName = document.getElementById('name').value;
+   	    var orderPhone = [
+   	        document.querySelector('input[name="phone1"]').value,
+   	        document.querySelector('input[name="phone2"]').value,
+   	        document.querySelector('input[name="phone3"]').value
+   	    ];
+
+   	    // 저장된 주소 정보
+   	    var savedAddress = {
+   	        postalCode: '${addr.addressCode}',
+   	        basicAddress: '${addr.address}',
+   	        detailAddress: '${addr.addressDetail}',
+   	        extraAddress: '${addr.addressPlus}'
+   	    };
+   	    
+   	    function clearFields() {
+   	        recipientNameInput.value = '';
+   	        addressInputs.forEach(function(input) {
+   	            input.value = '';
+   	        });
+   	        phoneInputs.forEach(function(input) {
+   	            input.value = '';
+   	        });
+   	    }
+
+   	    function fillFields() {
+   	        recipientNameInput.value = orderName;
+   	        addressInputs[0].value = savedAddress.postalCode;
+   	        addressInputs[1].value = savedAddress.basicAddress;
+   	        addressInputs[2].value = savedAddress.detailAddress;
+   	        addressInputs[3].value = savedAddress.extraAddress;
+   	        phoneInputs.forEach(function(input, index) {
+   	            input.value = orderPhone[index];
+   	        });
+   	    }
+
+   	    shippingOptions.forEach(function(option) {
+   	        option.addEventListener('change', function() {
+   	            if (this.checked && this.value === 'same') {
+   	                fillFields();
+   	            } else if (this.checked && this.value === 'new') {
+   	                clearFields();
+   	            }
+   	        });
+   	    });
+
+   	    // 초기 상태 설정: 모든 입력 필드를 비움
+   	    clearFields();
+	});
+ 	
+ 	
+	/* 카카오페이 구현 */
+	document.getElementById('payment').addEventListener('click', function() {
 	     kakaoPay(username, useremail);
-	 });
+	});
 	 
-	 let lastUsedMerchantUid = null;
+	let lastUsedMerchantUid = null;
+	
+	function generateMerchantUid() {
+	    var today = new Date();
+	    var randomStr = Math.random().toString(36).substring(2, 15);
+	    return "IMP" + today.getTime() + randomStr;
+	}
+	
+	function kakaoPay(username, useremail) {
+	    if (!useremail || useremail.trim() === "") {
+	        alert('로그인이 필요합니다!');
+	        return;
+	    }
+	
+	    if (!confirm("구매 하시겠습니까?")) {
+	        return;
+	    }
+	
+	    var IMP = window.IMP;
+	    IMP.init("imp41762117");
+	    
+	    // 새로운 merchant_uid 생성
+	    var newMerchantUid = generateMerchantUid();
+	    
+	    // 이전에 사용한 merchant_uid와 다른지 확인
+	    while (newMerchantUid === lastUsedMerchantUid) {
+	        newMerchantUid = generateMerchantUid();
+	    }
+	    
+	    lastUsedMerchantUid = newMerchantUid;
+	
+	    // 동적으로 주문 이름 생성
+	    var orderName = "커스텀PC Shop 주문";
+	    var firstItemName = document.querySelector('.order-items tbody tr .product-info h3').textContent.trim();
+	    if (firstItemName) {
+	        orderName = firstItemName;
+	        var itemCount = document.querySelectorAll('.order-items tbody tr').length;
+	        if (itemCount > 1) {
+	            orderName += ` 외 ${itemCount - 1}건`;
+	        }
+	    }
 
-	 function generateMerchantUid() {
-	     var today = new Date();
-	     var randomStr = Math.random().toString(36).substring(2, 15);
-	     return "IMP" + today.getTime() + randomStr;
-	 }
-	 
-	 function kakaoPay(username, useremail) {
-	     if (!useremail || useremail.trim() === "") {
-	         alert('로그인이 필요합니다!');
-	         return;
-	     }
+	    // 총 결제 금액 가져오기
+	    var totalAmount = parseInt(document.querySelector('.payment-summary .total').textContent.replace(/[^0-9]/g, ''));
 
-	     if (!confirm("구매 하시겠습니까?")) {
-	         return;
-	     }
+	    IMP.request_pay({
+	        pg: 'kakaopay.TC0ONETIME',
+	        pay_method: 'card',
+	        merchant_uid: newMerchantUid,
+	        name: orderName,
+	        amount: totalAmount,
+	        buyer_email: useremail,
+	        buyer_name: username,
+	    }, function (rsp) {
+	        if (rsp.success) {
+	            console.log("결제 성공:", rsp);
+	            alert('결제가 완료되었습니다!');
+	            window.location.href = 'orderComplete.do';
+	        } else {
+	            console.log("결제 실패:", rsp);
+	            alert(`결제 실패: ${rsp.error_msg}`);
+	        }
+	    });
+	}
 
-	     var IMP = window.IMP;
-	     IMP.init("imp41762117");
-	     
-	     // 새로운 merchant_uid 생성
-	     var newMerchantUid = generateMerchantUid();
-	     
-	     // 이전에 사용한 merchant_uid와 다른지 확인
-	     while (newMerchantUid === lastUsedMerchantUid) {
-	         newMerchantUid = generateMerchantUid();
-	     }
-	     
-	     lastUsedMerchantUid = newMerchantUid;
-
-	     IMP.request_pay({
-	         pg: 'kakaopay.TC0ONETIME',
-	         pay_method: 'card',
-	         merchant_uid: newMerchantUid,
-	         name: '마인 러블리 퍼프 더블버튼 블라우스(BL)',
-	         	/* document.getElementById('title').innerText, */
-	         amount: 43000, //제품가격
-	         buyer_email: useremail,
-	         buyer_name: username,
-	     }, function (rsp) {
-	         if (rsp.success) {
-	             console.log("결제 성공:", rsp);
-	             alert('결제가 완료되었습니다!');
-	             // 서버 연결 전이므로 바로 페이지 이동
-	             window.location.href = 'orderComplete.jsp';
-	         } else {
-	             console.log("결제 실패:", rsp);
-	             alert(`결제 실패: ${rsp.error_msg}`);
-	         }
-	     });
-	 }
-
-	 /* function sendPaymentInfoToServer(paymentResult) {
-	     $.ajax({
-	         url: '/payment/complete',
-	         method: 'POST',
-	         contentType: 'application/json',
-	         data: JSON.stringify(paymentResult),
-	         success: function(response) {
-	        	 alert('결제 완료!');
-	        	 window.location.href = '/orderComplete.jsp';
-	        	 
-	        	 if (response.status == 200) {
-	                 alert('결제 완료!');
-	                 window.location.reload();
-	             } else {
-	                 alert(`에러: [${response.status}] 결제요청이 승인된 경우 관리자에게 문의바랍니다.`);
-	             }
-	         },
-	         error: function() {
-	             alert('서버 오류가 발생했습니다. 관리자에게 문의바랍니다.');
-	         }
-	     });
-	 } */
-
-	 function DaumPostcode() {
-         new daum.Postcode({
-             oncomplete: function(data) {
-
-                 var addr = '';
-                 var extraAddr = '';
- 
-                 if (data.userSelectedType === 'R') {
-                     addr = data.roadAddress;
-                 } else {
-                     addr = data.jibunAddress;
-                 }
-                 
-                 if(data.userSelectedType === 'R'){
-                   
-                     if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                         extraAddr += data.bname;
-                     }
-                     
-                     if(data.buildingName !== '' && data.apartment === 'Y'){
-                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                     }
-                     
-                     if(extraAddr !== ''){
-                         extraAddr = ' (' + extraAddr + ')';
-                     }
-                     
-                     document.getElementById("address-extra").value = extraAddr;
-                 } else {
-                     document.getElementById("address-extra").value = '';
-                 }
-                 
-                 document.getElementById('postal-code').value = data.zonecode;
-                 document.getElementById("address-basic").value = addr;
-                
-                 document.getElementById("address-detail").focus();
-             }
-         }).open();
-     }
-    </script>
+	function sendPaymentInfoToServer(paymentResult) {
+	    $.ajax({
+	        url: '<c:url value="/payment/complete"/>', // 컨텍스트 경로를 포함한 URL
+	        method: 'POST',
+	        contentType: 'application/json',
+	        data: JSON.stringify(paymentResult),
+	        success: function(response) {
+	            if (response.status == 200) {
+	                alert('결제가 성공적으로 처리되었습니다.');
+	                window.location.href = '<c:url value="/orderComplete.do"/>'; // 컨텍스트 경로를 포함한 URL
+	            } else {
+	                alert(`오류 발생: [${response.status}] 관리자에게 문의 바랍니다.`);
+	            }
+	        },
+	        error: function(xhr, status, error) {
+	            console.error("서버 요청 실패:", error);
+	            alert('서버 오류가 발생했습니다. 관리자에게 문의 바랍니다.');
+	        }
+	    });
+	}
+	
+	
+	/* 다음주소 검색 입력 구현 */
+	function DaumPostcode() {
+	       new daum.Postcode({
+	           oncomplete: function(data) {
+	
+	               var addr = '';
+	               var extraAddr = '';
+	
+	               if (data.userSelectedType === 'R') {
+	                   addr = data.roadAddress;
+	               } else {
+	                   addr = data.jibunAddress;
+	               }
+	               
+	               if(data.userSelectedType === 'R'){
+	                 
+	                   if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                       extraAddr += data.bname;
+	                   }
+	                   
+	                   if(data.buildingName !== '' && data.apartment === 'Y'){
+	                       extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                   }
+	                   
+	                   if(extraAddr !== ''){
+	                       extraAddr = ' (' + extraAddr + ')';
+	                   }
+	                   
+	                   document.getElementById("address-extra").value = extraAddr;
+	               } else {
+	                   document.getElementById("address-extra").value = '';
+	               }
+	               
+	               document.getElementById('postal-code').value = data.zonecode;
+	               document.getElementById("address-basic").value = addr;
+	              
+	               document.getElementById("address-detail").focus();
+	           }
+	       }).open();
+	}
+	</script>
 </html>

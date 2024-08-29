@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,63 +32,40 @@
                 <table>
                     <thead>
                         <tr>
-                            <th><input type="checkbox" id="select-all"></th>
+                            <th><input type="checkbox" id="selectAll"></th>
                             <th style="text-align: center">주문상품정보</th>
                             <th style="text-align: center">수량</th>
                             <th style="text-align: center">가격</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td class="product-info">
-                                <img src="../resources/image/product1.png" alt="Product1">
-                                <div>
-                                    <h3>마인 러블리 퍼프 더블버튼 블라우스(BL)</h3>
-                                    <p>아이보리 / ONE SIZE</p>
-                                    <button class="btn-option">옵션변경</button>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="quantity-control">
-                                    <input type="text" value="1">
+                        <c:forEach var="item" items="${cartItems}">
+                            <tr>
+                                <td><input type="checkbox" class="item-checkbox" data-price="${item.itemCategory == 1 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}"></td>
+                                <td class="product-info">
+                                    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 1 ? "computer.png" : "peripheral.png"}' />" alt="Product">
                                     <div>
-                                        <button class="quantity-up">▲</button>
-                                        <button class="quantity-down">▼</button>
+                                        <h3>
+                                            ${item.itemCategory == 1 ? '컴퓨터' : '주변기기'} - 
+                                            ${item.itemCategory == 1 ? item.computerNo : item.peripheralNo}
+                                        </h3>
+                                        <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 1 ? '포함' : '미포함'}</p>
+                                        <button class="btn-option">옵션변경</button>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="price" style="width:100px">
-                                <strong>20,000원</strong>
-                            </td>
-                            <td><button class="btn-remove">×</button></td>
-                        </tr>
-                        
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td class="product-info">
-                                <img src="../resources/image/product2.png" alt="Product2">
-                                <div>
-                                    <h3>시원한 여름원단 핀턱 스판 뒷밴딩 와이드 반바지 슬랙스[P]</h3>
-                                    <p>블랙 / S(숏)</p>
-                                    <button class="btn-option">옵션변경</button>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="quantity-control">
-                                    <input type="text" value="1">
-                                    <div>
-                                        <button class="quantity-up">▲</button>
-                                        <button class="quantity-down">▼</button>
+                                </td>
+                                <td>
+                                    <div class="quantity-control">
+                                        <p>${item.itemCount}</p>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="price" style="width:100px">
-                                <strong>20,000원</strong>
-                            </td>
-                            <td><button class="btn-remove">×</button></td>
-                        </tr>
-                      
+                                </td>
+								<td class="price">
+								    <strong>
+								        <fmt:formatNumber value="${item.itemCategory == 1 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
+								    </strong>
+								</td>
+                                <td><button class="btn-remove">×</button></td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
                 <div class="cart-actions">
@@ -99,15 +77,16 @@
                 <h3>결제금액</h3>
                 <div class="summary-item">
                     <span>총 상품금액</span>
-                    <span>40,000원</span>
+                    <span id="total-product-price">0원</span>
+
                 </div>
                 <div class="summary-item">
-                    <span>배송비</span>
-                    <span>3,000원</span>
-                </div>
+				    <span>배송비</span>
+				    <span id="shipping-fee">0원</span>
+				</div>
                 <div class="summary-item total">
                     <span>결제예정금액</span>
-                    <span>43,000원</span>
+                    <span id="total-payment-price">0원</span>
                 </div>
                 <button class="btn-primary" onclick="location.href='<c:url value='/cart/order.do'/>'">전체상품 주문하기</button>
                 <button class="btn-secondary-outline" onclick="location.href='<c:url value='/cart/order.do'/>'">선택상품 주문하기</button>
@@ -115,4 +94,61 @@
         </div>
     </div>
 </body>
+	<script>
+	//결제금액 계산
+	document.addEventListener('DOMContentLoaded', function() {
+	    const selectAllCheckbox = document.getElementById('selectAll');
+	    const itemCheckboxes = document.querySelectorAll('.item-checkbox');
+	    const totalProductPriceElement = document.getElementById('total-product-price');
+	    const totalPaymentPriceElement = document.getElementById('total-payment-price');
+	    const shippingFeeElement = document.getElementById('shipping-fee');
+	    
+	    const SHIPPING_FEE_THRESHOLD = 50000; // 배송비 무료 기준금액
+	    const SHIPPING_FEE = 3000; // 기본 배송비
+	    
+	    // 전체 선택 체크박스 이벤트
+	    selectAllCheckbox.addEventListener('change', function() {
+	        itemCheckboxes.forEach(checkbox => checkbox.checked = selectAllCheckbox.checked);
+	        updateTotalPrice();
+	    });
+
+	    // 개별 체크박스 이벤트
+	    itemCheckboxes.forEach(checkbox => {
+	        checkbox.addEventListener('change', updateTotalPrice);
+	    });
+
+	    function updateTotalPrice() {
+	        let totalProductPrice = 0;
+	        
+	        itemCheckboxes.forEach(checkbox => {
+	            if (checkbox.checked) {
+	                const itemPrice = parseInt(checkbox.getAttribute('data-price'));
+	                const quantityElement = checkbox.closest('tr').querySelector('.quantity-control p');
+	                const quantity = parseInt(quantityElement.textContent);
+	                totalProductPrice += itemPrice * quantity;
+	            }
+	        });
+	        
+	        // 배송비 계산
+	        const shippingFee = totalProductPrice >= SHIPPING_FEE_THRESHOLD ? 0 : SHIPPING_FEE;
+	        
+	        // 총 결제금액 계산
+	        const totalPaymentPrice = totalProductPrice + shippingFee;
+	        
+	        // 화면에 표시
+	        totalProductPriceElement.textContent = totalProductPrice.toLocaleString() + "원";
+	        shippingFeeElement.textContent = shippingFee.toLocaleString() + "원";
+	        totalPaymentPriceElement.textContent = totalPaymentPrice.toLocaleString() + "원";
+	        
+	        // 전체 선택 체크박스 상태 업데이트
+	        selectAllCheckbox.checked = itemCheckboxes.length > 0 && 
+	                                    Array.from(itemCheckboxes).every(checkbox => checkbox.checked);
+	    }
+	    
+	    // 페이지 로드 시 모든 상품 선택 및 초기 계산
+	    selectAllCheckbox.checked = true;
+	    itemCheckboxes.forEach(checkbox => checkbox.checked = true);
+	    updateTotalPrice();
+	});
+	</script>
 </html>

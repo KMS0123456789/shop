@@ -100,7 +100,7 @@ public class UserController {
 
     @GetMapping("/login.do")
     public String login(HttpSession session, HttpServletRequest request) {
-        return "login";  // 로그인되지 않은 상태라면 로그인 페이지로 이동
+        return "login";  // 로그인되지 않은 상태라면 홈으로 이동
     }
     
     @PostMapping("/login.do")
@@ -110,13 +110,13 @@ public class UserController {
             session.setAttribute("user", user);
             return "redirect:/user/mypage.do";  // 로그인 성공 시 마이페이지로 리다이렉트
         }
-        return "login";  // 로그인 실패 시 로그인 페이지로 이동
+        return "/";  // 로그인 실패 시 홈으로 이동
     }
 
     @GetMapping("/logout.do")
     public String logout(HttpSession session) {
         session.invalidate();  // 세션 무효화 (로그아웃)
-        return "redirect:/user/login.do";  // 로그아웃 후 로그인 페이지로 리다이렉트
+        return "redirect:/";  // 로그아웃 후 홈으로 리다이렉트
     }
     
 }

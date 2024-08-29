@@ -25,6 +25,29 @@
 		</collection>
 	</resultMap>
 	
+	<select id="getAddress" resultMap="addrMap">
+        SELECT 
+            addr_no, addr_user_email, address_code, address, address_detail, 
+            address_plus, d_addr_name, addr_user_name, addr_user_landline, 
+            addr_user_phone_num, addr_flag
+        FROM 
+            addr
+        WHERE 
+            addr_user_email = #{userEmail} AND addr_flag = 1
+        LIMIT 1
+    </select>
+    
+    <select id="getAddressesByUserEmail" resultMap="addrMap">
+        SELECT 
+            addr_no, addr_user_email, address_code, address, address_detail, 
+            address_plus, d_addr_name, addr_user_name, addr_user_landline, 
+            addr_user_phone_num, addr_flag
+        FROM 
+            addr
+        WHERE 
+            addr_user_email = #{userEmail} AND addr_flag = 1
+    </select>
+	
 	<!-- 배송주소 등록 쿼리 -->
 	<insert id="myaddrplus"  parameterType="com.project.shop.user.vo.AddrVO" useGeneratedKeys="true" keyProperty="addrNo">
 		insert into addr(addr_user_email, address_code, address, address_detail,

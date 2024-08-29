@@ -13,11 +13,22 @@
 		<div class="wrap">
 			<header id="header">
 				<div class="top">
-					<h1><a href="<c:url value=""/>">컴퓨터 사이트</a></h1>
+					<h1><a href="<c:url value="/"/>">커스텀 PC Shop</a></h1>
 					<ul class="toplink">
-						<li><a>장바구니</a></li>
-						<li><a>마이페이지</a></li>
-						<li><a>로그인</a></li>
+						<c:if test="${sessionScope.user.email != null}">
+							<li><a href="<c:url value='/cart/view.do'/>">장바구니</a></li>
+						</c:if>
+						<c:if test="${sessionScope.user.email != null}">
+							<li><a href="<c:url value='/user/mypage.do'/>">마이페이지</a></li>
+						</c:if>
+    					<c:if test="${sessionScope.user.email == null}">
+							<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91452e14d92a8c67875cd1e2ec08fdd2
+							&redirect_uri=http://localhost:8080/shop/user/kakao/callback.do">
+							<img height="30px" src="<c:url value='/resources/image/kakaoLogin.png'/>"></a></li>
+						</c:if>
+						<c:if test="${sessionScope.user.email != null}">
+    						<li><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
+    					</c:if>
 					</ul>
 				</div>
 				<nav id="gnb" class="bottom">

@@ -2,16 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="CartMapper">
 	<resultMap type="com.project.shop.progress.vo.CartVO" id="cartMap">
-		<id property="cartNo" column="cart_no"/>
-		<result property="cartUser" column="cart_user"/>
-		<result property="computerNo" column="computer_no"/>
-		<result property="peripheralNo" column="peripheral_no"/>
-		<result property="optSsd" column="opt_ssd"/>
-		<result property="optHdd" column="opt_hdd"/>
-		<result property="optOs" column="opt_os"/>
-		<result property="itemCount" column="item_count"/>
-		<result property="itemCategory" column="item_category"/>
+	    <id property="cartNo" column="cart_no"/>
+	    <result property="cartUser" column="cart_user"/>
+	    <result property="computerNo" column="computer_no"/>
+	    <result property="peripheralNo" column="peripheral_no"/>
+	    <result property="optSsd" column="opt_ssd"/>
+	    <result property="optHdd" column="opt_hdd"/>
+	    <result property="optOs" column="opt_os"/>
+	    <result property="itemCount" column="item_count"/>
+	    <result property="itemCategory" column="item_category"/>
+	    <collection property="computers" ofType="com.project.shop.computer.vo.ComputerVO">
+	        <id property="computerNo" column="computer_no"/>
+	        <result property="computerTitle" column="computer_title"/>
+	        <result property="computerSalePrice" column="computer_sale_price"/>
+	        <result property="cpu" column="cpu"/>
+	        <result property="ssd" column="ssd"/>
+	        <result property="mainBoard" column="main_board"/>
+	        <result property="gpu" column="gpu"/>
+	        <result property="power" column="power"/>
+	        <result property="bCase" column="b_case"/>
+	        <result property="ram" column="ram"/>
+	        <result property="cooler" column="cooler"/>
+	        <result property="computerStock" column="computer_stock"/>
+	        <result property="computerOutFlag" column="computer_out_flag"/>
+	        <result property="computerSaleDate" column="computer_sale_date"/>
+	        <result property="computerCreateDate" column="computer_create_date"/>
+	    </collection>
+	    <collection property="peripherals" ofType="com.project.shop.computer.vo.PeripheralVO">
+	        <id property="peripheralNo" column="peripheral_no"/>
+	        <result property="peripheralCategory" column="peripheral_category"/>
+	        <result property="peripheralTitle" column="peripheral_title"/>
+	        <result property="peripheralName" column="peripheral_name"/>
+	        <result property="peripheralStock" column="peripheral_stock"/>
+	        <result property="peripheralSalePrice" column="peripheral_sale_price"/>
+	        <result property="peripheralOutFlag" column="peripheral_out_flag"/>
+	        <result property="peripheralSaleDate" column="peripheral_sale_date"/>
+	        <result property="peripheralCreateDate" column="peripheral_create_date"/>
+	    </collection>
 	</resultMap>
+
+	<!-- 주문 아이템 조회 -->
+    <select id="getCartItemsByUser" parameterType="string" resultMap="cartMap" >
+        SELECT *
+	    FROM cart c
+	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 1
+	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 2
+	    WHERE c.cart_user = #{value}
+	</select>
+
+    <!-- 장바구니 아이템 조회 -->
+	<select id="getCartItemsWithDetails" parameterType="string" resultMap="cartMap" >
+	    SELECT *
+	    FROM cart c
+	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 1
+	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 2
+	    WHERE c.cart_user = #{value}
+	</select>
 	
 	<!-- 완제품 상세페이지에서 장바구니 담기 -->
 	<insert id="cartComputer" parameterType="com.project.shop.progress.vo.CartVO">

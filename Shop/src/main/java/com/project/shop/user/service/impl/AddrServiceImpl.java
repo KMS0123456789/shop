@@ -15,6 +15,15 @@ public class AddrServiceImpl implements AddrService {
 	@Autowired
 	private AddrRepository repository;
 	
+	@Override
+    public AddrVO getAddress(String userEmail) {
+        return repository.getAddress(userEmail);
+    }
+	
+	@Override
+    public List<AddrVO> getAddressesByUserEmail(String userEmail) {
+        return repository.getAddressesByUserEmail(userEmail);
+    }
 	
 	@Override
 	public int myaddrplus(AddrVO vo) {

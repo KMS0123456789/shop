@@ -45,22 +45,22 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>마인 러블리 퍼프 더블버튼 블라우스(BL)</td>
+                    <td>컴퓨터 - 1</td>
                     <td>1</td>
-                    <td>20,000원</td>
+                    <td>1,000,000원</td>
                 </tr>
                 <tr>
-                    <td>시원한 여름원단 핀턱 스판 뒷밴딩 와이드 반바지 슬랙스[P]</td>
+                    <td>컴퓨터 - 1</td>
                     <td>1</td>
-                    <td>20,000원</td>
+                    <td>1,000,000원</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="total-amount">
-            <p>총 결제 금액: 40,000 원 + 배송비 : 3,000 원 = 합계 :  <strong>43,000원</strong></p>
+            <p>총 결제 금액: 2,000,000 원 + 배송비 : 0 원 = 합계 :  <strong>2,000,000원</strong></p>
         </div>
-       	<div>
+       	<div style="display: flex; justify-content: center;">
         <a href="/shop" class="back-to-shop">쇼핑 계속하기</a>
         </div>
     </div>
