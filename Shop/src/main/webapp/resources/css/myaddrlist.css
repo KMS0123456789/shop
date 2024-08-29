@@ -57,6 +57,10 @@ li{
     margin: 5px 0 0;
     line-height: 220%;
 }
+#listtable table{
+	border-top: 1px solid #d7d5d5;
+    border-bottom: 1px solid #d7d5d5;
+}
 table{
     position: relative;
     margin: 10px 0 0;
@@ -95,6 +99,13 @@ table tbody td{
     vertical-align: middle;
     word-break: break-all;
     word-wrap: break-word;
+    text-align: center;
+}
+#listtable table td .message{
+	padding: 50px 0;
+}
+.left{
+	text-align: left;
 }
 table .message{
     border-bottom: 1px solid #d7d5d5;
@@ -120,6 +131,7 @@ table .message{
     white-space: nowrap;
     color: #000;
     background-color: #fff;
+    cursor: pointer;
 }
 .btnEm{
     display: inline-block;

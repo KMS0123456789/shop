@@ -102,83 +102,21 @@
 	    SELECT * FROM user WHERE email = #{email}  <!-- 'user' 테이블에서 주어진 이메일과 일치하는 사용자 정보를 조회 -->
 	</select>
 	
-	<!-- 유저가 찜한 개수 찾는 쿼리-->
+	<!-- 유저가 찜한 , 장바구니, 결제, 배송 정보 찾는 쿼리-->
 	<select id="mylist" resultType="int" resultMap="userMap">
 		select *,
-		(select count(keep_user) from keep where keep_user = #{email}) as keep_count,
-		(select count(cart_user) from cart where cart_user = #{email}) as cart_count,
-		(select count(ask_user) from ask where ask_state_flag = 0 and ask_user = #{email}) as pay_count,
-		(select count(ask_user) from ask where ask_state_flag = 1 and ask_user = #{email}) as dready_count,
-		(select count(ask_user) from ask where ask_state_flag = 2 and ask_user = #{email}) as clear_count,
-		(select count(ask_user) from ask where ask_delete_flag = 1 and ask_user = #{email}) as orcancel_count,
-		(select count(ask_user) from ask where ask_delete_flag = 2 and ask_user = #{email}) as orchange_count
-		from user where user.email = #{email};
+		(select count(keep_user) from keep where keep_user = #{email}) as keep_count, <!-- keep 테이블에  특정 유저가 찜한 조회 개수 조회, 이름을 keep_count로 설정.-->
+		(select count(cart_user) from cart where cart_user = #{email}) as cart_count, <!-- cart 테이블에  특정 유저가 장바구니에 담은 개수 조회, 이름을 cart_count로 설정.-->
+		(select count(ask_user) from ask where ask_state_flag = 0 and ask_user = #{email}) as pay_count, <!-- ask 테이블에 특정 유저가 결제완료한 개수 조회, 이름을 pay_count로 설정.-->
+		(select count(ask_user) from ask where ask_state_flag = 1 and ask_user = #{email}) as dready_count, <!-- ask 테이블에 특정 유저가 배송준비중인 개수 조회, 이름을 dready_count로 설정.-->
+		(select count(ask_user) from ask where ask_state_flag = 2 and ask_user = #{email}) as clear_count, <!-- ask 테이블에 특정 유저가 배송완료된 개수 조회, 이름을 clear_count로 설정.--> 
+		(select count(ask_user) from ask where ask_delete_flag = 1 and ask_user = #{email}) as orcancel_count, <!-- ask 테이블에 특정 유저가 주문취소한 개수 조회, 이름을 orcancel_count로 설정.-->
+		(select count(ask_user) from ask where ask_delete_flag = 2 and ask_user = #{email}) as orchange_count <!-- ask 테이블에 특정 유저가 교환한 개수 조회, 이름을 orchange_count로 설정.-->
+		from user where user.email = #{email}; <!-- user테이블에 특정 이메일로 입력한 것 조회. -->
 	</select>
 	
-	<!-- 유저가 장바구니에 담은 개수 찾는 쿼리-->
-	<select id="cartCount" resultType="int">
-		select count(*) from user left join cart on email = cart_user
-			<where>
-				and cart_no;
-			</where>
-	</select>
+	<select id="myboard" resultMap="userMap">
 	
-	<!-- 유저가 주문한 개수 찾는 쿼리-->
-	<select id="orderCount" resultType="int">
-		select count(*) from user left join ask on email = ask_user
 	</select>
-	
-	<!-- 유저가 결제완료한 개수 찾는 쿼리-->
-	<select id="payCount" resultType="int">
-		select count(*) from user left join ask on email = ask_user
-			<where>
-				and ask_no 
-				and ask_state_flag = 0;
-			</where>
-	</select>
-	
-	<!-- 배송준비중인  개수 찾는 쿼리-->
-	<select id="dReadyCount" resultType="int">
-		select count(*) from user left join ask on email = ask_user
-			<where>
-				and ask_no 
-				and ask_state_flag = 1;
-			</where>
-	</select>
-	
-	<!-- 상품 배송 완료된 개수 찾는 쿼리-->
-	<select id="clearCount" resultType="int">
-		select count(*) from user left join ask on email = ask_user
-			<where>
-				and ask_no 
-				and ask_state_flag = 2;
-			</where>
-	</select>
-	
-	<!-- 상품 취소된 개수 찾는 쿼리-->
-	<select id="orcancelCount" resultType="int">
-		select count(*) from user left join ask on email = ask_user
-			<where>
-				and ask_no 
-				and ask_delete_flag = 1;
-			</where>
-	</select>
-	
-	<!-- 상품 교환한 개수 찾는 쿼리-->
-	<select id="orchangeCount" resultType="int">
-		select count(*) from user left join ask on email = ask_user
-			<where>
-				and ask_no 
-				and ask_delete_flag = 2;
-			</where>
-	</select>
-
-	<!-- 회원 배송지 목록 가져오는 쿼리 -->
-	<select id="myaddrlist" resultType="com.project.shop.user.vo.AddrVO">
-		(select * from user left join addr on user.email = addr.addr_user_email)
-			union
-		(select * from user right join addr on user.email = addr.addr_user_email)
-	</select>
-	
 	
 </mapper>

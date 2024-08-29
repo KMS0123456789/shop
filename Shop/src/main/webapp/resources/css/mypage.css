@@ -23,6 +23,7 @@ body{
     width: 160px;
     height: 150px;
     padding: 0 10px;
+    vertical-align: middle;
 }
 #mymenu,.mymenu{
     position: relative;
@@ -41,6 +42,13 @@ body{
     display: block;
     border: 1px solid black;
     height: 120px;
+}
+.mymenu form button{
+	display: block;
+    border: 1px solid black;
+    height: 122px;
+    width: 140px;
+    padding: 0px;
 }
 .mymenu h5{
     font-size: 15px;

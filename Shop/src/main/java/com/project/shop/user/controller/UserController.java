@@ -29,56 +29,33 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
+    
+    //마이페이지
+    @RequestMapping(value = "/mypage.do", method = RequestMethod.POST)
     public String mypage(UserVO vo, Model model, KeepVO kvo) {
     	
-    	UserVO mylist = userService.mylist(vo); // 내가 찜한 개수 불러옴.
-    	model.addAttribute("my", mylist); // 찜한 개수를 모델에 담아 화면에 출력할수 있게 함.
+    	UserVO mylist = userService.mylist(vo); // 내가 찜한 개수,장바구니 개수, 결제완료 개수 ,배송준비중 개수,배송완료 개수, 취소/교환 개수 불러옴.
+    	model.addAttribute("my", mylist); // 모델에 담아 화면에 출력할수 있게 함.
         return "mypage";
     }
     
-    @RequestMapping(value = "/myorder_cancel.do", method = RequestMethod.GET)
-    public String myorder_cancel() {
-        return "myorder_cancel";
-    }
-    
-    @RequestMapping(value = "/myorder_past.do", method = RequestMethod.GET)
-    public String myorder_past() {
-        return "myorder_past";
-    }
-    
-    @RequestMapping(value = "/myorder.do", method = RequestMethod.GET)
-    public String myorder() {
-        return "myorder";
-    }
-    
-    
-    @RequestMapping(value = "/myaddrlist.do", method = RequestMethod.GET)
-    public String myaddrlist(Model model) {
+    @RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
+    public String mypage2(UserVO vo, Model model, KeepVO kvo) {
     	
-    	List<AddrVO> myaddrlist = userService.myaddrlist();
-    	model.addAttribute("my", myaddrlist);
-        return "myaddrlist";
+    	UserVO mylist = userService.mylist(vo);  
+    	model.addAttribute("my", mylist); 
+        return "mypage";
     }
-    
-    
-    @RequestMapping(value = "/myaddradd.do", method = RequestMethod.GET)
-    public String myaddradd() {
-        return "myaddradd";
-    }
-    
-    @RequestMapping(value = "/myboard.do", method = RequestMethod.GET)
-    public String myboard(Model model) {
+
+    @RequestMapping(value = "/myboard.do", method = RequestMethod.POST)
+    public String myboard(Model model, UserVO vo) {
+    	
+    	/*List<UserVO> myquestionlist = userService.myboard(vo); 
+    	model.addAttribute("my", myquestionlist); */
+    	
         return "myboard";
     }
-    
-    @RequestMapping(value = "/myaddradd.do")
-    public String myaddradd(Model model) {
-        return "myaddradd";
-    }
-    
-    
+
     //user 전체 조회
     @RequestMapping(value = "/blacklist.do", method = RequestMethod.GET)
     public String manageuser(Model model) {
@@ -96,6 +73,7 @@ public class UserController {
         int result = userService.blackList(vo);
         return "redirect:/user/blacklist.do"; //블랙리스트 추가 후 관리자 페이지로 리다이렉트
     }
+    
     @RequestMapping(value="/manager.do", method = RequestMethod.GET)
     public String manager() {
     	return "manager";

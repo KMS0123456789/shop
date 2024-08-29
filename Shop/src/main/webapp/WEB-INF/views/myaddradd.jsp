@@ -43,11 +43,11 @@
                                 <tr>
                                     <th scope="row">주소 <img src="../resources/image/ico_required_blue.gif" alt="필수"></th>
                                     <td>
-                                        <input type="text" id="sample6_postcode" placeholder="우편번호" name="addressCode">
-                                        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                                        <input type="text" id="sample6_address" placeholder="주소" name="address"><br>
+                                        <input type="text" id="sample6_postcode" placeholder="우편번호" name="addressCode" readonly>
+                                        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="btn"><br>
+                                        <input type="text" id="sample6_address" placeholder="주소" name="address" readonly><br>
                                         <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addressDetail">
-                                        <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="addressPlus">
+                                        <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="addressPlus" readonly>
                                     </td>
                                 </tr>
                                 <tr>
@@ -63,12 +63,13 @@
                                         <span class=""><img src="../resources/image/ico_required_blue.gif" alt="필수"></span>
                                     </th>
                                     <td>
-                                        <input id="ma_rcv_mobile_no" name="addrUserPhoneNum" maxlength="13" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="" type="text">
+                                        <input id="ma_rcv_mobile_no" name="addrUserPhoneNum" maxlength="13" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" oninput="oninputPhone(this)" fw-alone="N" fw-msg="" placeholder="" value="" type="text">
                                     </td>
                                 </tr>
                                 <tr class="right">
                                     <td colspan="2">
                                         <input id="ma_main_flag0" name="addrFlag" fw-filter="" fw-label="기본 배송지로 저장" fw-msg="" value="0" type="checkbox">
+                                        <input type="hidden" name="addrFlag" value="1" id="addr_hidden">
                                         <label for="ma_main_flag0">기본 배송지로 저장</label>
                                     </td>
                                 </tr>
@@ -145,5 +146,16 @@
 	    }).open();
 	}
 </script>
+<script type="text/javascript">
+	if(document.getElementById("ma_main_flag0").checked) {
+	    document.getElementById("addr_hidden").disabled = true;
+	}
+	function oninputPhone(target) {
+	    target.value = target.value
+	        .replace(/[^0-9]/g, '')
+	        .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+	}
+</script>
+
 </body>
 </html>

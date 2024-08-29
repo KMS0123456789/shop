@@ -50,8 +50,7 @@ public class UserRepository {
     	return template.selectOne(NAME_SPACE + ".mylist", vo);
     }
     
-    // 배송주소 가져오는 메서드
-    public List<AddrVO> myaddrlist(){
-		return template.selectList(NAME_SPACE+ ".myaddrlist");
-	}
+    public List<UserVO> myboard(UserVO vo){
+    	return template.selectList(NAME_SPACE+ ".myboard", vo);
+    }
 }

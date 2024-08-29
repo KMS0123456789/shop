@@ -14,10 +14,30 @@
             <div id="mytitle"><h3>MY PAGE</h3></div>
             <div id="mymenu">
                 <ul class="mymenu">
-                    <li><a href="<c:url value='/user/mypage.do'/>" id="first"> <h5> MY ACCOUNT</h5> <h4>내 계정</h4></a></li>
-                    <li><a href="<c:url value='/user/myorder.do'/>" > <h5> ORDER </h5> <h4>주문내역 조회</h4> </a></li>
-                    <li><a href="<c:url value='/user/myaddrlist.do'/>" > <h5> ADDRESS </h5> <h4>배송 주소록 관리</h4></a></li>
-                    <li><a href="<c:url value='/user/myboard.do'/>" > <h5> BOARD </h5> <h4>내가 쓴 게시물</h4></a></li>
+                    <li>
+                    	<form action="<c:url value='/user/mypage.do'/>" method="post">
+	                		<input type="hidden" value="${sessionScope.user.email}" name="email">
+	                 		<button type="submit" id="first"><h5> MY ACCOUNT</h5> <h4>내 계정</h4></button>
+                		</form>
+                	</li>
+                    <li>
+                    	<form action="<c:url value='/ask/myorder.do'/>" method="post">
+	                		<input type="hidden" value="${sessionScope.user.email}" name="askUser">
+	                 		<button type="submit"> <h5> ORDER </h5> <h4>주문내역 조회</h4> </button>
+                		</form>
+                	</li>
+                    <li>
+	                    <form action="<c:url value='/addr/myaddrlist.do'/>" method="get">
+	                    	<input type="hidden" name="addrUserEmail" value="${sessionScope.user.email}">
+	                    	<button type="submit"> <h5> ADDRESS </h5> <h4>배송 주소록 관리</h4> </button>
+	                    </form>
+                    </li>
+                    <li>
+                    	<form action="<c:url value='/user/myboard.do'/>" method="post">
+	                		<input type="hidden" value="${sessionScope.user.email}" name="email">
+	                 		<button type="submit" ><h5> BOARD </h5> <h4>내가 쓴 게시물</h4></button>
+                		</form>
+                    </li>
                 </ul>
             </div>
 	            <div id="main_content">

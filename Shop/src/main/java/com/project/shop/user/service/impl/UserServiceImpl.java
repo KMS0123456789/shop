@@ -117,9 +117,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<AddrVO> myaddrlist() {
+	public List<UserVO> myboard(UserVO vo) {
 		// TODO Auto-generated method stub
-		return repository.myaddrlist(); // 배송주소 가져오는 메서드 호출.
+		return repository.myboard(vo);
 	}
+
+	
 }
 

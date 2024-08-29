@@ -47,5 +47,19 @@ public class AskController {
 		model.addAttribute("date",myOnedate);
 		return "myorder";
 	}
-		
+	
+	@RequestMapping(value = "/myorder_cancel.do", method = RequestMethod.POST)
+    public String myorder_cancel() {
+        return "myorder_cancel";
+    }
+    
+    @RequestMapping(value = "/myorder_past.do", method = RequestMethod.POST)
+    public String myorder_past() {
+        return "myorder_past";
+    }
+	
+    @RequestMapping(value = "/myorder.do", method = RequestMethod.POST)
+    public String myorder() {
+        return "myorder";
+    }
 }

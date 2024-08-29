@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <link href="<c:url value='../resources/css/myaddrlist.css' />" rel="stylesheet">
 <link href="<c:url value='../resources/css/mypage.css' />" rel="stylesheet">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 <%@ include file="./includes/myheader.jsp" %>
@@ -17,7 +18,6 @@
                 <p>자주 쓰는 배송지를 등록 관리하실 수 있습니다.</p>
             </div>
             <div id="listtable">
-                <form>
                     <table border="1">
                         <caption>배송 주소록 관리</caption>
                         <colgroup>
@@ -34,7 +34,7 @@
                             <tr>
                                 <th scope="col">
                                     <span class="">
-                                        <input id="allCheck" onclick="myshopAddr.checkAll(this)" value="" type="checkbox">
+                                        <input id="ck_all"  value="" type="checkbox" name="ck_all">
                                     </span>
                                 </th>
                                 <th scope="col">주소록 고정</th>
@@ -48,48 +48,53 @@
                         </thead>
                         <tbody class="displaynones center">
                       	<c:forEach items="${my}" var="my">
-                      		<c:if test="${sessionScope.user.email == my.addrUserEmail }">
-	                        	<tr class="">
-	                                <td>
-	                                	<span class="">
-	                                        <input id="allCheck" onclick="myshopAddr.checkAll(this)" value="" type="checkbox">
-	                                    </span>
-	                                </td>
-	                                <td style="text-align: center;">
-	                                    <span class="displaynones">-</span>
-	                                </td>
-	                                <td>
-	                                	<c:if test="${my.addrFlag == 0}">
-	                                		<img src="../resources/image/ico_addr_default.gif" class="displaynones" alt="기본"> 
-	                                	</c:if>
-	                                  	${my.dAddrName}
-	                                </td>
-	                                <td>${my.addrUserName}</td>
-	                                <td style="text-align: center;">${my.addrUserLandLine}</td>
-	                                <td>${my.addrUserPhoneNum}</td>
-	                                <td class="left">(${my.addressCode})${my.address} ${my.addressDetail}</td>
-	                                <td>
-	                                    <a href="<c:url value='/addr/myaddr_modify.do'/>" class="btnNormal ">수정</a>
-	                                </td>
+                        	<tr class="" data-tr_value="${my.addrNo} ">
+                                <td>
+                                	<span class="">
+                                        <input id="Check" type="checkbox" name="check" value="${my.addrNo}">
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="displaynones">-</span>
+                                </td>
+                                <td>
+                                	<c:if test="${my.addrFlag == 0}">
+                                		<img src="../resources/image/ico_addr_default.gif" class="displaynones" alt="기본"> 
+                                	</c:if>
+                                  	${my.dAddrName}
+                                </td>
+                                <td>${my.addrUserName}</td>
+                                <td>${my.addrUserLandLine}</td>
+                                <td>${my.addrUserPhoneNum}</td>
+                                <td class="left">(${my.addressCode})${my.address} ${my.addressDetail}</td>
+                                <td>
+                                	<form action="<c:url value='/addr/myaddrOne.do'/>">
+                                		<input type="hidden" value="${my.addrNo}" name="addrNo">
+                                		<input type="submit" value="수정" class="btnNormal">
+                                	</form>
+                                </td>
+                            </tr>
+                         </c:forEach>
+                         <c:if test="${empty my}">
+	                        <tbody class="">
+	                            <tr>
+	                                <td colspan="8" class="message">등록된 주소가 없습니다.</td>
 	                            </tr>
-                            </c:if>
-                            <c:if test="${my == null}">
-		                        <tbody class="">
-		                            <tr>
-		                                <td colspan="8" class="message">등록된 주소가 없습니다.</td>
-		                            </tr>
-		                        </tbody>
-                        	</c:if>
-                         </c:forEach>  
+	                        </tbody>
+                        </c:if>
                     </table>
                     <div class="ec-base-button">
-                        <span class="gLeft displaynone">
-                            <a href="#" class="btn_del">선택 주소록 삭제</a>
-                        </span>
+                    	<c:if test="${!empty my}">
+	                        <span class="gLeft displaynones">
+	                            <button type="button" class="btn_del" onclick="myaddrDelete()">선택 주소록 삭제</button>
+	                        </span>
+                         </c:if>
                         <span class="gRight">
-                            <a href="<c:url value='/user/myaddradd.do'/>" class="btn_ins">배송지등록</a>
+                            <a href="<c:url value='/addr/myaddradd.do'/>" class="btn_ins">배송지등록</a>
                         </span>
                     </div>
+                <form action="" name="deleteForm" method="post">
+                	<input type="hidden" name="idList">
                 </form>
                 <div class="ec-base-help">
                     <h3>배송주소록 유의사항</h3>
@@ -104,5 +109,41 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+		    $(document).ready(function(){
+		        //체크박스 전체 선택&해제
+		        $('#ck_all').click(function(){
+		             if($("#ck_all").prop("checked")){
+		                $("input[type=checkbox]").prop("checked",true); 
+		            }else{
+		                $("input[type=checkbox]").prop("checked",false); 
+		            }
+		    	});       
+   			});
+    </script>
+    <script type="text/javascript">
+	function myaddrDelete(){
+		var check = [];
+			$("input[name='check']:checked").each(function(i){
+				check.push($(this).val());
+			});
+		var arrayParams = {"checkArray": check};
+		console.log(arrayParams);
+		$.ajax({
+	    	url: "<c:url value='/addr/myaddrDelete.do'/>",
+	    	type: "POST",
+	    	data: arrayParams,
+	    	success:function(arrayParams){
+	    		alert("완료!");
+	    		document.location.href = document.location.href;
+				self.close();        
+			},
+			error:function(jqXHR, textStatus, errorThrown){
+				alert("에러 발생~~ \n" + textStatus + " : " + errorThrown);
+				self.close();
+			}
+	    })
+	}
+    </script>
 </body>
 </html>

@@ -15,7 +15,7 @@
                 <h2>배송 주소록 관리</h2>
                 <p>자주 쓰는 배송지를 등록 관리하실 수 있습니다.</p>
             </div>
-            <form action="<c:url value='/addr/myaddrplus.do'/>" method="post">
+            <form action="<c:url value='/addr/myaddrModify.do'/>" method="post">
                 <div id="new">
                     <div id="table">
                         <table border="1">
@@ -26,28 +26,29 @@
                             </colgroup>
                             <tbody>
                                 <tr>
-                                    <th scope="row"> 배송지명 
+                                    <th scope="row"> 배송지명                                    	
                                         <img src="../resources/image/ico_required_blue.gif" alt="필수">
                                     </th>
                                     <td>
-                                        <input id="ma_rcv_title" name="dAddrName" fw-filter="isFill&amp;isMaxByte[90]" fw-label="배송지명" fw-msg="" class="inputTypeText" placeholder=""  type="text">
+                                    	<input type="hidden" value="${myaddr.addrUserEmail}" name="addrUserEmail">
+                                    	<input type="hidden" value="${myaddr.addrNo}" name="addrNo">
+                                        <input id="ma_rcv_title" name="dAddrName" fw-filter="isFill&amp;isMaxByte[90]" fw-label="배송지명" fw-msg="" class="inputTypeText" placeholder="" type="text" value="${myaddr.dAddrName}">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">성명 <img src="../resources/image/ico_required_blue.gif" alt="필수"></th>
                                     <td>
-                                    	<input type="hidden" id="addr_user_email" name="addrUserEmail" value="${sessionScope.user.email}">
-                                        <input id="ma_rcv_name" name="addrUserName" fw-filter="isFill&amp;isMaxByte[90]" fw-label="성명" fw-msg="" class="ec-member-name" placeholder="" value="" type="text">
+                                        <input id="ma_rcv_name" name="addrUserName" fw-filter="isFill&amp;isMaxByte[90]" fw-label="성명" fw-msg="" class="ec-member-name" placeholder="" value="${myaddr.addrUserName}" type="text">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">주소 <img src="../resources/image/ico_required_blue.gif" alt="필수"></th>
                                     <td>
-                                        <input type="text" id="sample6_postcode" placeholder="우편번호" name="addressCode">
-                                        <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                                        <input type="text" id="sample6_address" placeholder="주소" name="address"><br>
-                                        <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addressDetail">
-                                        <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="addressPlus">
+                                        <input type="text" id="sample6_postcode" placeholder="우편번호" name="addressCode" value="${myaddr.addressCode}" readonly>
+                                        <input type="button" onclick="sample6_execDaumPostcode()" value="주소 검색" class="btn"><br>
+                                        <input type="text" id="sample6_address" placeholder="주소" name="address" value="${myaddr.address}" readonly><br>
+                                        <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="addressDetail" value="${myaddr.addressDetail}">
+                                        <input type="text" id="sample6_extraAddress" placeholder="참고항목" name="addressPlus" value="${myaddr.addressPlus}"readonly>
                                     </td>
                                 </tr>
                                 <tr>
@@ -55,7 +56,7 @@
                                     <span class="displaynone"></span>
                                 </th>
                                     <td>
-                                        <input id="ma_rcv_phone" name="addrUserLandLine" maxlength="15" fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value="" type="text">
+                                        <input id="ma_rcv_phone" name="addrUserLandLine" maxlength="15" fw-filter="isNumber" fw-label="유선전화" fw-alone="N" fw-msg="" value="${myaddr.addrUserLandLine }" type="text">
                                     </td>
                                 </tr>
                                 <tr>
@@ -63,12 +64,13 @@
                                         <span class=""><img src="../resources/image/ico_required_blue.gif" alt="필수"></span>
                                     </th>
                                     <td>
-                                        <input id="ma_rcv_mobile_no" name="addrUserPhoneNum" maxlength="13" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="" type="text">
+                                        <input id="ma_rcv_mobile_no" name="addrUserPhoneNum" oninput="oninputPhone(this)" maxlength="13" fw-filter="isNumber&amp;isFill" fw-label="휴대전화" fw-alone="N" fw-msg="" placeholder="" value="${myaddr.addrUserPhoneNum}" type="text">
                                     </td>
                                 </tr>
                                 <tr class="right">
                                     <td colspan="2">
-                                        <input id="ma_main_flag0" name="addrFlag" fw-filter="" fw-label="기본 배송지로 저장" fw-msg="" value="0" type="checkbox">
+                               			<input id="ma_main_flag0" name="addrFlag" fw-filter="" fw-label="기본 배송지로 저장" fw-msg="" value="0" type="checkbox">
+                                        <input type="hidden" name="addrFlag" value="1" id="addr_hidden">
                                         <label for="ma_main_flag0">기본 배송지로 저장</label>
                                     </td>
                                 </tr>
@@ -77,7 +79,7 @@
                     </div>
                     <div class="ec-base-button">
                         <span class="gRight">
-                        	<button type="submit" class="btnSubmitFix sizeS" >등록</button>
+                        	<button type="submit" class="btnSubmitFix sizeS" >수정</button>
                             <a onclick="history.back()" class="btnNormalFix sizeS" >취소</a>
                         </span>
                     </div>
@@ -143,6 +145,16 @@
 	            document.getElementById("sample6_detailAddress").focus();
 	        }
 	    }).open();
+	}
+</script>
+<script type="text/javascript">
+	if(document.getElementById("ma_main_flag0").checked) {
+	    document.getElementById("addr_hidden").disabled = true;
+	}
+	function oninputPhone(target) {
+	    target.value = target.value
+	        .replace(/[^0-9]/g, '')
+	        .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
 	}
 </script>
 </body>

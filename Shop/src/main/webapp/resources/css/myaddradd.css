@@ -287,3 +287,22 @@ input[type=radio] + label, input[type=checkbox] + label {
     color: #000000;
     font-size: 11px;
 }
+.btn{
+	display: inline-block;
+    box-sizing: border-box;
+    padding: 2px 8px;
+    border: 1px solid #d1d1d1;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 19px;
+    font-weight: normal;
+    text-decoration: none;
+    vertical-align: middle;
+    word-spacing: -0.5px;
+    letter-spacing: 0;
+    text-align: center;
+    white-space: nowrap;
+    color: #000;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}

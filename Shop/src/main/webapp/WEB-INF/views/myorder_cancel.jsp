@@ -24,9 +24,24 @@
         </div>
         <div id="myordermenu">
             <ul class="myordermenu">
-                <li id="ormenu"><a href="<c:url value='/user/myorder.do'/>" id="order">주문 내역 조회</a></li>
-                <li id="ormenu"><a href="<c:url value='/user/myorder_cancel.do'/>" id="order2">취소/교환 내역</a></li>
-                <li id="ormenu"><a href="<c:url value='/user/myorder_past.do'/>" id="order3">과거 주문 내역</a></li>
+                <li id="ormenu">
+               		<form action="<c:url value='/ask/myorder.do'/>" method="post">
+                		<input type="hidden" value="${sessionScope.user.email}" name="askUser">
+                 		<button type="submit" id="order"> 주문 내역 조회</button>
+                	</form>
+                </li>
+                <li id="ormenu">
+                	<form action="<c:url value='/ask/myorder_cancel.do'/>" method="post">
+                		<input type="hidden" value="${sessionScope.user.email}" name="askUser">
+                 		<button type="submit" id="order2"> 취소/교환 내역</button>
+                	</form>
+                </li>
+                <li id="ormenu">
+                	<form action="<c:url value='/ask/myorder_past.do'/>" method="post">
+                		<input type="hidden" value="${sessionScope.user.email}" name="askUser">
+                 		<button type="submit" id="order3">과거 주문 내역</button>
+                	</form>
+                </li>
             </ul>
         </div>
         <div id="field">

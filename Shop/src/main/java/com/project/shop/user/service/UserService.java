@@ -22,6 +22,5 @@ public interface UserService {
 	// 찜한 개수 조회하는 메서드
 	UserVO mylist(UserVO vo);
 	
-	// 배송주소 가져오는 메서드
-	List<AddrVO> myaddrlist();
+	List<UserVO> myboard(UserVO vo);
 }

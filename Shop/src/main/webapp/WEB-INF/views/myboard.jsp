@@ -16,49 +16,35 @@
             </div>
             <div id="data">
                 <div id="cho">
-                    <p>
-                        분류 선택
-                        <select id="board_sort" name="board_sort" fw-filter="" fw-label="" fw-msg="">
-                            <option value="D">작성 일자별</option>
-                            <option value="C">분류별</option>
-                        </select>
-                    </p>
+                    <p> My question </p>
                 </div>
                 <div id="table">
                     <table border="1">
                         <caption> 게시물 관리 목록</caption>
                         <colgroup class="xans-element- xans-board xans-board-listheader-1002 xans-board-listheader xans-board-1002 ">
                             <col style="width:70px;">
-                            <col style="width:135px;">
                             <col style="width:auto;">
                             <col style="width:84px;">
                             <col style="width:90px;">
                         </colgroup>
                         <thead><tr>
                             <th scope="col">번호</th>
-                            <th scope="col">분류</th>
                             <th scope="col">제목</th>
                             <th scope="col">작성자</th>
                             <th scope="col">작성일</th>
                             </tr>
                         </thead>
-                        <tbody class="displaynone center">
-                            <tr class="">
-                                <td></td>
-                                <td>
-                                    <a href="" class="txtEm"></a>
-                                </td>
-                                <td class="left subject">
-                                    <a href=""></a>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <span class="txtNum"></span>
-                                </td>
-                                <td>
-                                    <span class="txtNum"></span>
-                                </td>
-                            </tr>
+                        <tbody class="displaynoned center">
+	                        <%-- <c:forEach items="${my}" var="my">
+	                            <tr class="">
+	                                <td>${my.questionNo}</td>
+	                                <td>
+	                                    <a href="" class="txtEm">${my.questionTitle}</a>
+	                                </td>
+	                                <td class="left subject">${my.questionUser}</td>
+	                                <td>${my.questionCreateDate}</td>
+                           		</tr>
+	                        </c:forEach> --%>
                             <tr class="">
                                 <td></td>
                                 <td>
@@ -77,7 +63,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p class="message ">게시물이 없습니다.</p>
+                    <p class="message0 ">게시물이 없습니다.</p>
                 </div>
             </div>
             <form id="boardSearchForm" name="" action="" method="get" target="" enctype="multipart/form-data">

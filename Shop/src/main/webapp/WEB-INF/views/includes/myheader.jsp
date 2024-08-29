@@ -51,6 +51,17 @@
             font-family: "Noto Serif KR", serif;
             font-optical-sizing: auto;
             font-style: normal;
+            font-size: 13px;
+        }
+        button{
+        	border: none;
+        	color: black;
+            font-family: "Noto Serif KR", serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            background: none;
+            font-size: 13px;
+            cursor: pointer;
         }
 	</style>
 </head>
@@ -67,7 +78,7 @@
         </nav>
             <ul id="menu2">
                 <li>
-                	<form action="<c:url value='/user/mypage.do'/>">
+                	<form action="<c:url value='/user/mypage.do'/>" method="post">
                 		<input type="hidden" value="${sessionScope.user.email}" name="email">
                  		<button type="submit">마이페이지</button>
                 	</form>

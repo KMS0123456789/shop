@@ -1,5 +1,8 @@
 package com.project.shop.user.vo;
 
+import java.util.List;
+
+
 public class AddrVO {
 	private int addrNo;
 	private String addrUserEmail;
@@ -12,7 +15,14 @@ public class AddrVO {
 	private int addressCode;
 	private String addressDetail;
 	private String addressPlus;
-	
+	private List<UserVO> users;
+
+	public List<UserVO> getUsers() {
+		return users;
+	}
+	public void setUsers(List<UserVO> users) {
+		this.users = users;
+	}
 	public int getAddrNo() {
 		return addrNo;
 	}
