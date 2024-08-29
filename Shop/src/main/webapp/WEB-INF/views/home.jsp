@@ -7,6 +7,7 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <link href="<c:url value='/resources/css/home.css' />" rel="stylesheet">
+	    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
 	<body>
 		<div class="wrap">
@@ -28,7 +29,7 @@
 					</ul>
 				</nav>
 			</header>
-			<div style="position: relative;">
+			<div style="position: relative; display: inline-block; width: 80%; margin-left: 200px">
 				<div class="main-slide slick-initialized slick-slider">
 					<div aria-live="polite" class="slick-list draggable">
 						<div class="slick-track" role="listbox">
@@ -43,9 +44,16 @@
 					</div>
 				</div>
 			</div>
-			<section id="container" class="mainpage">
+			<div class="right" id="right" style="display: inline-block;">
+				<div class='history_box'>
+					<ul class='history_list' id='history'>
+					
+					</ul>
+				</div>
+			</div>
+			<section id="container" class="mainpage" style="display: inline-block;">
 				<div class="product-box" id="main-recommend">
-					<div class="box recomend">
+					<div class="box recomend" id="box_recomend">
 						<ul class="item">
 							<c:forEach items="${computer}" var="computer">
 								<li>
@@ -129,4 +137,28 @@
 			</section>
 		</div>
 	</body>
+	<script>	
+		let watchList = window.localStorage.getItem('watchList');
+		watchList = JSON.parse(watchList);
+		if (watchList.length >= 5) {
+			watchList.length = 5; 
+		}
+		
+		let history = "";
+		
+		for(let i = 0; i < watchList.length; i++){
+			if(watchList[i].flag == 1){
+				history += "<li>"
+					history += "<a href='<c:url value='/computer/computer.do/"+watchList[i].no+"'/>'>"+watchList[i].title+"</a>"
+				history += "</li>"
+			}
+			else if(watchList[i].flag == 2){
+				history += "<li>"
+					history += "<a href='<c:url value='/peripheral/peripheral.do/"+watchList[i].no+"'/>'>"+watchList[i].title+"</a>"
+				history += "</li>"	
+			}
+			
+		}
+		$("#history").append(history);
+	</script>
 </html>

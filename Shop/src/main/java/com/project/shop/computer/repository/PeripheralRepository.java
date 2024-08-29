@@ -72,8 +72,8 @@ public class PeripheralRepository {
 	}
 	
 	//마우스, 키보드, 모니터 단건 조회
-	public PeripheralVO peripheralPost(int peripheralNo) {
-		return template.selectOne(NAME_SPACE + ".peripheralPost", peripheralNo);
+	public PeripheralVO peripheralPost(HashMap<String, Object> map) {
+		return template.selectOne(NAME_SPACE + ".peripheralPost", map);
 	}
 	public int peripheralInsert(PeripheralVO vo) {
 		return template.insert(NAME_SPACE + ".peripheralInsert", vo);

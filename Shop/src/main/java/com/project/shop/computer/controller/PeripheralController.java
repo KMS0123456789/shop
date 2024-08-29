@@ -2,6 +2,7 @@ package com.project.shop.computer.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ import com.project.shop.progress.repository.FileRepository;
 import com.project.shop.progress.service.AskService;
 import com.project.shop.progress.vo.AskVO;
 import com.project.shop.progress.vo.FileVO;
+import com.project.shop.user.vo.UserVO;
 
 
 
@@ -102,9 +104,17 @@ public class PeripheralController {
 	}
 	
 	@RequestMapping(value="/peripheral.do/{peripheralNo}", method = RequestMethod.GET)
-	public String computerPost(@PathVariable int peripheralNo, Model model) {
+	public String computerPost(@PathVariable int peripheralNo, Model model, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("peripheralNo", peripheralNo);
+		if(user != null) {
+			map.put("email", user.getEmail());
+		}
+		
 		//PeripheralNo에 해당하는 데이터 조회
-		PeripheralVO peripheral = service.peripheralPost(peripheralNo); //컴퓨터에 service.computerPost 값 넣기
+		PeripheralVO peripheral = service.peripheralPost(map); //컴퓨터에 service.computerPost 값 넣기
 		
 		List<AskVO> ask = askService.peripheralPost(peripheralNo);
 		

@@ -1,5 +1,6 @@
 package com.project.shop.computer.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class ComputerServiceImpl implements ComputerService{
 	
 	//완제품 단건 조회
 	@Override
-	public ComputerVO computerPost(int computerNo) {
-		return repository.computerPost(computerNo);
+	public ComputerVO computerPost(HashMap<String, Object> map) {
+		return repository.computerPost(map);
 	}
 	
 	//완제품 인서트

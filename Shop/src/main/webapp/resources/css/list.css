@@ -60,6 +60,8 @@ section{
 .subpage .contents {
     margin: 0 auto;
     width: 1400px;
+    display: inline-block;
+    margin-left: 200px;
 }
 .subpage .contents > h2 {
     padding: 0 0 45px 0;
@@ -436,4 +438,57 @@ input:not([type="file" i], [type="image" i], [type="checkbox" i], [type="radio" 
     line-height: 32px;
     font-family: 'Noto-M';
     margin-left: 100px;
+}
+#right{
+	display: inline-block;
+	box-sizing: border-box;
+    position: fixed;
+    margin-left: 100px;
+}
+
+.right .history_box {
+    width: 100%;
+    overflow: inherit;
+    position: relative;
+    z-index: 10;
+    padding: 0 13px 13px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+}
+
+.right .history_box .history_list li {
+    width: 72px;
+    height: 72px;
+    position: relative;
+}
+
+.right .history_box .history_list li > a {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    width: 72px;
+    height: 72px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    transition: width 0.25s ease-in-out;
+    overflow: hidden;
+}
+
+.right .history_list li .img_box {
+    position: absolute;
+    display: inline-block;
+    z-index: 2;
+    width: 70px;
+    height: 70px;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+}
+
+.right .history_list li .img_box img {
+    width: 100%;
+    height: 100%;
+    display: block;
 }

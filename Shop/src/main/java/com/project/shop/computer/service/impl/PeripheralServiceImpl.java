@@ -1,5 +1,6 @@
 package com.project.shop.computer.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,8 @@ public class PeripheralServiceImpl implements PeripheralService{
 	
 	//마우스, 키보드, 모니터 단건 조회
 	@Override
-	public PeripheralVO peripheralPost(int peripheralNo) {
-		return repository.peripheralPost(peripheralNo);
+	public PeripheralVO peripheralPost(HashMap<String, Object> map) {
+		return repository.peripheralPost(map);
 	}
 	
 	@Override

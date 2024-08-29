@@ -20,6 +20,8 @@
 		<result property="keepFlag" column="keep_flag"/>
 		<result property="reviewFlag" column="review_flag"/>
 		<result property="buyFlag" column="buy_flag"/>
+		<result property="starAvg" column="star_avg"/>
+		<result property="computerFilePath" column="computer_file_path"/>
 		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
 			<id property="reviewNo" column="review_no"/>
 			<result property="reviewUser" column="review_user"/>
@@ -90,9 +92,13 @@
 	</select>
 	
 	<!-- 완제품 단건 조회 -->
-	<select id="computerPost" parameterType="int" resultMap="computerMap">
+	<select id="computerPost" parameterType="hashMap" resultMap="computerMap">
 		select *,
-		(select count(keep_user) from keep where computer.computer_no = keep.computer_no) as keep_flag,
+		<if test="email != null">
+		(select count(keep_user) from keep where computer.computer_no = keep.computer_no and keep.keep_user = #{email}) as keep_flag,
+		</if>
+		(select file_path from file where file.computer_no = computer.computer_no) as computer_file_path,
+		(select avg(star_count) from star where star.computer_no = #{computerNo} group by star.computer_no) as star_avg,
 		(select count(review_user) from review where review.computer_no = computer.computer_no) as review_flag,
 		(select count(ask_user) from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask.ask_state_flag = 2 and computer_no = #{computerNo}) as buy_flag
 		from computer 

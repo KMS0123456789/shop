@@ -7,6 +7,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Insert title here</title>
 		<link href="<c:url value='/resources/css/list.css' />" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
 	<body>
 		<div class="wrap">
@@ -98,7 +99,38 @@
 						</div>
 					</div>
 				</div>
+				<div class="right" id="right">
+					<div class='history_box'>
+						<ul class='history_list' id='history'>
+						
+						</ul>
+					</div>
+				</div>
 			</section>
 		</div>
 	</body>
+	<script>	
+		let watchList = window.localStorage.getItem('watchList');
+		watchList = JSON.parse(watchList);
+		if (watchList.length >= 5) {
+			watchList.length = 5; 
+		}
+		
+		let history = "";
+		
+		for(let i = 0; i < watchList.length; i++){
+			if(watchList[i].flag == 1){
+				history += "<li>"
+					history += "<a href='<c:url value='/computer/computer.do/"+watchList[i].no+"'/>'>"+watchList[i].title+"</a>"
+				history += "</li>"
+			}
+			else if(watchList[i].flag == 2){
+				history += "<li>"
+					history += "<a href='<c:url value='/peripheral/peripheral.do/"+watchList[i].no+"'/>'>"+watchList[i].title+"</a>"
+				history += "</li>"	
+			}
+			
+		}
+		$("#history").append(history);
+	</script>
 </html>

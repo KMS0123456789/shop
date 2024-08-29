@@ -1,5 +1,6 @@
 package com.project.shop.computer.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -22,7 +23,7 @@ public interface PeripheralService {
 	int count(String searchType, String keyword, int peripheralCategory);
 	
 	//마우스, 키보드, 모니터 단건 조회
-	PeripheralVO peripheralPost(int peripheralNo);
+	PeripheralVO peripheralPost(HashMap<String, Object> map);
 	
 	int peripheralInsert(PeripheralVO vo);
 	

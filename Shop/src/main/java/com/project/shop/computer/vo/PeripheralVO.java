@@ -23,8 +23,22 @@ public class PeripheralVO {
 	private int keepFlag;
 	private int reviewFlag;
 	private int buyFlag;
+	private int starAvg;
+	private String peripheralFilePath;
 	
 	
+	public int getStarAvg() {
+		return starAvg;
+	}
+	public void setStarAvg(int starAvg) {
+		this.starAvg = starAvg;
+	}
+	public String getPeripheralFilePath() {
+		return peripheralFilePath;
+	}
+	public void setPeripheralFilePath(String peripheralFilePath) {
+		this.peripheralFilePath = peripheralFilePath;
+	}
 	public List<StarVO> getStars() {
 		return stars;
 	}

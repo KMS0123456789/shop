@@ -37,16 +37,21 @@
 				</nav>
 			</header>
 			<section id="container" class="subpage">
-				<div class="contents">
+				<div class="contents" style="display: inline-block; margin-left: 200px;" >
 					<div class="product-view">
 						<div class="detail-top">
 							<div class="left">
 								<div class="photo-slide">
 									<div class="large" style="position: relative;">
 										<div class="mainImg">
-											<img class="mainImg2">
+											<img class="mainImg2" src="${peripheral.peripheralFilePath}">
 										</div>
 									</div>
+								</div>
+								<div id="avg_star_rating">
+								    <fieldset>	    		
+						    			<span>⭐ ${peripheral.starAvg} &ensp;<a href="#review" style="color: black;">리뷰 보러 가기</a></span>
+								    </fieldset>
 								</div>
 							</div>
 							<div class="right">
@@ -246,6 +251,13 @@
 						</div>
 					</div>
 				</div>
+				<div class="right" id="right" >
+					<div class='history_box'>
+						<ul class='history_list' id='history'>
+						
+						</ul>
+					</div>
+				</div>
 			</section>
 		</div>
 		<div id="qnaModal" class="modal" style="display: none;">
@@ -345,7 +357,51 @@
 		    }
 			function reviewCloseModal() {
 		        document.getElementById('reviewModal').style.display = 'none';
-		    }﻿
+		    }
+			
+			window.onload = function () {
+				let no = ${peripheral.peripheralNo};
+				let title = "${peripheral.peripheralTitle}";
+				$("#history").children().remove();
+								
+				let obj = {
+						no : no,
+						title : title,
+						flag : 2
+				};
+				
+				let watchArr = window.localStorage.getItem('watchList');
+				let watchArrNo = watchArr == null ? [] : JSON.parse(watchArr);
+				watchArrNo.unshift(obj);
+				watchArrNo =  watchArrNo.filter((watch, idx, arr)=>{
+				    return arr.findIndex((item) => item.no === watch.no && item.flag === watch.flag) === idx
+				});
+
+				let watchList = JSON.stringify(watchArrNo);
+				window.localStorage.setItem('watchList', watchList);
+				let watchListArr = window.localStorage.getItem('watchList');
+				watchListArr = JSON.parse(watchListArr);
+				if (watchListArr.length >= 5) {
+					watchListArr.length = 5; 
+				}
+				
+				let history = "";
+				
+				for(let i = 0; i < watchListArr.length; i++){
+					if(watchListArr[i].flag === 1){
+						history += "<li>"
+							history += "<a href='<c:url value='/computer/computer.do/"+watchListArr[i].no+"'/>'>"+watchListArr[i].title+"</a>"
+						history += "</li>"
+					}
+					else if(watchListArr[i].flag === 2){
+						history += "<li>"
+							history += "<a href='<c:url value='/peripheral/peripheral.do/"+watchListArr[i].no+"'/>'>"+watchListArr[i].title+"</a>"
+						history += "</li>"	
+					}
+					
+				}
+				$("#history").append(history);
+			}﻿
 		</script>
 	</body>
 </html>

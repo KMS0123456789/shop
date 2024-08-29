@@ -1,5 +1,6 @@
 package com.project.shop.computer.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -16,7 +17,7 @@ public interface ComputerService {
 	int count(String searchType, String keyword);
 	
 	//완제품 단건 조회
-	ComputerVO computerPost(int computerNo);
+	ComputerVO computerPost(HashMap<String, Object> map);
 	
 	//완제품 인서트
 	int computerInsert(ComputerVO vo);

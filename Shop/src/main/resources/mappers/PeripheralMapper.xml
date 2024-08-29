@@ -14,6 +14,8 @@
 		<result property="keepFlag" column="keep_flag"/>
 		<result property="reviewFlag" column="review_flag"/>
 		<result property="buyFlag" column="buy_flag"/>
+		<result property="starAvg" column="star_avg"/>
+		<result property="peripheralFilePath" column="peripheral_file_path"/>
 		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
 			<id property="reviewNo" column="review_no"/>
 			<result property="reviewUser" column="review_user"/>
@@ -112,15 +114,20 @@
 	</select>
 	
 	<!-- 마우스, 키보드, 모니터 단건 조회 -->
-	<select id="peripheralPost" parameterType="int" resultMap="peripheralMap">
+	<select id="peripheralPost" parameterType="hashMap" resultMap="peripheralMap">
 		select *,
-		(select count(keep_user) from keep where peripheral.peripheral_no = keep.peripheral_no) as keep_flag,
+		<if test="email != null">
+		(select count(keep_user) from keep where peripheral.peripheral_no = keep.peripheral_no and keep.keep_user = #{email}) as keep_flag,
+		</if>
+		(select file_path from file where file.peripheral_no = peripheral.peripheral_no) as peripheral_file_path,
+		(select avg(star_count) from star where star.peripheral_no = #{peripheralNo} group by star.peripheral_no) as star_avg,
 		(select count(review_user) from review where review.peripheral_no = peripheral.peripheral_no) as review_flag,
 		(select count(ask_user) from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask.ask_state_flag = 2 and peripheral_no = #{peripheralNo}) as buy_flag 
 		from peripheral 
 		left join review on peripheral.peripheral_no = review.peripheral_no
 		left join question on peripheral.peripheral_no = question.peripheral_no
 		left join answer on question.question_no = answer.question_no
+		left join star on peripheral.peripheral_no = star.peripheral_no
 		where peripheral.peripheral_no = #{peripheralNo}
 	</select>
 	

@@ -29,6 +29,7 @@ import com.project.shop.computer.vo.OptVO;
 import com.project.shop.progress.service.AskService;
 import com.project.shop.progress.vo.AskVO;
 import com.project.shop.progress.vo.FileVO;
+import com.project.shop.user.vo.UserVO;
 
 @Controller
 @RequestMapping("/computer")
@@ -67,9 +68,17 @@ public class ComputerController {
 	
 	//완제품 단건 조회
 	@RequestMapping(value="/computer.do/{computerNo}", method = RequestMethod.GET)
-	public String computerPost(@PathVariable int computerNo, Model model) {
+	public String computerPost(@PathVariable int computerNo, Model model, HttpSession session) {
+		UserVO user = (UserVO)session.getAttribute("user");
+
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("computerNo", computerNo);
+		if(user != null) {
+			map.put("email", user.getEmail());
+		}
+		
 		//computerNo에 해당하는 데이터 조회
-		ComputerVO computer = service.computerPost(computerNo);
+		ComputerVO computer = service.computerPost(map);
 		//컴퓨터에 service.computerPost 값 넣기
 		List<OptVO> opt = optService.computerPost();
 		//opt에 optService.computerPost 값 넣기 

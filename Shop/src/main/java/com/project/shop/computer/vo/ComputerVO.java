@@ -2,6 +2,7 @@ package com.project.shop.computer.vo;
 
 import java.util.List;
 
+import com.project.shop.progress.vo.FileVO;
 import com.project.shop.progress.vo.KeepVO;
 import com.project.shop.user.vo.AnswerVO;
 import com.project.shop.user.vo.QuestionVO;
@@ -32,8 +33,23 @@ public class ComputerVO {
 	private int keepFlag;
 	private int reviewFlag;
 	private int buyFlag;
+	private int starAvg;
+	private String computerFilePath;
+
+
 	
-	
+	public String getComputerFilePath() {
+		return computerFilePath;
+	}
+	public void setComputerFilePath(String computerFilePath) {
+		this.computerFilePath = computerFilePath;
+	}
+	public int getStarAvg() {
+		return starAvg;
+	}
+	public void setStarAvg(int starAvg) {
+		this.starAvg = starAvg;
+	}
 	public int getBuyFlag() {
 		return buyFlag;
 	}

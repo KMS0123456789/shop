@@ -42,8 +42,8 @@ public class ComputerRepository {
 	}
 	
 	//완제품 단건 조회
-	public ComputerVO computerPost(int computerNo) {
-		return template.selectOne(NAME_SPACE + ".computerPost", computerNo);
+	public ComputerVO computerPost(HashMap<String, Object> map) {
+		return template.selectOne(NAME_SPACE + ".computerPost", map);
 	}
 	
 	//완제품 인서트
