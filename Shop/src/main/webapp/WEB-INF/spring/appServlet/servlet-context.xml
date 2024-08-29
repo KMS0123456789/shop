@@ -29,6 +29,33 @@
 	
 	<context:component-scan base-package="com.project.shop" />
 	
+	<beans:bean id="loginInterceptor" class="com.project.shop.LoginSessionInterceptor"></beans:bean>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+					<exclude-mapping path="/computer/computer.do"/>
+					<exclude-mapping path="/computer/computer.do/{computerNo}"/>
+					<exclude-mapping path="/computer/computerHighPrice.do"/>
+					<exclude-mapping path="/computer/computerLowPrice.do"/>
+					<exclude-mapping path="/peripheral/mouse.do"/>
+					<exclude-mapping path="/peripheral/keyboard.do"/>
+					<exclude-mapping path="/peripheral/monitor.do"/>
+					<exclude-mapping path="/peripheral/peripheral.do/{peripheralNo}"/>
+					<exclude-mapping path="/peripheral/mouseHighPrice.do"/>
+					<exclude-mapping path="/peripheral/mouseLowPrice.do"/>
+					<exclude-mapping path="/peripheral/keyboardHighPrice.do"/>
+					<exclude-mapping path="/peripheral/keyboardLowPrice.do"/>
+					<exclude-mapping path="/peripheral/monitorHighPrice.do"/>
+					<exclude-mapping path="/peripheral/monitorLowPrice.do"/>
+					<exclude-mapping path="/resources/**"/>
+					<exclude-mapping path="/uploads/**"/>
+					<exclude-mapping path="/user/login.do"/>
+					<exclude-mapping path="/user/logout.do"/>
+					<exclude-mapping path="/user/kakao/callback.do"/>
+					<exclude-mapping path="/"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>
