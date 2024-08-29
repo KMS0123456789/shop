@@ -32,6 +32,7 @@
             <div class="form-group">
                 <label for="peripheral_stock">상품 수량</label>
                 <input type="text" id="itemCount" name="peripheral_stock">
+            </div>
             <div class="form-group" id="fileDiv">
                 <label for="file">첨부파일</label>
                 <input type="file" accept="image/*" multiple id="file" name="file">

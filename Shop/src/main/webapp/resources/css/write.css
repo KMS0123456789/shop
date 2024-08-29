@@ -1,5 +1,5 @@
 body{
-    background-color: #e3d7ea;
+    background-color: #f5f5f5;
 }
 .container {
     background: white;
@@ -14,7 +14,7 @@ h1 {
     margin-bottom: 1.5rem;
     color: #333;
     text-align: center;
-    border-bottom: 2px solid #a2a4dd;
+    border-bottom: 2px solid gray;
     padding-bottom: 0.5rem;
 }
 
@@ -28,8 +28,7 @@ h1 {
     color: #666;
 }
 
-.form-group input,
-.form-group textarea {
+.form-group input{
     width: calc(100% - 12px); /* padding과 border를 고려한 너비 조정 */
     padding: 0.5rem;
     border: 1px solid #ddd;
@@ -49,7 +48,7 @@ h1 {
 }
 
 .button {
-    background: #a2a4dd;
+    background: gray;
     color: white;
     padding: 0.75rem 1.5rem;
     border: none;

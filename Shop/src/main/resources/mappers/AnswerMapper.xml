@@ -6,4 +6,10 @@
 		<result property="answerBody" column="answer_body"/>
 		<result property="answerDate" column="answer_date"/>
 	</resultMap>
+	
+	<!-- QnA 답변 다는 쿼리 -->
+	<insert id="answerwrite" parameterType="com.project.shop.user.vo.AnswerVO">
+		insert into answer(question_no,answer_body)
+		values(#{questionNo},#{answerBody});
+	</insert>
 </mapper>

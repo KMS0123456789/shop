@@ -7,6 +7,12 @@ public class AskVO {
 	private String askUser;
 	private String askDate;
 	private int askStateFlag;
+	public int getAskDeleteFlag() {
+		return askDeleteFlag;
+	}
+	public void setAskDeleteFlag(int askDeleteFlag) {
+		this.askDeleteFlag = askDeleteFlag;
+	}
 	private int askDeleteFlag;
 	private List<AskDetailVO> askDetails;
 	
