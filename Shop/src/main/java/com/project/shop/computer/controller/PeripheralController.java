@@ -166,7 +166,7 @@ public class PeripheralController {
 	            }
 	        }
 	   	 if(!fileList.isEmpty()) {
-			 filerepository.computerwriteOk(fileList);
+			 filerepository.peripheralwriteOk(fileList);
 	        }
 	        
 	        return "redirect:/peripheral/peripheral.do/" + peripheralVO.getPeripheralNo();
