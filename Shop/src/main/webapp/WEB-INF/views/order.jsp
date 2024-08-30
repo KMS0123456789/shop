@@ -57,8 +57,7 @@
                         <img src="<c:url value='/resources/image/${item.itemCategory == 1 ? "computer.png" : "peripheral.png"}' />" alt="Product" class="product-image">
                         <div class="product-info">
                             <h3>
-                                ${item.itemCategory == 1 ? '컴퓨터' : '주변기기'} - 
-                                ${item.itemCategory == 1 ? item.computerNo : item.peripheralNo}
+                                ${item.itemCategory == 1 ? '컴퓨터' : '주변기기'}
                             </h3>
                             <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 1 ? '포함' : '미포함'}</p>
                             <button class="option-change">옵션변경</button>
