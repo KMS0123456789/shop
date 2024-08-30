@@ -12,31 +12,7 @@
 	</head>
 	<body>
 		<div class="wrap">
-			<header id="header">
-				<div class="top">
-					<h1><a href="<c:url value="/"/>">컴퓨터 사이트</a></h1>
-					<ul class="toplink">
-						<c:choose>
-							<c:when test="${sessionScope.user.email != null}">
-								<li><a>장바구니</a></li>
-								<li><a>마이페이지</a></li>
-								<li><a>로그아웃</a></li>	
-							</c:when>
-							<c:when test="${sessionScope.user.email == null}">
-								<li><a>로그인</a></li>
-							</c:when>
-						</c:choose>
-					</ul>
-				</div>
-				<nav id="gnb" class="bottom">
-					<ul class="menu">
-						<li><a href="<c:url value="/computer/computer.do"/>">컴퓨터</a></li>
-						<li><a href="<c:url value="/peripheral/mouse.do"/>">마우스</a></li>
-						<li><a href="<c:url value="/peripheral/keyboard.do"/>">키보드</a></li>
-						<li><a href="<c:url value="/peripheral/monitor.do"/>">모니터</a></li>
-					</ul>
-				</nav>
-			</header>
+		<%@ include file="./includes/myheader.jsp" %>	
 			<section id="container" class="subpage">
 				<div class="contents">
 					<div class="product-view">

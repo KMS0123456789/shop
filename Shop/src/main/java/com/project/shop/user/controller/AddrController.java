@@ -70,11 +70,14 @@ public class AddrController {
 		int result = service.myaddrModify(vo); //result에 service.myaddrModify 값 넣기.
 		System.out.println(addrFlag); // addrFlag값 잘 넘어오나 확인.
 		redirect.addAttribute("addrUserEmail", email); // redirect 할때 같이 값보내기 위해 param으로 가져온 email값 넣기.
-		if(addrFlag == 0 && result > 0) {
+		if(addrFlag == 0) {
 			UserVO user = (UserVO)session.getAttribute("user");  // User에 세션에서 가져온 아이디값 넣기.
 			vo.setAddrUserEmail(user.getEmail()); //userEmail에 세션에서 가져온 아이디 넣기.
 			service.myaddr1(vo); // service.myaddr1에 vo 값 넣어줌.
-			return "redirect:/addr/myaddrlist.do"; // 성공시 리스트로 redirect.
+			// 성공시 리스트로 redirect.
+		}
+		if(result > 0) {
+			return "redirect:/addr/myaddrlist.do"; 
 		}else {
 			return "redirect:/addr/myaddrOne.do";
 		}

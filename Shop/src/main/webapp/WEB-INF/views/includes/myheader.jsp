@@ -15,7 +15,6 @@
         }
         header{
             margin-top: 20px;
-            margin-bottom: 5rem;
         }
         li a{
             text-decoration: none;
@@ -77,7 +76,7 @@
             </ul>
         </nav>
             <ul id="menu2">
-                <li>
+            	<li>
                 	<form action="<c:url value='/user/mypage.do'/>" method="post">
                 		<input type="hidden" value="${sessionScope.user.email}" name="email">
                  		<button type="submit">마이페이지</button>

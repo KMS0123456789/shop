@@ -76,6 +76,9 @@ select{
     margin-top: 10px;
 }
 #table table{
+	border-bottom: 1px solid #d7d5d5;
+}
+table{
     border-top: 1px solid #d7d5d5;
     position: relative;
     margin: 10px 0 0;
@@ -179,4 +182,7 @@ input[type=text], input[type=password] {
 }
 #search{
     width: 162;
+}
+#myreview{
+	margin-top: 5rem;
 }

@@ -1,11 +1,17 @@
 package com.project.shop.user.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import com.project.shop.computer.vo.ComputerVO;
 import com.project.shop.progress.vo.KeepVO;
 import com.project.shop.user.vo.AddrVO;
 import com.project.shop.user.vo.UserVO;
@@ -50,7 +56,12 @@ public class UserRepository {
     	return template.selectOne(NAME_SPACE + ".mylist", vo);
     }
     
-    public List<UserVO> myboard(UserVO vo){
-    	return template.selectList(NAME_SPACE+ ".myboard", vo);
+    // 내가 질문한 목록 조회하는 메서드.
+    public List<UserVO> myquestion(UserVO vo){
+    	return template.selectList(NAME_SPACE+".myquestion", vo);
+    }
+    
+    public List<UserVO> myreview(UserVO vo){
+    	return template.selectList(NAME_SPACE+".myreview", vo);
     }
 }

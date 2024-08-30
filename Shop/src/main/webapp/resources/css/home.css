@@ -73,7 +73,7 @@ ol, ul {
     list-style: none;
 }
 .product-box .box .item li {
-    width: 253px !important;
+    width: 200px !important;
     display: inline-block;
     padding-left: 2px;
     vertical-align: top;
@@ -240,5 +240,5 @@ img {
 	margin: 0 auto;
     width: 1400px;
     display: inline-block;
-    margin-left: 350px;
+    margin-left: 130px; 
 }

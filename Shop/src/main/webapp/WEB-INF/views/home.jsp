@@ -12,7 +12,7 @@
 	<body>
 		<div class="wrap">
 			<%@ include file="./includes/homeheader.jsp" %>
-			<div style="position: relative; display: inline-block; width: 80%; margin-left :8rem;">
+			<div style="position: relative; display: inline-block; width: 85%; ">
 				<div class="main-slide slick-initialized slick-slider">
 					<div aria-live="polite" class="slick-list draggable">
 						<div class="slick-track" role="listbox">

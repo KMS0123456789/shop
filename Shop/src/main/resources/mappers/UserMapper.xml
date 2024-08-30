@@ -115,8 +115,11 @@
 		from user where user.email = #{email}; <!-- user테이블에 특정 이메일로 입력한 것 조회. -->
 	</select>
 	
-	<select id="myboard" resultMap="userMap">
-	
+	<select id="myquestion" resultMap="userMap" parameterType="com.project.shop.user.vo.UserVO">
+		SELECT * from user left join question on user.email = question.question_user where email = #{email} order by question_no desc limit 0,5;
 	</select>
 	
+	<select id="myreview" resultMap="userMap" parameterType="com.project.shop.user.vo.UserVO">
+		SELECT * from user left join review on user.email = review.review_user where email = #{email} order by review_no desc limit 0,5;
+	</select>
 </mapper>

@@ -66,7 +66,7 @@
             cursor: pointer;
         }
         #h1{
-        	text-align: center;
+        	margin-left: 35rem;
         }
 	</style>
 </head>

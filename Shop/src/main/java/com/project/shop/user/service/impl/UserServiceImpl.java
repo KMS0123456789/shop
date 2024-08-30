@@ -3,6 +3,8 @@ package com.project.shop.user.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -117,11 +119,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserVO> myboard(UserVO vo) {
+	public List<UserVO> myquestion(UserVO vo) {
 		// TODO Auto-generated method stub
-		return repository.myboard(vo);
+		return repository.myquestion(vo); // 질문 조회하는 메서드 호출
 	}
 
+	@Override
+	public List<UserVO> myreview(UserVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myreview(vo);
+	}
 	
 }
 

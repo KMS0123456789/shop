@@ -3,6 +3,9 @@ package com.project.shop.user.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,8 +53,11 @@ public class UserController {
     @RequestMapping(value = "/myboard.do", method = RequestMethod.POST)
     public String myboard(Model model, UserVO vo) {
     	
-    	/*List<UserVO> myquestionlist = userService.myboard(vo); 
-    	model.addAttribute("my", myquestionlist); */
+    	List<UserVO> myquestionlist = userService.myquestion(vo); 
+    	List<UserVO> myreviewlist = userService.myreview(vo);
+    	
+    	model.addAttribute("myreview", myreviewlist);
+    	model.addAttribute("my", myquestionlist);
     	
         return "myboard";
     }

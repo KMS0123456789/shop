@@ -24,8 +24,8 @@
                         <colgroup class="xans-element- xans-board xans-board-listheader-1002 xans-board-listheader xans-board-1002 ">
                             <col style="width:70px;">
                             <col style="width:auto;">
-                            <col style="width:84px;">
-                            <col style="width:90px;">
+                            <col style="width:12rem;">
+                            <col style="width:10rem;">
                         </colgroup>
                         <thead><tr>
                             <th scope="col">번호</th>
@@ -35,35 +35,56 @@
                             </tr>
                         </thead>
                         <tbody class="displaynoned center">
-	                        <%-- <c:forEach items="${my}" var="my">
-	                            <tr class="">
-	                                <td>${my.questionNo}</td>
-	                                <td>
-	                                    <a href="" class="txtEm">${my.questionTitle}</a>
-	                                </td>
-	                                <td class="left subject">${my.questionUser}</td>
-	                                <td>${my.questionCreateDate}</td>
-                           		</tr>
-	                        </c:forEach> --%>
-                            <tr class="">
-                                <td></td>
-                                <td>
-                                    <a href="" class="txtEm"></a>
-                                </td>
-                                <td class="left subject">
-                                    <a href=""></a>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <span class="txtNum"></span>
-                                </td>
-                                <td>
-                                    <span class="txtNum"></span>
-                                </td>
-                            </tr>
+	                       <c:forEach items="${my}" var="my">
+		                       	<c:forEach items="${my.questions}" var="question">
+		                       		<tr class="">
+		                                <td style="text-align: center">${question.questionNo}</td>
+		                                <td>
+		                                    <a href="" class="txtEm">${question.questionTitle}</a>
+		                                </td>
+		                                <td class="left subject" style="text-align: center">${question.questionUser}</td>
+		                                <td style="text-align: center">${question.questionCreateDate}</td>
+	                           		</tr>
+		                       	</c:forEach>
+	                        </c:forEach>
                         </tbody>
                     </table>
-                    <p class="message0 ">게시물이 없습니다.</p>
+                     <p id="myreview"> My Review </p>
+                    <table border="1">
+                        <caption> 게시물 관리 목록</caption>
+                        <colgroup class="xans-element- xans-board xans-board-listheader-1002 xans-board-listheader xans-board-1002 ">
+                            <col style="width:70px;">
+                            <col style="width:auto;">
+                            <col style="width:12rem;">
+                            <col style="width:10rem;">
+                        </colgroup>
+                        <thead><tr>
+                            <th scope="col">번호</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">작성자</th>
+                            <th scope="col">작성일</th>
+                            </tr>
+                        </thead>
+                        <tbody class="displaynoned center">
+	                       <c:forEach items="${myreview}" var="mr">
+	                        	<c:forEach items="${mr.reviews}" var="my">
+	                        		<tr class="">
+		                                <td style="text-align: center">${my.reviewNo}</td>
+		                                <td>
+		                                    <a href="" class="txtEm">${my.reviewBody}</a>
+		                                </td>
+		                                <td style="text-align: center">${my.reviewUser}</td>
+		                                <td style="text-align: center">
+		                                    <span class="txtNum">${my.reviewCreateDate}</span>
+		                                </td>
+		                            </tr>
+	                        	</c:forEach>
+	                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <c:if test="${empty my}">
+                    	<p class="message0 ">게시물이 없습니다.</p>
+                    </c:if>
                 </div>
             </div>
             <form id="boardSearchForm" name="" action="" method="get" target="" enctype="multipart/form-data">
