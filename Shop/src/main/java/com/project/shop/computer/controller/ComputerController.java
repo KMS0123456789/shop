@@ -26,6 +26,7 @@ import com.project.shop.computer.service.ComputerService;
 import com.project.shop.computer.service.OptService;
 import com.project.shop.computer.vo.ComputerVO;
 import com.project.shop.computer.vo.OptVO;
+import com.project.shop.progress.repository.FileRepository;
 import com.project.shop.progress.service.AskService;
 import com.project.shop.progress.vo.AskVO;
 import com.project.shop.progress.vo.FileVO;
@@ -49,6 +50,9 @@ public class ComputerController {
 	
 	@Autowired
 	AskService askService;
+	
+	@Autowired
+	FileRepository filerepository;
 	
 	//완제품 전제 조회
 	@RequestMapping(value="/computer.do", method=RequestMethod.GET)
@@ -129,6 +133,10 @@ public class ComputerController {
 				}
 			}
 		}
+			 if(!fileList.isEmpty()) {
+				 filerepository.computerwriteOk(fileList);
+		        }
+
 			return "redirect:/computer/computer.do/" + computerVO.getComputerNo(); //성공 시 /computer/computer.do/" + 생성된 ComputerNO로 이동한다
 		}else {
 		        return "redirect:/user/manager.do"; //실패시 /user/manager.do로 이동

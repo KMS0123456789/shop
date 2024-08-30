@@ -49,6 +49,9 @@ public class PeripheralController {
 	@Autowired
 	AskService askService;
 	
+	@Autowired
+	FileRepository filerepository;
+	
 	//마우스 전체 조회
 	@RequestMapping(value="/mouse.do", method=RequestMethod.GET)
 	public String mouse(Model model, 
@@ -162,7 +165,10 @@ public class PeripheralController {
 	                }
 	            }
 	        }
-
+	   	 if(!fileList.isEmpty()) {
+			 filerepository.computerwriteOk(fileList);
+	        }
+	        
 	        return "redirect:/peripheral/peripheral.do/" + peripheralVO.getPeripheralNo();
 	    } else {
 	        return "redirect:/user/manager.do";

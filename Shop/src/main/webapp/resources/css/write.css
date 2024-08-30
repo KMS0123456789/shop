@@ -39,6 +39,7 @@ h1 {
 .form-group textarea {
     height: 200px;
     resize: vertical;
+    width: 99.3%;
 }
 
 .form-group input:focus,

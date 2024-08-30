@@ -10,7 +10,7 @@
 <body>
 <%@ include file="./includes/myheader.jsp" %>
         <div class="container">
-		    <h1>게시글 작성</h1>
+		    <h1>QnA 답변</h1>
         <form action="answerwrite.do" method="post" enctype="multipart/form-data">
         <input type="hidden" name="questionNo" value="${questionNo}">
 		        <div class="form-group">

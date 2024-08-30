@@ -120,7 +120,7 @@
 	</select>
 	
 	<!--완제품 인서트하는 쿼리-->
-	<insert id="computerInsert" parameterType="com.project.shop.computer.vo.ComputerVO" useGeneratedKeys="true" keyProperty="computerNo">
+	<insert id="computerInsert" parameterType="com.project.shop.computer.vo.ComputerVO" useGeneratedKeys="true"  keyProperty="computerNo" >
 		insert into computer(computer_title,computer_sale_price,cpu,ssd,main_board,gpu,power,b_case,ram,cooler,computer_stock)
 		values(#{computerTitle},#{computerSalePrice},#{cpu},#{ssd},#{mainBoard},#{gpu},#{power},#{bCase},#{ram},#{cooler},#{computerStock});
 	</insert>

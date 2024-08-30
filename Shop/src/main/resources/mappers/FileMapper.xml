@@ -10,4 +10,20 @@
 		<result property="fileSize" column="file_size"/>
 		<result property="itemCategory" column="item_category"/>
 	</resultMap>
+	
+	<insert id="computerwriteOk" parameterType="java.util.List">
+		insert into file(computer_no,file_name,file_path,file_size,item_category)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.computerNo}, #{item.fileName}, #{item.filePath}, #{item.fileSize},1)
+		</foreach>
+	</insert>
+	
+	<insert id="peripheralwriteOk" parameterType="java.util.List">
+		insert into file(peripheral_no,file_name,file_path,file_size,item_category)
+		values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.peripheralNo}, #{item.fileName}, #{item.filePath}, #{item.fileSize},1)
+		</foreach>
+	</insert>
 </mapper>

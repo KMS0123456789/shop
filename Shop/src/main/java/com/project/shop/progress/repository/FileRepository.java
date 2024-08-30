@@ -15,7 +15,10 @@ public class FileRepository {
 	private SqlSessionTemplate template;
 	private final String NAME_SPACE = "FileMapper";
 	
-	public int insert(List<FileVO> vo) {
-		return template.insert(NAME_SPACE + ".insert", vo);
+	public int computerwriteOk(List<FileVO> vo) {
+		return template.insert(NAME_SPACE + ".computerwriteOk", vo);
+	}
+	public int peripheralwriteOk(List<FileVO> vo) {
+		return template.insert(NAME_SPACE + ".peripheralwriteOk", vo);
 	}
 }

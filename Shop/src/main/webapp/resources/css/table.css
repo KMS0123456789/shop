@@ -59,9 +59,13 @@ th{
 .paing{
 	text-decoration-line:none;
 }
-.a{
+a{
     list-style: none;
     text-align: center;
     padding: 0px;
     cursor: pointer;
+    text-decoration-line:none;
+}
+.paging{
+	text-align: center;
 }
