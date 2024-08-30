@@ -54,6 +54,7 @@
 					<exclude-mapping path="/user/logout.do"/>
 					<exclude-mapping path="/user/kakao/callback.do"/>
 					<exclude-mapping path="/"/>
+					<exclude-mapping path="/computer/search.do"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>

@@ -95,10 +95,9 @@
             </ul>
     </header>
     <div class="search">
-		<form action="<c:url value="/computer/computer.do" />" method="get" id="form">
+		<form action="<c:url value="/computer/search.do" />" method="get" id="form">
 		    <fieldset>
 			    <div class="inform">
-					<input type="hidden" name="searchType" value="computer_title" ${param.searchType == 'peripheral_title'  ? 'selected' : ''}>
 			        <input type="text" name="keyword" value="${param.keyword}">
 			        <button type="submit" class="btn-search"></button>
 			    </div>

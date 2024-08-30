@@ -27,4 +27,6 @@ public interface ComputerService {
 	
 	//완제품 낮은 가격순 조회
 	Page<ComputerVO> computerLowPrice(Pageable pageable, String searchType, String keyword);
+	
+	Page<ComputerVO> search(Pageable pageable, String keyword);
 }

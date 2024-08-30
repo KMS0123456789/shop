@@ -22,6 +22,11 @@
 		<result property="buyFlag" column="buy_flag"/>
 		<result property="starAvg" column="star_avg"/>
 		<result property="computerFilePath" column="computer_file_path"/>
+		<result property="searchNo" column="search_no"/>
+		<result property="searchTitle" column="search_title"/>
+		<result property="searchPrice" column="search_price"/>
+		<result property="searchFlag" column="search_flag"/>
+		<result property="searchFilePath" column="search_file_path"/>
 		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
 			<id property="reviewNo" column="review_no"/>
 			<result property="reviewUser" column="review_user"/>
@@ -144,5 +149,38 @@
 		</where>
 		order by computer_sale_price asc, computer_no desc
 		limit #{offset}, #{limit}
+	</select>
+	
+	<select id="search" resultMap="computerMap">
+		(select 
+		computer_no as search_no,
+		computer_title as search_title, 
+		computer_sale_price as search_price,
+		1 as search_flag,
+		(select file_path from file where computer.computer_no = file.computer_no) as search_file_path
+		from computer
+		where computer_title like concat('%',#{keyword},'%'))
+		union
+		(select 
+		peripheral_no as search_no,
+		peripheral_title as search_title, 
+		peripheral_sale_price as search_price, 
+		2 as search_flag,
+		(select file_path from file where peripheral.peripheral_no = file.peripheral_no) as search_file_path
+		from peripheral
+		where peripheral_title like concat('%',#{keyword},'%'))
+		order by search_no desc
+		limit #{offset}, #{limit}
+	</select>
+	
+	<select id="searchCount" resultType="int">
+		select 
+		((select count(*)
+		from computer
+		where computer_title like '%제목%')+(select  count(*)
+		from peripheral
+		where peripheral_title like '%제목%')) as sumCount
+		from computer
+		group by sumCount;
 	</select>
 </mapper>

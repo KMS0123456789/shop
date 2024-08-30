@@ -53,4 +53,9 @@ public class ComputerServiceImpl implements ComputerService{
 	public Page<ComputerVO> computerLowPrice(Pageable pageable, String searchType, String keyword) {
 		return repository.computerLowPrice(pageable, searchType, keyword); //ComputerRepository의 메서드 computerHighPrice 실행
 	}
+	
+	@Override
+	public Page<ComputerVO> search(Pageable pageable,String keyword) {
+		return repository.search(pageable, keyword); //ComputerRepository의 메서드 computerHighPrice 실행
+	}
 }

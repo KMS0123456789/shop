@@ -35,9 +35,44 @@ public class ComputerVO {
 	private int buyFlag;
 	private int starAvg;
 	private String computerFilePath;
+	private int searchNo;
+	private String searchTitle;
+	private int searchPrice;
+	private int searchFlag;
+	private String searchFilePath;
 
 
 	
+	public int getSearchNo() {
+		return searchNo;
+	}
+	public void setSearchNo(int searchNo) {
+		this.searchNo = searchNo;
+	}
+	public String getSearchTitle() {
+		return searchTitle;
+	}
+	public void setSearchTitle(String searchTitle) {
+		this.searchTitle = searchTitle;
+	}
+	public int getSearchPrice() {
+		return searchPrice;
+	}
+	public void setSearchPrice(int searchPrice) {
+		this.searchPrice = searchPrice;
+	}
+	public int getSearchFlag() {
+		return searchFlag;
+	}
+	public void setSearchFlag(int searchFlag) {
+		this.searchFlag = searchFlag;
+	}
+	public String getSearchFilePath() {
+		return searchFilePath;
+	}
+	public void setSearchFilePath(String searchFilePath) {
+		this.searchFilePath = searchFilePath;
+	}
 	public String getComputerFilePath() {
 		return computerFilePath;
 	}
