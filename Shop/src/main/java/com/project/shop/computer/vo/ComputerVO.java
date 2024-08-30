@@ -30,6 +30,7 @@ public class ComputerVO {
 	private List<AnswerVO> answers;
 	private List<PeripheralVO> peripherals;
 	private List<StarVO> stars;
+	private List<FileVO> files;
 	private int keepFlag;
 	private int reviewFlag;
 	private int buyFlag;
@@ -42,7 +43,12 @@ public class ComputerVO {
 	private String searchFilePath;
 
 
-	
+	public List<FileVO> getFiles() {
+		return files;
+	}
+	public void setFiles(List<FileVO> files) {
+		this.files = files;
+	}
 	public int getSearchNo() {
 		return searchNo;
 	}

@@ -2,6 +2,7 @@ package com.project.shop.computer.vo;
 
 import java.util.List;
 
+import com.project.shop.progress.vo.FileVO;
 import com.project.shop.user.vo.AnswerVO;
 import com.project.shop.user.vo.QuestionVO;
 import com.project.shop.user.vo.ReviewVO;
@@ -20,13 +21,21 @@ public class PeripheralVO {
 	private List<QuestionVO> questions;
 	private List<AnswerVO> answers;
 	private List<StarVO> stars;
+	private List<FileVO> files;
 	private int keepFlag;
 	private int reviewFlag;
 	private int buyFlag;
 	private int starAvg;
 	private String peripheralFilePath;
+
 	
 	
+	public List<FileVO> getFiles() {
+		return files;
+	}
+	public void setFiles(List<FileVO> files) {
+		this.files = files;
+	}
 	public int getStarAvg() {
 		return starAvg;
 	}

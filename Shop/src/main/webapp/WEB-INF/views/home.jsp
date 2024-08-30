@@ -39,80 +39,84 @@
 					<div class="box recomend" id="box_recomend">
 						<ul class="item">
 							<c:forEach items="${computer}" var="computer">
-								<li>
-									<div class="item-image">
-										<a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'><img class="image">이미지</a>
-									</div>
-									<div class="item-content">
-										<div class="subject">
-											<a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'>${computer.computerTitle}</a>
+								<c:forEach items="${computer.files}" var="file">
+									<li>
+										<div class="item-image">
+											<a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>"></a>
 										</div>
-									</div>
-									<div class="info">
-										<div class="pull-left">
-											<span>${computer.computerSalePrice}</span>
+										<div class="item-content">
+											<div class="subject">
+												<a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'>${computer.computerTitle}</a>
+											</div>
 										</div>
-									</div>
-									<div class="txt"></div>
-								</li>
+										<div class="info">
+											<div class="pull-left">
+												<span>${computer.computerSalePrice}</span>
+											</div>
+										</div>
+										<div class="txt"></div>
+									</li>
+								</c:forEach>
 							</c:forEach>	
 							<c:forEach items="${peripheral}" var="peripheral">
-								<c:choose>
-									<c:when test="${peripheral.peripheralCategory == 0}">
-										<li>
-											<div class="item-image">
-												<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image">이미지</a>
-											</div>
-											<div class="item-content">
-												<div class="subject">
-													<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
+								<c:forEach items="${peripheral.files}" var="file"> 
+									<c:choose>
+										<c:when test="${peripheral.peripheralCategory == 0}">
+											<li>
+												<div class="item-image">
+													<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>"></a>
 												</div>
-											</div>
-											<div class="info">
-												<div class="pull-left">
-													<span>${peripheral.peripheralSalePrice}</span>
+												<div class="item-content">
+													<div class="subject">
+														<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
+													</div>
 												</div>
-											</div>
-											<div class="txt"></div>
-										</li>	
-									</c:when>
-									<c:when test="${peripheral.peripheralCategory == 1}">
-										<li>
-											<div class="item-image">
-												<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image">이미지</a>
-											</div>
-											<div class="item-content">
-												<div class="subject">
-													<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
+												<div class="info">
+													<div class="pull-left">
+														<span>${peripheral.peripheralSalePrice}</span>
+													</div>
 												</div>
-											</div>
-											<div class="info">
-												<div class="pull-left">
-													<span>${peripheral.peripheralSalePrice}</span>
+												<div class="txt"></div>
+											</li>	
+										</c:when>
+										<c:when test="${peripheral.peripheralCategory == 1}">
+											<li>
+												<div class="item-image">
+													<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>"></a>
 												</div>
-											</div>
-											<div class="txt"></div>
-										</li>	
-									</c:when>
-									<c:when test="${peripheral.peripheralCategory == 2}">
-										<li>
-											<div class="item-image">
-												<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image">이미지</a>
-											</div>
-											<div class="item-content">
-												<div class="subject">
-													<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
+												<div class="item-content">
+													<div class="subject">
+														<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
+													</div>
 												</div>
-											</div>
-											<div class="info">
-												<div class="pull-left">
-													<span>${peripheral.peripheralSalePrice}</span>
+												<div class="info">
+													<div class="pull-left">
+														<span>${peripheral.peripheralSalePrice}</span>
+													</div>
 												</div>
-											</div>
-											<div class="txt"></div>
-										</li>	
-									</c:when>
-								</c:choose>
+												<div class="txt"></div>
+											</li>	
+										</c:when>
+										<c:when test="${peripheral.peripheralCategory == 2}">
+											<li>
+												<div class="item-image">
+													<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>"></a>
+												</div>
+												<div class="item-content">
+													<div class="subject">
+														<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</a>
+													</div>
+												</div>
+												<div class="info">
+													<div class="pull-left">
+														<span>${peripheral.peripheralSalePrice}</span>
+													</div>
+												</div>
+												<div class="txt"></div>
+											</li>	
+										</c:when>
+									</c:choose>
+								</c:forEach>
 							</c:forEach>								
 						</ul>
 					</div>
@@ -130,14 +134,14 @@
 		let history = "";
 		
 		for(let i = 0; i < watchList.length; i++){
-			if(watchList[i].flag == 1){
+			if(watchList[i].flag === 1){
 				history += "<li>"
-					history += "<a href='<c:url value='/computer/computer.do/"+watchList[i].no+"'/>'>"+watchList[i].title+"</a>"
+					history += "<a href='<c:url value='/computer/computer.do/'/>"+watchList[i].no+"'>"+"<img src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
 				history += "</li>"
 			}
-			else if(watchList[i].flag == 2){
+			else if(watchList[i].flag === 2){
 				history += "<li>"
-					history += "<a href='<c:url value='/peripheral/peripheral.do/"+watchList[i].no+"'/>'>"+watchList[i].title+"</a>"
+					history += "<a href='<c:url value='/peripheral/peripheral.do/'/>"+watchList[i].no+"'>"+"<img src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
 				history += "</li>"	
 			}
 			
