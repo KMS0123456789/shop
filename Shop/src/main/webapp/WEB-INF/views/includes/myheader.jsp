@@ -77,14 +77,19 @@
             </ul>
         </nav>
             <ul id="menu2">
-            	<li>
-                	<form action="<c:url value='/user/mypage.do'/>" method="post">
-                		<input type="hidden" value="${sessionScope.user.email}" name="email">
-                 		<button type="submit">마이페이지</button>
-                	</form>
-               </li>
-                <li><a href="<c:url value="/cart/view.do"/>">장바구니</a></li>
-                <li><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
+            	<c:if test="${sessionScope.user.email != null }">
+	                <li>
+	                	<form action="<c:url value='/user/mypage.do'/>" method="post">
+	                		<input type="hidden" value="${sessionScope.user.email}" name="email">
+	                 		<button type="submit">마이페이지</button>
+	                	</form>
+	               </li>
+	                <li><a href="<c:url value="/cart/view.do"/>">장바구니</a></li>
+	                <li><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
+                </c:if>
+               <c:if test="${sessionScope.user.email == null }">
+                	<li><a href="<c:url value='/user/login.do'/>">로그인</a></li>
+                </c:if>
             </ul>
     </header>
 </body>
