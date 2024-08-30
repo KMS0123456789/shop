@@ -12,6 +12,7 @@
             margin-left: 10rem;
             margin-right: 10rem;
             min-width: 1220px;
+            margin-bottom: 5rem;
         }
         header{
             margin-top: 20px;
@@ -82,7 +83,7 @@
                  		<button type="submit">마이페이지</button>
                 	</form>
                </li>
-                <li><a href="#">장바구니</a></li>
+                <li><a href="<c:url value="/cart/view.do"/>">장바구니</a></li>
                 <li><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
             </ul>
     </header>

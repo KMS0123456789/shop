@@ -89,7 +89,7 @@
 	                 		<button type="submit">마이페이지</button>
 	                	</form>
 	               </li>
-	                <li><a href="#">장바구니</a></li>
+	                <li><a href="<c:url value="/cart/view.do"/>">장바구니</a></li>
 	                <li><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
                 </c:if>
                 <c:if test="${sessionScope.user.email == null }">
