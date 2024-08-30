@@ -41,14 +41,14 @@
                     <tbody>
                         <c:forEach var="item" items="${cartItems}">
                             <tr>
-                                <td><input type="checkbox" class="item-checkbox" data-price="${item.itemCategory == 1 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}"></td>
+                                <td><input type="checkbox" class="item-checkbox" data-price="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}"></td>
                                 <td class="product-info">
-                                    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 1 ? "computer.png" : "peripheral.png"}' />" alt="Product">
+                                    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
                                     <div>
                                         <h3>
-                                            ${item.itemCategory == 1 ? '컴퓨터' : '주변기기'}
+                                            ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
                                         </h3>
-                                        <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 1 ? '포함' : '미포함'}</p>
+                                        <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '포함' : '미포함'}</p>
                                         <button class="btn-option">옵션변경</button>
                                     </div>
                                 </td>
@@ -59,7 +59,7 @@
                                 </td>
 								<td class="price">
 								    <strong>
-								        <fmt:formatNumber value="${item.itemCategory == 1 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
+								        <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
 								    </strong>
 								</td>
                                 <td><button class="btn-remove">×</button></td>

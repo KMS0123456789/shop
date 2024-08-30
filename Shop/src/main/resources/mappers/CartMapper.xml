@@ -45,8 +45,8 @@
     <select id="getCartItemsByUser" parameterType="string" resultMap="cartMap" >
         SELECT *
 	    FROM cart c
-	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 1
-	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 2
+	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
+	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
 	    WHERE c.cart_user = #{value}
 	</select>
 
@@ -54,8 +54,8 @@
 	<select id="getCartItemsWithDetails" parameterType="string" resultMap="cartMap" >
 	    SELECT *
 	    FROM cart c
-	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 1
-	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 2
+	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
+	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
 	    WHERE c.cart_user = #{value}
 	</select>
 	

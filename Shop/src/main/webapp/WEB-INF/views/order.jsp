@@ -54,12 +54,12 @@
                 <c:forEach var="item" items="${cartItems}">
                 <tr>
                     <td>
-                        <img src="<c:url value='/resources/image/${item.itemCategory == 1 ? "computer.png" : "peripheral.png"}' />" alt="Product" class="product-image">
+                        <img src="<c:url value='/resources/image/${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product" class="product-image">
                         <div class="product-info">
                             <h3>
-                                ${item.itemCategory == 1 ? '컴퓨터' : '주변기기'}
+                                ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
                             </h3>
-                            <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 1 ? '포함' : '미포함'}</p>
+                            <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '포함' : '미포함'}</p>
                             <button class="option-change">옵션변경</button>
                         </div>
                     </td>
@@ -70,7 +70,7 @@
                     </td>
                     <td class="price" style="text-align: center">
 					    <strong>
-					        <fmt:formatNumber value="${item.itemCategory == 1 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
+					        <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
 					    </strong>
 					</td>
                 </tr>
