@@ -158,85 +158,91 @@
 	
 	<!-- 마우스 가격 높은순 조회 -->
 	<select id="mouseHighPrice" resultMap="peripheralMap">
-		select * from peripheral 
+		select * from peripheral
+		left join file on peripheral.peripheral_no = file.peripheral_no
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
-			and peripheral_category = 0
+			and peripheral.peripheral_category = 0
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by peripheral_sale_price desc, peripheral_no desc
+		order by peripheral.peripheral_sale_price desc, peripheral.peripheral_no desc
 		limit #{offset}, #{limit}
 	</select>
 	
 	<!-- 마우스 가격 낮은순 조회 -->
 	<select id="mouseLowPrice" resultMap="peripheralMap">
 		select * from peripheral 
+		left join file on peripheral.peripheral_no = file.peripheral_no
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
-			and peripheral_category = 0
+			and peripheral.peripheral_category = 0
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by peripheral_sale_price asc, peripheral_no desc
+		order by peripheral.peripheral_sale_price asc, peripheral.peripheral_no desc
 		limit #{offset}, #{limit}
 	</select>
 	
 	<!-- 키보드 가격 높은순 조회 -->
 	<select id="keyboardHighPrice" resultMap="peripheralMap">
 		select * from peripheral 
+		left join file on peripheral.peripheral_no = file.peripheral_no
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
-			and peripheral_category = 1
+			and peripheral.peripheral_category = 1
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by peripheral_sale_price desc, peripheral_no desc
+		order by peripheral.peripheral_sale_price desc, peripheral.peripheral_no desc
 		limit #{offset}, #{limit}
 	</select>
 	
 	<!-- 키보드 가격 낮은순 조회 -->
 	<select id="keyboardLowPrice" resultMap="peripheralMap">
-		select * from peripheral 
+		select * from peripheral
+		left join file on peripheral.peripheral_no = file.peripheral_no 
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
-			and peripheral_category = 1
+			and peripheral.peripheral_category = 1
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by peripheral_sale_price asc, peripheral_no desc
+		order by peripheral.peripheral_sale_price asc, peripheral.peripheral_no desc
 		limit #{offset}, #{limit}
 	</select>
 	
 	<!-- 모니터 가격 높은순 조회 -->
 	<select id="monitorHighPrice" resultMap="peripheralMap">
 		select * from peripheral 
+		left join file on peripheral.peripheral_no = file.peripheral_no
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
-			and peripheral_category = 2
+			and peripheral.peripheral_category = 2
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by peripheral_sale_price desc, peripheral_no desc
+		order by peripheral.peripheral_sale_price desc, peripheral.peripheral_no desc
 		limit #{offset}, #{limit}
 	</select>
 	
 	<!-- 모니터 가격 낮은순 조회 -->
 	<select id="monitorLowPrice" resultMap="peripheralMap">
 		select * from peripheral 
+		left join file on peripheral.peripheral_no = file.peripheral_no
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
-			and peripheral_category = 2
+			and peripheral.peripheral_category = 2
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by peripheral_sale_price asc, peripheral_no desc
+		order by peripheral.peripheral_sale_price asc, peripheral.peripheral_no desc
 		limit #{offset}, #{limit}
 	</select>
 </mapper>

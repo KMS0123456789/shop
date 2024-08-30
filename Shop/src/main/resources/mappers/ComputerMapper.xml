@@ -140,26 +140,28 @@
 	<!-- 완제품 높은 가격순 조회 -->
 	<select id="computerHighPrice" resultMap="computerMap">
 		select * from computer
+		left join file on computer.computer_no = file.computer_no
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by computer_sale_price desc, computer_no desc
+		order by computer.computer_sale_price desc, computer.computer_no desc
 		limit #{offset}, #{limit}
 	</select>
 	
 	<!-- 완제품 낮은 가격순 조회 -->
 	<select id="computerLowPrice" resultMap="computerMap">
 		select * from computer
+		left join file on computer.computer_no = file.computer_no
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by computer_sale_price asc, computer_no desc
+		order by computer.computer_sale_price asc, computer.computer_no desc
 		limit #{offset}, #{limit}
 	</select>
 	
