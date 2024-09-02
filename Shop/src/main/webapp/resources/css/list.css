@@ -469,3 +469,9 @@ input[type="text" i] {
     height: 100%;
     display: block;
 }
+.image{
+	width: 300px;
+}
+.last_image{
+	width: 70px;
+}

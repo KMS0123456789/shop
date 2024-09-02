@@ -242,3 +242,9 @@ img {
     display: inline-block;
     margin-left: 130px; 
 }
+.image{
+	width: 200px;
+}
+.last_image{
+	width: 70px;
+}

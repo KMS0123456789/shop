@@ -31,7 +31,7 @@
 										<c:forEach items="${monitor}" var="monitor">
 											<c:forEach items="${monitor.files}" var="file">
 												<li>
-													<div class="item-image"><a href='<c:url value="/peripheral/peripheral.do/${monitor.peripheralNo}"/>'><img src="<c:url value='${file.filePath}'/>"></a></div>
+													<div class="item-image"><a href='<c:url value="/peripheral/peripheral.do/${monitor.peripheralNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>"></a></div>
 													<div class="item-content">
 														<div class="subject"><a href='<c:url value="/peripheral/peripheral.do/${monitor.peripheralNo}"/>'>${monitor.peripheralTitle}</a></div>
 													</div>
@@ -95,12 +95,12 @@
 		for(let i = 0; i < watchList.length; i++){
 			if(watchList[i].flag === 1){
 				history += "<li>"
-					history += "<a href='<c:url value='/computer/computer.do/'/>"+watchList[i].no+"'>"+"<img src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
+					history += "<a href='<c:url value='/computer/computer.do/'/>"+watchList[i].no+"'>"+"<img class='last_image' src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
 				history += "</li>"
 			}
 			else if(watchList[i].flag === 2){
 				history += "<li>"
-					history += "<a href='<c:url value='/peripheral/peripheral.do/'/>"+watchList[i].no+"'>"+"<img src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
+					history += "<a href='<c:url value='/peripheral/peripheral.do/'/>"+watchList[i].no+"'>"+"<img class='last_image' src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
 				history += "</li>"	
 			}
 			

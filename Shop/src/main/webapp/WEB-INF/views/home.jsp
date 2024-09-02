@@ -136,12 +136,12 @@
 		for(let i = 0; i < watchList.length; i++){
 			if(watchList[i].flag === 1){
 				history += "<li>"
-					history += "<a href='<c:url value='/computer/computer.do/'/>"+watchList[i].no+"'>"+"<img src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
+					history += "<a href='<c:url value='/computer/computer.do/'/>"+watchList[i].no+"'>"+"<img class='last_image' src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
 				history += "</li>"
 			}
 			else if(watchList[i].flag === 2){
 				history += "<li>"
-					history += "<a href='<c:url value='/peripheral/peripheral.do/'/>"+watchList[i].no+"'>"+"<img src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
+					history += "<a href='<c:url value='/peripheral/peripheral.do/'/>"+watchList[i].no+"'>"+"<img class='last_image' src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
 				history += "</li>"	
 			}
 			

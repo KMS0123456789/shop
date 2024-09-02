@@ -450,12 +450,12 @@
 				for(let i = 0; i < watchListArr.length; i++){
 					if(watchListArr[i].flag === 1){
 						history += "<li>"
-							history += "<a href='<c:url value='/computer/computer.do/'/>"+watchListArr[i].no+"'>"+"<img src='<c:url value='/'/>"+watchListArr[i].path+"'>"+"</a>"
+							history += "<a href='<c:url value='/computer/computer.do/'/>"+watchListArr[i].no+"'>"+"<img class='last_image' src='<c:url value='/'/>"+watchListArr[i].path+"'>"+"</a>"
 						history += "</li>"
 					}
 					else if(watchListArr[i].flag === 2){
 						history += "<li>"
-							history += "<a href='<c:url value='/peripheral/peripheral.do/'/>"+watchListArr[i].no+"'>"+"<img src='<c:url value='/'/>"+watchListArr[i].path+"'>"+"</a>"
+							history += "<a href='<c:url value='/peripheral/peripheral.do/'/>"+watchListArr[i].no+"'>"+"<img class='last_image' src='<c:url value='/'/>"+watchListArr[i].path+"'>"+"</a>"
 						history += "</li>"	
 					}
 					

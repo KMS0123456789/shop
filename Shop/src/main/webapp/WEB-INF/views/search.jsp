@@ -24,7 +24,7 @@
 										<c:forEach items="${search}" var="search">
 											<c:if test="${search.searchFlag == 1}">
 												<li>
-													<div class="item-image"><a href='<c:url value="/computer/computer.do/${search.searchNo}"/>'><img src="<c:url value='${search.searchFilePath}'/>"></a></div>
+													<div class="item-image"><a href='<c:url value="/computer/computer.do/${search.searchNo}"/>'><img class="image" src="<c:url value='${search.searchFilePath}'/>"></a></div>
 													<div class="item-content">
 														<div class="subject"><a href='<c:url value="/computerl/computer.do/${search.searchNo}"/>'>${search.searchTitle}</a></div>
 													</div>
@@ -37,7 +37,7 @@
 											</c:if>
 											<c:if test="${search.searchFlag == 2}">
 												<li>
-													<div class="item-image"><a href='<c:url value="/peripheral/peripheral.do/${search.searchNo}"/>'><img src="<c:url value='${search.searchFilePath}'/>"></a></div>
+													<div class="item-image"><a href='<c:url value="/peripheral/peripheral.do/${search.searchNo}"/>'><img class="image" src="<c:url value='${search.searchFilePath}'/>"></a></div>
 													<div class="item-content">
 														<div class="subject"><a href='<c:url value="/peripheral/peripheral.do/${search.searchNo}"/>'>${search.searchTitle}</a></div>
 													</div>
@@ -101,12 +101,12 @@
 		for(let i = 0; i < watchList.length; i++){
 			if(watchList[i].flag === 1){
 				history += "<li>"
-					history += "<a href='<c:url value='/computer/computer.do/'/>"+watchList[i].no+"'>"+"<img src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
+					history += "<a href='<c:url value='/computer/computer.do/'/>"+watchList[i].no+"'>"+"<img class='last_image' src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
 				history += "</li>"
 			}
 			else if(watchList[i].flag === 2){
 				history += "<li>"
-					history += "<a href='<c:url value='/peripheral/peripheral.do/'/>"+watchList[i].no+"'>"+"<img src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
+					history += "<a href='<c:url value='/peripheral/peripheral.do/'/>"+watchList[i].no+"'>"+"<img class='last_image' src='<c:url value='/'/>"+watchList[i].path+"'>"+"</a>"
 				history += "</li>"	
 			}
 			
