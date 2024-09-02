@@ -38,7 +38,7 @@
 						            	</c:forEach>
 						                <div>
 						                    <h3>
-						                        <a href="<c:url value='/computer/computer.do/${comptuer.computerNo}'/>">${computer.computerTitle}</a>
+						                        <a href="<c:url value='/computer/computer.do/${computer.computerNo}'/>">${computer.computerTitle}</a>
 						                    </h3>
 						                </div>
 						            </td>
