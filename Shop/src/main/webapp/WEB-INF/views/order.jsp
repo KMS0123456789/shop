@@ -416,20 +416,30 @@
 
 	function getCartItemsForServer(useremail) {
 	    const items = [];
+	    
+	 	// 각 장바구니 항목(tr)을 순회하며 데이터 추출
 	    document.querySelectorAll('.order-items tbody tr').forEach(function(row) {
 	        const itemCategory = row.querySelector('.product-info h3').textContent.trim() === '컴퓨터' ? 0 : 1;
+	     	
+	        // 각 행(row)에서 computerNo 값을 가져옴
+	        const computerNo = parseInt(row.dataset.computerNo);  // 여기서 computerNo 값을 가져옴
+	        
+	        console.log("computerNo:", computerNo);  // 추출한 computerNo 값을 확인
+
 	        const item = {
-	            askDetailUser: useremail,  // 이메일을 askDetailUser 필드에 추가
+	            askDetailUser: useremail, // 사용자 이메일
 	            itemCategory: itemCategory,
 	            itemCount: parseInt(row.querySelector('.quantity-control p').textContent),
 	            optNo: 0, // 필요 시 옵션 번호 추가
-	            computerNo: itemCategory === 0 ? row.dataset.computerNo : null,
-	            peripheralNo: itemCategory === 1 ? row.dataset.peripheralNo : null
+	            computerNo: itemCategory === 0 ? computerNo : null, // 컴퓨터 카테고리인 경우 computerNo 설정
+	            peripheralNo: itemCategory === 1 ? parseInt(row.dataset.peripheralNo) : null
 	        };
 	        items.push(item);
 	    });
+
 	    return items;
 	}
+
 	    
 	function sendPaymentInfoToServer(paymentResult) {
 	    $.ajax({

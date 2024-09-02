@@ -7,17 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주문 완료</title>
     <link href="<c:url value='/resources/css/ordercomplete.css' />" rel="stylesheet">
-	<script type="text/javascript">
+    <script type="text/javascript">
         var useremail = "${sessionScope.user.email}";
         var username = "${sessionScope.user.name}";
-        var userEmail = useremail;
     </script>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
     <%@ include file="./includes/myheader.jsp" %>
+
     <div class="order-complete-page">
         <h1>주문 완료</h1>
+
+        <!-- 주문 진행 단계 표시 -->
         <div class="cart-header">
             <div class="cart-step">
                 <i class="icon-bag"></i>
@@ -32,9 +34,11 @@
                 <span>주문완료</span>
             </div>
         </div>
+
         <p>고객님의 주문이 성공적으로 완료되었습니다.</p>
         <p>주문 번호: <strong>${requestScope.orderNumber}</strong></p>
-        
+
+        <!-- 주문 정보 표시 -->
         <h2>주문 정보</h2>
         <table class="order-summary">
             <thead>
@@ -47,17 +51,21 @@
             <tbody>
                 <c:forEach var="item" items="${cartItems}">
                     <tr>
+                        <!-- 상품명을 itemCategory를 기준으로 구분 -->
                         <td>${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}</td>
                         <td>${item.itemCount}</td>
-                        <td>${item.computers[0].computerSalePrice}원</td>
+                        <td>${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}원</td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
 
+        <!-- 총 결제 금액 및 배송비 표시 -->
         <div class="total-amount">
             <p>총 결제 금액: ${requestScope.totalAmount} 원 + 배송비 : ${requestScope.shippingCost} 원 = 합계 :  <strong>${requestScope.totalAmountWithShipping}원</strong></p>
         </div>
+
+        <!-- 쇼핑 계속하기 버튼 -->
         <div style="display: flex; justify-content: center;">
             <a href="<c:url value='/shop' />" class="back-to-shop">쇼핑 계속하기</a>
         </div>
