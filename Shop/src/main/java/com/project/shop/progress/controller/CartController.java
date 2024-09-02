@@ -90,20 +90,16 @@ public class CartController {
         return ResponseEntity.ok().body("Selected items deleted successfully");
     }
 
-    // 모든 항목 삭제
-    private static final Logger logger = LoggerFactory.getLogger(CartController.class);
-    
+    // 모든 항목 삭제    
     @PostMapping("/deleteAll.do")
     public ResponseEntity<String> deleteAllItems(@RequestBody Map<String, String> payload) {
         String userEmail = payload.get("cartUser");
-        logger.info("Received deleteAll request for user email: {}", userEmail);
         
         if (userEmail == null || userEmail.isEmpty()) {
             return ResponseEntity.badRequest().body("Invalid user information");
         }
         
         int deletedCount = service.deleteAllItems(userEmail);
-        logger.info("Deleted {} items for user email: {}", deletedCount, userEmail);
         
         if (deletedCount > 0) {
             return ResponseEntity.ok().body("All items deleted successfully");

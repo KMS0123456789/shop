@@ -9,7 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.shop.progress.repository.AskDetailRepository;
 import com.project.shop.progress.repository.AskRepository;
+import com.project.shop.progress.service.AskDetailService;
 import com.project.shop.progress.service.AskService;
 import com.project.shop.progress.vo.AskDetailVO;
 import com.project.shop.progress.vo.AskVO;
@@ -20,26 +22,30 @@ public class AskServiceImpl implements AskService{
 	
 	@Autowired
 	private AskRepository repository;
+	
+	@Autowired
+	private AskDetailRepository askDetailRepository;
 
     @Autowired
     private UserRepository userRepository; 
-	
+    
+
     @Override
     @Transactional
     public void completePaymentAndInsert(AskVO ask) throws Exception {
-        if (!userExists(ask.getAskUser())) {
-            throw new Exception("User does not exist: " + ask.getAskUser());
-        }
-        ask.setAskDate(LocalDateTime.now().toString());
-        ask.setAskStateFlag(1);
-        ask.setAskDeleteFlag(0);
-        
+        System.out.println("ask: " + ask);
+        System.out.println("askDetails: " + ask.getAskDetails());
+    	
+    	// 1. AskVO를 먼저 저장 (askNo 생성)
         repository.insertAsk(ask);
-        
+
+        // 2. AskDetailVO 리스트가 있는지 확인하고 반복 처리
         if (ask.getAskDetails() != null && !ask.getAskDetails().isEmpty()) {
             for (AskDetailVO detail : ask.getAskDetails()) {
+                // 3. askNo 설정
                 detail.setAskNo(ask.getAskNo());
-                repository.insertAskDetail(detail);
+                // 4. AskDetailVO 저장
+                askDetailRepository.insertAskDetail(detail);
             }
         }
     }

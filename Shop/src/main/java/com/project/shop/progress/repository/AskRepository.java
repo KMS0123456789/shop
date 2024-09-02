@@ -27,11 +27,6 @@ public class AskRepository {
         template.insert(NAME_SPACE + ".insertAsk", ask);
     }
 
-    // AskDetail 테이블에 데이터 삽입
-    public void insertAskDetail(AskDetailVO askDetail) {
-        template.insert(NAME_SPACE + ".insertAskDetail", askDetail);
-    }
-
 	//주문 전체 조회
 	public Page<AskVO> askAll(Pageable pageable, String searchType, String keyword){
 		Map<String, Object> map = new HashMap<String, Object>();

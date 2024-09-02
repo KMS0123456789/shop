@@ -22,13 +22,7 @@
 	<!-- 주문 입력 -->
     <insert id="insertAsk" useGeneratedKeys="true" keyProperty="askNo">
         INSERT INTO ask (ask_user, ask_date, ask_state_flag, ask_delete_flag)
-        VALUES (#{askUser}, #{askDate}, #{askStateFlag}, #{askDeleteFlag})
-    </insert>
-    
-	<!-- 주문 상세입력-->
-    <insert id="insertAskDetail">
-        INSERT INTO askdetail (ask_no, ask_detail_user, computer_no, peripheral_no, opt_no, item_count, item_category)
-        VALUES (#{askNo}, #{askDetailUser}, #{computerNo}, #{peripheralNo}, #{optNo}, #{itemCount}, #{itemCategory})
+        VALUES (#{askUser}, now(), 0,0)
     </insert>
 
 	<!-- 주문을 전체 조회 -->

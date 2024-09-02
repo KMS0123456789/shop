@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.shop.progress.service.AskDetailService;
 import com.project.shop.progress.service.AskService;
 import com.project.shop.progress.vo.AskVO;
 

@@ -401,14 +401,11 @@
 	        buyer_name: username,
 	    }, function (rsp) {
 	        if (rsp.success) {
-	            alert('결제가 완료되었습니다!');
-	            
 	            // 결제 성공 시 서버로 결제 및 주문 정보 전송
 	            sendPaymentInfoToServer({
 	                askUser: useremail,
-	                askDate: new Date().toISOString(), // 결제 시점의 날짜를 저장
-	                askStateFlag: 1, // 1은 주문 완료 상태
-	                items: getCartItemsForServer() // 장바구니 아이템 정보를 서버로 전송
+	                askDetails: getCartItemsForServer(useremail)
+	                /* items: getCartItemsForServer() // 장바구니 아이템 정보를 서버로 전송 */
 	            });
 	        } else {
 	        	console.error('카카오페이 결제 실패:', rsp);
@@ -417,11 +414,12 @@
 	    });
 	}
 
-	function getCartItemsForServer() {
+	function getCartItemsForServer(useremail) {
 	    const items = [];
 	    document.querySelectorAll('.order-items tbody tr').forEach(function(row) {
 	        const itemCategory = row.querySelector('.product-info h3').textContent.trim() === '컴퓨터' ? 0 : 1;
 	        const item = {
+	            askDetailUser: useremail,  // 이메일을 askDetailUser 필드에 추가
 	            itemCategory: itemCategory,
 	            itemCount: parseInt(row.querySelector('.quantity-control p').textContent),
 	            optNo: 0, // 필요 시 옵션 번호 추가
@@ -431,7 +429,7 @@
 	        items.push(item);
 	    });
 	    return items;
-	}   
+	}
 	    
 	function sendPaymentInfoToServer(paymentResult) {
 	    $.ajax({

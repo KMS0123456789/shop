@@ -12,4 +12,10 @@
 		<result property="itemCategory" column="item_category"/>
 		<result property="askDate" column="ask_date" />
 	</resultMap>
+	
+	<!-- 주문 상세입력-->
+    <insert id="insertAskDetail">
+        INSERT INTO ask_detail (ask_no, ask_detail_user, computer_no, peripheral_no, opt_no, item_count, item_category)
+        VALUES (#{askNo}, #{askDetailUser}, #{computerNo}, #{peripheralNo}, #{optNo}, #{itemCount}, #{itemCategory})
+    </insert>
 </mapper>
