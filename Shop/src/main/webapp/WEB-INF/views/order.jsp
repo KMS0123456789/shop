@@ -11,8 +11,6 @@
     <link href="<c:url value='/resources/css/order.css' />" rel="stylesheet">
     <!-- 포트원 결제 -->
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <!-- iamport.payment.js -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -60,7 +58,6 @@
                                 ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
                             </h3>
                             <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '포함' : '미포함'}</p>
-                            <button class="option-change">옵션변경</button>
                         </div>
                     </td>
                     <td>
@@ -191,7 +188,7 @@
 	    function updateTotalPrice() {
 	        let totalProductPrice = 0;
 	        
-	        itemRows.forEach(row => {
+	        itemRows.forEach(function(row) {
 	            const priceElement = row.querySelector('.price strong');
 	            const quantityElement = row.querySelector('.quantity-control p');
 	            
@@ -212,9 +209,6 @@
 	        totalProductPriceElement.textContent = totalProductPrice.toLocaleString() + "원";
 	        shippingFeeElement.textContent = shippingFee.toLocaleString() + "원";
 	        totalPaymentPriceElement.textContent = totalPaymentPrice.toLocaleString() + "원";
-	        
-	        // 주문 요약 섹션 업데이트
-	        document.querySelector('.total-price').innerHTML = `${totalPaymentPrice.toLocaleString()} 원`;
 	    }
 	    
 	    // 페이지 로드 시 초기 계산
@@ -367,75 +361,111 @@
 	        alert('로그인이 필요합니다!');
 	        return;
 	    }
-	
+
 	    if (!confirm("구매 하시겠습니까?")) {
 	        return;
 	    }
-	
+
 	    var IMP = window.IMP;
 	    IMP.init("imp41762117");
-	    
-	    // 새로운 merchant_uid 생성
+	 	// 새로운 merchant_uid 생성
 	    var newMerchantUid = generateMerchantUid();
-	    
-	    // 이전에 사용한 merchant_uid와 다른지 확인
-	    while (newMerchantUid === lastUsedMerchantUid) {
+	 	
+	 	// 이전에 사용한 merchant_uid와 다른지 확인
+	 	while (newMerchantUid === lastUsedMerchantUid) {
 	        newMerchantUid = generateMerchantUid();
 	    }
-	    
 	    lastUsedMerchantUid = newMerchantUid;
-	
-	    // 동적으로 주문 이름 생성
+		
+	 	// 동적으로 주문 이름 생성
 	    var orderName = "커스텀PC Shop 주문";
 	    var firstItemName = document.querySelector('.order-items tbody tr .product-info h3').textContent.trim();
 	    if (firstItemName) {
 	        orderName = firstItemName;
 	        var itemCount = document.querySelectorAll('.order-items tbody tr').length;
 	        if (itemCount > 1) {
-	            orderName += ` 외 ${itemCount - 1}건`;
+	            orderName += "외 " +  (itemCount - 1) + "건";
 	        }
 	    }
-
-	    // 총 결제 금액 가져오기
+		
+	 	// 총 결제 금액 가져오기
 	    var totalAmount = parseInt(document.querySelector('.payment-summary .total').textContent.replace(/[^0-9]/g, ''));
 
 	    IMP.request_pay({
 	        pg: 'kakaopay.TC0ONETIME',
 	        pay_method: 'card',
-	        merchant_uid: newMerchantUid,
+	        merchant_uid: lastUsedMerchantUid,
 	        name: orderName,
 	        amount: totalAmount,
 	        buyer_email: useremail,
 	        buyer_name: username,
 	    }, function (rsp) {
 	        if (rsp.success) {
-	            console.log("결제 성공:", rsp);
 	            alert('결제가 완료되었습니다!');
-	            window.location.href = 'orderComplete.do';
+	            
+	            // 결제 성공 시 서버로 결제 및 주문 정보 전송
+	            sendPaymentInfoToServer({
+	                askUser: useremail,
+	                askDate: new Date().toISOString(), // 결제 시점의 날짜를 저장
+	                askStateFlag: 1, // 1은 주문 완료 상태
+	                items: getCartItemsForServer() // 장바구니 아이템 정보를 서버로 전송
+	            });
 	        } else {
-	            console.log("결제 실패:", rsp);
-	            alert(`결제 실패: ${rsp.error_msg}`);
+	        	console.error('카카오페이 결제 실패:', rsp);
+	            alert("결제 실패: " + rsp.error_msg); // 여기서 오류가 발생하지 않도록 공백 추가
 	        }
 	    });
 	}
 
+	function getCartItemsForServer() {
+	    const items = [];
+	    document.querySelectorAll('.order-items tbody tr').forEach(function(row) {
+	        const itemCategory = row.querySelector('.product-info h3').textContent.trim() === '컴퓨터' ? 0 : 1;
+	        const item = {
+	            itemCategory: itemCategory,
+	            itemCount: parseInt(row.querySelector('.quantity-control p').textContent),
+	            optNo: 0, // 필요 시 옵션 번호 추가
+	            computerNo: itemCategory === 0 ? row.dataset.computerNo : null,
+	            peripheralNo: itemCategory === 1 ? row.dataset.peripheralNo : null
+	        };
+	        items.push(item);
+	    });
+	    return items;
+	}   
+	    
 	function sendPaymentInfoToServer(paymentResult) {
 	    $.ajax({
-	        url: '<c:url value="/payment/complete"/>', // 컨텍스트 경로를 포함한 URL
+	        url: '<c:url value="/ask/completePay.do"/>',
 	        method: 'POST',
 	        contentType: 'application/json',
 	        data: JSON.stringify(paymentResult),
 	        success: function(response) {
-	            if (response.status == 200) {
-	                alert('결제가 성공적으로 처리되었습니다.');
-	                window.location.href = '<c:url value="/orderComplete.do"/>'; // 컨텍스트 경로를 포함한 URL
+	            console.log('서버 응답:', response);
+	            
+	            if (response.status === 200) {
+	                alert(response.message);
+	                window.location.href = '<c:url value="/ask/orderComplete.do"/>';
 	            } else {
-	                alert(`오류 발생: [${response.status}] 관리자에게 문의 바랍니다.`);
+	                console.error('서버 응답 상세:', response);
+	                alert(`오류 발생: [${response.status}] ${response.message}`);
 	            }
 	        },
 	        error: function(xhr, status, error) {
-	            console.error("서버 요청 실패:", error);
-	            alert('서버 오류가 발생했습니다. 관리자에게 문의 바랍니다.');
+	            console.error("서버 요청 실패:", xhr.responseText);
+	            console.error("상태:", status);
+	            console.error("오류:", error);
+	            
+	            let errorMessage = '서버 오류가 발생했습니다. 관리자에게 문의 바랍니다.';
+	            try {
+	                const errorResponse = JSON.parse(xhr.responseText);
+	                if (errorResponse && errorResponse.message) {
+	                    errorMessage = errorResponse.message;
+	                }
+	            } catch (e) {
+	                console.error('응답 파싱 실패:', e);
+	            }
+	            
+	            alert(errorMessage);
 	        }
 	    });
 	}
@@ -481,5 +511,6 @@
 	           }
 	       }).open();
 	}
+	
 	</script>
 </html>

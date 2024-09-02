@@ -10,6 +10,9 @@ import com.project.shop.progress.repository.CartRepository;
 import com.project.shop.progress.service.CartService;
 import com.project.shop.progress.vo.CartVO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Service
 public class CartServiceImpl implements CartService{
 	
@@ -26,6 +29,25 @@ public class CartServiceImpl implements CartService{
         return repository.getCartItemsWithDetails(userId);
     }
 	
+    // 개별 상품 삭제
+    @Override
+    public void deleteCartItem(int cartNo) {
+        repository.deleteCartItem(cartNo);
+    }
+
+    // 선택된 상품 삭제
+    @Override
+    public void deleteSelectedItems(List<Integer> cartNos) {
+        repository.deleteSelectedItems(cartNos);
+    }
+
+    // 모든 상품 삭제
+    @Override
+    public int deleteAllItems(String cartUser) {
+        int deletedCount = repository.deleteAllItems(cartUser);
+        return deletedCount;
+    }
+    
 	@Override
 	public int cartComputer(CartVO vo) {
 		//CartRepository의 cartComputer 메서드 실행 CartVO vo 파라미터로 같이 보냄

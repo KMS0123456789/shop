@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>장바구니</title>
     <link href="<c:url value='/resources/css/cart.css' />" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 <%@ include file="./includes/myheader.jsp" %>
@@ -39,37 +40,36 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="item" items="${cartItems}">
-                            <tr>
-                                <td><input type="checkbox" class="item-checkbox" data-price="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}"></td>
-                                <td class="product-info">
-                                    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
-                                    <div>
-                                        <h3>
-                                            ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
-                                        </h3>
-                                        <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '포함' : '미포함'}</p>
-                                        <button class="btn-option">옵션변경</button>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="quantity-control">
-                                        <p>${item.itemCount}</p>
-                                    </div>
-                                </td>
-								<td class="price">
-								    <strong>
-								        <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
-								    </strong>
-								</td>
-                                <td><button class="btn-remove">×</button></td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
+					    <c:forEach var="item" items="${cartItems}">
+					        <tr data-cart-no="${item.cartNo}">
+					            <td><input type="checkbox" class="item-checkbox" data-price="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}"></td>
+					            <td class="product-info">
+					                <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
+					                <div>
+					                    <h3>
+					                        ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
+					                    </h3>
+					                    <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '포함' : '미포함'}</p>
+					                </div>
+					            </td>
+					            <td>
+					                <div class="quantity-control">
+					                    <p>${item.itemCount}</p>
+					                </div>
+					            </td>
+					            <td class="price">
+					                <strong>
+					                    <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
+					                </strong>
+					            </td>
+					            <td><button class="btn-remove">×</button></td>
+					        </tr>
+					    </c:forEach>
+					</tbody>
                 </table>
                 <div class="cart-actions">
-                    <button class="btn-secondary">선택상품 삭제</button>
-                    <button class="btn-secondary">전체상품 삭제</button>
+                    <button class="btn-delete-selected">선택상품 삭제</button>
+                    <button class="btn-delete-all">전체상품 삭제</button>
                 </div>
             </div>
             <div class="cart-summary">
@@ -88,7 +88,7 @@
                     <span id="total-payment-price">0원</span>
                 </div>
                 <button class="btn-primary" onclick="location.href='<c:url value='/cart/order.do'/>'">전체상품 주문하기</button>
-                <button class="btn-secondary-outline" onclick="location.href='<c:url value='/cart/order.do'/>'">선택상품 주문하기</button>
+				<button class="btn-secondary-outline" onclick="location.href='<c:url value='/cart/order.do'/>'">선택상품 주문하기</button>
             </div>
         </div>
     </div>
@@ -101,6 +101,9 @@
 	    const totalProductPriceElement = document.getElementById('total-product-price');
 	    const totalPaymentPriceElement = document.getElementById('total-payment-price');
 	    const shippingFeeElement = document.getElementById('shipping-fee');
+	    const removeButtons = document.querySelectorAll('.btn-remove');
+	    const deleteSelectedButton = document.querySelector('.btn-delete-selected');
+	    const deleteAllButton = document.querySelector('.btn-delete-all');
 	    
 	    const SHIPPING_FEE_THRESHOLD = 50000; // 배송비 무료 기준금액
 	    const SHIPPING_FEE = 3000; // 기본 배송비
@@ -110,10 +113,131 @@
 	        itemCheckboxes.forEach(checkbox => checkbox.checked = selectAllCheckbox.checked);
 	        updateTotalPrice();
 	    });
-
+	
 	    // 개별 체크박스 이벤트
 	    itemCheckboxes.forEach(checkbox => {
 	        checkbox.addEventListener('change', updateTotalPrice);
+	    });
+	
+	    // 개별 삭제 x 버튼 이벤트
+	    removeButtons.forEach(button => {
+	        button.addEventListener('click', function() {
+	            const row = button.closest('tr');
+	            const cartNo = row.getAttribute('data-cart-no');
+	            
+	            // AJAX 요청으로 서버에 삭제 요청
+	            $.ajax({
+	                url: "${pageContext.request.contextPath}/cart/deleteItem.do",
+	                method: 'POST',
+	                contentType: 'application/json',  // JSON 형식을 명시
+	                data: JSON.stringify({ cartNo: cartNo }), // JSON으로 데이터 변환
+	                success: function(response) {
+	                    row.remove();
+	                    updateTotalPrice();
+	                    alert('상품이 삭제되었습니다.');
+	                },
+	                error: function(error) {
+	                    console.error('Error:', error);
+	                    alert('삭제 중 오류가 발생했습니다.');
+	                }
+	            });
+	        });
+	    });
+	
+	    // 선택된 상품 삭제 버튼 이벤트
+		deleteSelectedButton.addEventListener('click', function() {
+		    const selectedNos = [];
+		    const selectedRows = [];
+		    
+		    itemCheckboxes.forEach(checkbox => {
+		        if (checkbox.checked) {
+		            const row = checkbox.closest('tr');
+		            const cartNo = row.getAttribute('data-cart-no');
+		            if (cartNo && cartNo.trim() !== '') {
+		                selectedNos.push(cartNo);
+		                selectedRows.push(row);
+		            }
+		        }
+		    });
+		    
+		    if (selectedNos.length > 0) {
+		        console.log('Attempting to delete:', selectedNos);
+		        $.ajax({
+		            url: "${pageContext.request.contextPath}/cart/deleteSelected.do",
+		            method: 'POST',
+		            contentType: 'application/json',
+		            data: JSON.stringify({ cartNos: selectedNos }),
+		            success: function(response) {
+		                console.log('Server response:', response);
+		                console.log('Selected Nos:', selectedNos);
+		                alert('선택한 상품이 삭제되었습니다.');
+		                
+		                selectedRows.forEach((row, index) => {
+		                    const cartNo = selectedNos[index];
+		                    console.log(`Removing row for cartNo: ${cartNo}`);
+		                    if (row && row.parentNode) {
+		                        row.parentNode.removeChild(row);
+		                        console.log(`Successfully removed row for cartNo: ${cartNo}`);
+		                    } else {
+		                        console.warn(`Failed to remove row for cartNo: ${cartNo}`);
+		                    }
+		                });
+		                
+		                updateTotalPrice();
+		                
+		                // 체크박스 상태 초기화
+		                selectAllCheckbox.checked = false;
+		                itemCheckboxes.forEach(cb => cb.checked = false);
+		            },
+		            error: function(error) {
+		                console.error('Error:', error);
+		                alert('선택된 상품 삭제 중 오류가 발생했습니다.');
+		            }
+		        });
+		    } else {
+		        alert('선택된 상품이 없습니다.');
+		    }
+		});
+	
+	    
+	    // 전체 삭제 버튼 이벤트
+	    deleteAllButton.addEventListener('click', function() {
+	        const userEmail = "${user.email}";
+	        
+	        console.log("Attempting to delete all items for user:", userEmail);
+	        
+	        $.ajax({
+	            url: "${pageContext.request.contextPath}/cart/deleteAll.do",
+	            method: 'POST',
+	            contentType: 'application/json',
+	            data: JSON.stringify({ cartUser: userEmail }),
+	            success: function(response) {
+	                console.log("Server response:", response);
+	                if (response === "모든 상품이 삭제되었습니다.") {
+	                    // 테이블 본문의 모든 행을 제거합니다
+	                    const tbody = document.querySelector('.cart-items tbody');
+	                    console.log("tbody before removal:", tbody.innerHTML);
+	                    tbody.innerHTML = '';
+	                    console.log("tbody after removal:", tbody.innerHTML);
+
+	                    // 체크박스 배열을 비웁니다
+	                    itemCheckboxes.forEach(checkbox => checkbox.checked = false);
+
+	                    // 전체 선택 체크박스의 상태를 업데이트합니다
+	                    selectAllCheckbox.checked = false;
+
+	                    // 가격을 업데이트합니다
+	                    updateTotalPrice();
+
+	                    console.log("All items should be removed now");
+	                }
+	                alert("모든 상품이 삭제되었습니다.");  // 여기서 알림 메시지를 한국어로 변경했습니다
+	            },
+	            error: function(error) {
+	                console.error('Error:', error);
+	                alert('전체 상품 삭제 중 오류가 발생했습니다.');
+	            }
+	        });
 	    });
 
 	    function updateTotalPrice() {
@@ -149,5 +273,6 @@
 	    itemCheckboxes.forEach(checkbox => checkbox.checked = true);
 	    updateTotalPrice();
 	});
+
 	</script>
 </html>

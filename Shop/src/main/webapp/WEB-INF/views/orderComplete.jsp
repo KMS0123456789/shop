@@ -10,7 +10,9 @@
 	<script type="text/javascript">
         var useremail = "${sessionScope.user.email}";
         var username = "${sessionScope.user.name}";
+        var userEmail = useremail;
     </script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
     <%@ include file="./includes/myheader.jsp" %>
@@ -31,8 +33,7 @@
             </div>
         </div>
         <p>고객님의 주문이 성공적으로 완료되었습니다.</p>
-        <p>주문 번호: <strong>1234 ${requestScope.orderNumber}</strong></p>
-        <p>결제 금액: <strong>43,000 ${requestScope.totalAmount}원</strong></p>
+        <p>주문 번호: <strong>${requestScope.orderNumber}</strong></p>
         
         <h2>주문 정보</h2>
         <table class="order-summary">
@@ -44,24 +45,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>컴퓨터 - 1</td>
-                    <td>1</td>
-                    <td>1,000,000원</td>
-                </tr>
-                <tr>
-                    <td>컴퓨터 - 1</td>
-                    <td>1</td>
-                    <td>1,000,000원</td>
-                </tr>
+                <c:forEach var="item" items="${cartItems}">
+                    <tr>
+                        <td>${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}</td>
+                        <td>${item.itemCount}</td>
+                        <td>${item.computers[0].computerSalePrice}원</td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
 
         <div class="total-amount">
-            <p>총 결제 금액: 2,000,000 원 + 배송비 : 0 원 = 합계 :  <strong>2,000,000원</strong></p>
+            <p>총 결제 금액: ${requestScope.totalAmount} 원 + 배송비 : ${requestScope.shippingCost} 원 = 합계 :  <strong>${requestScope.totalAmountWithShipping}원</strong></p>
         </div>
-       	<div style="display: flex; justify-content: center;">
-        <a href="/shop" class="back-to-shop">쇼핑 계속하기</a>
+        <div style="display: flex; justify-content: center;">
+            <a href="<c:url value='/shop' />" class="back-to-shop">쇼핑 계속하기</a>
         </div>
     </div>
 </body>

@@ -70,7 +70,7 @@ body {
      padding-top: 10px;
      border-top: 1px solid #eee;
 }
- .btn-primary, .btn-secondary {
+ .btn-primary, .btn-delete-selected, .btn-delete-all {
      display: block;
      width: 100%;
      padding: 10px;
@@ -84,7 +84,7 @@ body {
      background-color: #000000;
      color: #fff;
 }
- .btn-secondary {
+ .btn-delete-selected, .btn-delete-all {
      background-color: #f0f0f0;
      color: #333;
 }
@@ -174,7 +174,7 @@ body {
      background-color: #000000;
      color: #fff;
 }
- .btn-secondary {
+ .btn-delete-selected, .btn-delete-all {
      background-color: #333;
      color: #fff;
      font-size: 14px;

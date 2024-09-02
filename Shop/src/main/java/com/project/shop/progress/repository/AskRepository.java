@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
+import com.project.shop.progress.vo.AskDetailVO;
 import com.project.shop.progress.vo.AskVO;
 
 
@@ -21,6 +22,16 @@ public class AskRepository {
 	private SqlSessionTemplate template;
 	private final String NAME_SPACE = "AskMapper";
 	
+    // Ask 테이블에 데이터 삽입
+    public void insertAsk(AskVO ask) {
+        template.insert(NAME_SPACE + ".insertAsk", ask);
+    }
+
+    // AskDetail 테이블에 데이터 삽입
+    public void insertAskDetail(AskDetailVO askDetail) {
+        template.insert(NAME_SPACE + ".insertAskDetail", askDetail);
+    }
+
 	//주문 전체 조회
 	public Page<AskVO> askAll(Pageable pageable, String searchType, String keyword){
 		Map<String, Object> map = new HashMap<String, Object>();

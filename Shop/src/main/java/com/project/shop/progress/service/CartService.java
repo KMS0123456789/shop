@@ -9,6 +9,12 @@ public interface CartService {
     //장바구니 상품 리스트 조회
     List<CartVO> getCartItemsWithDetails(String userId);
     
+    void deleteCartItem(int cartNo);
+
+    void deleteSelectedItems(List<Integer> cartNos);
+
+    int deleteAllItems(String cartUser);
+    
 	//완제품 상세페이지에서 장바구니 담기
 	int cartComputer(CartVO vo);
 	

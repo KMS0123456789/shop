@@ -23,7 +23,22 @@ public class CartRepository {
     public List<CartVO> getCartItemsWithDetails(String user) {
         return template.selectList(NAME_SPACE + ".getCartItemsWithDetails", user);
     }
+    
+    // 개별 상품 삭제
+    public void deleteCartItem(int cartNo) {
+        template.delete(NAME_SPACE + ".deleteCartItem", cartNo);
+    }
 
+    // 선택된 상품 삭제
+    public void deleteSelectedItems(List<Integer> cartNos) {
+        template.delete(NAME_SPACE + ".deleteSelectedItems", cartNos);
+    }
+
+    // 모든 상품 삭제
+    public int deleteAllItems(String cartUser) {
+        return template.delete(NAME_SPACE + ".deleteAllItems", cartUser);
+    }
+    
 	//완제품 상세 페이지에서 장바구니 담기
 	public int cartComputer(CartVO vo) {
 		//CartMapper의 cartComputer 메서드 실행 CartVO vo 파라미터로 같이 보냄
