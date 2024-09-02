@@ -1,6 +1,9 @@
 package com.project.shop.progress.service.impl;
 
 import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +45,21 @@ public class KeepServiceImpl implements KeepService{
 	public int keepDeletePeripheral(KeepVO vo) {
 		//QuestionRepository의 keepDeletePeripheral 메서드 실행 KeepVO vo 파라미터로 같이 보냄
 		return repository.keepDeletePeripheral(vo);
+	}
+
+	@Override
+	public List<KeepVO> myKeep(KeepVO vo) {
+		return repository.myKeep(vo);
+	}
+	
+	@Override
+	public int keepDelete(int keepNo) {
+		return repository.keepDelete(keepNo);
+	}
+
+	@Override
+	public int keepSelectDelete(List<String> arrayParams) {
+		return repository.keepSelectDelete(arrayParams);
 	}
 
 }

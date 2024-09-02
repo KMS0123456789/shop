@@ -7,6 +7,58 @@
 		<result property="computerNo" column="computer_no"/>
 		<result property="peripheralNo" column="peripheral_no"/>
 		<result property="itemCategory" column="item_category"/>
+		<collection property="computers" ofType="com.project.shop.computer.vo.ComputerVO">
+			<id property="computerNo" column="computer_no"/>
+			<result property="computerTitle" column="computer_title"/>
+			<result property="computerSalePrice" column="computer_sale_price"/>
+			<result property="cpu" column="cpu"/>
+			<result property="ssd" column="ssd"/>
+			<result property="mainBoard" column="main_board"/>
+			<result property="gpu" column="gpu"/>
+			<result property="power" column="power"/>
+			<result property="bCase" column="b_case"/>
+			<result property="ram" column="ram"/>
+			<result property="cooler" column="cooler"/>
+			<result property="computerStock" column="computer_stock"/>
+			<result property="computerOutFlag" column="computer_out_flag"/>
+			<result property="computerSaleDate" column="computer_sale_date"/>
+			<result property="computerCreateDate" column="computer_create_date"/>
+			<result property="keepFlag" column="keep_flag"/>
+			<result property="reviewFlag" column="review_flag"/>
+			<result property="buyFlag" column="buy_flag"/>
+			<result property="starAvg" column="star_avg"/>
+			<result property="computerFilePath" column="computer_file_path"/>
+			<result property="searchNo" column="search_no"/>
+			<result property="searchTitle" column="search_title"/>
+			<result property="searchPrice" column="search_price"/>
+			<result property="searchFlag" column="search_flag"/>
+			<result property="searchFilePath" column="search_file_path"/>
+		</collection>
+		<collection property="peripherals" ofType="com.project.shop.computer.vo.PeripheralVO">
+			<id property="peripheralNo" column="peripheral_no"/>
+			<result property="peripheralCategory" column="peripheral_category"/>
+			<result property="peripheralTitle" column="peripheral_title"/>
+			<result property="peripheralName" column="peripheral_name"/>
+			<result property="peripheralStock" column="peripheral_stock"/>
+			<result property="peripheralSalePrice" column="peripheral_sale_price"/>
+			<result property="peripheralOutFlag" column="peripheral_out_flag"/>
+			<result property="peripheralSaleDate" column="peripheral_sale_date"/>
+			<result property="peripheralCreateDate" column="peripheral_create_date"/>
+			<result property="keepFlag" column="keep_flag"/>
+			<result property="reviewFlag" column="review_flag"/>
+			<result property="buyFlag" column="buy_flag"/>
+			<result property="starAvg" column="star_avg"/>
+			<result property="peripheralFilePath" column="peripheral_file_path"/>
+		</collection>
+		<collection property="files" ofType="com.project.shop.progress.vo.FileVO">
+			<id property="fileNo" column="file_no"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="fileName" column="file_name"/>
+			<result property="filePath" column="file_path"/>
+			<result property="fileSize" column="file_size"/>
+			<result property="itemCategory" column="item_category"/>
+		</collection>
 	</resultMap>
 	
 	<!-- 완제품 상세페이지에서 찜하기 -->
@@ -30,4 +82,25 @@
 	<delete id="keepDeletePeripheral" parameterType="com.project.shop.progress.vo.KeepVO">
 		delete from keep where keep_user =#{keepUser} and peripheral_no = #{peripheralNo}
 	</delete>
+	
+	<select id="myKeep" resultMap="keepMap">
+		select * from keep 
+		left join computer on keep.computer_no = computer.computer_no
+		left join peripheral on keep.peripheral_no = peripheral.peripheral_no
+		left join file on computer.computer_no = file.computer_no or peripheral.peripheral_no = file.peripheral_no
+		where keep_user = #{keepUser}
+		order by keep.keep_no desc
+	</select>
+	
+	<!-- 개별 상품 삭제 -->
+    <delete id="keepDelete" parameterType="int">
+        delete from keep where keep_no = #{keepNo}
+    </delete>
+    
+    <delete id="keepSelectDelete">
+    	delete from keep where keep_no in <!-- keep 테이블에 있는 특정 찜 삭제 -->
+		<foreach collection="list" item="keepNo" open="(" separator="," close=")" index="index">
+			${keepNo} <!-- 선택한 찜 번호  -->
+		</foreach>
+    </delete>
 </mapper>

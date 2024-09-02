@@ -1,6 +1,9 @@
 package com.project.shop.progress.repository;
 
 import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +40,17 @@ public class KeepRepository {
 	public int keepDeletePeripheral(KeepVO vo) {
 		//KeepMapper의 keepDeletePeripgeral 메서드 실행 HashMap map 파라미터로 같이 보냄
 		return template.delete(NAME_SPACE + ".keepDeletePeripheral", vo);
+	}
+	
+	public List<KeepVO> myKeep(KeepVO vo){
+		return template.selectList(NAME_SPACE + ".myKeep", vo);
+	}
+	
+	public int keepDelete(int keepNo) {
+		return template.delete(NAME_SPACE + ".keepDelete", keepNo);
+	}
+	
+	public int keepSelectDelete(List<String> arrayParams) {
+		return template.delete(NAME_SPACE + ".keepSelectDelete", arrayParams);
 	}
 }
