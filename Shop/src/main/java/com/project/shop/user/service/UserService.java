@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.project.shop.computer.vo.ComputerVO;
 import com.project.shop.progress.vo.KeepVO;
 import com.project.shop.user.vo.AddrVO;
+import com.project.shop.user.vo.QuestionVO;
 import com.project.shop.user.vo.UserVO;
 
 public interface UserService {
@@ -26,9 +27,4 @@ public interface UserService {
 	// 찜한 개수 조회하는 메서드
 	UserVO mylist(UserVO vo);
 	
-	// 질문 조회하는 메서드
-	List<UserVO> myquestion(UserVO vo);
-	
-	// 리뷰 조회하는 메서드
-	List<UserVO> myreview(UserVO vo);
 }

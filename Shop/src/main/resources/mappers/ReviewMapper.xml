@@ -9,6 +9,16 @@
 		<result property="reviewBody" column="review_body"/>
 		<result property="reviewCreateDate" column="review_create_date"/>
 		<result property="itemCategory" column="item_category"/>
+		<collection property="users" ofType="com.project.shop.user.vo.UserVO">
+			<id property="email" column="email"/>
+			<result property="name" column="name"/>
+			<result property="phoneNum" column="phone_num"/>
+			<result property="userType" column="user_type"/>
+			<result property="createDate" column="create_date"/>
+			<result property="updateDate" column="update_date"/>
+			<result property="deleteDate" column="delete_date"/>
+			<result property="blackListDate" column="black_list_date"/>
+		</collection>
 	</resultMap>
 	
 	<insert id="reviewComputer" parameterType="com.project.shop.user.vo.ReviewVO">
@@ -20,4 +30,29 @@
 		insert into review(review_user, peripheral_no, review_body, item_category)
 					values(#{reviewUser}, #{peripheralNo}, #{reviewBody}, 1)
 	</insert>
+	
+	<!-- 리뷰 전체 개수 조회 -->
+	<select id="count" resultType="int">
+		select count(*) from review
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 리뷰 전체 개수 조회 -->
+	<select id="mycount" resultType="int">
+		select count(*) from review
+		<where>
+			and review_user = #{email}
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="myreview" resultMap="reviewMap">
+		SELECT * from review where review_user = #{email} order by review_no desc limit #{offset}, #{limit};
+	</select>
 </mapper>

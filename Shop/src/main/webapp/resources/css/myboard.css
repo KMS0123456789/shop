@@ -186,3 +186,38 @@ input[type=text], input[type=password] {
 #myreview{
 	margin-top: 5rem;
 }
+#tables{
+	margin-bottom: 3rem;
+}
+#page,#page1{
+	display: flex;
+ 	justify-content: center;
+}
+#page a , #page1 a{
+	text-align: center;
+	text-decoration: none;
+	font-size: 20px;
+	margin-right: 1rem;
+}
+#page a, #page1 a {
+    position: relative;
+    border: none;
+    min-width: 30px;
+    min-height: 30px;
+    background: lightskyblue;
+    border-radius: 100px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px rgba(79, 209, 197, 0.64);
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+#page a:hover , #page1 a:hover{
+	transform: translate(-25%, -5%);
+    animation: ring 1.5s infinite;
+}
+
+#page1{
+	margin-bottom:4rem;
+}

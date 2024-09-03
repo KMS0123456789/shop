@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.project.shop.computer.vo.ComputerVO;
 import com.project.shop.progress.vo.KeepVO;
 import com.project.shop.user.vo.AddrVO;
+import com.project.shop.user.vo.QuestionVO;
 import com.project.shop.user.vo.UserVO;
 
 @Repository
@@ -56,12 +57,4 @@ public class UserRepository {
     	return template.selectOne(NAME_SPACE + ".mylist", vo);
     }
     
-    // 내가 질문한 목록 조회하는 메서드.
-    public List<UserVO> myquestion(UserVO vo){
-    	return template.selectList(NAME_SPACE+".myquestion", vo);
-    }
-    
-    public List<UserVO> myreview(UserVO vo){
-    	return template.selectList(NAME_SPACE+".myreview", vo);
-    }
 }

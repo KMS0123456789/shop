@@ -51,4 +51,9 @@ public class AddrRepository {
     public int myaddr1(AddrVO vo) {
     	return template.update(NAME_SPACE+ ".myaddr1", vo);
     }
+    
+    // 배송주소 기본주소에서 일반 주소로 업데이트 하는 메서드.
+    public int myaddr2(AddrVO vo) {
+    	return template.update(NAME_SPACE+".myaddr2", vo);
+    }
 }

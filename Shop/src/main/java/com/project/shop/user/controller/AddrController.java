@@ -63,7 +63,7 @@ public class AddrController {
 	
 	// 주소 수정
 	@RequestMapping(value="/myaddrModify.do" , method=RequestMethod.POST)
-	public String myaddrModify(AddrVO vo, @RequestParam(value="addrFlag") int addrFlag,
+	public String myaddrModify(AddrVO vo, @RequestParam(value="addrFlag") int addrFlag ,
 										@RequestParam(value="addrUserEmail") String email, HttpSession session,
 										RedirectAttributes redirect) {
 		

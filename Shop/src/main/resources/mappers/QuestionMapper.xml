@@ -11,6 +11,16 @@
 		<result property="questionCreateDate" column="question_create_date"/>
 		<result property="questionFlag" column="question_flag"/>
 		<result property="itemCategory" column="item_category"/>
+		<collection property="users" ofType="com.project.shop.user.vo.UserVO">
+			<id property="email" column="email"/>
+			<result property="name" column="name"/>
+			<result property="phoneNum" column="phone_num"/>
+			<result property="userType" column="user_type"/>
+			<result property="createDate" column="create_date"/>
+			<result property="updateDate" column="update_date"/>
+			<result property="deleteDate" column="delete_date"/>
+			<result property="blackListDate" column="black_list_date"/>
+		</collection>
 	</resultMap>
 	
 	<!-- question 전체 조회+페이징 기능 -->
@@ -26,10 +36,21 @@
 		limit #{offset}, #{limit}
 	</select>
 	
-	<!-- 완제품 전체 개수 조회 -->
+	<!-- 질문 전체 개수 조회 -->
 	<select id="count" resultType="int">
 		select count(*) from question
 		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 질문 전체 개수 조회 -->
+	<select id="mycount" resultType="int">
+		select count(*) from question
+		<where>
+			and question_user = #{email}
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -52,4 +73,16 @@
 	<select id="questionPost" parameterType="int" resultMap="questionMap">
 		select * from question where question_no = #{questionNo};
 	</select>
+	
+	<select id="myquestion" resultMap="questionMap" >
+		SELECT * from question 
+		<where>
+			and question_user = #{email}
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		 order by question_no desc limit #{offset}, #{limit};
+	</select>
+	
 </mapper>

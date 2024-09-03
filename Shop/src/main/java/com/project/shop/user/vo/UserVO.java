@@ -29,7 +29,14 @@ public class UserVO {
 	private int dReadyCount;
 	private int clearCount;
 	private int orchangeCount;
+	private int buyCount;
 	
+	public int getBuyCount() {
+		return buyCount;
+	}
+	public void setBuyCount(int buyCount) {
+		this.buyCount = buyCount;
+	}
 	public int getOrchangeCount() {
 		return orchangeCount;
 	}

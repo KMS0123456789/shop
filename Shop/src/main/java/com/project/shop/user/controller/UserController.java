@@ -1,5 +1,6 @@
 package com.project.shop.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.shop.progress.vo.KeepVO;
+import com.project.shop.user.service.QuestionService;
+import com.project.shop.user.service.ReviewService;
 import com.project.shop.user.service.UserService;
 import com.project.shop.user.vo.AddrVO;
 import com.project.shop.user.vo.QuestionVO;
@@ -33,6 +36,12 @@ public class UserController {
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private ReviewService reviewService;
+    
+    @Autowired
+    private QuestionService questionService;
+    
     //마이페이지
     @RequestMapping(value = "/mypage.do", method = RequestMethod.POST)
     public String mypage(UserVO vo, Model model, KeepVO kvo) {
@@ -41,24 +50,27 @@ public class UserController {
     	model.addAttribute("my", mylist); // 모델에 담아 화면에 출력할수 있게 함.
         return "mypage";
     }
-    
-    @RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
-    public String mypage2(UserVO vo, Model model, KeepVO kvo) {
-    	
-    	UserVO mylist = userService.mylist(vo);  
-    	model.addAttribute("my", mylist); 
-        return "mypage";
-    }
 
-    @RequestMapping(value = "/myboard.do", method = RequestMethod.POST)
-    public String myboard(Model model, UserVO vo) {
-    	
-    	List<UserVO> myquestionlist = userService.myquestion(vo); 
-    	List<UserVO> myreviewlist = userService.myreview(vo);
-    	
-    	model.addAttribute("myreview", myreviewlist);
-    	model.addAttribute("my", myquestionlist);
-    	
+    @RequestMapping(value = "/myboard.do", method = RequestMethod.GET)
+    public String myboard(Model model, String email,
+    							@RequestParam(name="page", required=false, defaultValue = "1") int page,
+    							@RequestParam(name="page2", required=false, defaultValue = "1") int page2,
+    							@RequestParam(name="searchType", required=false) String searchType,
+    							@RequestParam(name="keyword", required=false) String keyword,
+     							HttpSession session) {
+    	Pageable pageable = PageRequest.of(page-1, 5);
+		Pageable pageable2 = PageRequest.of(page2-1, 5);
+		Page<ReviewVO> myreviewlist = reviewService.myreview(pageable2, searchType, keyword, email);
+    	Page<QuestionVO> myquestionlist = questionService.myquestion(pageable, searchType, keyword, email); 
+    	model.addAttribute("myreview", myreviewlist.getContent());
+    	model.addAttribute("myquestion", myquestionlist.getContent());
+    	model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
+    	model.addAttribute("currentPage2", page2); //currentPage2 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", myquestionlist.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("totalPage2", myreviewlist.getTotalPages()); //totalPage2 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+		model.addAttribute("email", email);
+		model.addAttribute("email2", email);
         return "myboard";
     }
 

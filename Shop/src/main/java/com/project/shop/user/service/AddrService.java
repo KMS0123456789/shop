@@ -28,4 +28,7 @@ public interface AddrService {
 	
 	// 배송주소 업데이트하는 메서드
 	int myaddr1(AddrVO vo);
+	
+	// 배송주소 업데이트하는 메서드
+	int myaddr2(AddrVO vo);
 }

@@ -1,5 +1,7 @@
 package com.project.shop.user.vo;
 
+import java.util.List;
+
 public class QuestionVO {
 	private int questionNo;
 	private String questionUser;
@@ -10,6 +12,14 @@ public class QuestionVO {
 	private String questionCreateDate;
 	private int questionFlag;
 	private int itemCategory;
+	private List<UserVO> users;
+	
+	public List<UserVO> getUsers() {
+		return users;
+	}
+	public void setUsers(List<UserVO> users) {
+		this.users = users;
+	}
 	public int getQuestionNo() {
 		return questionNo;
 	}

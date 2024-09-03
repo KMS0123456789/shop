@@ -118,17 +118,6 @@ public class UserServiceImpl implements UserService {
 		return repository.mylist(vo); // 해당 사용자의 찜한 개수 찾는 메서드 호출
 	}
 
-	@Override
-	public List<UserVO> myquestion(UserVO vo) {
-		// TODO Auto-generated method stub
-		return repository.myquestion(vo); // 질문 조회하는 메서드 호출
-	}
 
-	@Override
-	public List<UserVO> myreview(UserVO vo) {
-		// TODO Auto-generated method stub
-		return repository.myreview(vo);
-	}
-	
 }
 

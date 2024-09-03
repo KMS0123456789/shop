@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.project.shop.user.vo.QuestionVO;
+import com.project.shop.user.vo.UserVO;
 
 @Repository
 public class QuestionRepository {
@@ -57,5 +58,25 @@ public class QuestionRepository {
 	public QuestionVO questionPost(int questionNo) {
 		//questionMapper의 questionPost 메서드 실행 파라미터로 int questionNo도 같이 보낸다.
 		return template.selectOne(NAME_SPACE + ".questionPost" , questionNo);
+	}
+	
+	 // 내가 질문한 목록 조회하는 메서드.
+    public Page<QuestionVO> myquestion(Pageable pageable, String searchType, String keyword, String email){
+    	Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("email", email);
+		int total = mycount(searchType, keyword , email);
+		List<QuestionVO> myquestion = template.selectList(NAME_SPACE+".myquestion", map);
+    	return new PageImpl<QuestionVO>(myquestion, pageable, total);	
+    }
+    
+    public int mycount(String searchType, String keyword, String email) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return template.selectOne(NAME_SPACE + ".count", map); //ComputerMapper의 count 메서드 실행
 	}
 }

@@ -59,6 +59,12 @@ public class AddrServiceImpl implements AddrService {
 		// TODO Auto-generated method stub
 		return repository.myaddr1(vo); // 특정 배송주소를 제외한 나머지를 1로 업데이트하는 메서드 호출.
 	}
+
+	@Override
+	public int myaddr2(AddrVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myaddr2(vo);
+	}
 	
 
 	

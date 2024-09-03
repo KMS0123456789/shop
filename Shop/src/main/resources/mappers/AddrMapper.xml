@@ -88,4 +88,8 @@
 		update addr set addr_flag = 1 where addr_user_email= #{addrUserEmail} and addr_no not in(#{addrNo}); <!-- 특정 배송주소 외에 addr_flag 1로 바꿈. -->
 	</update>
 	
+	<update id="myaddr2" parameterType="com.project.shop.user.vo.AddrVO">
+		update addr set addr_flag = 1 where addr_user_email = #{addrUserEmail} and addr_no = #{addrNo};
+	</update>
+	
 </mapper>

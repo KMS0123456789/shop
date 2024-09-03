@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.project.shop.user.repository.QuestionRepository;
 import com.project.shop.user.service.QuestionService;
 import com.project.shop.user.vo.QuestionVO;
+import com.project.shop.user.vo.UserVO;
 
 @Service
 public class QuestionServiceImpl implements QuestionService{
@@ -28,6 +29,12 @@ public class QuestionServiceImpl implements QuestionService{
 	public int count(String searchType, String keyword) {
 		return repository.count(searchType, keyword); //ComputerRepository의 메서드 count 실행
 	}
+	
+	//question 유저별 개수 조회
+		@Override
+		public int mycount(String searchType, String keyword, String email) {
+			return repository.mycount(searchType, keyword, email); //ComputerRepository의 메서드 count 실행
+		}
 
 	//완제품 상세페이지에서 문의글 쓰기
 	@Override
@@ -48,5 +55,12 @@ public class QuestionServiceImpl implements QuestionService{
 	public QuestionVO questionPost(int questionNo) {
 		//QuestionRepository의 메서드 questionPost 실행 int questionNo 파라미터도 같이 보낸다.
 		return repository.questionPost(questionNo);
+	}
+	
+	// 나의 질문 조회
+	@Override
+	public Page<QuestionVO> myquestion(Pageable pageable ,String searchType, String keyword, String email) {
+		// QuestionRepository의 메서드 myquestiont 실행 pageable 파라미터도 같이 보낸다.
+		return repository.myquestion(pageable, searchType, keyword, email); 
 	}
 }

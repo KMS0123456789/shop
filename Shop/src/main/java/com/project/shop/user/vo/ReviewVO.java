@@ -1,5 +1,7 @@
 package com.project.shop.user.vo;
 
+import java.util.List;
+
 public class ReviewVO {
 	private int reviewNo;
 	private String reviewUser;
@@ -8,7 +10,14 @@ public class ReviewVO {
 	private String reviewBody;
 	private String reviewCreateDate;
 	private int itemCategory;
+	private List<UserVO> users;
 	
+	public List<UserVO> getUsers() {
+		return users;
+	}
+	public void setUsers(List<UserVO> users) {
+		this.users = users;
+	}
 	public int getReviewNo() {
 		return reviewNo;
 	}

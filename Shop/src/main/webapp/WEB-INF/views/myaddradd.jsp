@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="<c:url value='/resources/css/myaddradd.css' />" rel="stylesheet">
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 <%@ include file="./includes/myheader.jsp" %>
@@ -78,7 +79,7 @@
                     </div>
                     <div class="ec-base-button">
                         <span class="gRight">
-                        	<button type="submit" class="btnSubmitFix sizeS" >등록</button>
+                        	<button type="submit" class="btnSubmitFix sizeS" id="sub">등록</button>
                             <a onclick="history.back()" class="btnNormalFix sizeS" >취소</a>
                         </span>
                     </div>
@@ -155,6 +156,55 @@
 	        .replace(/[^0-9]/g, '')
 	        .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
 	}
+</script>
+<script type="text/javascript">
+$("form").submit(function(){
+    
+    let addrDname = $("#ma_rcv_title");
+    let addrUname = $("#ma_rcv_name");
+    let addrCode = $("#sample6_postcode");
+    let addr = $("#sample6_address");
+    let addrDetail =$("#sample6_detailAddress");
+    let addrPlus = $("#sample6_extraAddress");
+    let addrLand = $("#ma_rcv_phone");
+    let addrPhone = $("#ma_rcv_mobile_no");
+
+
+    if(addrDname.val().trim() == ""){
+        alert("배송지명 입력해주세요");
+        addrDname.focus();
+        return false;
+    }
+
+
+    if(addrUname.val().trim() == ""){
+        alert("이름을 입력해주세요");
+        addrUname.focus();
+        return false;
+    }
+
+    if(addrCode.val().trim() == ""){
+        alert("우편번호을 입력해주세요");
+        return false;
+    }
+
+    if(addr.val().trim() == ""){
+        alert("주소를 입력해주세요");
+        return false;
+    }
+    
+    if(addrDetail.val().trim() == ""){
+        alert("상세주소를 입력해주세요");
+        return false;
+    }
+    if( addrPhone.val().trim() == ""){
+        alert("휴대전화번호를 입력해주세요");
+        addrPhone.focus();
+        return false;
+    }
+
+    this.submit();
+});
 </script>
 
 </body>
