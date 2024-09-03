@@ -23,8 +23,9 @@
 							<th>판매가</th>
 						</tr>
 					</thead>
+					
 					<c:forEach items="${ask}" var="ask">
-						<c:if test="${askStateFlag== 0}">
+						<c:if test="${ask.askStateFlag==1 or ask.askStateFlag==2}">
 							<tbody>
 								<tr>
 									<td>${ask.askNo}</td>

@@ -45,6 +45,29 @@
 		            </tr>
 		        </tbody>
 		</table>
+		
+		<div class="paging">
+	           <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
+				<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
+				<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
+			<c:if test="${currentPage > 1}">
+					<a class="first" href="<c:url value="/user/blacklist.do?page=1" />">&lt;&lt;</a>
+					<a class="prev" href="<c:url value="/user/blacklist.do?page=${currentPage-1}" />">&lt;</a>
+			</c:if>
+			<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
+				<c:choose>
+					<c:when test="${currentPage == pageNum}">
+						<a>${pageNum}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="<c:url value="/user/blacklist.do?page=${pageNum}" />">${pageNum}</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${currentPage < totalPage}">
+				<a class="next" href="<c:url value="/user/blacklist.do?page=${currentPage+1}" />">&gt;</a>
+				<a class="last" href="<c:url value="/user/blacklist.do?page=${totalPage}" />">&gt;&gt;</a>
+			</c:if>
 		</div>
 </body>
 </html>

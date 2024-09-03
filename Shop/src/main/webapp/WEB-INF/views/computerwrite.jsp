@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="<c:url value='/resources/css/write.css' />" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 		<div class="container">
@@ -70,4 +71,82 @@
         </form>
     </div>
 </body>
+<script>
+	$("form").submit(function(){
+		let title = $("#title");
+		let computerSalePrice=$("#computerSalePrice");
+		let cpu=$("#cpu");
+		let ssd=$("#ssd");
+		let mainBoard=$("#mainBoard");
+		let gpu = $("#gpu");
+		let power =$("#power");
+		let bCase =$("#bCase");
+		let ram = $("#ram");
+		let cooler = $("#cooler");
+		let itemCount = $("#itemCount");
+		
+		if(title.val().trim() == ""){
+			alert("제목은 필수 입력 항목 입니다.");
+			title.focus();
+			return false;
+		}
+		if(computerSalePrice.val().trim() == ""){
+			alert("상품 가격은 필수 입력 항목 입니다.");
+			computerSalePrice.focus();
+			return false;
+		}
+		if(cpu.val().trim() == ""){
+			alert("cpu는 필수 입력 항목 입니다.");
+			cpu.focus();
+			return false;
+		}
+		if(ssd.val().trim() == ""){
+			alert("ssd는 필수 입력 항목 입니다.");
+			ssd.focus();
+			return false;
+		}
+		if(mainBoard.val().trim() == ""){
+			alert("mainBoard는 필수 입력 항목 입니다.");
+			mainBoard.focus();
+			return false;
+		}
+		if(gpu.val().trim() == ""){
+			alert("gpu는 필수 입력 항목 입니다.");
+			gpu.focus();
+			return false;
+		}
+		if(power.val().trim() == ""){
+			alert("power는 필수 입력 항목 입니다.");
+			power.focus();
+			return false;
+		}
+		if(bCase.val().trim() == ""){
+			alert("bCase는 필수 입력 항목 입니다.");
+			bCase.focus();
+			return false;
+		}
+		if(ram.val().trim() == ""){
+			alert("ram은 필수 입력 항목 입니다.");
+			ram.focus();
+			return false;
+		}
+		if(ram.val().trim() == ""){
+			alert("ram은 필수 입력 항목 입니다.");
+			ram.focus();
+			return false;
+		}
+		if(cooler.val().trim() == ""){
+			alert("cooler은 필수 입력 항목 입니다.");
+			cooler.focus();
+			return false;
+		}
+		if(itemCount.val().trim() == ""){
+			alert("itemCount은 필수 입력 항목 입니다.");
+			itemCount.focus();
+			return false;
+		}				
+		
+		return true;
+	})
+</script>
 </html>

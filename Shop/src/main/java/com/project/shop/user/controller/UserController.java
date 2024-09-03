@@ -75,14 +75,20 @@ public class UserController {
     }
 
     //user 전체 조회
-    @RequestMapping(value = "/blacklist.do", method = RequestMethod.GET)
-    public String manageuser(Model model) {
-    	//user에 대한 모든 유저 조회
-        List<UserVO> userList = userService.userAll();
-        //userList에 service.userAll 값 넣기
-        model.addAttribute("user", userList);//포워딩할 때 키 user에 값 넣어 보내기
-        return "blacklist";
-    }
+    @RequestMapping(value="/blacklist.do",method = RequestMethod.GET)
+	public String manageuser(Model model,
+		@RequestParam(name="page", required=false, defaultValue = "1") int page,
+		@RequestParam(name="searchType", required=false) String searchType,
+		@RequestParam(name="keyword", required=false) String keyword,
+		HttpSession session) {
+	PageRequest pageable = PageRequest.of(page-1, 10);
+	Page<UserVO> data = userService.userAll(pageable, searchType, keyword);//data에 service.blacklist 값 넣기
+	model.addAttribute("user", data.getContent()); //question키에 조회할 페이지 정보 넣어 보내기
+	model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
+	model.addAttribute("totalPage", data.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
+	model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+	return "blacklist"; 
+	}
 
     //유저 타입을 블랙리스트로 변경
     @RequestMapping(value = "/blackList.do", method = RequestMethod.POST)

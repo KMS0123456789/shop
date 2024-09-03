@@ -78,8 +78,27 @@
 	</resultMap>
 	
 	<!-- 유저 조회하는 쿼리 -->
+	<!-- 블랙리스트 전체 조회+페이징 기능 -->
 	<select id="userAll" resultMap="userMap">
-		select * from user where user_type != 0; <!-- 유저테이블에서 userType이 0이 아닌 유저들을 전체 조회 쿼리 -->
+		select * from user where user_type != 0
+		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by email desc
+		limit #{offset}, #{limit}
+	</select>
+	
+	<!-- 블랙리스트 전체 개수 조회 -->
+	<select id="count" resultType="int">
+		select count(*) from user 
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
 	</select>
 		
 	<!-- 유저테이블의 user_type을 2로 수정하는 쿼리 -->

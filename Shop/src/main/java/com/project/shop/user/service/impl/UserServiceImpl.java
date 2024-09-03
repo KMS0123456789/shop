@@ -29,10 +29,17 @@ public class UserServiceImpl implements UserService {
     @Autowired  // UserRepository 객체를 자동으로 주입받도록 설정
     private UserRepository repository;
     
-    @Override
-    public List<UserVO> userAll() {
-        return repository.userAll();  //모든 유저 조회하는 메서드 호출
-    }
+  //블랙리스트 페이징 기능
+  	@Override
+  	public Page<UserVO> userAll(Pageable pageable, String searchType, String keyword) {
+  		return repository.userAll(pageable, searchType, keyword); //ComputerRepository의 메서드 managerQnA 실행
+  	}
+  	
+  	//블랙리스트 전체 개수 조회
+  	@Override
+  	public int count(String searchType, String keyword) {
+  		return repository.count(searchType, keyword); //ComputerRepository의 메서드 count 실행
+  	}
     
     @Override
     public int blackList(UserVO vo) {

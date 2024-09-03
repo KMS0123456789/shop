@@ -7,8 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="<c:url value='/resources/css/table.css' />" rel="stylesheet">
-    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 <%@ include file="./includes/myheader.jsp" %>
@@ -45,17 +43,8 @@
 											<img class="mainImg2" src="${file.computerFilePath}">
 										</div></td>
 	                            <td>${computer.computerTitle}</td>
-	                            <td>${option.optionName}</td>
-	                            <td class="price">
-					                    <f:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
-					                                <div class="cart-summary">
-                <h3>결제금액</h3>
-                <div class="summary-item">
-                    <span>총 상품금액</span>
-                    <span id="total-product-price">0원</span>
-
-                </div>
-	                            </td>                                                        
+	                           	<td><p>옵션: SSD ${option.optSsd}GB, HDD ${option.optHdd}GB, OS ${option.optOs == 0 ? '포함' : '미포함'}</p></td>
+	                            <td>${computer.computerPrice}</td>                                                        
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -85,35 +74,4 @@
 			</c:if>
 		</div>
 </body>
-<script type="text/javascript">
-/* 결제금액 계산 */
-document.addEventListener('DOMContentLoaded', function() {
-    const itemRows = document.querySelectorAll('.order-items tbody tr');
-    const totalProductPriceElement = document.getElementById('total-product-price');
-    const totalPaymentPriceElement = document.querySelector('.payment-summary .total');
-    const shippingFeeElement = document.getElementById('shipping-fee');
-    
-    const SHIPPING_FEE_THRESHOLD = 50000; // 배송비 무료 기준금액
-    const SHIPPING_FEE = 3000; // 기본 배송비
-
-    function updateTotalPrice() {
-        let totalProductPrice = 0;
-        
-        itemRows.forEach(row => {
-            const priceElement = row.querySelector('.price strong');
-            const quantityElement = row.querySelector('.quantity-control p');
-            
-            if (priceElement && quantityElement) {
-                const price = parseInt(priceElement.textContent.replace(/[^0-9]/g, ''));
-                const quantity = parseInt(quantityElement.textContent);
-                totalProductPrice += price * quantity;
-            }
-        });
-        // 총 결제금액 계산
-        const totalPaymentPrice = totalProductPrice + shippingFee;
-        // 화면에 표시
-        totalProductPriceElement.textContent = totalProductPrice.toLocaleString() + "원";
-        shippingFeeElement.textContent = shippingFee.toLocaleString() + "원";
-        totalPaymentPriceElement.textContent = totalPaymentPrice.toLocaleString() + "원";
-</script>
 </html>

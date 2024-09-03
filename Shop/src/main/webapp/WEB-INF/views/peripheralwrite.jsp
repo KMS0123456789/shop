@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="<c:url value='/resources/css/write.css' />" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -27,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label for="peripheralName">상품명</label>
-                <input type="text" id="itemCount" name="peripheralName">
+                <input type="text" id="peripheralName" name="peripheralName">
             </div>
             <div class="form-group">
                 <label for="peripheral_stock">상품 수량</label>
@@ -47,4 +48,39 @@
         </form>
     </div>
 </body>
+<script>
+
+		$("form").submit(function(){
+	
+		let title = $("#title");
+		let peripheralSalePrice = $("#peripheralSalePrice");
+		let peripheralName = $("#peripheralName");
+		let itemCount = $("#itemCount")		
+		
+		if(title.val().trim() == ""){
+			alert("제목은 필수 입력 항목 입니다.");
+			title.focus();
+			return false;
+		}
+		
+		if(peripheralSalePrice.val().trim() == ""){
+			alert("peripheralSalePrice는 필수 입력 항목 입니다.");
+			peripheralSalePrice.focus();
+			return false;
+		}
+		
+		if(peripheralName.val().trim() == ""){
+			alert("peripheralName는 필수 입력 항목 입니다.");
+			peripheralName.focus();
+			return false;
+		}
+		
+		if(itemCount.val().trim() == ""){
+			alert("itemCount은 필수 입력 항목 입니다.");
+			itemCount.focus();
+			return false;
+		}
+		return true;
+	})
+</script>
 </html>

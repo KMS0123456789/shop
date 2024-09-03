@@ -12,8 +12,12 @@ import com.project.shop.user.vo.QuestionVO;
 import com.project.shop.user.vo.UserVO;
 
 public interface UserService {
-	//모든 유저 조회하는 메서드
-	List<UserVO> userAll();
+	//블랙리스트 페이징 기능
+	Page<UserVO> userAll(Pageable pageable, String searchType, String keyword);
+		
+	//블랙리스트 전체 개수 조회
+	int count(String searchType, String keyword);
+
 	//유저 타입을 블랙리스트로 바꾸는 메서드
 	int blackList(UserVO vo);
 	

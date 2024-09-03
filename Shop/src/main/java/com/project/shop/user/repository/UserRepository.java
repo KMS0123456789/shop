@@ -41,10 +41,25 @@ public class UserRepository {
 		return template.selectOne(NAME_SPACE + ".login", vo);
 	}
     
-    //유저를 전체 조회하는 메서드
-    public List<UserVO> userAll() { 
-        return template.selectList(NAME_SPACE + ".userAll");
-    }
+  //블랙리스트 전체조회+페이징
+  	public Page<UserVO> userAll(Pageable pageable, String searchType, String keyword){
+  		Map<String, Object> map = new HashMap<String, Object>();
+  		map.put("offset", pageable.getOffset());
+  		map.put("limit", pageable.getPageSize());
+  		map.put("searchType", searchType);
+  		map.put("keyword", keyword);
+  		int total = count(searchType, keyword);
+  		List<UserVO> userAll = template.selectList(NAME_SPACE + ".userAll", map); //QuestionMapper의 questions 메서드 실행
+  		return new PageImpl<UserVO>(userAll, pageable, total);
+  	}
+  	//블랙리스트 전제 개수 조회
+
+  		public int count(String searchType, String keyword) {
+  		Map<String, Object> map = new HashMap<String, Object>();
+  		map.put("searchType", searchType);
+  		map.put("keyword", keyword);
+  		return template.selectOne(NAME_SPACE + ".count", map); //ComputerMapper의 count 메서드 실행
+  	}
     
     //유저 타입을 변경하는 메서드
     public int blackList(UserVO vo) {
