@@ -12,24 +12,11 @@
 </head>
 <body>
 <%@ include file="./includes/myheader.jsp" %>
-    <div class="container">
-        <h1>장바구니</h1>
-        <div class="cart-header">
-            <div class="cart-step active">
-                <i class="icon-bag"></i>
-                <span>장바구니</span>
-            </div>
-            <div class="cart-step">
-                <i class="icon-card"></i>
-                <span>주문/결제</span>
-            </div>
-            <div class="cart-step">
-                <i class="icon-check"></i>
-                <span>주문완료</span>
-            </div>
-        </div>
-        <div class="cart-content" style="width:1200px">
-            <div class="cart-items">
+<div class="container">
+    <h1>장바구니</h1>
+    <div class="cart-content" style="display: flex; justify-content: space-between;">
+        <div class="cart-items" style="width: 70%;">
+            <form action="<c:url value='/cart/order.do'/>" method="post">
                 <table>
                     <thead>
                         <tr>
@@ -39,66 +26,61 @@
                             <th style="text-align: center">가격</th>
                         </tr>
                     </thead>
-					<form action="<c:url value='/cart/order.do'/>" method="post">
-					    <tbody>
-					        <c:forEach var="item" items="${cartItems}">
-					            <tr data-cart-no="${item.cartNo}">
-					                <td>
-					                    <input type="checkbox" class="item-checkbox" name="checkedItem" 
-					                           value="${item.cartNo}" 
-					                           data-price="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}">
-					                </td>
-					                <td class="product-info">
-					                    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
-					                    <div>
-					                        <h3>
-					                            ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
-					                        </h3>
-					                        <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '미포함' : '포함'}</p>
-					                    </div>
-					                </td>
-					                <td>
-					                    <div class="quantity-control">
-					                        <p>${item.itemCount}</p>
-					                    </div>
-					                </td>
-					                <td class="price">
-					                    <strong>
-					                        <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
-					                    </strong>
-					                </td>
-					                <td><button class="btn-remove">×</button></td>
-					            </tr>
-					        </c:forEach>
-					    </tbody>
-					
-					    <div class="cart-actions">
-					        <button type="button" class="btn-delete-selected">선택상품 삭제</button>
-					        <button type="button" class="btn-delete-all">전체상품 삭제</button>
-					    </div>
-					
-					    <div class="cart-summary">
-					        <h3>결제금액</h3>
-					        <div class="summary-item">
-					            <span>총 상품금액</span>
-					            <span id="total-product-price">0원</span>
-					        </div>
-					        <div class="summary-item">
-					            <span>배송비</span>
-					            <span id="shipping-fee">0원</span>
-					        </div>
-					        <div class="summary-item total">
-					            <span>결제예정금액</span>
-					            <span id="total-payment-price">0원</span>
-					        </div>
-					
-					        <!-- Submit 버튼으로 변경 -->
-					        <button type="submit" class="btn-primary">전체상품 주문하기</button>
-					        <button type="submit" class="btn-secondary-outline">선택상품 주문하기</button>
-					    </div>
-					</form>
+                    <tbody>
+                        <c:forEach var="item" items="${cartItems}">
+                            <tr data-cart-no="${item.cartNo}">
+                                <td>
+                                    <input type="checkbox" class="item-checkbox" name="checkedItem" 
+                                           value="${item.cartNo}" 
+                                           data-price="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}">
+                                </td>
+                                <td class="product-info">
+                                    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
+                                    <div>
+                                        <h3>${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}</h3>
+                                        <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '미포함' : '포함'}</p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="quantity-control">
+                                        <p>${item.itemCount}</p>
+                                    </div>
+                                </td>
+                                <td class="price">
+                                    <strong>
+                                        <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
+                                    </strong>
+                                </td>
+                                <td><button type="button" class="btn-remove">×</button></td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+	            <div class="cart-actions">
+			        <button type="button" class="btn-delete-selected">선택상품 삭제</button>
+			        <button type="button" class="btn-delete-all">전체상품 삭제</button>
+			    </div>
+	                <button type="submit" class="btn-primary">전체상품 주문하기</button>
+	            	<button type="submit" class="btn-secondary-outline">선택상품 주문하기</button>
+            </form>
+        </div>
+        <div class="cart-summary" style="width: 25%;">
+            <h3>결제금액</h3>
+            <div class="summary-item">
+                <span>총 상품금액</span>
+                <span id="total-product-price">0원</span>
+            </div>
+            <div class="summary-item">
+                <span>배송비</span>
+                <span id="shipping-fee">0원</span>
+            </div>
+            <div class="summary-item total">
+                <span>결제예정금액</span>
+                <span id="total-payment-price">0원</span>
+            </div>
         </div>
     </div>
+</div>
 </body>
 	<script>
 	//결제금액 계산
@@ -111,9 +93,31 @@
 	    const removeButtons = document.querySelectorAll('.btn-remove');
 	    const deleteSelectedButton = document.querySelector('.btn-delete-selected');
 	    const deleteAllButton = document.querySelector('.btn-delete-all');
+	    const btnSubmitSelected = document.querySelector('.btn-secondary-outline');
+	    const btnSubmitAll = document.querySelector('.btn-primary');
 	    
 	    const SHIPPING_FEE_THRESHOLD = 50000; // 배송비 무료 기준금액
 	    const SHIPPING_FEE = 3000; // 기본 배송비
+	    
+	 	// 선택상품 주문하기 버튼 클릭 시
+	    btnSubmitSelected.addEventListener('click', function(event) {
+	        // 체크된 항목이 하나라도 있는지 확인
+	        const checkedItems = Array.from(itemCheckboxes).some(checkbox => checkbox.checked);
+	        
+	        if (!checkedItems) {
+	            event.preventDefault(); // 폼 제출을 막음
+	            alert('상품을 선택해 주세요.');
+	        } else {
+	            form.submit(); // 폼 제출
+	        }
+	    });
+
+	    // 전체상품 주문하기 버튼 클릭 시
+	    btnSubmitAll.addEventListener('click', function(event) {
+	        // 모든 체크박스 선택
+	        itemCheckboxes.forEach(checkbox => checkbox.checked = true);
+	        form.submit(); // 폼 제출
+	    });
 	    
 	    // 전체 선택 체크박스 이벤트
 	    selectAllCheckbox.addEventListener('change', function() {
