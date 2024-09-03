@@ -39,57 +39,64 @@
                             <th style="text-align: center">가격</th>
                         </tr>
                     </thead>
-                    <tbody>
-					    <c:forEach var="item" items="${cartItems}">
-					        <tr data-cart-no="${item.cartNo}">
-					            <td><input type="checkbox" class="item-checkbox" data-price="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}"></td>
-					            <td class="product-info">
-					                <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
-					                <div>
-					                    <h3>
-					                        ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
-					                    </h3>
-					                    <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '포함' : '미포함'}</p>
-					                </div>
-					            </td>
-					            <td>
-					                <div class="quantity-control">
-					                    <p>${item.itemCount}</p>
-					                </div>
-					            </td>
-					            <td class="price">
-					                <strong>
-					                    <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
-					                </strong>
-					            </td>
-					            <td><button class="btn-remove">×</button></td>
-					        </tr>
-					    </c:forEach>
-					</tbody>
-                </table>
-                <div class="cart-actions">
-                    <button class="btn-delete-selected">선택상품 삭제</button>
-                    <button class="btn-delete-all">전체상품 삭제</button>
-                </div>
-            </div>
-            <div class="cart-summary">
-                <h3>결제금액</h3>
-                <div class="summary-item">
-                    <span>총 상품금액</span>
-                    <span id="total-product-price">0원</span>
-
-                </div>
-                <div class="summary-item">
-				    <span>배송비</span>
-				    <span id="shipping-fee">0원</span>
-				</div>
-                <div class="summary-item total">
-                    <span>결제예정금액</span>
-                    <span id="total-payment-price">0원</span>
-                </div>
-                <button class="btn-primary" onclick="location.href='<c:url value='/cart/order.do'/>'">전체상품 주문하기</button>
-				<button class="btn-secondary-outline" onclick="location.href='<c:url value='/cart/order.do'/>'">선택상품 주문하기</button>
-            </div>
+					<form action="<c:url value='/cart/order.do'/>" method="post">
+					    <tbody>
+					        <c:forEach var="item" items="${cartItems}">
+					            <tr data-cart-no="${item.cartNo}">
+					                <td>
+					                    <input type="checkbox" class="item-checkbox" name="checkedItem" 
+					                           value="${item.cartNo}" 
+					                           data-price="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}">
+					                </td>
+					                <td class="product-info">
+					                    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
+					                    <div>
+					                        <h3>
+					                            ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
+					                        </h3>
+					                        <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '미포함' : '포함'}</p>
+					                    </div>
+					                </td>
+					                <td>
+					                    <div class="quantity-control">
+					                        <p>${item.itemCount}</p>
+					                    </div>
+					                </td>
+					                <td class="price">
+					                    <strong>
+					                        <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
+					                    </strong>
+					                </td>
+					                <td><button class="btn-remove">×</button></td>
+					            </tr>
+					        </c:forEach>
+					    </tbody>
+					
+					    <div class="cart-actions">
+					        <button type="button" class="btn-delete-selected">선택상품 삭제</button>
+					        <button type="button" class="btn-delete-all">전체상품 삭제</button>
+					    </div>
+					
+					    <div class="cart-summary">
+					        <h3>결제금액</h3>
+					        <div class="summary-item">
+					            <span>총 상품금액</span>
+					            <span id="total-product-price">0원</span>
+					        </div>
+					        <div class="summary-item">
+					            <span>배송비</span>
+					            <span id="shipping-fee">0원</span>
+					        </div>
+					        <div class="summary-item total">
+					            <span>결제예정금액</span>
+					            <span id="total-payment-price">0원</span>
+					        </div>
+					
+					        <!-- Submit 버튼으로 변경 -->
+					        <button type="submit" class="btn-primary">전체상품 주문하기</button>
+					        <button type="submit" class="btn-secondary-outline">선택상품 주문하기</button>
+					    </div>
+					</form>
         </div>
     </div>
 </body>

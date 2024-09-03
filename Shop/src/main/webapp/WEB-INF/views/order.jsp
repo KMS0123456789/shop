@@ -49,29 +49,29 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="item" items="${cartItems}">
-                <tr>
-                    <td>
-                        <img src="<c:url value='/resources/image/${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product" class="product-image">
-                        <div class="product-info">
-                            <h3>
-                                ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
-                            </h3>
-                            <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '포함' : '미포함'}</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="quantity-control">
-                            <p>${item.itemCount}</p>
-                        </div>
-                    </td>
-                    <td class="price" style="text-align: center">
-					    <strong>
-					        <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
-					    </strong>
-					</td>
-                </tr>
-                </c:forEach>
+				<c:forEach var="item" items="${cartItems}">
+			        <tr>
+			            <td>
+			                <img src="<c:url value='/resources/image/${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product" class="product-image">
+			                <div class="product-info">
+			                    <h3>
+			                        ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
+			                    </h3>
+			                    <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '포함' : '미포함'}</p>
+			                </div>
+			            </td>
+			            <td>
+			                <div class="quantity-control">
+			                    <p>${item.itemCount}</p>
+			                </div>
+			            </td>
+			            <td class="price" style="text-align: center">
+			                <strong>
+			                    <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
+			                </strong>
+			            </td>
+			        </tr>
+				</c:forEach>
             </tbody>
         </table>
         <h2>주문정보</h2>
@@ -423,6 +423,7 @@
 	     	
 	        // 각 행(row)에서 computerNo 값을 가져옴
 	        const computerNo = parseInt(row.dataset.computerNo);  // 여기서 computerNo 값을 가져옴
+	        const peripheralNo = itemCategory === 1 ? parseInt(row.dataset.peripheralNo) : null;
 	        
 	        console.log("computerNo:", computerNo);  // 추출한 computerNo 값을 확인
 
@@ -432,7 +433,7 @@
 	            itemCount: parseInt(row.querySelector('.quantity-control p').textContent),
 	            optNo: 0, // 필요 시 옵션 번호 추가
 	            computerNo: itemCategory === 0 ? computerNo : null, // 컴퓨터 카테고리인 경우 computerNo 설정
-	            peripheralNo: itemCategory === 1 ? parseInt(row.dataset.peripheralNo) : null
+	            peripheralNo: itemCategory === 1 ? parseInt(row.dataset.peripheralNo) : null // 주변기기 카테고리인 경우 peripheralNo 설정
 	        };
 	        items.push(item);
 	    });
@@ -442,6 +443,7 @@
 
 	    
 	function sendPaymentInfoToServer(paymentResult) {
+		console.log('결제 정보 전송:', paymentResult); // 결제 정보 로그 출력
 	    $.ajax({
 	        url: '<c:url value="/ask/completePay.do"/>',
 	        method: 'POST',
@@ -519,6 +521,5 @@
 	           }
 	       }).open();
 	}
-	
 	</script>
 </html>

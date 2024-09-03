@@ -41,6 +41,34 @@
 	    </collection>
 	</resultMap>
 
+		<!-- cartNo로 아이템을 조회 -->
+    <select id="selectItemByCartNo" parameterType="int" resultType="com.project.shop.progress.vo.CartVO">
+        SELECT 
+            c.cart_no as cartNo,
+            c.cart_user as cartUser,
+            c.computer_no as computerNo,
+            c.peripheral_no as peripheralNo,
+            c.opt_ssd as optSsd,
+            c.opt_hdd as optHdd,
+            c.opt_os as optOs,
+            c.item_count as itemCount,
+            c.item_category as itemCategory
+        FROM 
+            cart c
+            LEFT JOIN computer com ON c.computer_no = com.computer_no
+            LEFT JOIN peripheral per ON c.peripheral_no = per.peripheral_no
+        WHERE 
+            c.cart_no = #{cartNo}
+    </select>
+    
+    <select id="selectComputerByNo" parameterType="int" resultType="com.project.shop.computer.vo.ComputerVO">
+	    SELECT * FROM computer WHERE computer_no = #{computerNo}
+	</select>
+	
+	<select id="selectPeripheralByNo" parameterType="int" resultType="com.project.shop.computer.vo.PeripheralVO">
+	    SELECT * FROM peripheral WHERE peripheral_no = #{peripheralNo}
+	</select>
+
 	<!-- 주문 아이템 조회 -->
     <select id="getCartItemsByUser" parameterType="string" resultMap="cartMap" >
         SELECT *

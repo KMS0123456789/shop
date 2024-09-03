@@ -1,5 +1,6 @@
 package com.project.shop.progress.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +19,26 @@ public class CartServiceImpl implements CartService{
 	
 	@Autowired
 	private CartRepository repository;
+	
+	@Override
+	public List<CartVO> getSelectedItems(int[] cartNos) {
+	    List<CartVO> selectedItems = new ArrayList<>();
+	    
+	    for (int cartNo : cartNos) {
+	        CartVO item = repository.selectItemByCartNo(cartNo);
+	        if (item != null) {
+	            // 컴퓨터 또는 주변기기 정보 설정
+	            if (item.getItemCategory() == 0) {
+	                item.setComputers(repository.selectComputerByNo(item.getComputerNo()));
+	            } else {
+	                item.setPeripherals(repository.selectPeripheralByNo(item.getPeripheralNo()));
+	            }
+	            selectedItems.add(item);
+	        }
+	    }
+	    
+	    return selectedItems;
+	}
 
     @Override
     public List<CartVO> getCartItemsByUser(String user) {

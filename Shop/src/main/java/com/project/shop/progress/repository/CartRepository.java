@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.shop.computer.vo.ComputerVO;
+import com.project.shop.computer.vo.PeripheralVO;
 import com.project.shop.progress.vo.CartVO;
 
 @Repository
@@ -15,6 +17,18 @@ public class CartRepository {
 	@Autowired
 	private SqlSessionTemplate template;
 	private final String NAME_SPACE = "CartMapper";
+	
+    public CartVO selectItemByCartNo(int cartNo) {
+        return template.selectOne(NAME_SPACE + ".selectItemByCartNo", cartNo);
+    }
+	
+    public List<ComputerVO> selectComputerByNo(int computerNo) {
+        return template.selectList(NAME_SPACE + ".selectComputerByNo", computerNo);
+    }
+
+    public List<PeripheralVO> selectPeripheralByNo(int peripheralNo) {
+        return template.selectList(NAME_SPACE + ".selectPeripheralByNo", peripheralNo);
+    }
 	
     public List<CartVO> getCartItemsByUser(String user) {
         return template.selectList(NAME_SPACE + ".getCartItemsByUser", user);

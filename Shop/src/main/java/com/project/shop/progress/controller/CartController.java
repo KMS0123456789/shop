@@ -50,13 +50,14 @@ public class CartController {
         return "cart";
     }
     
-    @GetMapping("/order.do")
-    public String viewOrder(@ModelAttribute UserVO vo, HttpSession session, Model model) {
+    @PostMapping("/order.do")
+    public String orderSelectedItems(@RequestParam("checkedItem") int[] checkedItems, @ModelAttribute UserVO vo, HttpSession session, Model model) {
         UserVO user = (UserVO) session.getAttribute("user");
+        // 선택된 아이템들을 서비스로 전달하여 조회
+        List<CartVO> selectedItems = service.getSelectedItems(checkedItems);
 
-        // 장바구니 항목 조회
-        List<CartVO> cartItems = service.getCartItemsByUser(user.getEmail());
-        model.addAttribute("cartItems", cartItems);
+        // 모델에 선택된 아이템들을 추가하여 order.jsp로 전달
+        model.addAttribute("cartItems", selectedItems); //selectedItems을 cartItems로 전달
         
         // 단일 주소 조회
         AddrVO addr = addrService.getAddress(user.getEmail());
