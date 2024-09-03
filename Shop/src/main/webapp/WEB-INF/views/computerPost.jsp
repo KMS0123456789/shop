@@ -126,7 +126,7 @@
 											</ul>
 											<ul class="btnbox2">
 												<li>
-													<button class="btn-l-yellow">
+													<button class="btn-l-yellow" onclick="buy()">
 														<span>카카오페이로 구매하기</span>
 													</button>
 												</li>
@@ -462,6 +462,13 @@
 				}
 				$("#history").append(history);
 				
+			}
+			function buy(){
+				let session = "${sessionScope.user.email}"
+				if(session == null || session == ""){
+					alert("로그인 해주세요");
+					return;
+				}
 			}﻿
 		</script>
 	</body>

@@ -138,7 +138,8 @@ public class PeripheralController {
 	    int result =peripheralVO.getPeripheralNo();
 	    
 	    if(result > 0) {
-	        String uploadDir = servletContext.getRealPath("/uploads/");
+	        //String uploadDir = servletContext.getRealPath("/uploads/");
+	        String uploadDir = "D:\\CteamTwo\\Shop\\src\\main\\webapp\\uploads\\";
 	        File dir = new File(uploadDir);
 	        if(!dir.exists()) {
 	            dir.mkdirs();

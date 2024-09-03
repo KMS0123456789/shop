@@ -186,5 +186,6 @@ public class ComputerController {
 		model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
 		return "search";
 	}
+	
 }
 

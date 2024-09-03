@@ -13,7 +13,9 @@
 			<result property="askDetailUser" column="ask_detail_user"/>
 			<result property="computerNo" column="computer_no"/>
 			<result property="peripheralNo" column="peripheral_no"/>
-			<result property="optNo" column="opt_no"/>
+			<result property="optSsd" column="opt_ssd"/>
+		    <result property="optHdd" column="opt_hdd"/>
+		    <result property="optOs" column="opt_os"/>
 			<result property="itemCount" column="item_count"/>
 			<result property="itemCategory" column="item_category"/>
 		</collection>

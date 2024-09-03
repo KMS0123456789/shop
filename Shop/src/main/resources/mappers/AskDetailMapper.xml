@@ -7,15 +7,17 @@
 		<result property="askDetailUser" column="ask_detail_user"/>
 		<result property="computerNo" column="computer_no"/>
 		<result property="peripheralNo" column="peripheral_no"/>
-		<result property="optNo" column="opt_no"/>
+		<result property="optSsd" column="opt_ssd"/>
+	    <result property="optHdd" column="opt_hdd"/>
+	    <result property="optOs" column="opt_os"/>
 		<result property="itemCount" column="item_count"/>
 		<result property="itemCategory" column="item_category"/>
 		<result property="askDate" column="ask_date" />
 	</resultMap>
 	
 	<!-- 주문 상세입력-->
-    <insert id="insertAskDetail">
+    <!-- <insert id="insertAskDetail">
         INSERT INTO ask_detail (ask_no, ask_detail_user, computer_no, peripheral_no, opt_no, item_count, item_category)
         VALUES (#{askNo}, #{askDetailUser}, #{computerNo}, #{peripheralNo}, #{optNo}, #{itemCount}, #{itemCategory})
-    </insert>
+    </insert> -->
 </mapper>
