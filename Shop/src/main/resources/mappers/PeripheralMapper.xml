@@ -134,7 +134,7 @@
 		(select file_path from file where file.peripheral_no = peripheral.peripheral_no) as peripheral_file_path,
 		(select avg(star_count) from star where star.peripheral_no = #{peripheralNo} group by star.peripheral_no) as star_avg,
 		(select count(review_user) from review where review.peripheral_no = peripheral.peripheral_no) as review_flag,
-		(select count(ask_user) from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask.ask_state_flag = 2 and peripheral_no = #{peripheralNo}) as buy_flag 
+		(select count(ask_user) from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask.ask_state_flag = 4 and peripheral_no = #{peripheralNo}) as buy_flag 
 		from peripheral 
 		left join review on peripheral.peripheral_no = review.peripheral_no
 		left join question on peripheral.peripheral_no = question.peripheral_no
