@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -58,14 +59,14 @@
 				    	<p>옵션: SSD ${detail.ssdName != null ? detail.ssdName : '미포함'}, HDD ${detail.hddName != null ? detail.hddName : '미포함'}, OS ${detail.osName != null ? detail.osName : '미포함'}</p>
 				    </td>
 				    <td>1</td>
-				    <td>${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice }원</td>
+				    <td><fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice }" type="number" pattern="#,###"/>원</td>
 				</tr>
             </tbody>
         </table>
 
         <!-- 총 결제 금액 및 배송비 표시 -->
         <div class="total-amount">
-            <p>총 결제 금액:${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice }원 + 배송비 : 3000원  = 합계 : <strong>${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice + 3000}원</strong></p>
+            <p>총 결제 금액:<fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice }" type="number" pattern="#,###"/>원 + 배송비 : 3,000원  = 합계 : <strong><fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice + 3000 }" type="number" pattern="#,###"/>원</strong></p>
         </div>
 
         <!-- 쇼핑 계속하기 버튼 -->
