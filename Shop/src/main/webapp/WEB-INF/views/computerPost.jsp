@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -40,7 +41,7 @@
 										<div class="inner-box">
 											<div class="price-box">
 												<div class="pull-left">
-													<span class="p1"><em>${computer.computerSalePrice}</em>원</span>
+													<span class="p1"><em><fmt:formatNumber value="${computer.computerSalePrice}" type="number" pattern="#,###"/></em>원</span>
 												</div>
 											</div>
 											<form class="select-form" action="<c:url value="/ask/computerBuy.do"/>" method="post">	
@@ -55,7 +56,7 @@
 																<option data-price="0" value="0">SSD 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 0}">
-																		<option data-price="${opt.optSalePrice}" value="${opt.optNo}" >${opt.optName}+${opt.optSalePrice}원
+																		<option data-price="${opt.optSalePrice}" value="${opt.optNo}" >${opt.optName}+<fmt:formatNumber value="${opt.optSalePrice}" type="number" pattern="#,###"/>원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -68,7 +69,7 @@
 																<option data-price="0" value="0">HDD 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 1}">
-																		<option data-price="${opt.optSalePrice}" value="${opt.optNo}">${opt.optName}+${opt.optSalePrice}원
+																		<option data-price="${opt.optSalePrice}" value="${opt.optNo}">${opt.optName}+<fmt:formatNumber value="${opt.optSalePrice}" type="number" pattern="#,###"/>원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -81,7 +82,7 @@
 																<option data-price="0" value="0" >OS 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 2}">
-																		<option data-price="${opt.optSalePrice}" value="${opt.optNo}">${opt.optName}+${opt.optSalePrice}원
+																		<option data-price="${opt.optSalePrice}" value="${opt.optNo}">${opt.optName}+<fmt:formatNumber value="${opt.optSalePrice}" type="number" pattern="#,###"/>원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -92,7 +93,7 @@
 											<div class="total">
 												<span class="t1">총 결제금액</span>
 												<span class="t2">
-														<strong id="total-price">${computer.computerSalePrice}</strong>원
+														<strong id="total-price"><fmt:formatNumber value="${computer.computerSalePrice}" type="number" pattern="#,###"/></strong>원
 												</span>
 											</div>
 											<ul class="btnbox">

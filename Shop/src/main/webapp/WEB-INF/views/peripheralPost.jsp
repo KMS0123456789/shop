@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -39,7 +40,7 @@
 										<div class="inner-box">
 											<div class="price-box">
 												<div class="pull-left">
-													<span class="p1"><em>${peripheral.peripheralSalePrice}</em>원</span>
+													<span class="p1"><em><fmt:formatNumber value="${peripheral.peripheralSalePrice}" type="number" pattern="#,###"/></em>원</span>
 												</div>
 											</div>
 											<div class="add-list">
@@ -50,7 +51,7 @@
 											<div class="total">
 												<span class="t1">총 결제금액</span>
 												<span class="t2">
-													<strong id="toal-price">${peripheral.peripheralSalePrice}</strong>원
+													<strong id="toal-price"><fmt:formatNumber value="${peripheral.peripheralSalePrice}" type="number" pattern="#,###"/></strong>원
 												</span>
 											</div>
 											<ul class="btnbox">
