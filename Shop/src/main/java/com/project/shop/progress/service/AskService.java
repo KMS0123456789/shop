@@ -21,6 +21,18 @@ import com.project.shop.progress.vo.AskVO;
 		List<AskVO> computerPost(int computerNo);
 		
 		List<AskVO> peripheralPost(int peripheralNo);
+		
+		int computerBuy(AskVO avo);
+		
+		AskVO computerBuySelect(AskVO avo);
+		
+		int completeComputerBuy(AskVO vo);
+		
+		int peripheralBuy(AskVO avo);
+		
+		AskVO peripheralBuySelect(AskVO avo);
+		
+		int completePeripheralBuy(AskVO vo);
 
 	}
 	

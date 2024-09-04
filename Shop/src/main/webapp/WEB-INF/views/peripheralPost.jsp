@@ -57,40 +57,50 @@
 												<c:choose>
 													<c:when test="${peripheral.keepFlag == 0}">
 														<li>
-															<button class="btn-l-white" onclick="Keep()">
+															<button type="button" class="btn-l-white" onclick="Keep()">
 																<span>찜하기🤍</span>
 															</button>
 														</li>
 													</c:when>
 													<c:when test="${peripheral.keepFlag == 1}">
 														<li>
-														<form action="<c:url value="/keep/keepDeletePeripheral.do"/>">
-															<input type="hidden" value="${peripheral.peripheralNo}" name="peripheralNo">
-															<input type="hidden" value="${sessionScope.user.email}" name="keepUser">
-															<button class="btn-l-white">
+															<button type="button" class="btn-l-white" onclick="KeepDelete()">
 																<span>찜하기❤️</span>
 															</button>
-														</form>	
 														</li>
 													</c:when>
 												</c:choose>
 												<li>
-													<button class="btn-l-red" onclick="Cart()">
+													<button type="button" class="btn-l-red" onclick="Cart()">
 														<span>장바구니</span>
 													</button>
 												</li>
 												<li>
-													<button class="btn-l-gray" onclick="openModal()">
+													<button type="button" class="btn-l-gray" onclick="openModal()">
 														<span>QnA</span>
 													</button>
 												</li>
 											</ul>
 											<ul class="btnbox2">
-												<li>
-													<button class="btn-l-yellow">
-														<span>카카오페이로 구매하기</span>
-													</button>
-												</li>
+												<c:if test="${sessionScope.user.email == null or sessionScope.user.email == ''}">
+													<li>
+														<button type="button" class="btn-l-yellow" onclick="buyCheck()">
+															<span>카카오페이로 구매하기</span>
+														</button>
+													</li>
+												</c:if>
+												<c:if test="${sessionScope.user.email != null and sessionScope.user.email != ''}">
+													<li>
+														<form action="<c:url value='/ask/peripheralBuy.do'/>" method="post">
+															<input type="hidden" value="${sessionScope.user.email}" name="askUser">
+															<input type="hidden" value="${sessionScope.user.email}" name="askDetailUser">
+															<input type="hidden" value="${peripheral.peripheralNo}" name="peripheralNo">
+															<button class="btn-l-yellow" type="submit">
+																<span>카카오페이로 구매하기</span>
+															</button>
+														</form>	
+													</li>
+												</c:if>
 											</ul>
 										</div>
 									</div>
@@ -297,6 +307,25 @@
 					}
 				})
 			}
+			function KeepDelete(){
+				let session = "${sessionScope.user.email}"
+				if(session == null || session == ""){
+					alert("로그인 해주세요");
+					return;
+				};
+				$.ajax({
+					url : "<c:url value='/keep/keepDeletePeripheral.do'/>",
+					type : "post",
+					data : {
+						"keepUser" : "${sessionScope.user.email}",
+						"peripheralNo" : ${peripheral.peripheralNo}
+					},
+					success : function(data){
+						document.location.href = document.location.href;
+					}
+				})
+			}
+			
 			function Cart(){
 				let session = "${sessionScope.user.email}"
 				if(session == null || session == ""){
@@ -380,7 +409,15 @@
 				}
 				$("#history").append(history);
 				
-			}﻿
+			}
+			function buyCheck(){
+				let session = "${sessionScope.user.email}"
+				let selected = $("select option:selected");
+				if(session == null || session == ""){
+					alert("로그인 해주세요");
+					return;
+				};
+			};﻿
 		</script>
 	</body>
 </html>

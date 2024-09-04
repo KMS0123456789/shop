@@ -13,6 +13,17 @@
 		<result property="itemCount" column="item_count"/>
 		<result property="itemCategory" column="item_category"/>
 		<result property="askDate" column="ask_date" />
+		<result property="computerTitle" column="computer_title"/>
+		<result property="computerSalePrice" column="computer_sale_price"/>
+		<result property="ssdPrice" column="ssd_price"/>
+		<result property="hddPrice" column="hdd_price"/>
+		<result property="osPrice" column="os_price"/>
+		<result property="filePath" column="file_path"/>
+		<result property="ssdName" column="ssd_name"/>
+		<result property="hddName" column="hdd_name"/>
+		<result property="osName" column="os_name"/>
+		<result property="peripheralTitle" column="peripheral_title"/>
+		<result property="peripheralSalePrice" column="peripheral_sale_price"/>
 	</resultMap>
 	
 	<!-- 주문 상세입력-->
@@ -20,4 +31,62 @@
         INSERT INTO ask_detail (ask_no, ask_detail_user, computer_no, peripheral_no, opt_no, item_count, item_category)
         VALUES (#{askNo}, #{askDetailUser}, #{computerNo}, #{peripheralNo}, #{optNo}, #{itemCount}, #{itemCategory})
     </insert> -->
+    
+    <insert id="computerBuy" parameterType="com.project.shop.progress.vo.AskDetailVO">
+    	insert into ask_detail(ask_no, ask_detail_user, computer_no, opt_ssd, opt_hdd, opt_os, item_count, item_category)
+    				values(#{askNo},#{askDetailUser},#{computerNo},#{optSsd},#{optHdd},#{optOs},1,1)
+    </insert>
+    
+    <select id="computerBuySelect" resultMap="askDetailMap" parameterType="com.project.shop.progress.vo.AskDetailVO">
+    	select *, 
+    	(select computer_title from computer where computer.computer_no = #{computerNo}) as computer_title,
+    	(select computer_sale_price from computer where computer.computer_no = #{computerNo}) as computer_sale_price,
+   		(select opt_name from opt where opt.opt_no = #{optSsd} and opt_category = 0) as ssd_name,
+   		(select opt_sale_price from opt where opt.opt_no = #{optSsd} and opt_category = 0) as ssd_price,
+   		(select opt_name from opt where opt.opt_no = #{optHdd} and opt_category = 1) as hdd_name,
+   		(select opt_sale_price from opt where opt.opt_no = #{optHdd} and opt_category = 1) as hdd_price,
+   		(select opt_name from opt where opt.opt_no = #{optOs} and opt_category = 2) as os_name,
+   		(select opt_sale_price from opt where opt.opt_no = #{optOs} and opt_category = 2) as os_price,
+    	(select file_path from file where file.computer_no = #{computerNo}) as file_path
+    	from ask_detail 
+    	where ask_detail.ask_no = #{askNo};
+    </select>
+    
+    <select id="orderCompleteComputer" resultMap="askDetailMap" parameterType="com.project.shop.progress.vo.AskDetailVO">
+    	select *, 
+    	(select computer_title from computer where computer.computer_no = ask_detail.computer_no) as computer_title,
+    	(select computer_sale_price from computer where computer.computer_no = ask_detail.computer_no) as computer_sale_price,
+   		(select opt_name from opt where opt.opt_no = ask_detail.opt_ssd and opt_category = 0) as ssd_name,
+   		(select opt_sale_price from opt where opt.opt_no = ask_detail.opt_ssd and opt_category = 0) as ssd_price,
+   		(select opt_name from opt where opt.opt_no = ask_detail.opt_hdd and opt_category = 1) as hdd_name,
+   		(select opt_sale_price from opt where opt.opt_no = ask_detail.opt_hdd and opt_category = 1) as hdd_price,
+   		(select opt_name from opt where opt.opt_no = ask_detail.opt_os and opt_category = 2) as os_name,
+   		(select opt_sale_price from opt where opt.opt_no = ask_detail.opt_os and opt_category = 2) as os_price,
+    	(select file_path from file where file.computer_no = ask_detail.computer_no) as file_path
+    	from ask_detail 
+    	where ask_detail.ask_no = #{askNo} and ask_detail.ask_detail_user = #{askDetailUser};
+    </select>
+    
+    <insert id="peripheralBuy" parameterType="com.project.shop.progress.vo.AskDetailVO">
+    	insert into ask_detail(ask_no, ask_detail_user, peripheral_no, item_count, item_category)
+    				values(#{askNo},#{askDetailUser},#{peripheralNo},1,2)
+    </insert>
+    
+    <select id="peripheralBuySelect" resultMap="askDetailMap" parameterType="com.project.shop.progress.vo.AskDetailVO">
+    	select *, 
+    	(select peripheral_title from peripheral where peripheral.peripheral_no = #{peripheralNo}) as peripheral_title,
+    	(select peripheral_sale_price from peripheral where peripheral.peripheral_no = #{peripheralNo}) as peripheral_sale_price,
+    	(select file_path from file where file.peripheral_no = #{peripheralNo}) as file_path
+    	from ask_detail 
+    	where ask_detail.ask_no = #{askNo};
+    </select>
+    
+    <select id="orderCompletePeripheral" resultMap="askDetailMap" parameterType="com.project.shop.progress.vo.AskDetailVO">
+    	select *, 
+    	(select peripheral_title from peripheral where peripheral.peripheral_no = ask_detail.peripheral_no) as peripheral_title,
+    	(select peripheral_sale_price from peripheral where peripheral.peripheral_no = ask_detail.peripheral_no) as peripheral_sale_price,
+    	(select file_path from file where file.peripheral_no = ask_detail.peripheral_no) as file_path
+    	from ask_detail 
+    	where ask_detail.ask_no = #{askNo} and ask_detail.ask_detail_user = #{askDetailUser};
+    </select>
 </mapper>

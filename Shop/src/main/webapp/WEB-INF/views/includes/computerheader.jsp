@@ -65,6 +65,36 @@
             font-size: 13px;
             cursor: pointer;
         }
+        
+        .search-box{
+        	height: 30px;
+        	width: 300px;
+        	background: white;
+        	border-radius: 40px;
+        	padding: 10px;
+        	border: 1px solid black;
+        }
+        .search-text{
+        	border: none;
+        	background: none;
+        	outline: none;
+        	float: left;
+        	padding: 0px;
+        	color: #797979;
+        	font-size: 16px;
+        	line-height: 30px;
+        	width: 200px;
+        }
+        .search-btn{
+        	color: #f9deec;
+        	float: right;
+        	width: 40px;
+        	height: 100%;
+        	border-radius: 50%;
+        	background: white;
+        	font-size: 16px;
+        	display: flex;
+        }
 	</style>
 </head>
 <body>
@@ -91,18 +121,16 @@
                 </c:if>
                 <c:if test="${sessionScope.user.email == null }">
                 	<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91452e14d92a8c67875cd1e2ec08fdd2
-	&redirect_uri=http://jjezen.cafe24.com/ComputerShop/user/kakao/callback.do">로그인</a></li>
+	&redirect_uri=http://jjezen.cafe24.com/custompcshop/user/kakao/callback.do">로그인</a></li>
                 </c:if>
             </ul>
     </header>
     <div class="search">
-		<form action="<c:url value="/computer/search.do" />" method="get" id="form">
-		    <fieldset>
-			    <div class="inform">
-			        <input type="text" name="keyword" value="${param.keyword}">
-			        <button type="submit" class="btn-search"></button>
-			    </div>
-		    </fieldset>
+		<form action="<c:url value="/computer/search.do" />" method="get" class="search-box">
+		    <div class="inform">
+		        <input type="text" name="keyword" value="${param.keyword}" class="search-text">
+		        <button type="submit" class="search-btn"><img src="../resources/image/btn_search.png"></button>
+		    </div>
 	    </form>
 	</div>
 </body>

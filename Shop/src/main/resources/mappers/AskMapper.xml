@@ -60,4 +60,28 @@
 	<select id="peripheralPost" parameterType="int" resultMap="askMap">
 		select ask_user from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask_detail.computer_no = #{peripheralNo} and ask.ask_state_flag = 2
 	</select>
+	
+	<insert id="computerBuy" useGeneratedKeys="true" keyProperty="askNo" parameterType="com.project.shop.progress.vo.AskVO">
+		insert into ask(ask_user, ask_state_flag, ask_delete_flag) values(#{askUser}, 0, 0);
+	</insert>
+	
+	<select id="computerBuySelect" resultMap="askMap" parameterType="com.project.shop.progress.vo.AskVO">
+		select * from ask where ask_no = #{askNo}
+	</select>
+	
+	<update id="completeComputerBuy" parameterType="com.project.shop.progress.vo.AskVO">
+		update ask set ask_state_flag = 1 where ask_no = #{askNo}
+	</update>
+	
+	<insert id="peripheralBuy" useGeneratedKeys="true" keyProperty="askNo" parameterType="com.project.shop.progress.vo.AskVO">
+		insert into ask(ask_user, ask_state_flag, ask_delete_flag) values(#{askUser}, 0, 0);
+	</insert>
+	
+	<select id="peripheralBuySelect" resultMap="askMap" parameterType="com.project.shop.progress.vo.AskVO">
+		select * from ask where ask_no = #{askNo}
+	</select>
+	
+	<update id="completePeripheralBuy" parameterType="com.project.shop.progress.vo.AskVO">
+		update ask set ask_state_flag = 1 where ask_no = #{askNo}
+	</update>
 </mapper>

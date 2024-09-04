@@ -79,4 +79,34 @@ public class AskServiceImpl implements AskService{
 	public List<AskVO> peripheralPost(int peripheralNo) {
 		return repository.peripheralPost(peripheralNo);
 	}
+
+	@Override
+	public int computerBuy(AskVO avo) {
+		return repository.computerBuy(avo);
+	}
+
+	@Override
+	public AskVO computerBuySelect(AskVO avo) {
+		return repository.computerBuySelect(avo);
+	}
+
+	@Override
+	public int completeComputerBuy(AskVO vo) {
+		return repository.completeComputerBuy(vo);
+	}
+	
+	@Override
+	public int peripheralBuy(AskVO avo) {
+		return repository.peripheralBuy(avo);
+	}
+
+	@Override
+	public AskVO peripheralBuySelect(AskVO avo) {
+		return repository.peripheralBuySelect(avo);
+	}
+
+	@Override
+	public int completePeripheralBuy(AskVO vo) {
+		return repository.completePeripheralBuy(vo);
+	}
 }

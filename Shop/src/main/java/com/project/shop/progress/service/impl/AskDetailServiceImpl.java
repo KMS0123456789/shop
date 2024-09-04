@@ -21,5 +21,34 @@ public class AskDetailServiceImpl implements AskDetailService{
     public void insertAskDetail(AskDetailVO detail) throws Exception {
         repository.insertAskDetail(detail);
     }
+
+	@Override
+	public int computerBuy(AskDetailVO advo) {
+		return repository.computerBuy(advo);
+	}
+
+	@Override
+	public AskDetailVO computerBuySelect(AskDetailVO advo) {
+		return repository.computerBuySelect(advo);
+	}
+
+	@Override
+	public AskDetailVO orderCompleteComputer(AskDetailVO vo) {
+		return repository.orderCompleteComputer(vo);
+	}
 	
+	@Override
+	public int peripheralBuy(AskDetailVO advo) {
+		return repository.peripheralBuy(advo);
+	}
+
+	@Override
+	public AskDetailVO peripheralBuySelect(AskDetailVO advo) {
+		return repository.peripheralBuySelect(advo);
+	}
+
+	@Override
+	public AskDetailVO orderCompletePeripheral(AskDetailVO vo) {
+		return repository.orderCompletePeripheral(vo);
+	}
 }

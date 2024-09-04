@@ -58,4 +58,27 @@ public class AskRepository {
 	public List<AskVO> peripheralPost(int perihperalNo){
 		return template.selectList(NAME_SPACE + ".peripheralPost", perihperalNo);
 	}
+	public int computerBuy(AskVO avo) {
+    	return template.insert(NAME_SPACE + ".computerBuy", avo);
+    }
+	
+	public AskVO computerBuySelect(AskVO avo) {
+		return template.selectOne(NAME_SPACE + ".computerBuySelect", avo);
+	}
+	
+	public int completeComputerBuy(AskVO vo) {
+		return template.update(NAME_SPACE + ".completeComputerBuy", vo);
+	}
+	
+	public int peripheralBuy(AskVO avo) {
+    	return template.insert(NAME_SPACE + ".peripheralBuy", avo);
+    }
+	
+	public AskVO peripheralBuySelect(AskVO avo) {
+		return template.selectOne(NAME_SPACE + ".peripheralBuySelect", avo);
+	}
+	
+	public int completePeripheralBuy(AskVO vo) {
+		return template.update(NAME_SPACE + ".completePeripheralBuy", vo);
+	}
 }

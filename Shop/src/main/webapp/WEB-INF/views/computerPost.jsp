@@ -43,16 +43,19 @@
 													<span class="p1"><em>${computer.computerSalePrice}</em>원</span>
 												</div>
 											</div>
-											<form class="select-form">
+											<form class="select-form" action="<c:url value="/ask/computerBuy.do"/>" method="post">	
+												<input type="hidden" value="${sessionScope.user.email}" name="askUser">
+												<input type="hidden" value="${sessionScope.user.email}" name="askDetailUser">
+												<input type="hidden" value="${computer.computerNo}" name="computerNo">							
 												<ul class="info-list">
 													<li>
 														<div class="tit">SSD</div>
 														<div class="ssd">
-															<select id="selectbox1" class="selectbox" onchange="onSelectChange1()">
-																<option value="0" value2="0">SSD 추가 구매</option>
+															<select id="selectbox1" class="selectbox" onchange="onSelectChange1()" name="optSsd">
+																<option data-price="0" value="0">SSD 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 0}">
-																		<option value="${opt.optSalePrice}" value2="${opt.optNo}">${opt.optName}+${opt.optSalePrice}원
+																		<option data-price="${opt.optSalePrice}" value="${opt.optNo}" >${opt.optName}+${opt.optSalePrice}원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -61,11 +64,11 @@
 													<li>
 														<div class="tit">HDD</div>
 														<div class="hdd">
-															<select id="selectbox2" class="selectbox" onchange="onSelectChange2()">
-																<option value="0" value2="0">HDD 추가 구매</option>
+															<select id="selectbox2" class="selectbox" onchange="onSelectChange2()" name="optHdd">
+																<option data-price="0" value="0">HDD 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 1}">
-																		<option value="${opt.optSalePrice}" value2="${opt.optNo}">${opt.optName}+${opt.optSalePrice}원
+																		<option data-price="${opt.optSalePrice}" value="${opt.optNo}">${opt.optName}+${opt.optSalePrice}원
 																	</c:if>
 																</c:forEach>
 															</select>
@@ -74,18 +77,18 @@
 													<li>
 														<div class="tit">OS</div>
 														<div class="os">
-															<select id="selectbox3" class="selectbox" onchange="onSelectChange3()">
-																<option value="0" value2="0">OS 추가 구매</option>
+															<select id="selectbox3" class="selectbox" onchange="onSelectChange3()" name="optOs">
+																<option data-price="0" value="0" >OS 추가 구매</option>
 																<c:forEach items="${opt}" var="opt">
 																	<c:if test="${opt.optCategory == 2}">
-																		<option value="${opt.optSalePrice}" value2="${opt.optNo}">${opt.optName}+${opt.optSalePrice}원
+																		<option data-price="${opt.optSalePrice}" value="${opt.optNo}">${opt.optName}+${opt.optSalePrice}원
 																	</c:if>
 																</c:forEach>
 															</select>
 														</div>
 													</li>
 												</ul>
-											</form>
+											
 											<div class="total">
 												<span class="t1">총 결제금액</span>
 												<span class="t2">
@@ -96,41 +99,47 @@
 												<c:choose>
 													<c:when test="${computer.keepFlag == 0}">
 														<li>
-															<button class="btn-l-white" onclick="Keep()">
+															<button  type="button" class="btn-l-white" onclick="Keep()">
 																<span>찜하기🤍</span>
 															</button>
 														</li>
 													</c:when>
 													<c:when test="${computer.keepFlag == 1}">
 														<li>
-														<form action="<c:url value="/keep/keepDeleteComputer.do"/>">
-															<input type="hidden" value="${computer.computerNo}" name="computerNo">
-															<input type="hidden" value="${sessionScope.user.email}" name="keepUser">
-															<button class="btn-l-white-red">
+															<button  type="button" class="btn-l-white-red" onclick="KeepDelete()">
 																<span>찜하기❤️</span>
 															</button>
-														</form>	
 														</li>
 													</c:when>
 												</c:choose>
 												<li>
-													<button class="btn-l-red" onclick="Cart()">
+													<button  type="button" class="btn-l-red" onclick="Cart()">
 														<span>장바구니</span>
 													</button>
 												</li>
 												<li>
-													<button class="btn-l-gray" onclick="openModal()">
+													<button  type="button" class="btn-l-gray" onclick="openModal()">
 														<span>QnA</span>
 													</button>
 												</li>
 											</ul>
 											<ul class="btnbox2">
-												<li>
-													<button class="btn-l-yellow" onclick="buy()">
-														<span>카카오페이로 구매하기</span>
-													</button>
-												</li>
+												<c:if test="${sessionScope.user.email == null or sessionScope.user.email == ''}">
+													<li>
+														<button type="button" class="btn-l-yellow" onclick="buyCheck()">
+															<span>카카오페이로 구매하기</span>
+														</button>
+													</li>
+												</c:if>
+												<c:if test="${sessionScope.user.email != null and sessionScope.user.email != ''}">
+													<li>
+														<button class="btn-l-yellow" type="submit">
+															<span>카카오페이로 구매하기</span>
+														</button>
+													</li>
+												</c:if>
 											</ul>
+											</form>
 										</div>
 									</div>
 								</div>
@@ -335,7 +344,7 @@
 			    let beforePrice = parseInt($(".p1 > em").text());
 			    let totalPrice = beforePrice;
 			    for(var i = 0; i < selected.length; i++){
-			  		totalPrice += parseInt(selected.eq(i).val());
+			  		totalPrice += parseInt(selected.eq(i).data('price'));
 			    }
 			    $("#total-price").text(totalPrice);
 			}  	 
@@ -344,7 +353,7 @@
 			    let beforePrice = parseInt($(".p1 > em").text());
 			    let totalPrice = beforePrice;
 			    for(var i = 0; i < selected.length; i++){
-			   		totalPrice += parseInt(selected.eq(i).val());
+			   		totalPrice += parseInt(selected.eq(i).data('price'));
 			    }
 			    $("#total-price").text(totalPrice);
 			}  
@@ -353,7 +362,7 @@
 				let beforePrice = parseInt($(".p1 > em").text());
 				let totalPrice = beforePrice;
 				for(var i = 0; i < selected.length; i++){
-				   totalPrice += parseInt(selected.eq(i).val());
+				   totalPrice += parseInt(selected.eq(i).data('price'));
 				}
 				$("#total-price").text(totalPrice);
 			} 
@@ -365,6 +374,19 @@
 				};
 				$.ajax({
 					url : "<c:url value='/keep/keepComputer.do'/>",
+					type : "post",
+					data : {
+						"keepUser" : "${sessionScope.user.email}",
+						"computerNo" : ${computer.computerNo}
+					},
+					success : function(data){
+						document.location.href = document.location.href;
+					}
+				})
+			}
+			function KeepDelete(){
+				$.ajax({
+					url : "<c:url value='/keep/keepDeleteComputer.do'/>",
 					type : "post",
 					data : {
 						"keepUser" : "${sessionScope.user.email}",
@@ -388,9 +410,9 @@
 					data : {
 						"cartUser" : "${sessionScope.user.email}",
 						"computerNo" : ${computer.computerNo},
-						"optSsd" : parseInt(selected.eq(0).attr("value2")),
-						"optHdd" : parseInt(selected.eq(1).attr("value2")),
-						"optOs" : parseInt(selected.eq(2).attr("value2"))
+						"optSsd" : parseInt(selected.eq(0).attr("value")),
+						"optHdd" : parseInt(selected.eq(1).attr("value")),
+						"optOs" : parseInt(selected.eq(2).attr("value"))
 					},
 					success : function(data){
 						alert("장바구니에 추가되었습니다.");
@@ -463,13 +485,14 @@
 				$("#history").append(history);
 				
 			}
-			function buy(){
+			function buyCheck(){
 				let session = "${sessionScope.user.email}"
+				let selected = $("select option:selected");
 				if(session == null || session == ""){
 					alert("로그인 해주세요");
 					return;
-				}
-			}﻿
+				};
+			};﻿
 		</script>
 	</body>
 </html>

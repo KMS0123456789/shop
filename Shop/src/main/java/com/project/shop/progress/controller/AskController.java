@@ -20,10 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.shop.progress.service.AskDetailService;
 import com.project.shop.progress.service.AskService;
+import com.project.shop.progress.vo.AskDetailVO;
 import com.project.shop.progress.vo.AskVO;
+import com.project.shop.user.vo.UserVO;
 
 @Controller
 @RequestMapping("/ask")
@@ -31,6 +34,9 @@ public class AskController {
 	
 	@Autowired
 	private AskService service;
+	
+	@Autowired
+	private AskDetailService detailService;
 	
 	@PostMapping(value = "/completePay.do", produces = "application/json; charset=UTF-8")
 	@ResponseBody
@@ -121,5 +127,66 @@ public class AskController {
     @RequestMapping(value = "/myorder.do", method = RequestMethod.POST)
     public String myorder() {
         return "myorder";
+    }
+    
+    @RequestMapping(value="/computerBuy.do", method = RequestMethod.POST)
+    public String computerBuy(AskVO avo, AskDetailVO advo, Model model) {
+    	service.computerBuy(avo);
+    	advo.setAskNo(avo.getAskNo());
+    	detailService.computerBuy(advo);
+    	avo.setAskNo(avo.getAskNo());
+    	AskVO ask = service.computerBuySelect(avo);
+    	AskDetailVO detail = detailService.computerBuySelect(advo);
+    	model.addAttribute("ask", ask);
+    	model.addAttribute("detail",detail);
+    	return "computerBuy";
+    }
+    
+    @RequestMapping(value="/completeComputerBuy.do", method = RequestMethod.POST)
+    public String completeComputerBuy(AskVO vo) {
+    	service.completeComputerBuy(vo);
+    	return "orderCompleteComputer";
+    }
+    
+    @RequestMapping(value="/orderCompleteComputer.do")
+    public String orderCompleteComputer(@RequestParam("askNo") int askNo, 
+    		Model model, AskDetailVO vo, HttpSession session) {
+    	UserVO user = (UserVO)session.getAttribute("user");
+    	vo.setAskDetailUser(user.getEmail());
+    	vo.setAskNo(askNo);
+    	AskDetailVO detail = detailService.orderCompleteComputer(vo);
+    	model.addAttribute("detail",detail);
+    	return "orderCompleteComputer";
+    }
+    
+    
+    @RequestMapping(value="/peripheralBuy.do", method = RequestMethod.POST)
+    public String peripheralBuy(AskVO avo, AskDetailVO advo, Model model) {
+    	service.peripheralBuy(avo);
+    	advo.setAskNo(avo.getAskNo());
+    	detailService.peripheralBuy(advo);
+    	avo.setAskNo(avo.getAskNo());
+    	AskVO ask = service.peripheralBuySelect(avo);
+    	AskDetailVO detail = detailService.peripheralBuySelect(advo);
+    	model.addAttribute("ask", ask);
+    	model.addAttribute("detail",detail);
+    	return "peripheralBuy";
+    }
+    
+    @RequestMapping(value="/completePeripheralBuy.do", method = RequestMethod.POST)
+    public String completeperipheralBuy(AskVO vo) {
+    	service.completePeripheralBuy(vo);
+    	return "orderCompletePeripheral";
+    }
+    
+    @RequestMapping(value="/orderCompletePeripheral.do")
+    public String orderCompletePeripheral(@RequestParam("askNo") int askNo, 
+    		Model model, AskDetailVO vo, HttpSession session) {
+    	UserVO user = (UserVO)session.getAttribute("user");
+    	vo.setAskDetailUser(user.getEmail());
+    	vo.setAskNo(askNo);
+    	AskDetailVO detail = detailService.orderCompletePeripheral(vo);
+    	model.addAttribute("detail",detail);
+    	return "orderCompletePeripheral";
     }
 }
