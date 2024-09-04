@@ -99,7 +99,7 @@
 	&redirect_uri=http://jjezen.cafe24.com/custompcshop/user/kakao/callback.do">로그인</a></li>
 				<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91452e14d92a8c67875cd1e2ec08fdd2
 			&redirect_uri=http://jjezen.cafe24.com/custompcshop/user/kakao/callback.do">로그인</a></li>
-		    -->
+		     -->
                 </c:if>
             </ul>
     </header>
