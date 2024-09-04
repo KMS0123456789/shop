@@ -5,7 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="<c:url value='/resources/css/manager.css' />" rel="stylesheet">
+<link href="<c:url value='/resources/css/manager1.css' />" rel="stylesheet">
+<link href="<c:url value='/resources/css/table.css' />" rel="stylesheet">
 </head>
 <body>
 <%@ include file="./includes/myheader.jsp" %>
@@ -21,6 +22,30 @@
 		            <li class="menu-item"><a href="<c:url value="/ask/managercancel.do"/>">취소/교환</a></li>
 		            <li class="menu-item"><a href="<c:url value="/ask/managerdelivery.do"/>">배송 관리</a></li>
 		        </ul>
-   		 </div>  		 
+   	<%-- 	 </div>
+   		 <table>
+   		 	<thead>
+   		 		<tr>
+  					<th>상품번호</th>
+  					<th>상품이미지</th>
+  					<th>판매 상태</th>
+  					<th>판매가</th>
+  					<th>등록일</th>
+   		 		</tr>
+   		 	</thead>
+		   		 	<tbody>
+		   		 		<tr>
+		   		 			<c:forEach items="${computer}" var="computer">
+							<c:forEach items="${computer.files}" var="file">
+										<td>${computer.computerNo}</td>
+										<td><img class="image" src="<c:url value='${file.filePath}'/>"></td>
+										<td>${computer.computerTitle}</td>
+										<td>${computer.computerSalePrice}</td>
+										<td>${computer.computerCreateDate}</td>
+							</c:forEach>
+							</c:forEach>
+						</tr>
+		   		 	</tbody>
+   		 </table>  	 --%>	 
 </body>
 </html>
