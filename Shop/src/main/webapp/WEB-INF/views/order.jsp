@@ -57,7 +57,7 @@
 			                    <h3>
 			                        ${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}
 			                    </h3>
-			                    <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '포함' : '미포함'}</p>
+			                    <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '미포함' : '포함'}</p>
 			                </div>
 			            </td>
 			            <td>
