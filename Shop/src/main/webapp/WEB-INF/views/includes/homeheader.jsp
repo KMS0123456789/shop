@@ -102,6 +102,22 @@
 		     -->
                 </c:if>
             </ul>
+	    <script type="text/javascript">
+	        window.onload = function() {
+	            // URL에 loginSuccess 또는 logoutSuccess 파라미터가 있는 경우 알럿 띄우기
+	            const urlParams = new URLSearchParams(window.location.search);
+	            
+	            // 로그인 성공 시 알럿
+	            if (urlParams.get('loginSuccess') === 'true') {
+	                alert("로그인에 성공했습니다!");  // 로그인 성공 알림
+	            }
+	            
+	            // 로그아웃 성공 시 알럿
+	            if (urlParams.get('logoutSuccess') === 'true') {
+	                alert("로그아웃에 성공했습니다!");  // 로그아웃 성공 알림
+	            }
+	        };
+	    </script>     
     </header>
     <h1 id="h1">커스텀PC Shop</h1>
 </body>
