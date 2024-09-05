@@ -82,7 +82,11 @@
                 <li><a href="<c:url value='/computer/computer.do'/>">컴퓨터</a></li>
             </ul>
             <ul id="menu2">
-            	<c:if test="${sessionScope.user.email != null }">
+            	<c:if test="${sessionScope.user.email != null and sessionScope.user.userType == 2}">
+                	<li><a href="<c:url value='/user/manager.do'/>">관리자 페이지</a></li>
+					<li><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
+                </c:if>
+            	<c:if test="${sessionScope.user.email != null and sessionScope.user.userType == 1}">
 	                <li>
 	                	<form action="<c:url value='/user/mypage.do'/>" method="post">
 	                		<input type="hidden" value="${sessionScope.user.email}" name="email">
@@ -94,12 +98,7 @@
                 </c:if>
                 <c:if test="${sessionScope.user.email == null }">
                 	<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91452e14d92a8c67875cd1e2ec08fdd2
-	&redirect_uri=http://localhost:8080/shop/user/kakao/callback.do">로그인</a></li>
-			 <!-- <li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91452e14d92a8c67875cd1e2ec08fdd2
-	&redirect_uri=http://localhost:8080/shop/user/kakao/callback.do">로그인</a></li>
-				<li><a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=91452e14d92a8c67875cd1e2ec08fdd2
-			&redirect_uri=http://jjezen.cafe24.com/custompcshop/user/kakao/callback.do">로그인</a></li>
-		     -->
+	&redirect_uri=http://jjezen.cafe24.com/custompcshop/user/kakao/callback.do">로그인</a></li>
                 </c:if>
             </ul>
 	    <script type="text/javascript">

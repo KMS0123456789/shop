@@ -66,7 +66,14 @@
 
         <!-- 총 결제 금액 및 배송비 표시 -->
         <div class="total-amount">
-            <p>총 결제 금액:<fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice }" type="number" pattern="#,###"/>원 + 배송비 : 3,000원  = 합계 : <strong><fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice + 3000 }" type="number" pattern="#,###"/>원</strong></p>
+        	<c:choose>
+        		<c:when test="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice < 50000}">
+        			 <p>총 결제 금액:<fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice}" type="number" pattern="#,###"/>원 + 배송비 : 3,000원  = 합계 : <strong><fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice + 3000}" type="number" pattern="#,###"/>원</strong></p>
+        		</c:when>
+        		<c:when test="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice > 50000}">
+        			 <p>총 결제 금액:<fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice}" type="number" pattern="#,###"/>원 + 배송비 : 0원  = 합계 : <strong><fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice}" type="number" pattern="#,###"/>원</strong></p>
+        		</c:when>
+        	</c:choose>
         </div>
 
         <!-- 쇼핑 계속하기 버튼 -->

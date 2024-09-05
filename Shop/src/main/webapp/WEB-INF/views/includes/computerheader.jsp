@@ -109,7 +109,11 @@
                 <li><a href="<c:url value='/computer/computer.do'/>">컴퓨터</a></li>
             </ul>
             <ul id="menu2">
-            	<c:if test="${sessionScope.user.email != null }">
+            	<c:if test="${sessionScope.user.email != null and sessionScope.user.userType == 2}">
+                	<li><a href="<c:url value='/user/manager.do'/>">관리자 페이지</a></li>
+					<li><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
+                </c:if>
+            	<c:if test="${sessionScope.user.email != null and sessionScope.user.userType == 1}">
 	                <li>
 	                	<form action="<c:url value='/user/mypage.do'/>" method="post">
 	                		<input type="hidden" value="${sessionScope.user.email}" name="email">
