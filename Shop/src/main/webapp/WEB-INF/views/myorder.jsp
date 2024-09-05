@@ -130,40 +130,42 @@
 		                    	</td>
 		                    </c:forEach>
 	                    </c:if>
-		                <c:forEach items="${date.asks }" var="ask">
-		                   	<c:if test="${ask.askStateFlag  == 1}">
+		                <c:forEach items="${date.asks }" var="asks">
+		                   	<c:if test="${asks.askStateFlag  == 1}">
 		                    	<td>결제 완료</td>
 		                    </c:if>
-		                    <c:if test="${ask.askStateFlag  == 2}">
+		                    <c:if test="${asks.askStateFlag  == 2}">
 		                    	<td>배송 준비중</td>
 		                    </c:if>
-		                    <c:if test="${ask.askStateFlag  == 3}">
+		                    <c:if test="${asks.askStateFlag  == 3}">
 		                    	<td>
 		                    		<form action='<c:url value="/ask/buyOk.do"/>' method="get">
 		                    			<c:forEach items="${date.asks }" var="ask">
 		                    				<input type="hidden" name="askNo" value="${ask.askNo}">
-		                    				<button type="submit">구매 확정</button>
+		                    				<button type="submit"><span></span> <span></span><span></span><span></span>
+		                    					구매 확정
+		                    				</button>
 		                    			</c:forEach>
 		                    		</form>
 		                    	</td>
 		                    </c:if>
-		                    <c:if test="${ask.askStateFlag  == 4}">
+		                    <c:if test="${asks.askStateFlag  == 4}">
 		                    	<td>
 		                    		<c:if test="${date.computerNo != 0 }">
-		                    			<a href="<c:url value="/computer/computer.do/${date.computerNo}" />">리뷰쓰기</a>
+		                    			<a href="<c:url value="/computer/computer.do/${date.computerNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    		<c:if test="${date.peripheralNo != 0 }">
-		                    			<a href="<c:url value="/peripheral/peripheral.do/${date.peripheralNo}" />">리뷰쓰기</a>
+		                    			<a href="<c:url value="/peripheral/peripheral.do/${date.peripheralNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    	</td>
 		                    </c:if>
-		                    <c:if test="${ask.askDeleteFlag == 0}">
+		                    <c:if test="${asks.askDeleteFlag == 0}">
 		                    	 <td>-</td>
 		                    </c:if>
-		                    <c:if test="${ask.askDeleteFlag == 1}">
+		                    <c:if test="${asks.askDeleteFlag == 1}">
 		                    	 <td>취소</td>
 		                    </c:if>
-		                    <c:if test="${ask.askDeleteFlag == 2}">
+		                    <c:if test="${asks.askDeleteFlag == 2}">
 		                    	 <td>교환</td>
 		                    </c:if>
 		                </c:forEach>
@@ -208,40 +210,42 @@
 		                    	</td>
 		                    </c:forEach>
 	                    </c:if>
-		                <c:forEach items="${week.asks }" var="ask">
-		                    <c:if test="${ask.askStateFlag  == 1}">
+		                <c:forEach items="${week.asks }" var="asks">
+		                    <c:if test="${asks.askStateFlag  == 1}">
 		                    	<td>결제 완료</td>
 		                    </c:if>
-		                    <c:if test="${ask.askStateFlag  == 2}">
+		                    <c:if test="${asks.askStateFlag  == 2}">
 		                    	<td>배송 준비중</td>
 		                    </c:if>
-		                    <c:if test="${ask.askStateFlag  == 3}">
+		                    <c:if test="${asks.askStateFlag  == 3}">
 		                    	<td>
 		                    		<form action='<c:url value="/ask/buyOk.do"/>' method="get">
 		                    			<c:forEach items="${week.asks }" var="ask">
 		                    				<input type="hidden" name="askNo" value="${ask.askNo}">
-		                    				<button type="submit">구매 확정</button>
+		                    				<button type="submit"><span></span> <span></span><span></span><span></span>
+		                    					구매 확정
+		                    				</button>
 		                    			</c:forEach>
 		                    		</form>
 		                    	</td>
 		                    </c:if>
-		                    <c:if test="${ask.askStateFlag  == 4}">
+		                    <c:if test="${asks.askStateFlag  == 4}">
 		                    	<td>
 		                    		<c:if test="${week.computerNo != 0 }">
-		                    			<a href="<c:url value="/computer/computer.do/${week.computerNo}" />">리뷰쓰기</a>
+		                    			<a href="<c:url value="/computer/computer.do/${week.computerNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    		<c:if test="${week.peripheralNo != 0 }">
-		                    			<a href="<c:url value="/peripheral/peripheral.do/${week.peripheralNo}" />">리뷰쓰기</a>
+		                    			<a href="<c:url value="/peripheral/peripheral.do/${week.peripheralNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    	</td>
 		                    </c:if>
-		                    <c:if test="${ask.askDeleteFlag == 0}">
+		                    <c:if test="${asks.askDeleteFlag == 0}">
 		                    	 <td>-</td>
 		                    </c:if>
-		                    <c:if test="${ask.askDeleteFlag == 1}">
+		                    <c:if test="${asks.askDeleteFlag == 1}">
 		                    	 <td>취소</td>
 		                    </c:if>
-		                    <c:if test="${ask.askDeleteFlag == 2}">
+		                    <c:if test="${asks.askDeleteFlag == 2}">
 		                    	 <td>교환</td>
 		                    </c:if>
 		                </c:forEach>
@@ -298,7 +302,9 @@
 		                    		<form action='<c:url value="/ask/buyOk.do"/>' method="get">
 		                    			<c:forEach items="${month.asks }" var="ask">
 		                    				<input type="hidden" name="askNo" value="${ask.askNo}">
-		                    				<button type="submit">구매 확정</button>
+		                    				<button type="submit"><span></span> <span></span><span></span><span></span>
+		                    					구매 확정
+		                    				</button>
 		                    			</c:forEach>
 		                    		</form>
 		                    	</td>
@@ -306,10 +312,10 @@
 		                    <c:if test="${asks.askStateFlag  == 4}">
 		                    	<td>
 		                    		<c:if test="${month.computerNo != 0 }">
-		                    			<a href="<c:url value="/computer/computer.do/${month.computerNo}" />">리뷰쓰기</a>
+		                    			<a href="<c:url value="/computer/computer.do/${month.computerNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    		<c:if test="${month.peripheralNo != 0 }">
-		                    			<a href="<c:url value="/peripheral/peripheral.do/${month.peripheralNo}" />">리뷰쓰기</a>
+		                    			<a href="<c:url value="/peripheral/peripheral.do/${month.peripheralNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    	</td>
 		                    </c:if>
@@ -376,7 +382,9 @@
 		                    		<form action='<c:url value="/ask/buyOk.do"/>' method="get">
 		                    			<c:forEach items="${three.asks }" var="ask">
 		                    				<input type="hidden" name="askNo" value="${ask.askNo}">
-		                    				<button type="submit">구매 확정</button>
+		                    				<button type="submit"><span></span> <span></span><span></span><span></span>
+		                    					구매 확정
+		                    				</button>
 		                    			</c:forEach>
 		                    		</form>
 		                    	</td>
@@ -384,10 +392,10 @@
 		                    <c:if test="${asks.askStateFlag  == 4}">
 		                    	<td>
 		                    		<c:if test="${three.computerNo != 0 }">
-		                    			<a href="<c:url value="/computer/computer.do/${three.computerNo}" />">리뷰쓰기</a>
+		                    			<a href="<c:url value="/computer/computer.do/${three.computerNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    		<c:if test="${three.peripheralNo != 0 }">
-		                    			<a href="<c:url value="/peripheral/peripheral.do/${three.peripheralNo}" />">리뷰쓰기</a>
+		                    			<a href="<c:url value="/peripheral/peripheral.do/${three.peripheralNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    	</td>
 		                    </c:if>
@@ -454,7 +462,9 @@
 		                    		<form action='<c:url value="/ask/buyOk.do"/>' method="get">
 		                    			<c:forEach items="${six.asks }" var="ask">
 		                    				<input type="hidden" name="askNo" value="${ask.askNo}">
-		                    				<button type="submit">구매 확정</button>
+		                    				<button type="submit"><span></span> <span></span><span></span><span></span>
+		                    					구매 확정
+		                    				</button>
 		                    			</c:forEach>
 		                    		</form>
 		                    	</td>
@@ -462,10 +472,10 @@
 		                    <c:if test="${asks.askStateFlag  == 4}">
 		                    	<td>
 		                    		<c:if test="${six.computerNo != 0 }">
-		                    			<a href="<c:url value="/computer/computer.do/${six.computerNo}" />">리뷰쓰기</a>
+		                    			<a href="<c:url value="/computer/computer.do/${six.computerNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    		<c:if test="${six.peripheralNo != 0 }">
-		                    			<a href="<c:url value="/peripheral/peripheral.do/${six.peripheralNo}" />">리뷰쓰기</a>
+		                    			<a href="<c:url value="/peripheral/peripheral.do/${six.peripheralNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    	</td>
 		                    </c:if>

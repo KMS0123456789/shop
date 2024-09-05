@@ -3,6 +3,7 @@ html{
     width: 100%;
     height: 100%;
 }
+
 body{
     margin-top: 0px;
     margin-left: 10rem;
@@ -10,6 +11,9 @@ body{
     min-width: 900px;
     font: 13px Pretendard, 맑은 고딕, Nanum Gothic, Verdana, Dotum, AppleGothic, sans-serif;
     border-top: 7px solid #cbe2dd;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 #mycontents{
     position: relative;
@@ -246,4 +250,157 @@ legend{
     font-size: 15px;
     cursor:pointer;
     vertical-align: middle;
+}
+#or_table button{
+	position: relative;
+	background:black;
+    display: inline-block;
+    padding: 10px 15px;
+    color: #03e9f4;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    overflow: hidden;
+    font-weight: bold;
+}
+button:nth-child(4){
+    filter: hue-rotate(370deg);
+}
+button:nth-child(4){
+    filter: hue-rotate(110deg);
+}
+#or_table button:hover{
+    background: #03e9f4;
+    color: #050801;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 200px #03e9f4;
+     -webkit-box-reflect:below 1px linear-gradient(transparent, #0005);
+}
+button span{
+    position: absolute;
+    display: block;
+}
+button span:nth-child(1){
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg,transparent,#03e9f4);
+    animation: animate1 1s linear infinite;
+}
+@keyframes animate1{
+    0%{
+        left: -100%;
+    }
+    50%,100%{
+        left: 100%;
+    }
+}
+button span:nth-child(2){
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg,transparent,#03e9f4);
+    animation: animate2 1s linear infinite;
+    animation-delay: 0.25s;
+}
+@keyframes animate2{
+    0%{
+        top: -100%;
+    }
+    50%,100%{
+        top: 100%;
+    }
+}
+button span:nth-child(3){
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(270deg,transparent,#03e9f4);
+    animation: animate3 1s linear infinite;
+    animation-delay: 0.50s;
+}
+@keyframes animate3{
+    0%{
+        right: -100%;
+    }
+    50%,100%{
+        right: 100%;
+    }
+}
+button span:nth-child(4){
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg,transparent,#03e9f4);
+    animation: animate4 1s linear infinite;
+    animation-delay: 0.75s;
+}
+@keyframes animate4{
+    0%{
+        bottom: -100%;
+    }
+    50%,100%{
+        bottom: 100%;
+    }
+}
+
+#or_table a {
+  line-height: 40px;
+  padding: 0;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  -webkit-perspective: 300px;
+  perspective: 300px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  vertical-align: middle;
+  text-decoration: none;
+}
+#or_table a:hover{
+  color: #000;
+  vertical-align: middle;
+}
+#or_table a:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: -1;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+  -webkit-transform: rotateX(0);
+  transform: rotateX(0);
+  transition: all 0.3s ease;
+  vertical-align: middle;
+}
+#or_table a:hover:after {
+  -webkit-transform: rotateX(-180deg);
+  transform: rotateX(-180deg);
+  vertical-align: middle;
+}
+#or_table a {
+  width: 60px;
+  height: 30px;
+  padding: 10px 25px;
+  border: 2px solid #000;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
 }
