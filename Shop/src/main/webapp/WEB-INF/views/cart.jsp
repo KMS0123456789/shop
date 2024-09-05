@@ -16,7 +16,7 @@
     <h1>장바구니</h1>
     <div class="cart-content" style="display: flex; justify-content: space-between;">
         <div class="cart-items" style="width: 70%;">
-            <form action="<c:url value='/cart/order.do'/>" method="post">
+            <form id="cartForm" action="<c:url value='/cart/order.do'/>" method="post">
                 <table>
                     <thead>
                         <tr>
@@ -60,8 +60,6 @@
 			        <button type="button" class="btn-delete-selected">선택상품 삭제</button>
 			        <button type="button" class="btn-delete-all">전체상품 삭제</button>
 			    </div>
-	                <button type="submit" class="btn-primary">전체상품 주문하기</button>
-	            	<button type="submit" class="btn-secondary-outline">선택상품 주문하기</button>
             </form>
         </div>
         <div class="cart-summary" style="width: 25%;">
@@ -78,11 +76,37 @@
                 <span>결제예정금액</span>
                 <span id="total-payment-price">0원</span>
             </div>
+            <!-- 전체상품 주문하기 버튼 -->
+            <button type="button" class="btn-primary" onclick="submitForm(false)">전체상품 주문하기</button>
+            <!-- 선택상품 주문하기 버튼 -->
+            <button type="button" class="btn-secondary-outline" onclick="submitForm(true)">선택상품 주문하기</button>
         </div>
     </div>
 </div>
 </body>
 	<script>
+    // form 제출을 위한  함수
+    function submitForm(isSelected) {
+        var form = document.getElementById('cartForm');
+        
+        if (isSelected) {
+            // 선택상품만 전송하는 경우: 체크된 상품만 남김
+            var checkedItems = document.querySelectorAll('.item-checkbox:checked');
+            if (checkedItems.length === 0) {
+                alert("선택된 상품이 없습니다.");
+                return;
+            }
+        } else {
+            // 전체상품을 전송하는 경우: 모든 checkbox 선택
+            var checkboxes = document.querySelectorAll('.item-checkbox');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = true;
+            });
+        }
+
+        form.submit();
+    }
+	
 	//결제금액 계산
 	document.addEventListener('DOMContentLoaded', function() {
 	    const selectAllCheckbox = document.getElementById('selectAll');
