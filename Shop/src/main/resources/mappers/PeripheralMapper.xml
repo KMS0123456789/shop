@@ -245,4 +245,29 @@
 		order by peripheral.peripheral_sale_price asc, peripheral.peripheral_no desc
 		limit #{offset}, #{limit}
 	</select>
+	
+	<select id="peripheralmanager" resultMap="peripheralMap">
+		(select * from peripheral left join file on peripheral.peripheral_no = file.peripheral_no where peripheral_category = 0 order by peripheral.peripheral_no desc limit 0,5)
+		union
+		(select * from peripheral left join file on peripheral.peripheral_no = file.peripheral_no where peripheral_category = 1 order by peripheral.peripheral_no desc limit 0,5)
+		union
+		(select * from peripheral left join file on peripheral.peripheral_no = file.peripheral_no where peripheral_category = 2 order by peripheral.peripheral_no desc limit 0,5)
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by computer_no desc
+		limit #{offset}, #{limit}
+	</select>
+	
+	<!-- 관리자 주변기기 전체 개수 조회 -->
+	<select id="peripheralcount" resultType="int">
+		select count(*) from peripheral
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
 </mapper>

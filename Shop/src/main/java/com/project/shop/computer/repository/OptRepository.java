@@ -19,4 +19,7 @@ public class OptRepository {
 	public List<OptVO> computerPost(){
 		return template.selectList(NAME_SPACE+".computerPost");
 	}
+	public int optionInsert(OptVO vo){
+		return template.insert(NAME_SPACE+".optionInsert", vo);
+}
 }

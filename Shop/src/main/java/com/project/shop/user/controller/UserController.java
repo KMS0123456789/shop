@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.shop.computer.service.ComputerService;
+import com.project.shop.computer.service.PeripheralService;
+import com.project.shop.computer.vo.ComputerVO;
+import com.project.shop.computer.vo.PeripheralVO;
 import com.project.shop.progress.vo.KeepVO;
 import com.project.shop.user.service.QuestionService;
 import com.project.shop.user.service.ReviewService;
@@ -41,6 +45,12 @@ public class UserController {
     
     @Autowired
     private QuestionService questionService;
+    
+    @Autowired
+	private ComputerService computerService;
+	
+	@Autowired
+	private PeripheralService perpheralService;
     
     //마이페이지
     @RequestMapping(value = "/mypage.do", method = RequestMethod.POST)
@@ -97,11 +107,6 @@ public class UserController {
         int result = userService.blackList(vo);
         return "redirect:/user/blacklist.do"; //블랙리스트 추가 후 관리자 페이지로 리다이렉트
     }
-    
-    @RequestMapping(value="/manager.do", method = RequestMethod.GET)
-    public String manager() {
-    	return "manager";
-    }
 
     @RequestMapping(value = "/kakao/callback.do", produces = "application/json;charset=UTF-8")
     public String join(@RequestParam String code, HttpSession session) {
@@ -142,6 +147,25 @@ public class UserController {
         session.invalidate();  // 세션 무효화 (로그아웃)
         return "redirect:/?logoutSuccess=true";  // 로그아웃 후 홈으로 리다이렉트하면서 로그아웃 성공 여부 전달
     }
+    @RequestMapping(value ="/manager.do", method = RequestMethod.GET)
+	public String manager(Model model,
+			@RequestParam(name="page", required=false, defaultValue = "1") int page,
+			@RequestParam(name="page2", required=false, defaultValue = "1") int page2,
+			@RequestParam(name="searchType", required=false) String searchType,
+			@RequestParam(name="keyword", required=false) String keyword,
+				HttpSession session) {
+    	Pageable pageable = PageRequest.of(page-1, 5);
+		Pageable pageable2 = PageRequest.of(page2-1, 5);
+		Page<ComputerVO> computer = computerService.computerManager(pageable2, searchType, keyword);
+    	Page<PeripheralVO> peripheral = perpheralService.peripheralmanager(pageable, searchType, keyword); 
+    	model.addAttribute("computer", computer.getContent());
+    	model.addAttribute("peripheral", peripheral.getContent());
+    	model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
+    	model.addAttribute("currentPage2", page2); //currentPage2 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", computer.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("totalPage2", peripheral.getTotalPages()); //totalPage2 키에 총 페이지 수 넣어 보내기		model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+		return "manager";
+	}
     
 }
 

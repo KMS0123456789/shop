@@ -24,6 +24,7 @@
 						</tr>
 					</thead>
 					<c:forEach items="${ask}" var="ask">
+						
 						<tbody>
 							<tr>
 								<td>${ask.askNo}</td>
@@ -39,14 +40,19 @@
 									</c:when>
 								</c:choose>								
 	                           	<td>${ask.askDate}</td>
-	                            <td><div class="mainImg">
+	                            <td>
+	                            <c:forEach items="${ask.files}" var="file">
+	                            		<div class="mainImg">
 											<img class="mainImg2" src="${file.computerFilePath}">
-										</div></td>
+										</div>
+								</c:forEach>
+								</td>
 	                            <td>${computer.computerTitle}</td>
 	                           	<td><p>옵션: SSD ${option.optSsd}GB, HDD ${option.optHdd}GB, OS ${option.optOs == 0 ? '포함' : '미포함'}</p></td>
 	                            <td>${computer.computerPrice}</td>                                                        
 							</tr>
 						</tbody>
+						
 					</c:forEach>
 				</table>
 				

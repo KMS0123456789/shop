@@ -19,6 +19,15 @@
 			<result property="itemCount" column="item_count"/>
 			<result property="itemCategory" column="item_category"/>
 		</collection>
+		<collection property="files" ofType="com.project.shop.progress.vo.FileVO">
+			<id property="fileNo" column="file_no"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="fileName" column="file_name"/>
+			<result property="filePath" column="file_path"/>
+			<result property="fileSize" column="file_size"/>
+			<result property="itemCategory" column="item_category"/>
+		</collection>
 	</resultMap>
 	
 	<!-- 주문 입력 -->

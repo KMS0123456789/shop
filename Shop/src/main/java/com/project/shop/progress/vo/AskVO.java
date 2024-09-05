@@ -9,7 +9,14 @@ public class AskVO {
 	private int askStateFlag;
 	private int askDeleteFlag;
 	private List<AskDetailVO> askDetails;
+	private List<FileVO> files;
 	
+	public List<FileVO> getFiles() {
+		return files;
+	}
+	public void setFiles(List<FileVO> files) {
+		this.files = files;
+	}
 	public int getAskDeleteFlag() {
 		return askDeleteFlag;
 	}

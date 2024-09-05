@@ -44,4 +44,8 @@ public interface PeripheralService {
 	
 	//모니터 낮은 가격순 조회
 	Page<PeripheralVO> monitorLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory);
+
+	Page<PeripheralVO> peripheralmanager(Pageable pageable, String searchType, String keyword);
+
+	int peripheralcount(String searchType, String keyword);
 }

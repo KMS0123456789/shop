@@ -7,4 +7,6 @@ import com.project.shop.computer.vo.OptVO;
 //옵션 전체 조회
 public interface OptService {
 	List<OptVO> computerPost();
+	
+	int optionInsert(OptVO vo);
 }

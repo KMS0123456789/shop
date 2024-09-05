@@ -90,4 +90,16 @@ public class ComputerRepository {
 		map.put("keyword", keyword);
 		return template.selectOne(NAME_SPACE + ".searchCount", map); //ComputerMapper의 searchCount 메서드 실행
 	}
+	
+	public Page<ComputerVO> computerManager(Pageable pageable, String searchType, String keyword){
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = count(searchType, keyword);
+    	List<ComputerVO> computerManagers = template.selectList(NAME_SPACE+".computerManager", map);
+		return new PageImpl<ComputerVO>(computerManagers, pageable, total);
+    }
+
 }

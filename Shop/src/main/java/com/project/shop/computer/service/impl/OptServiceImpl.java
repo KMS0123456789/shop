@@ -20,4 +20,8 @@ public class OptServiceImpl implements OptService{
 	public List<OptVO> computerPost() {
 		return repository.computerPost();
 	}
+	@Override
+	public int optionInsert(OptVO vo) {
+		return repository.optionInsert(vo);
+	}
 }

@@ -196,5 +196,17 @@
 		where peripheral_title like '%제목%')) as sumCount
 		from computer
 		group by sumCount;
+		
+	</select>
+		<select id="computerManager" resultMap="computerMap">
+		select * from computer 
+		left join file on computer.computer_no = file.computer_no
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by computer.computer_no desc
+		limit #{offset}, #{limit}
 	</select>
 </mapper>

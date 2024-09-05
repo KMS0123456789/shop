@@ -29,5 +29,7 @@ public interface ComputerService {
 	Page<ComputerVO> computerLowPrice(Pageable pageable, String searchType, String keyword);
 	
 	Page<ComputerVO> search(Pageable pageable, String keyword);
+
+	Page<ComputerVO> computerManager(Pageable pageable, String searchType, String keyword);
 	
 }

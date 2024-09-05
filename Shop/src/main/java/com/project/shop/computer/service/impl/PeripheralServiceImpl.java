@@ -88,4 +88,16 @@ public class PeripheralServiceImpl implements PeripheralService{
 	public Page<PeripheralVO> monitorLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory) {
 		return repository.monitorLowPrice(pageable, searchType, keyword, peripheralCategory);
 	}
+	
+	@Override
+	public Page<PeripheralVO> peripheralmanager(Pageable pageable , String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return repository.peripheralmanager(pageable, searchType, keyword);
+	}
+
+	@Override
+	public int peripheralcount(String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return repository.peripheralcount(searchType, keyword);
+	}
 }
