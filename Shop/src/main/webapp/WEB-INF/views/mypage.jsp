@@ -54,14 +54,14 @@
 	                <div id="title"><h3> 나의 주문 현황</h3></div>
 	                <div id="state">
 	                    <ul>
-	                        <li id="d_state"><strong>결제 완료</strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.payCount}</span></a></li>
-	                        <li id="d_state"><strong>배송 준비중</strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.dReadyCount}</span></a></li>
-	                        <li id="d_state"><strong>배송 완료</strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.clearCount}</span></a></li>
-	                        <li id="d_state"><strong>구매 확정</strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.buyCount}</span></a></li>
+	                        <li id="d_state"><strong>결제 완료</strong><a href="<c:url value='/ask/myorder.do'/>"><span>${my.payCount}</span></a></li>
+	                        <li id="d_state"><strong>배송 준비중</strong><a href="<c:url value='/ask/myorder.do'/>"><span>${my.dReadyCount}</span></a></li>
+	                        <li id="d_state"><strong>배송 완료</strong><a href="<c:url value='/ask/myorder.do'/>"><span>${my.clearCount}</span></a></li>
+	                        <li id="d_state"><strong>구매 확정</strong><a href="<c:url value='/ask/myorder.do'/>"><span>${my.buyCount}</span></a></li>
 	                    </ul>
 	                    <ul id="re">
-	                        <li><strong>취소 : </strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.orcancelCount}</span></a></li>
-	                        <li><strong>교환 : </strong><a href="<c:url value='/user/myorder.do'/>"><span>${my.orchangeCount}</span></a></li>
+	                        <li><strong>취소 : </strong><a href="<c:url value='/ask/myorder.do'/>"><span>${my.orcancelCount}</span></a></li>
+	                        <li><strong>교환 : </strong><a href="<c:url value='/ask/myorder.do'/>"><span>${my.orchangeCount}</span></a></li>
 	                    </ul>
 	                </div>
 	            </div>
