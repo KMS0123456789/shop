@@ -33,7 +33,7 @@
         FROM 
             addr
         WHERE 
-            addr_user_email = #{userEmail} AND addr_flag = 1
+            addr_user_email = #{userEmail} AND addr_flag = 0
         LIMIT 1
     </select>
     
@@ -45,7 +45,7 @@
         FROM 
             addr
         WHERE 
-            addr_user_email = #{userEmail} AND addr_flag = 1
+            addr_user_email = #{userEmail}
     </select>
 	
 	<!-- 배송주소 등록 쿼리 -->
