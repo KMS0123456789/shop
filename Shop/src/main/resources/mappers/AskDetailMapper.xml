@@ -146,9 +146,7 @@
     <!-- 특정유저 하루 주문내역 개수 조회 쿼리 -->
     <select id="mydaycount" resultType="int">
 		select count(*) from ask_detail d 
-			left join ask a on d.ask_no = a.ask_no left join computer c on d.computer_no = c.computer_no 
-			left join peripheral p on d.peripheral_no = p.peripheral_no left join opt o on d.opt_ssd = o.opt_no 
-			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no 
+			left join ask a on d.ask_no = a.ask_no 
 		<where>
 			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 DAY ) AND NOW()
 			and a.ask_state_flag > 0
@@ -162,10 +160,6 @@
 	<select id="myweekcount" resultType="int">
 		select count(*) from ask_detail d 
 			left join ask a on d.ask_no = a.ask_no 
-			left join computer c on d.computer_no = c.computer_no 
-			left join peripheral p on d.peripheral_no = p.peripheral_no 
-			left join opt o on d.opt_ssd = o.opt_no or d.opt_hdd = o.opt_no or d.opt_os = o.opt_no
-			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no 
 		<where>
 			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
 			and a.ask_state_flag > 0
@@ -179,9 +173,7 @@
 	 <!-- 특정유저 한달 주문내역 개수 조회 쿼리 -->
 	<select id="myMonthcount" resultType="int">
 		select count(*) from ask_detail d 
-			left join ask a on d.ask_no = a.ask_no left join computer c on d.computer_no = c.computer_no 
-			left join peripheral p on d.peripheral_no = p.peripheral_no left join opt o on d.opt_ssd = o.opt_no 
-			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no 
+			left join ask a on d.ask_no = a.ask_no 
 		<where>
 			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()
 			and a.ask_state_flag > 0
@@ -195,9 +187,7 @@
 	 <!-- 특정유저 세달 주문내역 개수 조회 쿼리 -->
 	<select id="myThreeMonthcount" resultType="int">
 		select count(*) from ask_detail d 
-			left join ask a on d.ask_no = a.ask_no left join computer c on d.computer_no = c.computer_no 
-			left join peripheral p on d.peripheral_no = p.peripheral_no left join opt o on d.opt_ssd = o.opt_no 
-			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no 
+			left join ask a on d.ask_no = a.ask_no 
 		<where>
 			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH ) AND NOW()
 			and a.ask_state_flag > 0
@@ -211,9 +201,7 @@
 	 <!-- 특정유저 여섯달 주문내역 개수 조회 쿼리 -->
 	<select id="mySixMonthcount" resultType="int">
 		select count(*) from ask_detail d 
-			left join ask a on d.ask_no = a.ask_no left join computer c on d.computer_no = c.computer_no 
-			left join peripheral p on d.peripheral_no = p.peripheral_no left join opt o on d.opt_ssd = o.opt_no 
-			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no 
+			left join ask a on d.ask_no = a.ask_no 
 		<where>
 			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -6 MONTH ) AND NOW()
 			and a.ask_state_flag > 0
