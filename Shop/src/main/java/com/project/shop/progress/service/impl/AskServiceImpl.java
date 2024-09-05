@@ -109,4 +109,11 @@ public class AskServiceImpl implements AskService{
 	public int completePeripheralBuy(AskVO vo) {
 		return repository.completePeripheralBuy(vo);
 	}
+	
+	// 구매확정으로 업데이트 
+	@Override
+	public int buyOk(AskVO vo) {
+		// TODO Auto-generated method stub
+		return repository.buyOk(vo);
+	}
 }

@@ -22,7 +22,7 @@
         <div id="myordermenu">
             <ul class="myordermenu">
                 <li id="ormenu">
-                	<form action="<c:url value='/ask/myorder.do'/>" method="post">
+                	<form action="<c:url value='/ask/myorder.do'/>" method="get">
                 		<input type="hidden" value="${sessionScope.user.email}" name="askUser">
                  		<button type="submit" id="order"> 주문 내역 조회</button>
                 	</form>

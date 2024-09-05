@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.project.shop.computer.vo.ComputerVO;
 import com.project.shop.computer.vo.OptVO;
+import com.project.shop.computer.vo.PeripheralVO;
 
 public class AskDetailVO {
 	private int askDetailNo;
@@ -27,9 +28,44 @@ public class AskDetailVO {
 	private String osName;
 	private String peripheralTitle;
 	private int peripheralSalePrice;
+	private List<AskVO> asks;
+	private List<ComputerVO> computers;
+	private List<PeripheralVO> peripherals;
+	private List<FileVO> files;
+	private List<OptVO> opts;
 	
 	
 	
+	public List<AskVO> getAsks() {
+		return asks;
+	}
+	public List<ComputerVO> getComputers() {
+		return computers;
+	}
+	public List<PeripheralVO> getPeripherals() {
+		return peripherals;
+	}
+	public List<FileVO> getFiles() {
+		return files;
+	}
+	public List<OptVO> getOpts() {
+		return opts;
+	}
+	public void setAsks(List<AskVO> asks) {
+		this.asks = asks;
+	}
+	public void setComputers(List<ComputerVO> computers) {
+		this.computers = computers;
+	}
+	public void setPeripherals(List<PeripheralVO> peripherals) {
+		this.peripherals = peripherals;
+	}
+	public void setFiles(List<FileVO> files) {
+		this.files = files;
+	}
+	public void setOpts(List<OptVO> opts) {
+		this.opts = opts;
+	}
 	public String getPeripheralTitle() {
 		return peripheralTitle;
 	}

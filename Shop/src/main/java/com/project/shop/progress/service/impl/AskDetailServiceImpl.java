@@ -3,6 +3,8 @@ package com.project.shop.progress.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,5 +52,74 @@ public class AskDetailServiceImpl implements AskDetailService{
 	@Override
 	public AskDetailVO orderCompletePeripheral(AskDetailVO vo) {
 		return repository.orderCompletePeripheral(vo);
+	}
+	
+	// 특정 유저 주문 내역 하루 조회
+ 	@Override
+ 	public Page<AskDetailVO> myOnedate(Pageable pageable ,String searchType, String keyword, AskDetailVO vo) {
+ 		// AskRepository의 메서드 myOnedate 실행 pageable 파라미터도 같이 보낸다.
+ 		return repository.myOnedate(pageable, searchType, keyword, vo);
+ 	}
+
+ 	// 특정 유저 주문 내역 하루 개수 조회
+ 	@Override
+ 	public int mydaycount(String searchType, String keyword, AskDetailVO vo) {
+ 		return repository.mydaycount(searchType, keyword, vo); //AskRepository의 메서드 count 실행
+ 	}
+ 	
+ 	// 특정 유저 주문 내역 일주일 조회
+ 	@Override
+	public Page<AskDetailVO> myOneweek(Pageable pageable, String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myOneweek(pageable, searchType, keyword, vo);
+	}
+ 	
+ 	// 특정 유저 주문 내역 일주일 개수 조회
+	@Override
+	public int myweekcount(String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myweekcount(searchType, keyword, vo);
+	}
+	
+	// 특정 유저 주문 내역 한달 조회
+	@Override
+	public Page<AskDetailVO> myOnemonth(Pageable pageable, String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myOnemonth(pageable, searchType, keyword, vo);
+	}
+	
+	// 특정 유저 주문 내역 한달 개수 조회
+	@Override
+	public int myMonthcount(String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myMonthcount(searchType, keyword, vo);
+	}
+	
+	// 특정 유저 주문 내역 3달 조회
+	@Override
+	public Page<AskDetailVO> myThreemonth(Pageable pageable, String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myThreemonth(pageable, searchType, keyword, vo);
+	}
+
+	// 특정 유저 주문 내역 세달 개수 조회
+	@Override
+	public int myThreeMonthcount(String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myThreeMonthcount(searchType, keyword, vo);
+	}
+	
+	// 특정 유저 주문 내역 6달 조회
+	@Override
+	public Page<AskDetailVO> mySixmonth(Pageable pageable, String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.mySixmonth(pageable, searchType, keyword, vo);
+	}
+	
+	// 특정 유저 주문 내역 여섯달 개수 조회
+	@Override
+	public int mySixMonthcount(String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.mySixMonthcount(searchType, keyword, vo);
 	}
 }

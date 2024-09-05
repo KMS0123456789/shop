@@ -84,4 +84,9 @@
 	<update id="completePeripheralBuy" parameterType="com.project.shop.progress.vo.AskVO">
 		update ask set ask_state_flag = 1 where ask_no = #{askNo}
 	</update>
+	
+	<!-- 구매확정으로 업데이트 하는 쿼리 -->
+	<update id="buyOk" parameterType="com.project.shop.progress.vo.AskVO">
+		update ask set ask_state_flag = 4 where ask_no = #{askNo}
+	</update>
 </mapper>

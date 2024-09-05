@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -48,22 +49,12 @@
             <form method="get" name="myorder_history" >
                 <fieldset id="datecase">
                     <legend>검색기간 설정</legend>
-                    <div class="stateSelect">
-                        <select id="order_status" name="order_status" class="fSelect">
-                            <option value="all">전체 주문처리상태</option>
-                            <option value="shipped_after">결제 완료</option>
-                            <option value="shipped_standby">배송준비중</option>
-                            <option value="shipped_complate">배송완료</option>
-                            <option value="order_cancel">취소</option>
-                            <option value="order_exchange">교환</option>
-                        </select>
-                    </div>
                     <span id="date">
-                        <a href="<c:url value='/ask/myOnedate.do'/>" class="btnNormal" days="00"><img src="../resources/image/btn_date1.gif" alt="오늘"></a>
-                        <a href="#none" class="btnNormal" days="07"><img src="../resources/image/btn_date2.gif" alt="1주일"></a>
-                        <a href="#none" class="btnNormal" days="30"><img src="../resources/image/btn_date3.gif" alt="1개월"></a>
-                        <a href="#none" class="btnNormal" days="90"><img src="../resources/image/btn_date4.gif" alt="3개월"></a>
-                        <a href="#none" class="btnNormal" days="180"><img src="../resources/image/btn_date5.gif" alt="6개월"></a>
+                        <a href="<c:url value='/askdetail/myOnedate.do'/>" class="btnNormal" days="00"><img src="../resources/image/btn_date1.gif" alt="오늘"></a>
+                        <a href="<c:url value='/askdetail/myOneweek.do'/>" class="btnNormal" days="07"><img src="../resources/image/btn_date2.gif" alt="1주일"></a>
+                        <a href="<c:url value='/askdetail/myOnemonth.do'/>" class="btnNormal" days="30"><img src="../resources/image/btn_date3.gif" alt="1개월"></a>
+                        <a href="<c:url value='/askdetail/myThreemonth.do'/>" class="btnNormal" days="90"><img src="../resources/image/btn_date4.gif" alt="3개월"></a>
+                        <a href="<c:url value='/askdetail/mySixmonth.do'/>" class="btnNormal" days="180"><img src="../resources/image/btn_date5.gif" alt="6개월"></a>
                     </span>
                     <input id="start_date" name="history_start_date" class="start_date" readonly="readonly" size="10" value="" type="text">
                     ~ 
@@ -104,44 +95,551 @@
                         <th scope="col">취소/교환/반품</th>
                     </tr>
                 </thead>
-                <c:if test="${myOnedate != null }">
-                	<c:forEach items="myOnedate" var="my">
-                		  <tbody>
-		                    <tr>
-		                        <td>${my.askDate}<br>
-		                        	 ${my.askNo }</td>
-		                        <td>이미지</td>
-		                        <td>컴퓨터</td>
-		                        <td>1</td>
-		                        <td>30000원</td>
-		                        <td>배송</td>
-		                        <td> - </td>
-		                    </tr>
-		                </tbody>
-                	</c:forEach>
-                </c:if>
-                <tbody>
-                    <tr>
-                        <td>2024-08-05</td>
-                        <td>11</td>
-                        <td>컴퓨터</td>
-                        <td>1</td>
-                        <td>456000원</td>
-                        <td>배송완료</td>
-                        <td> - </td>
-                    </tr>
-                </tbody>
+                <c:forEach items="${date}" var="date">
+                	<tbody>
+		               	<tr>
+		                	<td>
+		                		<c:forEach items="${date.asks }" var="ask">
+			                		${ask.askDate }<br>
+			                		${ask.askNo }
+		                		 </c:forEach>
+		                	</td>
+		               		<td>
+			               		<c:forEach items="${date.files }" var="file">
+			               			<img src="<c:url value="${file.filePath}"/>">
+			               		</c:forEach>
+		               		</td>
+		               <c:if test="${date.computerNo ge 1 }">
+	                    	<c:forEach items="${date.computers }" var="com">
+	                    		<td>${com.computerTitle} <br>
+			                    	<c:if test="${date.optSsd >= 1 or date.optHdd >= 1 or date.optOs >= 1}">
+			                    		옵션 :
+			                    		 ${date.optSsd }
+			                    		 ${date.optHdd }
+			                    		 ${date.optOs }
+			                    	</c:if>
+			                    	<c:if test="${date.optSsd == 0 or date.optHdd == 0 or date.optOs == 0}">
+				                    	옵션 : X.
+				                    </c:if>
+		                    	</td>
+		                   	</c:forEach>
+	                    	<td>${date.itemCount}</td>	                    
+		                    <td>
+	                    		<c:forEach items="${date.computers }" var="com">
+	                    			<f:formatNumber type="number" pattern="#,###" value="${com.computerSalePrice }"/>원
+	                    		</c:forEach>
+		                    </td>
+	                    </c:if>
+	                    <c:if test="${date.peripheralNo ge 1 }">
+	                    	<c:forEach items="${date.peripherals }" var="per">
+			                    <td>${per.peripheralTitle }</td>
+			                    <td>${date.itemCount}</td>
+		                    	<td>
+		                    		<f:formatNumber type="number" pattern="#,###" value="${per.peripheralSalePrice }"/>원
+		                    	</td>
+		                    </c:forEach>
+	                    </c:if>
+		                <c:forEach items="${date.asks }" var="ask">
+		                   	<c:if test="${ask.askStateFlag  == 1}">
+		                    	<td>결제 완료</td>
+		                    </c:if>
+		                    <c:if test="${ask.askStateFlag  == 2}">
+		                    	<td>배송 준비중</td>
+		                    </c:if>
+		                    <c:if test="${ask.askStateFlag  == 3}">
+		                    	<td>
+		                    		<form action='<c:url value="/ask/buyOk.do"/>' method="get">
+		                    			<c:forEach items="${date.asks }" var="ask">
+		                    				<input type="hidden" name="askNo" value="${ask.askNo}">
+		                    				<button type="submit">구매 확정</button>
+		                    			</c:forEach>
+		                    		</form>
+		                    	</td>
+		                    </c:if>
+		                    <c:if test="${ask.askStateFlag  == 4}">
+		                    	<td>
+		                    		<c:if test="${date.computerNo != 0 }">
+		                    			<a href="<c:url value="/computer/computer.do/${date.computerNo}" />">리뷰쓰기</a>
+		                    		</c:if>
+		                    		<c:if test="${date.peripheralNo != 0 }">
+		                    			<a href="<c:url value="/peripheral/peripheral.do/${date.peripheralNo}" />">리뷰쓰기</a>
+		                    		</c:if>
+		                    	</td>
+		                    </c:if>
+		                    <c:if test="${ask.askDeleteFlag == 0}">
+		                    	 <td>-</td>
+		                    </c:if>
+		                    <c:if test="${ask.askDeleteFlag == 1}">
+		                    	 <td>취소</td>
+		                    </c:if>
+		                    <c:if test="${ask.askDeleteFlag == 2}">
+		                    	 <td>교환</td>
+		                    </c:if>
+		                </c:forEach>
+		                </tr>
+               			</tbody>
+               		</c:forEach>
+               		 <c:forEach items="${week}" var="week">
+                	 <tbody>
+		               	<tr>
+			               	<c:forEach items="${week.asks }" var="ask">
+			                	<td>${ask.askDate }<br>
+			                		${ask.askNo }
+			                	</td>
+			                </c:forEach>
+		               		<td>
+			               		<c:forEach items="${week.files }" var="file">
+			               			<img src="<c:url value="${file.filePath}"/>">
+			               		</c:forEach>
+		               		</td>
+		               <c:if test="${week.computerNo ge 1 }">
+	                    	<c:forEach items="${week.computers }" var="com">
+	                    		<td>${com.computerTitle} <br>
+			                    	<c:if test="${week.optSsd >= null or week.optHdd >= null or week.optOs >= null}">
+			                    		옵션 :
+			                    		 ${week.optSsd }
+			                    		 ${week.optHdd }
+			                    		 ${week.optOs }
+				                    </c:if>
+				                    <c:if test="${week.optSsd == 0 or week.optHdd == 0 or week.optOs == 0}">
+				                    	옵션 : X.
+				                    </c:if>
+			                    </td>
+		                   	</c:forEach>
+	                    	<td>${week.itemCount}</td>
+		                    <c:forEach items="${week.computers }" var="com">	                   
+		                    	<td>
+		                    		<f:formatNumber type="number" pattern="#,###" value="${com.computerSalePrice }"/>원
+		                    	</td>
+		                   	</c:forEach>
+	                    </c:if>
+	                    <c:if test="${week.peripheralNo ge 1 }">
+	                    	<c:forEach items="${week.peripherals }" var="per">
+			                    <td>${per.peripheralTitle }</td>
+			                    <td>${week.itemCount}</td>
+		                    	<td>
+		                    		<f:formatNumber type="number" pattern="#,###" value="${per.peripheralSalePrice }"/>원
+		                    	</td>
+		                    </c:forEach>
+	                    </c:if>
+		                <c:forEach items="${week.asks }" var="ask">
+		                    <c:if test="${ask.askStateFlag  == 1}">
+		                    	<td>결제 완료</td>
+		                    </c:if>
+		                    <c:if test="${ask.askStateFlag  == 2}">
+		                    	<td>배송 준비중</td>
+		                    </c:if>
+		                    <c:if test="${ask.askStateFlag  == 3}">
+		                    	<td>
+		                    		<form action='<c:url value="/ask/buyOk.do"/>' method="get">
+		                    			<c:forEach items="${week.asks }" var="ask">
+		                    				<input type="hidden" name="askNo" value="${ask.askNo}">
+		                    				<button type="submit">구매 확정</button>
+		                    			</c:forEach>
+		                    		</form>
+		                    	</td>
+		                    </c:if>
+		                    <c:if test="${ask.askStateFlag  == 4}">
+		                    	<td>
+		                    		<c:if test="${week.computerNo != 0 }">
+		                    			<a href="<c:url value="/computer/computer.do/${week.computerNo}" />">리뷰쓰기</a>
+		                    		</c:if>
+		                    		<c:if test="${week.peripheralNo != 0 }">
+		                    			<a href="<c:url value="/peripheral/peripheral.do/${week.peripheralNo}" />">리뷰쓰기</a>
+		                    		</c:if>
+		                    	</td>
+		                    </c:if>
+		                    <c:if test="${ask.askDeleteFlag == 0}">
+		                    	 <td>-</td>
+		                    </c:if>
+		                    <c:if test="${ask.askDeleteFlag == 1}">
+		                    	 <td>취소</td>
+		                    </c:if>
+		                    <c:if test="${ask.askDeleteFlag == 2}">
+		                    	 <td>교환</td>
+		                    </c:if>
+		                </c:forEach>
+		                </tr>
+               			</tbody>
+               		</c:forEach>	
+               		<c:forEach items="${month}" var="month">
+                	 <tbody>
+		               	<tr>
+			               	<c:forEach items="${month.asks }" var="ask">
+			                	<td>${ask.askDate }<br>
+			                		${ask.askNo }
+			                	</td>
+			                </c:forEach>
+		               		<td>
+			               		<c:forEach items="${month.files }" var="file">
+			               			<img src="<c:url value="${file.filePath}"/>">
+			               		</c:forEach>
+		               		</td>
+		               <c:if test="${month.computerNo ge 1 }">
+	                    	<c:forEach items="${month.computers }" var="com">
+	                    		<td>${com.computerTitle} <br>
+			                    	<c:if test="${month.optSsd >= null or month.optHdd >= null or month.optOs >= null}">
+			                    		옵션 :
+			                    		 ${month.optSsd }
+			                    		 ${month.optHdd }
+			                    		 ${month.optOs }
+				                    </c:if>
+				                    <c:if test="${month.optSsd == 0 or month.optHdd == 0 or month.optOs == 0}">
+				                    	옵션 : X.
+				                    </c:if>
+			                    </td>
+		                   	</c:forEach>
+	                    	<td>${month.itemCount}</td>
+		                    <c:forEach items="${month.computers }" var="com">	                   
+		                    	<td>
+		                    		<f:formatNumber type="number" pattern="#,###" value="${com.computerSalePrice }"/>원
+		                    	</td>
+		                   	</c:forEach>
+	                    </c:if>
+	                    <c:if test="${month.peripheralNo ge 1 }">
+	                    	<c:forEach items="${month.peripherals }" var="per">
+			                    <td>${per.peripheralTitle }</td>
+			                    <td>${month.itemCount}</td>
+		                    	<td>
+		                    		<f:formatNumber type="number" pattern="#,###" value="${per.peripheralSalePrice }"/>원
+		                    	</td>
+		                    </c:forEach>
+	                    </c:if>
+		                <c:forEach items="${month.asks }" var="asks">
+		                	<c:if test="${asks.askStateFlag  == 1}">
+		                    	<td>결제 완료</td>
+		                    </c:if>
+		                    <c:if test="${asks.askStateFlag  == 2}">
+		                    	<td>배송 준비중</td>
+		                    </c:if>
+		                    <c:if test="${asks.askStateFlag  == 3}">
+		                    	<td>
+		                    		<form action='<c:url value="/ask/buyOk.do"/>' method="get">
+		                    			<c:forEach items="${month.asks }" var="ask">
+		                    				<input type="hidden" name="askNo" value="${ask.askNo}">
+		                    				<button type="submit">구매 확정</button>
+		                    			</c:forEach>
+		                    		</form>
+		                    	</td>
+		                    </c:if>
+		                    <c:if test="${asks.askStateFlag  == 4}">
+		                    	<td>
+		                    		<c:if test="${month.computerNo != 0 }">
+		                    			<a href="<c:url value="/computer/computer.do/${month.computerNo}" />">리뷰쓰기</a>
+		                    		</c:if>
+		                    		<c:if test="${month.peripheralNo != 0 }">
+		                    			<a href="<c:url value="/peripheral/peripheral.do/${month.peripheralNo}" />">리뷰쓰기</a>
+		                    		</c:if>
+		                    	</td>
+		                    </c:if>
+		                    <c:if test="${asks.askDeleteFlag == 0}">
+		                    	 <td>-</td>
+		                    </c:if>
+		                    <c:if test="${asks.askDeleteFlag == 1}">
+		                    	 <td>취소</td>
+		                    </c:if>
+		                    <c:if test="${asks.askDeleteFlag == 2}">
+		                    	 <td>교환</td>
+		                    </c:if>
+		                </c:forEach>
+		                </tr>
+               			</tbody>
+               		</c:forEach>
+               		<c:forEach items="${three}" var="three">
+                	 <tbody>
+		               	<tr>
+			               	<c:forEach items="${three.asks }" var="ask">
+			                	<td>${ask.askDate }<br>
+			                		${ask.askNo }
+			                	</td>
+			                </c:forEach>
+		               		<td>
+			               		<c:forEach items="${three.files }" var="file">
+			               			<img src="<c:url value="${file.filePath}"/>">
+			               		</c:forEach>
+		               		</td>
+		               <c:if test="${three.computerNo ge 1 }">
+	                    	<c:forEach items="${three.computers }" var="com">
+	                    		<td>${com.computerTitle} <br>
+			                    	<c:if test="${three.optSsd >= null or three.optHdd >= null or three.optOs >= null}">
+			                    		옵션 :
+			                    		 ${three.optSsd }
+			                    		 ${three.optHdd }
+			                    		 ${three.optOs }
+				                    </c:if>
+				                    <c:if test="${three.optSsd == 0 or three.optHdd == 0 or three.optOs == 0}">
+				                    	옵션 : X.
+				                    </c:if>
+			                    </td>
+		                   	</c:forEach>
+	                    	<td>${three.itemCount}</td>
+		                    <c:forEach items="${three.computers }" var="com">	                   
+		                    	<td>
+		                    		<f:formatNumber type="number" pattern="#,###" value="${com.computerSalePrice }"/>원
+		                    	</td>
+		                   	</c:forEach>
+	                    </c:if>
+	                    <c:if test="${three.peripheralNo ge 1 }">
+	                    	<c:forEach items="${three.peripherals }" var="per">
+			                    <td>${per.peripheralTitle }</td>
+			                    <td>${three.itemCount}</td>
+		                    	<td>
+		                    		<f:formatNumber type="number" pattern="#,###" value="${per.peripheralSalePrice }"/>원
+		                    	</td>
+		                    </c:forEach>
+	                    </c:if>
+		                <c:forEach items="${three.asks }" var="asks">
+		                	<c:if test="${asks.askStateFlag  == 1}">
+		                    	<td>결제 완료</td>
+		                    </c:if>
+		                    <c:if test="${asks.askStateFlag  == 2}">
+		                    	<td>배송 준비중</td>
+		                    </c:if>
+		                    <c:if test="${asks.askStateFlag  == 3}">
+		                    	<td>
+		                    		<form action='<c:url value="/ask/buyOk.do"/>' method="get">
+		                    			<c:forEach items="${three.asks }" var="ask">
+		                    				<input type="hidden" name="askNo" value="${ask.askNo}">
+		                    				<button type="submit">구매 확정</button>
+		                    			</c:forEach>
+		                    		</form>
+		                    	</td>
+		                    </c:if>
+		                    <c:if test="${asks.askStateFlag  == 4}">
+		                    	<td>
+		                    		<c:if test="${three.computerNo != 0 }">
+		                    			<a href="<c:url value="/computer/computer.do/${three.computerNo}" />">리뷰쓰기</a>
+		                    		</c:if>
+		                    		<c:if test="${three.peripheralNo != 0 }">
+		                    			<a href="<c:url value="/peripheral/peripheral.do/${three.peripheralNo}" />">리뷰쓰기</a>
+		                    		</c:if>
+		                    	</td>
+		                    </c:if>
+		                    <c:if test="${asks.askDeleteFlag == 0}">
+		                    	 <td>-</td>
+		                    </c:if>
+		                    <c:if test="${asks.askDeleteFlag == 1}">
+		                    	 <td>취소</td>
+		                    </c:if>
+		                    <c:if test="${asks.askDeleteFlag == 2}">
+		                    	 <td>교환</td>
+		                    </c:if>
+		                </c:forEach>
+		                </tr>
+               			</tbody>
+               		</c:forEach>
+               		<c:forEach items="${six}" var="six">
+                	 <tbody>
+		               	<tr>
+			               	<c:forEach items="${six.asks }" var="ask">
+			                	<td>${ask.askDate }<br>
+			                		${ask.askNo }
+			                	</td>
+			                </c:forEach>
+		               		<td>
+			               		<c:forEach items="${six.files }" var="file">
+			               			<img src="<c:url value="${file.filePath}"/>">
+			               		</c:forEach>
+		               		</td>
+		               <c:if test="${six.computerNo ge 1 }">
+	                    	<c:forEach items="${six.computers }" var="com">
+	                    		<td>${com.computerTitle} <br>
+			                    	<c:if test="${six.optSsd >= null or six.optHdd >= null or six.optOs >= null}">
+			                    		옵션 :
+			                    		 ${six.optSsd }
+			                    		 ${six.optHdd }
+			                    		 ${six.optOs }
+				                    </c:if>
+				                    <c:if test="${six.optSsd == 0 or six.optHdd == 0 or six.optOs == 0}">
+				                    	옵션 : X.
+				                    </c:if>
+			                    </td>
+		                   	</c:forEach>
+	                    	<td>${six.itemCount}</td>
+		                    <c:forEach items="${six.computers }" var="com">	                   
+		                    	<td>
+		                    		<f:formatNumber type="number" pattern="#,###" value="${com.computerSalePrice }"/>원
+		                    	</td>
+		                   	</c:forEach>
+	                    </c:if>
+	                    <c:if test="${six.peripheralNo ge 1 }">
+	                    	<c:forEach items="${six.peripherals }" var="per">
+			                    <td>${per.peripheralTitle }</td>
+			                    <td>${six.itemCount}</td>
+		                    	<td>
+		                    		<f:formatNumber type="number" pattern="#,###" value="${per.peripheralSalePrice }"/>원
+		                    	</td>
+		                    </c:forEach>
+	                    </c:if>
+		                <c:forEach items="${six.asks }" var="asks">
+		                	<c:if test="${asks.askStateFlag  == 1}">
+		                    	<td>결제 완료</td>
+		                    </c:if>
+		                    <c:if test="${asks.askStateFlag  == 2}">
+		                    	<td>배송 준비중</td>
+		                    </c:if>
+		                    <c:if test="${asks.askStateFlag  == 3}">
+		                    	<td>
+		                    		<form action='<c:url value="/ask/buyOk.do"/>' method="get">
+		                    			<c:forEach items="${six.asks }" var="ask">
+		                    				<input type="hidden" name="askNo" value="${ask.askNo}">
+		                    				<button type="submit">구매 확정</button>
+		                    			</c:forEach>
+		                    		</form>
+		                    	</td>
+		                    </c:if>
+		                    <c:if test="${asks.askStateFlag  == 4}">
+		                    	<td>
+		                    		<c:if test="${six.computerNo != 0 }">
+		                    			<a href="<c:url value="/computer/computer.do/${six.computerNo}" />">리뷰쓰기</a>
+		                    		</c:if>
+		                    		<c:if test="${six.peripheralNo != 0 }">
+		                    			<a href="<c:url value="/peripheral/peripheral.do/${six.peripheralNo}" />">리뷰쓰기</a>
+		                    		</c:if>
+		                    	</td>
+		                    </c:if>
+		                    <c:if test="${asks.askDeleteFlag == 0}">
+		                    	 <td>-</td>
+		                    </c:if>
+		                    <c:if test="${asks.askDeleteFlag == 1}">
+		                    	 <td>취소</td>
+		                    </c:if>
+		                    <c:if test="${asks.askDeleteFlag == 2}">
+		                    	 <td>교환</td>
+		                    </c:if>
+		                </c:forEach>
+		                </tr>
+               			</tbody>
+               		</c:forEach>
             </table>
-            <p class="message ">주문 내역이 없습니다.</p>
-            <div id="paging">
-                <ul id="page">
-                    <li><a>&lt;&lt;</a></li>
-                    <li><a>&lt;</a></li>
-                    <li><a>1</a></li>
-                    <li><a>&gt;</a></li>
-                    <li><a>&gt;&gt;</a></li>
-                </ul>
-            </div>
+            <div id="page">
+	            <c:if test="${date != null}">
+	                <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
+					<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
+					<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
+						<c:if test="${currentPage > 1}">
+							<a class="first" href="<c:url value="/askdetail/myOnedate.do?email=${email}&page=1" />">&lt;&lt;</a>
+							<a class="prev" href="<c:url value="/askdetail/myOnedate.do?email=${email}&page=${currentPage-1}" />">&lt;</a>
+						</c:if>
+					<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
+						<c:choose>
+							<c:when test="${currentPage == pageNum}">
+								<a>${pageNum}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="<c:url value="/askdetail/myOnedate.do?email=${email}&page=${pageNum}" />">${pageNum}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${currentPage < totalPage}">
+						<a class="next" href="<c:url value="/askdetail/myOnedate.do?email=${email}&page=${currentPage+1}" />">&gt;</a>
+						<a class="last" href="<c:url value="/askdetail/myOnedate.do?email=${email}&page=${totalPage}" />">&gt;&gt;</a>
+					</c:if>
+				</c:if>
+			</div>
+			<div id="page">
+	            <c:if test="${week != null}">
+	                <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
+					<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
+					<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
+						<c:if test="${currentPage > 1}">
+							<a class="first" href="<c:url value="/askdetail/myOneweek.do?email=${email}&page=1" />">&lt;&lt;</a>
+							<a class="prev" href="<c:url value="/askdetail/myOneweek.do?email=${email}&page=${currentPage-1}" />">&lt;</a>
+						</c:if>
+					<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
+						<c:choose>
+							<c:when test="${currentPage == pageNum}">
+								<a>${pageNum}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="<c:url value="/askdetail/myOneweek.do?email=${email}&page=${pageNum}" />">${pageNum}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${currentPage < totalPage}">
+						<a class="next" href="<c:url value="/askdetail/myOneweek.do?email=${email}&page=${currentPage+1}" />">&gt;</a>
+						<a class="last" href="<c:url value="/askdetail/myOneweek.do?email=${email}&page=${totalPage}" />">&gt;&gt;</a>
+					</c:if>
+				</c:if>
+			</div>
+			<div id="page">
+	            <c:if test="${month != null}">
+	                <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
+					<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
+					<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
+						<c:if test="${currentPage > 1}">
+							<a class="first" href="<c:url value="/askdetail/myOnemonth.do?email=${email}&page=1" />">&lt;&lt;</a>
+							<a class="prev" href="<c:url value="/askdetail/myOnemonth.do?email=${email}&page=${currentPage-1}" />">&lt;</a>
+						</c:if>
+					<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
+						<c:choose>
+							<c:when test="${currentPage == pageNum}">
+								<a>${pageNum}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="<c:url value="/askdetail/myOnemonth.do?email=${email}&page=${pageNum}" />">${pageNum}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${currentPage < totalPage}">
+						<a class="next" href="<c:url value="/askdetail/myOnemonth.do?email=${email}&page=${currentPage+1}" />">&gt;</a>
+						<a class="last" href="<c:url value="/askdetail/myOnemonth.do?email=${email}&page=${totalPage}" />">&gt;&gt;</a>
+					</c:if>
+				</c:if>
+			</div>
+			<div id="page">
+	            <c:if test="${three != null}">
+	                <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
+					<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
+					<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
+						<c:if test="${currentPage > 1}">
+							<a class="first" href="<c:url value="/askdetail/myThreemonth.do?email=${email}&page=1" />">&lt;&lt;</a>
+							<a class="prev" href="<c:url value="/askdetail/myThreemonth.do?email=${email}&page=${currentPage-1}" />">&lt;</a>
+						</c:if>
+					<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
+						<c:choose>
+							<c:when test="${currentPage == pageNum}">
+								<a>${pageNum}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="<c:url value="/askdetail/myThreemonth.do?email=${email}&page=${pageNum}" />">${pageNum}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${currentPage < totalPage}">
+						<a class="next" href="<c:url value="/askdetail/myThreemonth.do?email=${email}&page=${currentPage+1}" />">&gt;</a>
+						<a class="last" href="<c:url value="/askdetail/myThreemonth.do?email=${email}&page=${totalPage}" />">&gt;&gt;</a>
+					</c:if>
+				</c:if>
+			</div>
+			<div id="page">
+	            <c:if test="${six != null}">
+	                <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
+					<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
+					<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
+						<c:if test="${currentPage > 1}">
+							<a class="first" href="<c:url value="/askdetail/mySixmonth.do?email=${email}&page=1" />">&lt;&lt;</a>
+							<a class="prev" href="<c:url value="/askdetail/mySixmonth.do?email=${email}&page=${currentPage-1}" />">&lt;</a>
+						</c:if>
+					<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
+						<c:choose>
+							<c:when test="${currentPage == pageNum}">
+								<a>${pageNum}</a>
+							</c:when>
+							<c:otherwise>
+								<a href="<c:url value="/askdetail/mySixmonth.do?email=${email}&page=${pageNum}" />">${pageNum}</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${currentPage < totalPage}">
+						<a class="next" href="<c:url value="/askdetail/mySixmonth.do?email=${email}&page=${currentPage+1}" />">&gt;</a>
+						<a class="last" href="<c:url value="/askdetail/mySixmonth.do?email=${email}&page=${totalPage}" />">&gt;&gt;</a>
+					</c:if>
+				</c:if>
+			</div>
+            <%-- <c:if test="${empty date}">
+            	<p class="message ">주문 내역이 없습니다.</p>
+            </c:if> --%>
         </div>
     </div>
     <script type="text/javascript">

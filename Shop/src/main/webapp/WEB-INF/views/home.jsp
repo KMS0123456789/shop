@@ -8,21 +8,49 @@
 	    <meta charset="UTF-8">
 	    <link href="<c:url value='/resources/css/home.css' />" rel="stylesheet">
 	    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.4.1/swiper-bundle.min.js"></script>
+	   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.4.1/swiper-bundle.css">
 	</head>
 	<body>
 		<div class="wrap">
 			<%@ include file="./includes/homeheader.jsp" %>
 			<div style="position: relative; display: inline-block; width: 85%; ">
-				<div class="main-slide slick-initialized slick-slider">
-					<div aria-live="polite" class="slick-list draggable">
-						<div class="slick-track" role="listbox">
-							<ul class="slick-silde slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1">
-								<li>
-									<a href="" target="_self" class="trace_link" data-name="" tabindex="-1">
-										<img src="<c:url value="/resources/image/keyboard.jpg"/>">
+				<div class="main-slide slick-initialized slick-slider ">
+					<div aria-live="polite" class="slick-list draggable ">
+						<div class="slick-track swiper" role="listbox" >
+							<ul class="slick-silde slick-cloned swiper-wrapper"aria-hidden="true">
+								<li class="swiper-slide">
+									<a href="" target="_self" class="trace_link" data-name="" >
+										<img src="<c:url value="/resources/image/amd.jpg"/>">
+									</a>
+								</li>
+								<li class="swiper-slide">
+									<a href="" target="_self" class="trace_link" data-name="" >
+										<img src="<c:url value="/resources/image/intel.jpg"/>">
+									</a>
+								</li>
+								<li class="swiper-slide">
+									<a href="" target="_self" class="trace_link" data-name="" >
+										<img src="<c:url value="/resources/image/computer.jpg"/>">
+									</a>
+								</li>
+								<li class="swiper-slide">
+									<a href="" target="_self" class="trace_link" data-name="" >
+										<img src="<c:url value="/resources/image/gpu.jpg"/>">
+									</a>
+								</li>
+								<li class="swiper-slide">
+									<a href="" target="_self" class="trace_link" data-name="" >
+										<img src="<c:url value="/resources/image/pc.jpeg"/>">
 									</a>
 								</li>
 							</ul>
+							<div class="control-area">
+			          		<div class="pagination"></div>
+				          		<button class="btn btn-autoplay" aria-label="자동재생정지"></button>
+				          		<button class="btn btn-prev" aria-label="이전슬라이드"></button>
+				          		<button class="btn btn-next" aria-label="다음슬라이드"></button>
+					        </div>
 						</div>
 					</div>
 				</div>
@@ -147,5 +175,25 @@
 			
 		}
 		$("#history").append(history);
+	</script>
+	<script type="text/javascript">
+	const visualSlide = new Swiper('.swiper',{
+	      loop: true,
+	      centeredSlides: true,
+	      freeMode : true,
+	      autoplay:{
+	         delay: 4000,  
+	      	},
+	     navigation: {
+	      	nextEl: ".btn-next",
+	      	prevEl: ".btn-prev"
+	    	},
+	    pagination: {
+	      el: ".pagination",
+	      type:"bullets",
+	      clickable: true
+	      },
+	      effect: 'cube',
+	 	})
 	</script>
 </html>

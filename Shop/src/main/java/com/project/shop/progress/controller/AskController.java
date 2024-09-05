@@ -189,4 +189,17 @@ public class AskController {
     	model.addAttribute("detail",detail);
     	return "orderCompletePeripheral";
     }
+    // 구매확정
+    @RequestMapping(value = "/buyOk.do", method = RequestMethod.GET)
+    public String buyOk(AskVO vo , Model model, int askNo) {
+    	
+    	System.out.println(askNo);
+    	int buyOk = service.buyOk(vo);
+    	
+    	if(buyOk > 0) {
+    		return "redirect:/ask/myorder.do";
+    	}else {
+    		return "redirect:/ask/myorder.do";
+    	}
+    }
 }

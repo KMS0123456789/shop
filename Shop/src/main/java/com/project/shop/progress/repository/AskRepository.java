@@ -81,4 +81,9 @@ public class AskRepository {
 	public int completePeripheralBuy(AskVO vo) {
 		return template.update(NAME_SPACE + ".completePeripheralBuy", vo);
 	}
+	
+	// 구매확정으로 업데이트
+	public int buyOk (AskVO vo) {
+		return template.update(NAME_SPACE+ ".buyOk", vo);
+	}
 }

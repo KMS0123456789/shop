@@ -33,6 +33,8 @@ import com.project.shop.progress.vo.AskVO;
 		AskVO peripheralBuySelect(AskVO avo);
 		
 		int completePeripheralBuy(AskVO vo);
-
+		
+		// 구매확정으로 업데이트
+		int buyOk(AskVO vo);
 	}
 	
