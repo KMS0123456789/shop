@@ -102,7 +102,7 @@
 		                	</td>
 		               		<td>
 			               		<c:forEach items="${date.files }" var="file">
-			               			<img src="<c:url value="${file.filePath}"/>">
+			               			<img src="<c:url value="${file.filePath}"/>" style="width: 50px">
 			               		</c:forEach>
 		               		</td>
 		               <c:if test="${date.computerNo ge 1 }">
@@ -180,7 +180,7 @@
 			                </c:forEach>
 		               		<td>
 			               		<c:forEach items="${week.files }" var="file">
-			               			<img src="<c:url value="${file.filePath}"/>">
+			               			<img src="<c:url value="${file.filePath}"/>" style="width: 50px">
 			               		</c:forEach>
 		               		</td>
 		               <c:if test="${week.computerNo ge 1 }">
@@ -258,7 +258,7 @@
 			                </c:forEach>
 		               		<td>
 			               		<c:forEach items="${month.files }" var="file">
-			               			<img src="<c:url value="${file.filePath}"/>">
+			               			<img src="<c:url value="${file.filePath}"/>" style="width: 50px">
 			               		</c:forEach>
 		               		</td>
 		               <c:if test="${month.computerNo ge 1 }">
@@ -336,7 +336,7 @@
 			                </c:forEach>
 		               		<td>
 			               		<c:forEach items="${three.files }" var="file">
-			               			<img src="<c:url value="${file.filePath}"/>">
+			               			<img src="<c:url value="${file.filePath}"/>" style="width: 50px">
 			               		</c:forEach>
 		               		</td>
 		               <c:if test="${three.computerNo ge 1 }">
@@ -414,7 +414,7 @@
 			                </c:forEach>
 		               		<td>
 			               		<c:forEach items="${six.files }" var="file">
-			               			<img src="<c:url value="${file.filePath}"/>">
+			               			<img src="<c:url value="${file.filePath}"/>" style="width: 50px">
 			               		</c:forEach>
 		               		</td>
 		               <c:if test="${six.computerNo ge 1 }">
