@@ -53,7 +53,7 @@ public class AskDetailController {
 			vo.setAskDetailUser(user.getEmail());
 			Page<AskDetailVO> myOneweek = service.myOneweek(pageable, searchType , keyword , vo);
 			model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
-			model.addAttribute("month", myOneweek.getContent());
+			model.addAttribute("week", myOneweek.getContent());
 			model.addAttribute("totalPage", myOneweek.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
 			model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
 			model.addAttribute("email", vo.getAskDetailUser());

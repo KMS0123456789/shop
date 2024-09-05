@@ -124,7 +124,7 @@ public class AskController {
         return "myorder_past";
     }
 	
-    @RequestMapping(value = "/myorder.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/myorder.do", method = RequestMethod.GET)
     public String myorder() {
         return "myorder";
     }

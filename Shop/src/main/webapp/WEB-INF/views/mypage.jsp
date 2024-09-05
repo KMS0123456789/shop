@@ -21,7 +21,7 @@
                 		</form>
                 	</li>
                     <li>
-                    	<form action="<c:url value='/ask/myorder.do'/>" method="post">
+                    	<form action="<c:url value='/ask/myorder.do'/>" method="get">
 	                		<input type="hidden" value="${sessionScope.user.email}" name="askUser">
 	                 		<button type="submit"> <h5> ORDER </h5> <h4>주문내역 조회</h4> </button>
                 		</form>

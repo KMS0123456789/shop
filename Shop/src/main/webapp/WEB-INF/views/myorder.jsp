@@ -56,10 +56,6 @@
                         <a href="<c:url value='/askdetail/myThreemonth.do'/>" class="btnNormal" days="90"><img src="../resources/image/btn_date4.gif" alt="3개월"></a>
                         <a href="<c:url value='/askdetail/mySixmonth.do'/>" class="btnNormal" days="180"><img src="../resources/image/btn_date5.gif" alt="6개월"></a>
                     </span>
-                    <input id="start_date" name="history_start_date" class="start_date" readonly="readonly" size="10" value="" type="text">
-                    ~ 
-                    <input id="end_date" name="history_end_date"readonly="readonly" size="10" value="" type="text">
-                    <input alt="조회" id="order_btn" type="image" src="../resources/image/btn_search.gif">
                 </fieldset>
                 <ul id="order_infor">
                     <li class="displaynone">기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
@@ -112,15 +108,10 @@
 		               <c:if test="${date.computerNo ge 1 }">
 	                    	<c:forEach items="${date.computers }" var="com">
 	                    		<td>${com.computerTitle} <br>
-			                    	<c:if test="${date.optSsd >= 1 or date.optHdd >= 1 or date.optOs >= 1}">
-			                    		옵션 :
-			                    		 ${date.optSsd }
-			                    		 ${date.optHdd }
-			                    		 ${date.optOs }
-			                    	</c:if>
-			                    	<c:if test="${date.optSsd == 0 or date.optHdd == 0 or date.optOs == 0}">
-				                    	옵션 : X.
-				                    </c:if>
+			                    	옵션:
+			                    	SSD ${date.ssdName != null ? date.ssdName : '미포함'}, 
+			                    	HDD ${date.hddName != null ? date.hddName : '미포함'}, 
+			                    	OS ${date.osName != null ? date.osName : '미포함'}
 		                    	</td>
 		                   	</c:forEach>
 	                    	<td>${date.itemCount}</td>	                    
@@ -195,15 +186,10 @@
 		               <c:if test="${week.computerNo ge 1 }">
 	                    	<c:forEach items="${week.computers }" var="com">
 	                    		<td>${com.computerTitle} <br>
-			                    	<c:if test="${week.optSsd >= null or week.optHdd >= null or week.optOs >= null}">
-			                    		옵션 :
-			                    		 ${week.optSsd }
-			                    		 ${week.optHdd }
-			                    		 ${week.optOs }
-				                    </c:if>
-				                    <c:if test="${week.optSsd == 0 or week.optHdd == 0 or week.optOs == 0}">
-				                    	옵션 : X.
-				                    </c:if>
+			                    	옵션:
+			                    	SSD ${week.ssdName != null ? week.ssdName : '미포함'}, 
+			                    	HDD ${week.hddName != null ? week.hddName : '미포함'}, 
+			                    	OS ${week.osName != null ? week.osName : '미포함'}
 			                    </td>
 		                   	</c:forEach>
 	                    	<td>${week.itemCount}</td>
@@ -278,15 +264,10 @@
 		               <c:if test="${month.computerNo ge 1 }">
 	                    	<c:forEach items="${month.computers }" var="com">
 	                    		<td>${com.computerTitle} <br>
-			                    	<c:if test="${month.optSsd >= null or month.optHdd >= null or month.optOs >= null}">
-			                    		옵션 :
-			                    		 ${month.optSsd }
-			                    		 ${month.optHdd }
-			                    		 ${month.optOs }
-				                    </c:if>
-				                    <c:if test="${month.optSsd == 0 or month.optHdd == 0 or month.optOs == 0}">
-				                    	옵션 : X.
-				                    </c:if>
+			                    	옵션:
+			                    	SSD ${month.ssdName != null ? month.ssdName : '미포함'}, 
+			                    	HDD ${month.hddName != null ? month.hddName : '미포함'}, 
+			                    	OS ${month.osName != null ? month.osName : '미포함'}
 			                    </td>
 		                   	</c:forEach>
 	                    	<td>${month.itemCount}</td>
@@ -361,15 +342,10 @@
 		               <c:if test="${three.computerNo ge 1 }">
 	                    	<c:forEach items="${three.computers }" var="com">
 	                    		<td>${com.computerTitle} <br>
-			                    	<c:if test="${three.optSsd >= null or three.optHdd >= null or three.optOs >= null}">
-			                    		옵션 :
-			                    		 ${three.optSsd }
-			                    		 ${three.optHdd }
-			                    		 ${three.optOs }
-				                    </c:if>
-				                    <c:if test="${three.optSsd == 0 or three.optHdd == 0 or three.optOs == 0}">
-				                    	옵션 : X.
-				                    </c:if>
+			                    	옵션:
+			                    	SSD ${three.ssdName != null ? three.ssdName : '미포함'}, 
+			                    	HDD ${three.hddName != null ? three.hddName : '미포함'}, 
+			                    	OS ${three.osName != null ? three.osName : '미포함'}
 			                    </td>
 		                   	</c:forEach>
 	                    	<td>${three.itemCount}</td>
@@ -444,15 +420,10 @@
 		               <c:if test="${six.computerNo ge 1 }">
 	                    	<c:forEach items="${six.computers }" var="com">
 	                    		<td>${com.computerTitle} <br>
-			                    	<c:if test="${six.optSsd >= null or six.optHdd >= null or six.optOs >= null}">
-			                    		옵션 :
-			                    		 ${six.optSsd }
-			                    		 ${six.optHdd }
-			                    		 ${six.optOs }
-				                    </c:if>
-				                    <c:if test="${six.optSsd == 0 or six.optHdd == 0 or six.optOs == 0}">
-				                    	옵션 : X.
-				                    </c:if>
+			                    	옵션:
+			                    	SSD ${six.ssdName != null ? six.ssdName : '미포함'}, 
+			                    	HDD ${six.hddName != null ? six.hddName : '미포함'}, 
+			                    	OS ${six.osName != null ? six.osName : '미포함'}
 			                    </td>
 		                   	</c:forEach>
 	                    	<td>${six.itemCount}</td>
@@ -538,7 +509,7 @@
 				</c:if>
 			</div>
 			<div id="page">
-	            <c:if test="${week != null}">
+	            <c:if test="${week != null and date == null and month ==null and three == null and six == null}">
 	                <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
 					<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
 					<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
