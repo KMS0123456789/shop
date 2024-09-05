@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -79,7 +79,7 @@
 										</div>
 										<div class="info">
 											<div class="pull-left">
-												<span>${computer.computerSalePrice}</span>
+												<span><fmt:formatNumber value="${computer.computerSalePrice}" type="number" pattern="#,###"/></span>
 											</div>
 										</div>
 										<div class="txt"></div>
@@ -101,7 +101,7 @@
 												</div>
 												<div class="info">
 													<div class="pull-left">
-														<span>${peripheral.peripheralSalePrice}</span>
+														<span><fmt:formatNumber value="${peripheral.peripheralSalePrice}" type="number" pattern="#,###"/></span>
 													</div>
 												</div>
 												<div class="txt"></div>
@@ -119,7 +119,7 @@
 												</div>
 												<div class="info">
 													<div class="pull-left">
-														<span>${peripheral.peripheralSalePrice}</span>
+														<span><fmt:formatNumber value="${peripheral.peripheralSalePrice}" type="number" pattern="#,###"/></span>
 													</div>
 												</div>
 												<div class="txt"></div>
@@ -137,7 +137,7 @@
 												</div>
 												<div class="info">
 													<div class="pull-left">
-														<span>${peripheral.peripheralSalePrice}</span>
+														<span><fmt:formatNumber value="${peripheral.peripheralSalePrice}" type="number" pattern="#,###"/></span>
 													</div>
 												</div>
 												<div class="txt"></div>

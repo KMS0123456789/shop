@@ -93,7 +93,7 @@
 											<div class="total">
 												<span class="t1">총 결제금액</span>
 												<span class="t2">
-														<strong id="total-price"><fmt:formatNumber value="${computer.computerSalePrice}" type="number" pattern="#,###"/></strong>원
+													<strong id="total-price"><fmt:formatNumber value="${computer.computerSalePrice}" type="number" pattern="#,###"/></strong>원
 												</span>
 											</div>
 											<ul class="btnbox">
@@ -339,33 +339,36 @@
 		        </form>
 		    </div>
 		</div>
-		<script>
+		<script>			
 			function onSelectChange1(){ 
 			    let selected = $("select option:selected");
-			    let beforePrice = parseInt($(".p1 > em").text());
+			    let beforePrice = parseInt($(".p1 > em").text().replace(/[^0-9]/g, ""));
 			    let totalPrice = beforePrice;
 			    for(var i = 0; i < selected.length; i++){
 			  		totalPrice += parseInt(selected.eq(i).data('price'));
 			    }
-			    $("#total-price").text(totalPrice);
+			    let str = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			    $("#total-price").text(str);
 			}  	 
 			function onSelectChange2(){ 
 			 	let selected = $("select option:selected");
-			    let beforePrice = parseInt($(".p1 > em").text());
+			    let beforePrice = parseInt($(".p1 > em").text().replace(/[^0-9]/g, ""));
 			    let totalPrice = beforePrice;
 			    for(var i = 0; i < selected.length; i++){
 			   		totalPrice += parseInt(selected.eq(i).data('price'));
 			    }
-			    $("#total-price").text(totalPrice);
+			    let str = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			    $("#total-price").text(str);
 			}  
 			function onSelectChange3(){ 
 				let selected = $("select option:selected");
-				let beforePrice = parseInt($(".p1 > em").text());
+				let beforePrice = parseInt($(".p1 > em").text().replace(/[^0-9]/g, ""));
 				let totalPrice = beforePrice;
 				for(var i = 0; i < selected.length; i++){
 				   totalPrice += parseInt(selected.eq(i).data('price'));
 				}
-				$("#total-price").text(totalPrice);
+				let str = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+				$("#total-price").text(str);
 			} 
 			function Keep(){
 				let session = "${sessionScope.user.email}"

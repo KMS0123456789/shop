@@ -67,7 +67,7 @@
 </head>
 <body>
 	<header>
-        <h2 id="main"><a href="/shop">커스텀PC Shop</a></h2>
+        <h2 id="main"><a href="<c:url value="/"/>">커스텀PC Shop</a></h2>
         <nav id="menu">    
             <ul id="menu">
                 <li><a href="<c:url value='/peripheral/keyboard.do'/>">키보드</a></li>
