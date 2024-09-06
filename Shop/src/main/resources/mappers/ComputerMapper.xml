@@ -114,8 +114,8 @@
 		</if>
 		(select file_path from file where file.computer_no = computer.computer_no) as computer_file_path,
 		(select avg(star_count) from star where star.computer_no = #{computerNo} group by star.computer_no) as star_avg,
-		(select count(review_user) from review where review.computer_no = computer.computer_no) as review_flag,
-		(select count(ask_user) from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask.ask_state_flag = 4 and computer_no = #{computerNo}) as buy_flag
+		(select count(review_user) from review where review.computer_no = computer.computer_no and review.review_user = #{email}) as review_flag,
+		(select count(ask_user) from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask.ask_state_flag = 4 and computer_no = #{computerNo} and ask.ask_user = #{email}) as buy_flag
 		from computer 
 		left join review on computer.computer_no = review.computer_no
 		left join question on computer.computer_no = question.computer_no

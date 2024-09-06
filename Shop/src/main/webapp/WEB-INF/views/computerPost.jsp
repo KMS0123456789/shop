@@ -197,7 +197,7 @@
 							<div class="tab-title"></div>
 							<c:if test="${(computer.reviewFlag < 1) && (computer.buyFlag > 0)}">
 								<c:forEach items="${ask}" var="ask">
-									<c:if test="${ask.askUser == sessionScope.user.email}">
+									<c:if test="${fn:contains(ask.askUser,sessionScope.user.email)}">
 										<div>
 											<button onclick="reviewModal()">리뷰 작성</button>
 										</div>

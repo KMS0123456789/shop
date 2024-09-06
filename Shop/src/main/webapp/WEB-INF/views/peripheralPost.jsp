@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -147,7 +148,7 @@
 							<div class="tab-title"></div>
 							<c:if test="${(peripheral.reviewFlag < 1) && (peripheral.buyFlag > 0)}">
 								<c:forEach items="${ask}" var="ask">
-									<c:if test="${ask.askUser == sessionScope.user.email}">
+									<c:if test="${fn:contains(ask.askUser,sessionScope.user.email)}">
 										<div>
 											<button onclick="reviewModal()">리뷰 작성</button>
 										</div>
