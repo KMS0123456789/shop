@@ -119,8 +119,8 @@
      height: 160px;
 }
 .product-info {
-     display: flex;
-     align-items: center;
+    display: flex;
+    align-items: center;
 }
 .product-info img {
      height: 160px;
