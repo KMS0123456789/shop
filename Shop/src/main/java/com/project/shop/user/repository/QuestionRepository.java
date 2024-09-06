@@ -77,6 +77,6 @@ public class QuestionRepository {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
-		return template.selectOne(NAME_SPACE + ".count", map); //ComputerMapper의 count 메서드 실행
+		return template.selectOne(NAME_SPACE + ".mycount", map); //ComputerMapper의 count 메서드 실행
 	}
 }
