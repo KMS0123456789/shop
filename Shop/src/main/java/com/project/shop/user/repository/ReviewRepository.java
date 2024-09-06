@@ -36,7 +36,7 @@ public class ReviewRepository {
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
 		map.put("email", email);
-		int total = count(searchType, keyword);
+		int total = mycount(searchType, keyword, email);
     	List<ReviewVO> myreview = template.selectList(NAME_SPACE+".myreview", map);
 		return new PageImpl<ReviewVO>(myreview, pageable, total);
     }
@@ -52,7 +52,7 @@ public class ReviewRepository {
 	    	Map<String, Object> map = new HashMap<String, Object>();
 			map.put("searchType", searchType);
 			map.put("keyword", keyword);
-			return template.selectOne(NAME_SPACE + ".count" , map); //ComputerMapper의 count 메서드 실행
+			return template.selectOne(NAME_SPACE + ".mycount" , map); //ComputerMapper의 count 메서드 실행
 	}
 	    
 }

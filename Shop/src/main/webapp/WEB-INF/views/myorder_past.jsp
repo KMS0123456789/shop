@@ -42,7 +42,6 @@
             </ul>
         </div>
         <div id="field">
-            <form>
                 <fieldset id="datecase">
                     <legend>검색기간 설정</legend>
                     <div id="selectcase">
@@ -54,7 +53,7 @@
                             <option value="2019">2019</option>
                         </select>
                     </div>
-                    <input alt="조회" id="order_btn" type="image" src="../resources/image/btn_search.gif">
+                    <BUTTON TYPE="button"><input alt="조회" id="order_btn" type="image" src="../resources/image/btn_search.gif"></BUTTON>
                 </fieldset>
                 <ul id="order_infor">
                     <li>주문처리완료 후 36개월 이내의 최근 주문건은 주문내역조회 탭에서 확인할 수 있습니다.</li>
@@ -62,7 +61,6 @@
                 </ul>
                 <input id="mode" name="mode" value="" type="hidden">
                 <input id="term" name="term" value="" type="hidden">
-            </form>
         </div>
         <div id="order_contents">
             <div id="order_title"><h3>주문 상품 정보</h3></div>
