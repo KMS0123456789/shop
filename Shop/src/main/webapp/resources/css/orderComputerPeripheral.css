@@ -1,0 +1,242 @@
+.order-info form {
+     display: grid;
+     grid-template-columns: 120px 1fr;
+     gap: 10px 20px;
+     align-items: center;
+}
+.form-group {
+     display: contents;
+}
+.form-group label {
+     text-align: center;
+     padding-right: 10px;
+}
+.form-group input[type="text"],.form-group input[type="email"]{
+     width: 165px;
+     padding: 5px;
+     box-sizing: border-box;
+}
+.form-group input[type="tel"] {
+     width: 100px;
+     margin-right: 5px;
+     padding: 5px;
+     box-sizing: border-box;
+}
+.form-group input[id="delivery-msg"] {
+     width: 400px;
+}
+.address-inputs input {
+     width: 100px;
+     padding: 5px;
+     margin-bottom: 10px;
+     gap: 10px;
+}
+.address-inputs input[type="text"] {
+     width: 300px;
+}
+.address-inputs button {
+     grid-column: 2;
+}
+.postcode {
+	 cursor: pointer;
+}
+.option-change{
+     background-color: #000000;
+     font-family: Arial, sans-serif;
+     color: #fff;
+     border: none;
+     border-radius: 4px;
+     padding: 8px 12px;
+     margin-left: 10px;
+     cursor: pointer;
+}
+.shipping-options {
+     grid-column: 1 / -1;
+     margin: 10px 0;
+}
+.order-info h3 {
+     grid-column: 1 / -1;
+     margin-top: 30px;
+     margin-bottom: 15px;
+}
+.order-info {
+     padding: 20px;
+     background-color: #f9f9f9;
+     border: 1px solid #e0e0e0;
+     border-radius: 5px;
+}
+.order-page {
+     font-family: Arial, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     display: flex;
+     flex-direction: column;
+}
+ h1 {
+     text-align: center;
+     color: #000000;
+     font-size: 40px;
+}
+.cart-header {
+     display: flex;
+     justify-content: center;
+     margin-bottom: 30px;
+}
+.cart-step {
+     text-align: center;
+     margin: 0 20px;
+     color: #999;
+     font-weight: bold;
+}
+.cart-step.active {
+     color: #000000;
+}
+.progress-icons {
+     display: flex;
+     justify-content: center;
+     margin-bottom: 30px;
+}
+.icon {
+     text-align: center;
+     margin: 0 20px;
+}
+.icon.active img {
+     background-color: #000000;
+     border-radius: 50%;
+     padding: 10px;
+}
+.order-items {
+     width: 100%;
+     border-collapse: collapse;
+}
+.order-items th,.order-items td {
+     border: 1px solid #ddd;
+     padding: 10px;
+}
+.product-image {
+     float: left;
+     margin-right: 10px;
+     height: 160px;
+}
+.product-info {
+     overflow: hidden;
+}
+.quantity-control {
+     text-align: center;
+}
+.quantity-control input {
+     width: 30px;
+     text-align: center;
+}
+.quantity-control button {
+     background: none;
+     border: none;
+     font-size: 12px;
+     cursor: pointer;
+}
+.original-price {
+     font-weight: bold;
+}
+.total-price {
+     text-align: right;
+     margin-top: 20px;
+}
+.total-price span {
+     color: #000000;
+     font-weight: bold;
+}
+.order-info-summary {
+     display: flex;
+     flex-direction: row;
+     margin-top: 30px;
+}
+.order-info {
+     flex: 1;
+}
+.payment-summary {
+     width: 300px;
+     position: sticky;
+     top: 20px;
+     background-color: #f8f8f8;
+     padding: 20px;
+     border: 1px solid #ddd;
+}
+.payment-summary .total {
+     font-size: 24px;
+     font-weight: bold;
+     color: #000000;
+}
+.order-button {
+	 font-family: Arial, sans-serif;
+     background-color: #000000;
+     color: white;
+     border: none;
+     padding: 15px;
+     font-size: 18px;
+     width: 100%;
+     margin-top: 20px;
+     cursor: pointer;
+}
+.kakaoPay {
+     border: none;
+     margin-left: 40px;
+     cursor: pointer;
+}
+.icon-bag:before {
+    content: '\1F6CD';
+    font-size: 50px;
+}
+
+.icon-card:before {
+    content: '\1F4B3';
+    font-size: 50px;
+}
+
+.icon-check:before {
+    content: '\2714';
+    font-size: 50px;
+}
+
+.modal {
+    display: none; /* 기본 상태에서 숨김 */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4); /* 모달 배경색 */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 350px; /* 모달 내용 크기 */
+    cursor: pointer;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h2{
+	text-align : center;
+}
+
+#address-list li{
+	padding : 15px;
+}

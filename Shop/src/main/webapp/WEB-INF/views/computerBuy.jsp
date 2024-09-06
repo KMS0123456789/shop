@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주문</title>
-    <link href="<c:url value='/resources/css/order.css' />" rel="stylesheet">
+    <link href="<c:url value='/resources/css/orderComputerPeripheral.css' />" rel="stylesheet">
     <!-- 포트원 결제 -->
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     <!-- iamport.payment.js -->
