@@ -154,11 +154,11 @@
 	</select>
 	
 	<select id="computerPost" parameterType="int" resultMap="askMap">
-		select ask_user from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask_detail.computer_no = #{computerNo} and ask.ask_state_flag = 2
+		select ask_user from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask_detail.computer_no = #{computerNo} and ask.ask_state_flag = 4
 	</select>
 	
 	<select id="peripheralPost" parameterType="int" resultMap="askMap">
-		select ask_user from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask_detail.computer_no = #{peripheralNo} and ask.ask_state_flag = 2
+		select ask_user from ask left join ask_detail on ask.ask_no = ask_detail.ask_no where ask_detail.computer_no = #{peripheralNo} and ask.ask_state_flag = 4
 	</select>
 	
 	<insert id="computerBuy" useGeneratedKeys="true" keyProperty="askNo" parameterType="com.project.shop.progress.vo.AskVO">
