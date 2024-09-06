@@ -63,7 +63,6 @@
                 </table>
 	            <div class="cart-actions">
 			        <button type="button" class="btn-delete-selected">선택상품 삭제</button>
-			        <button type="button" class="btn-delete-all">전체상품 삭제</button>
 			    </div>
             </form>
         </div>
@@ -91,26 +90,32 @@
 </body>
 	<script>
     // form 제출을 위한  함수
-    function submitForm(isSelected) {
-        var form = document.getElementById('cartForm');
-        
-        if (isSelected) {
-            // 선택상품만 전송하는 경우: 체크된 상품만 남김
-            var checkedItems = document.querySelectorAll('.item-checkbox:checked');
-            if (checkedItems.length === 0) {
-                alert("선택된 상품이 없습니다.");
-                return;
-            }
-        } else {
-            // 전체상품을 전송하는 경우: 모든 checkbox 선택
-            var checkboxes = document.querySelectorAll('.item-checkbox');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = true;
-            });
-        }
-
-        form.submit();
-    }
+	function submitForm(isSelected) {
+	    var form = document.getElementById('cartForm');
+	    var checkboxes = document.querySelectorAll('.item-checkbox');
+	
+	    // 체크박스가 하나도 없는 경우 처리
+	    if (checkboxes.length === 0) {
+	        alert('주문할 상품이 없습니다.');
+	        return;
+	    }
+	
+	    if (isSelected) {
+	        // 선택상품만 전송하는 경우: 체크된 상품만 남김
+	        var checkedItems = document.querySelectorAll('.item-checkbox:checked');
+	        if (checkedItems.length === 0) {
+	            alert('선택한 상품이 없습니다.');
+	            return;
+	        }
+	    } else {
+	        // 전체상품을 전송하는 경우: 모든 checkbox 선택
+	        checkboxes.forEach(function(checkbox) {
+	            checkbox.checked = true;
+	        });
+	    }
+	
+	    form.submit();
+	}
 	
 	//결제금액 계산
 	document.addEventListener('DOMContentLoaded', function() {
@@ -121,7 +126,6 @@
 	    const shippingFeeElement = document.getElementById('shipping-fee');
 	    const removeButtons = document.querySelectorAll('.btn-remove');
 	    const deleteSelectedButton = document.querySelector('.btn-delete-selected');
-	    const deleteAllButton = document.querySelector('.btn-delete-all');
 	    const btnSubmitSelected = document.querySelector('.btn-secondary-outline');
 	    const btnSubmitAll = document.querySelector('.btn-primary');
 	    
@@ -135,19 +139,27 @@
 	        
 	        if (!checkedItems) {
 	            event.preventDefault(); // 폼 제출을 막음
-	            alert('상품을 선택해 주세요.');
 	        } else {
 	            form.submit(); // 폼 제출
 	        }
 	    });
 
-	    // 전체상품 주문하기 버튼 클릭 시
+	 	// 전체상품 주문하기 버튼 클릭 시
 	    btnSubmitAll.addEventListener('click', function(event) {
-	        // 모든 체크박스 선택
+	        const checkedItems = Array.from(itemCheckboxes).filter(checkbox => checkbox.checked);
+
+	        // 체크된 항목이 있는지 확인 (상품이 없는 경우)
+	        if (checkedItems.length === 0) {
+	            event.preventDefault(); // 폼 제출을 막음
+	            return;
+	        }
+
+	        // 모든 체크박스를 선택한 상태로 폼을 제출
 	        itemCheckboxes.forEach(checkbox => checkbox.checked = true);
 	        form.submit(); // 폼 제출
 	    });
 	    
+	 	
 	    // 전체 선택 체크박스 이벤트
 	    selectAllCheckbox.addEventListener('change', function() {
 	        itemCheckboxes.forEach(checkbox => checkbox.checked = selectAllCheckbox.checked);
@@ -238,47 +250,7 @@
 		        alert('선택된 상품이 없습니다.');
 		    }
 		});
-	
 	    
-	    // 전체 삭제 버튼 이벤트
-	    deleteAllButton.addEventListener('click', function() {
-	        const userEmail = "${user.email}";
-	        
-	        console.log("Attempting to delete all items for user:", userEmail);
-	        
-	        $.ajax({
-	            url: "${pageContext.request.contextPath}/cart/deleteAll.do",
-	            method: 'POST',
-	            contentType: 'application/json',
-	            data: JSON.stringify({ cartUser: userEmail }),
-	            success: function(response) {
-	                console.log("Server response:", response);
-	                if (response === "모든 상품이 삭제되었습니다.") {
-	                    // 테이블 본문의 모든 행을 제거합니다
-	                    const tbody = document.querySelector('.cart-items tbody');
-	                    console.log("tbody before removal:", tbody.innerHTML);
-	                    tbody.innerHTML = '';
-	                    console.log("tbody after removal:", tbody.innerHTML);
-
-	                    // 체크박스 배열을 비웁니다
-	                    itemCheckboxes.forEach(checkbox => checkbox.checked = false);
-
-	                    // 전체 선택 체크박스의 상태를 업데이트합니다
-	                    selectAllCheckbox.checked = false;
-
-	                    // 가격을 업데이트합니다
-	                    updateTotalPrice();
-
-	                    console.log("All items should be removed now");
-	                }
-	                alert("모든 상품이 삭제되었습니다.");  // 여기서 알림 메시지를 한국어로 변경했습니다
-	            },
-	            error: function(error) {
-	                console.error('Error:', error);
-	                alert('전체 상품 삭제 중 오류가 발생했습니다.');
-	            }
-	        });
-	    });
 
 	    function updateTotalPrice() {
 	        let totalProductPrice = 0;
