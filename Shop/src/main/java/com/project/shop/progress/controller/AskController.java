@@ -39,24 +39,44 @@ public class AskController {
 	private AskDetailService detailService;
 	
 	@PostMapping(value = "/completePay.do", produces = "application/json; charset=UTF-8")
-	@ResponseBody
-	public ResponseEntity<Map<String, Object>> completePayment(@RequestBody AskVO ask) {
-	    Map<String, Object> response = new HashMap<>();
-	    try {
-	        service.completePaymentAndInsert(ask);
-	        response.put("status", 200);
-	        response.put("message", "결제가 완료되었습니다.");
-	        return ResponseEntity.ok(response);
-	    } catch (Exception e) {
-	        response.put("status", 400);
-	        response.put("message", "결제 실패: " + e.getMessage());
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-	    }
-	}
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> completePay(@RequestBody AskVO ask, HttpSession session) {
+        UserVO user = (UserVO) session.getAttribute("user");
+        ask.setAskUser(user.getEmail());
+        Map<String, Object> response = new HashMap<>();
+
+        try {
+            service.completePay(ask);
+            if (ask.getAskDetails() != null) {
+                for (AskDetailVO detail : ask.getAskDetails()) {
+                    detail.setAskNo(ask.getAskNo());
+                    detail.setAskDetailUser(user.getEmail());
+                    detailService.completePay(detail);
+                }
+            }
+            response.put("status", 200);
+            response.put("message", "결제가 완료되었습니다.");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("status", 400);
+            response.put("message", "결제 실패: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
 	
     @GetMapping("/orderComplete.do")
-    public String orderComplete() {
-        return "orderComplete";
+    public String orderComplete(Model model, AskVO vo, AskDetailVO advo) {
+    	AskVO order = service.selectlastone();
+    	vo.setAskNo(order.getAskNo());
+    	advo.setAskNo(order.getAskNo());
+  
+    	AskVO ask = service.getAskById(vo);  // ask 데이터를 DB에서 가져옴
+
+        List<AskDetailVO> askDetails = detailService.getAskDetailsByAskNo(advo);  // askDetail 데이터도 가져옴
+
+        model.addAttribute("ask", ask);
+        model.addAttribute("askDetails", askDetails);
+        return "orderComplete";  // 주문 완료 페이지로 이동
     }
 
 	//주문 전체 조회

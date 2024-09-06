@@ -20,8 +20,13 @@ public class AskDetailServiceImpl implements AskDetailService{
 	
     @Override
     @Transactional
-    public void insertAskDetail(AskDetailVO detail) throws Exception {
-        repository.insertAskDetail(detail);
+    public void completePay(AskDetailVO detail) throws Exception {
+        repository.completePay(detail);
+    }
+    
+    @Override
+    public List<AskDetailVO> getAskDetailsByAskNo(AskDetailVO advo) {
+        return repository.getAskDetailsByAskNo(advo);
     }
 
 	@Override

@@ -22,6 +22,17 @@ public class AskDetailRepository {
 	private SqlSessionTemplate template;
 	private final String NAME_SPACE = "AskDetailMapper";
 	
+    public List<AskDetailVO> getAskDetailsByAskNo(AskDetailVO advo) {
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("askNo", advo.getAskNo());
+		return template.selectList(NAME_SPACE + ".getAskDetailsByAskNo", map);
+	}
+    
+    // AskDetail 테이블에 데이터 삽입
+    public void completePay(AskDetailVO detail) {
+        template.insert(NAME_SPACE + ".completePay", detail);
+    }
+	
     // AskDetail 테이블에 데이터 삽입
     public void insertAskDetail(AskDetailVO askDetail) {
         template.insert(NAME_SPACE + ".insertAskDetail", askDetail);

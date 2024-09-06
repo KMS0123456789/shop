@@ -23,6 +23,21 @@ public class AskRepository {
 	private final String NAME_SPACE = "AskMapper";
 	
     // Ask 테이블에 데이터 삽입
+    public void completePay(AskVO ask) {
+        template.insert(NAME_SPACE + ".completePay", ask);
+    }
+
+    public AskVO selectlastone() {
+    	return template.selectOne(NAME_SPACE + ".selectlastone");
+    }
+    
+	public AskVO getAskById(AskVO vo){
+		HashMap<String, Object> map=new HashMap<>();
+		map.put("askNo", vo.getAskNo());
+		return template.selectOne(NAME_SPACE + ".getAskById", map);
+	}
+	
+    // Ask 테이블에 데이터 삽입
     public void insertAsk(AskVO ask) {
         template.insert(NAME_SPACE + ".insertAsk", ask);
     }

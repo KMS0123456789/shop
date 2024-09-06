@@ -34,13 +34,18 @@
                                            value="${item.cartNo}" 
                                            data-price="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}">
                                 </td>
-                                <td class="product-info">
-                                    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
-                                    <div>
-                                        <h3>${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}</h3>
-                                        <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '미포함' : '포함'}</p>
-                                    </div>
-                                </td>
+								<td class="product-info">
+									<%-- <c:forEach items="${computer.files}" var="file">
+					            		 <img src="<c:url value='${file.filePath}' />" alt="Product">
+					            	</c:forEach> --%>
+								    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
+								    <div>
+								        <h3>${item.itemCategory == 0 ? item.computers[0].computerTitle : item.peripherals[0].peripheralTitle}</h3>
+								        <c:if test="${item.itemCategory == 0}">
+								            <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '미포함' : '포함'}</p>
+								        </c:if>
+								    </div>
+								</td>
                                 <td>
                                     <div class="quantity-control">
                                         <p>${item.itemCount}</p>

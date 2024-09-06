@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,11 +16,8 @@
 </head>
 <body>
     <%@ include file="./includes/myheader.jsp" %>
-
     <div class="order-complete-page">
         <h1>주문 완료</h1>
-
-        <!-- 주문 진행 단계 표시 -->
         <div class="cart-header">
             <div class="cart-step">
                 <i class="icon-bag"></i>
@@ -34,38 +32,52 @@
                 <span>주문완료</span>
             </div>
         </div>
-
         <p>고객님의 주문이 성공적으로 완료되었습니다.</p>
-        <p>주문 번호: <strong>${requestScope.orderNumber}</strong></p>
-
-        <!-- 주문 정보 표시 -->
+        <h3>주문 번호: ${ask.askNo}</h3>
         <h2>주문 정보</h2>
         <table class="order-summary">
             <thead>
                 <tr>
-                    <th>상품명</th>
+                    <th>상품 이미지</th>
                     <th>수량</th>
                     <th>가격</th>
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="item" items="${cartItems}">
-                    <tr>
-                        <!-- 상품명을 itemCategory를 기준으로 구분 -->
-                        <td>${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}</td>
-                        <td>${item.itemCount}</td>
-                        <td>${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}원</td>
-                    </tr>
-                </c:forEach>
+				<c:forEach var="item" items="${askDetails}">
+				    <tr>
+				        <td class="product-info">
+				            <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
+				            <div>
+				                <h3>${item.itemCategory == 0 ? '컴퓨터' : '주변기기'}</h3>
+				                <c:if test="${item.itemCategory == 0}">
+				                    <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '미포함' : '포함'}</p>
+				                </c:if>
+				            </div>
+				        </td>
+				        <td>
+				            <div class="quantity-control">
+				                <p>${item.itemCount}</p>
+				            </div>
+				        </td>
+				        <td class="price" style="text-align: center">
+				            <strong>
+				                <fmt:formatNumber value="${item.itemCategory == 0 ? item.computerSalePrice : item.peripheralSalePrice}" type="number" pattern="#,###"/>원
+				            </strong>
+				        </td>
+				    </tr>
+				</c:forEach>
             </tbody>
         </table>
-
-        <!-- 총 결제 금액 및 배송비 표시 -->
-        <div class="total-amount">
-            <p>총 결제 금액: ${requestScope.totalAmount} 원 + 배송비 : ${requestScope.shippingCost} 원 = 합계 :  <strong>${requestScope.totalAmountWithShipping}원</strong></p>
-        </div>
-
-        <!-- 쇼핑 계속하기 버튼 -->
+			<c:if test="${ask != null}">
+			    <p>총 결제 금액: 
+			        <fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice }" type="number" pattern="#,###"/>원
+			        + 배송비 : 3,000원 = 합계 :
+			        <strong>
+			            <fmt:formatNumber value="${detail.computerSalePrice + detail.ssdPrice + detail.hddPrice + detail.osPrice + 3000 }" type="number" pattern="#,###"/>원
+			        </strong>
+			    </p>
+			</c:if>
         <div style="display: flex; justify-content: center;">
             <a href="<c:url value='/shop' />" class="back-to-shop">쇼핑 계속하기</a>
         </div>

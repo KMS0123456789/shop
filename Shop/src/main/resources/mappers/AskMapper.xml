@@ -65,10 +65,22 @@
 	</resultMap>
 	
 	<!-- 주문 입력 -->
-    <insert id="insertAsk" useGeneratedKeys="true" keyProperty="askNo">
-        INSERT INTO ask (ask_user, ask_date, ask_state_flag, ask_delete_flag)
-        VALUES (#{askUser}, now(), 0,0)
+    <insert id="completePay" useGeneratedKeys="true" keyProperty="askNo" parameterType="com.project.shop.progress.vo.AskVO">
+        INSERT INTO ask (ask_user, ask_state_flag, ask_delete_flag)
+        VALUES (#{askUser}, 1, 0)
     </insert>
+    
+    <select id="getAskById" resultType="com.project.shop.progress.vo.AskVO">
+        SELECT * 
+        FROM ask
+        WHERE ask_no = #{askNo}
+    </select>
+    
+    <select id="selectlastone" resultType="com.project.shop.progress.vo.AskVO">
+    	SELECT * 
+        FROM ask
+       	order by ask_no DESC LIMIT 0,1;
+    </select>
 
 	<!-- 주문을 전체 조회 -->
 	<select id="askAll" resultMap="askMap">		

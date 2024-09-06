@@ -78,12 +78,17 @@
 		</collection>
 	</resultMap>
 	
+    <select id="getAskDetailsByAskNo" resultMap="askDetailMap">
+        SELECT *
+        FROM ask_detail
+        WHERE ask_no = #{askNo}
+    </select>
 	
 	<!-- 주문 상세입력-->
-    <!-- <insert id="insertAskDetail">
-        INSERT INTO ask_detail (ask_no, ask_detail_user, computer_no, peripheral_no, opt_no, item_count, item_category)
-        VALUES (#{askNo}, #{askDetailUser}, #{computerNo}, #{peripheralNo}, #{optNo}, #{itemCount}, #{itemCategory})
-    </insert> -->
+    <insert id="completePay" parameterType="com.project.shop.progress.vo.AskDetailVO">
+        INSERT INTO ask_detail (ask_no, ask_detail_user, computer_no, peripheral_no, opt_ssd, opt_hdd, opt_os, item_count, item_category)
+        VALUES (#{askNo}, #{askDetailUser}, #{computerNo}, #{peripheralNo}, #{optSsd}, #{optHdd}, #{optOs}, #{itemCount}, #{itemCategory})
+    </insert>
     
     <insert id="computerBuy" parameterType="com.project.shop.progress.vo.AskDetailVO">
     	insert into ask_detail(ask_no, ask_detail_user, computer_no, opt_ssd, opt_hdd, opt_os, item_count, item_category)

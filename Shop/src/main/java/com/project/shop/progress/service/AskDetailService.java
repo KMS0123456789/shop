@@ -8,7 +8,9 @@ import org.springframework.data.domain.Pageable;
 import com.project.shop.progress.vo.AskDetailVO;
 
 public interface AskDetailService {
-	void insertAskDetail(AskDetailVO detail) throws Exception;
+	void completePay(AskDetailVO detail) throws Exception;
+	
+	List<AskDetailVO> getAskDetailsByAskNo(AskDetailVO advo);
 	
 	int computerBuy(AskDetailVO advo);
 	

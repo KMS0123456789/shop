@@ -32,28 +32,24 @@ public class AskServiceImpl implements AskService{
 
     @Override
     @Transactional
-    public void completePaymentAndInsert(AskVO ask) throws Exception {
-        System.out.println("ask: " + ask);
-        System.out.println("askDetails: " + ask.getAskDetails());
-    	
-    	// 1. AskVO를 먼저 저장 (askNo 생성)
-        repository.insertAsk(ask);
-
-        // 2. AskDetailVO 리스트가 있는지 확인하고 반복 처리
-        if (ask.getAskDetails() != null && !ask.getAskDetails().isEmpty()) {
-            for (AskDetailVO detail : ask.getAskDetails()) {
-                // 3. askNo 설정
-                detail.setAskNo(ask.getAskNo());
-                // 4. AskDetailVO 저장
-                askDetailRepository.insertAskDetail(detail);
-            }
-        }
+    public void completePay(AskVO ask) throws Exception {
+        repository.completePay(ask);
     }
     
     private boolean userExists(String userEmail) {
         return userRepository.findUserByEmail(userEmail) != null;
     }	
 	
+    @Override
+    public AskVO selectlastone() {
+    	return repository.selectlastone();
+    }
+    
+    @Override
+    public AskVO getAskById(AskVO vo) {
+        return repository.getAskById(vo);
+    }
+    
 	//ask 전체 조회
 	@Override
 	public Page<AskVO> askAll(Pageable pageable, String searchType, String keyword){

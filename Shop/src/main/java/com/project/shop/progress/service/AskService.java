@@ -8,7 +8,11 @@ import org.springframework.data.domain.Pageable;
 import com.project.shop.progress.vo.AskVO;
 
 	public interface AskService {
-	    void completePaymentAndInsert(AskVO ask) throws Exception;
+	    void completePay(AskVO ask) throws Exception;
+	    
+	    AskVO selectlastone();
+	    
+	    AskVO getAskById(AskVO vo); 
 		
 		//ask 전체 조회
 		Page<AskVO> askAll(Pageable pageable, String searchType, String keyword);
