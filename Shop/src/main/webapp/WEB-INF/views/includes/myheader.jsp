@@ -77,7 +77,7 @@
             </ul>
         </nav>
             <ul id="menu2">
-            	<c:if test="${sessionScope.user.email != null and sessionScope.user.userType == 2}">
+            	<c:if test="${sessionScope.user.email != null and sessionScope.user.userType == 0}">
                 	<li><a href="<c:url value='/user/manager.do'/>">관리자 페이지</a></li>
 					<li><a href="<c:url value='/user/logout.do'/>">로그아웃</a></li>
                 </c:if>
