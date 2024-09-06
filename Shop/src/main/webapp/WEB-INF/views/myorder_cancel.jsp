@@ -55,10 +55,6 @@
                         <a href="#none" class="btnNormal" days="90"><img src="../resources/image/btn_date4.gif" alt="3개월"></a>
                         <a href="#none" class="btnNormal" days="180"><img src="../resources/image/btn_date5.gif" alt="6개월"></a>
                     </span>
-                    <input id="start_date" name="history_start_date" class="start_date" readonly="readonly" size="10" value="2024-08-09" type="text">
-                    ~ 
-                    <input id="end_date" name="history_end_date"readonly="readonly" size="10" value="2024-08-09" type="text">
-                    <input alt="조회" id="order_btn" type="image" src="../resources/image/btn_search.gif">
                 </fieldset>
                 <ul id="order_infor">
                     <li class=" ">기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 주문처리완료 후 36개월 이내의 주문내역을 조회하실 수 있습니다.</li>
