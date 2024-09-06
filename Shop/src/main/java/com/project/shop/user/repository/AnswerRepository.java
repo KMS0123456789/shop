@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.project.shop.user.vo.AnswerVO;
+import com.project.shop.user.vo.QuestionVO;
 
 @Repository
 public class AnswerRepository {

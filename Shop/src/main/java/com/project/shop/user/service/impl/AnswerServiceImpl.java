@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.project.shop.user.repository.AnswerRepository;
 import com.project.shop.user.service.AnswerService;
 import com.project.shop.user.vo.AnswerVO;
+import com.project.shop.user.vo.QuestionVO;
 
 @Service
 public class AnswerServiceImpl implements AnswerService{

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.project.shop.user.repository.AnswerRepository;
 import com.project.shop.user.service.AnswerService;
+import com.project.shop.user.service.QuestionService;
 import com.project.shop.user.vo.AnswerVO;
+import com.project.shop.user.vo.QuestionVO;
 
 @Controller
 @RequestMapping("/answer")
@@ -20,6 +22,9 @@ public class AnswerController {
 	@Autowired
 	private AnswerRepository repository;
 	
+	@Autowired
+	private QuestionService questionService;
+	
 	//QnA 답글
 	@RequestMapping(value="/answerwrite.do", method=RequestMethod.GET)
 	public String answerwrite(Model model,@RequestParam(value="questionNo") int questionNo) { 
@@ -29,9 +34,11 @@ public class AnswerController {
 	
 	//QnA 답글
 	@RequestMapping(value="/answerwrite.do", method=RequestMethod.POST)
-	public String answerwriteOk(AnswerVO vo) { 
+	public String answerwriteOk(AnswerVO vo, QuestionVO qvo) { 
 		
 		repository.answerwrite(vo); //repository에 있는 answerwite에 vo값 넣어준다.
+		qvo.setQuestionNo(vo.getQuestionNo());
+		questionService.questionUpdate(qvo);
 		
 		return "redirect:/question/managerQnA.do/"; // /question/managerQnA.do/으로 이동한다.
 	}

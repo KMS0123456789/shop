@@ -79,4 +79,8 @@ public class QuestionRepository {
 		map.put("keyword", keyword);
 		return template.selectOne(NAME_SPACE + ".mycount", map); //ComputerMapper의 count 메서드 실행
 	}
+    
+	public int questionUpdate(QuestionVO qvo) {
+		return template.update(NAME_SPACE + ".questionUpdate", qvo);
+	}
 }

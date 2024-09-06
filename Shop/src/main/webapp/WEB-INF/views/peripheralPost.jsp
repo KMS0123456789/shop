@@ -149,7 +149,7 @@
 								<c:forEach items="${ask}" var="ask">
 									<c:if test="${ask.askUser == sessionScope.user.email}">
 										<div>
-											<button class="" onclick="reviewModal()">리뷰 작성</button>
+											<button onclick="reviewModal()">리뷰 작성</button>
 										</div>
 									</c:if>
 								</c:forEach>

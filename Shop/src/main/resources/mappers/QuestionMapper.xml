@@ -85,4 +85,8 @@
 		 order by question_no desc limit #{offset}, #{limit};
 	</select>
 	
+	
+	<update id="questionUpdate" parameterType="com.project.shop.user.vo.QuestionVO">
+		update question set question_flag = 2 where question_no = #{questionNo}
+	</update>
 </mapper>

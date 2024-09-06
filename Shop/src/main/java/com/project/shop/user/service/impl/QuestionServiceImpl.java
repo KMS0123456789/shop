@@ -63,4 +63,9 @@ public class QuestionServiceImpl implements QuestionService{
 		// QuestionRepository의 메서드 myquestiont 실행 pageable 파라미터도 같이 보낸다.
 		return repository.myquestion(pageable, searchType, keyword, email); 
 	}
+	
+	@Override
+	public int questionUpdate(QuestionVO qvo) {
+		return repository.questionUpdate(qvo);
+	}
 }

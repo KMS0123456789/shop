@@ -30,4 +30,6 @@ public interface QuestionService {
 	
 	// 질문 조회하는 메서드
 	Page<QuestionVO> myquestion(Pageable pageable, String searchType, String keyword, String email);
+	
+	int questionUpdate(QuestionVO qvo);
 }
