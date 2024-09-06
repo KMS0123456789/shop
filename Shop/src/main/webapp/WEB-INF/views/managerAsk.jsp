@@ -29,6 +29,9 @@
 							<tr>
                                 <td>${ask.askNo}</td>	
 								<c:choose>
+									<c:when test="${ask.askStateFlag == 0 }">
+										<td>오류입니다.</td>
+									</c:when>
 									<c:when test="${ask.askStateFlag == 1 }">
 										<td>결제완료</td>
 									</c:when>

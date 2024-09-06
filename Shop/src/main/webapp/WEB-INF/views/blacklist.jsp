@@ -35,16 +35,18 @@
 				             		<td>${user.name}</td>
 				                	<td>${user.email}</td>
 				                	<td>
-			              			<form action='<c:url value="/user/blackList.do"/>'  method="post">
-										<input type="hidden" name="email" value="${user.email}">
-							        	<button type="submit"  class="btn">블랙리스트</button>
-							        </form>
-						        </td>
-						    </tr>
-		             	</c:forEach>		             		    	
-		            </tr>
-		        </tbody>
-		</table>
+					                	<c:if test="${user.userType == 1}">
+					              			<form action='<c:url value="/user/blackList.do"/>'  method="post">
+												<input type="hidden" name="email" value="${user.email}">
+									        	<button type="submit"  class="btn">블랙리스트</button>
+									        </form>
+								        </c:if>
+							        </td>
+							    </tr>
+			             	</c:forEach>		             		    	
+			            </tr>
+			        </tbody>
+			</table>
 		
 		<div class="paging">
 	           <f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />

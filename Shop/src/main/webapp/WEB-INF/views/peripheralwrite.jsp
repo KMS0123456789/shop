@@ -20,11 +20,11 @@
             <br><br>
             <div class="form-group">
                 <label for="peripheralTitle">상품 제목</label>
-                <input type="text" id="title" name="peripheralTitle">
+                <input type="text" id="peripheralTitle" name="peripheralTitle">
             </div>
             <div class="form-group">
                 <label for="peripheralSalePrice">상품 가격</label>
-                <input type="text" id="peripheralSalePrice" name="peripheralSalePrice">
+                <input type="number" id="peripheralSalePrice" name="peripheralSalePrice" maxlength="10">
             </div>
             <div class="form-group">
                 <label for="peripheralName">상품명</label>
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="peripheral_stock">상품 수량</label>
-                <input type="text" id="itemCount" name="peripheral_stock">
+                <input type="number" id="peripheral_stock" name="peripheral_stock" maxlength="3">
             </div>
             <div class="form-group" id="fileDiv">
                 <label for="file">첨부파일</label>
@@ -52,14 +52,14 @@
 
 		$("form").submit(function(){
 	
-		let title = $("#title");
+		let title = $("#peripheralTitle");
 		let peripheralSalePrice = $("#peripheralSalePrice");
 		let peripheralName = $("#peripheralName");
-		let itemCount = $("#itemCount")		
+		let peripheral_stock = $("#peripheral_stock")		
 		
-		if(title.val().trim() == ""){
+		if(peripheralTitle.val().trim() == ""){
 			alert("제목은 필수 입력 항목 입니다.");
-			title.focus();
+			peripheralTitle.focus();
 			return false;
 		}
 		
@@ -75,9 +75,9 @@
 			return false;
 		}
 		
-		if(itemCount.val().trim() == ""){
-			alert("itemCount은 필수 입력 항목 입니다.");
-			itemCount.focus();
+		if(peripheral_stock.val().trim() == ""){
+			alert("peripheral_stock은 필수 입력 항목 입니다.");
+			peripheral_stock.focus();
 			return false;
 		}
 		return true;

@@ -64,12 +64,12 @@ public class AskServiceImpl implements AskService{
 	//ask 전체 조회
 		@Override
 		public Page<AskVO> deliveryAll(Pageable pageable, String searchType, String keyword){
-			return repository.askAll(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
+			return repository.deliveryAll(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
 		}
 		//ask 전체 개수 조회
 		@Override
 		public int deliveryCount(String searchType, String keyword) {
-			return repository.count(searchType, keyword); //AskRepository의 메서드 count 실행
+			return repository.deliveryCount(searchType, keyword); //AskRepository의 메서드 count 실행
 		}
 
 	@Override

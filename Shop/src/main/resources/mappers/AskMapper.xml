@@ -97,7 +97,7 @@
 				left join peripheral p on detail.peripheral_no = p.peripheral_no
 				left join file f on detail.computer_no = f.computer_no
 		<where>
-			and ask_state_flag >0
+			and ask_state_flag >0 
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
@@ -116,22 +116,33 @@
 	</select>
 	
 	<select id="deliveryAll" resultMap="askMap">
-		select * from ask
+		select *,
+			(select opt_name from opt where detail.opt_ssd = opt.opt_no) as ssd_name,
+			(select opt_name from opt where detail.opt_hdd = opt.opt_no) as hdd_name,
+			(select opt_name from opt where detail.opt_os = opt.opt_no) as os_name,
+			(select opt_sale_price from opt where opt.opt_no = detail.opt_ssd and opt_category = 0) as ssd_price,
+			(select opt_sale_price from opt where opt.opt_no = detail.opt_hdd and opt_category = 1) as hdd_price,
+			(select opt_sale_price from opt where opt.opt_no = detail.opt_os and opt_category = 2) as os_price
+			 from ask 
+				left join ask_detail detail on ask.ask_no = detail.ask_no
+				left join computer c on detail.computer_no = c.computer_no
+				left join peripheral p on detail.peripheral_no = p.peripheral_no
+				left join file f on detail.computer_no = f.computer_no
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
-			and ask_state_flag > 1 
+			and ask_state_flag > 1 and  ask_state_flag !=4
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%') and
 			</if>
 		</where>
-		order by ask_no desc
+		order by ask.ask_no desc
 		limit #{offset}, #{limit}
 	</select>
 	
 	<select id="deliveryCount" resultType="int">
 		select count(*) from ask
 		<where>
-			and ask_state_flag > 1
+			and ask_state_flag > 1 and  ask_state_flag !=4
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%') 
 			</if>

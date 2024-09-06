@@ -228,9 +228,9 @@ public class AskController {
     	int askStateModify = service.askStateModify(vo);
     	
     	if(askStateModify > 0) {
-    		return "redirect:/user/manager.do";
+    		return "redirect:/ask/managerdelivery.do";
     	}else {
-    		return "redirect:/user/manager.do";
+    		return "redirect:/ask/managerdelivery.do";
     	}
     }
     
@@ -240,9 +240,9 @@ public class AskController {
     	int deliveryComplete = service.deliveryComplete(vo);
     	
     	if(deliveryComplete > 0) {
-    		return "redirect:/user/manager.do";
+    		return "redirect:/ask/managerdelivery.do";
     	}else {
-    		return "redirect:/user/manager.do";
+    		return "redirect:/user/managerdelivery.do";
     	}
     }
 }

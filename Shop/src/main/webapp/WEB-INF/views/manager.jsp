@@ -50,7 +50,7 @@
 						<tr>		   		 			
 							<td>${computer.computerNo}</td>
 							<td><a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>" style="width:90px;"></td>
-							<td>${computer.computerTitle}</td>
+							<td><a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'>${computer.computerTitle}</td>
 							<td>${computer.computerSalePrice}원</td>
 							<td>${computer.computerCreateDate}</td>
 						</tr>
@@ -103,7 +103,7 @@
 				<tr>
 					<td>${peripheral.peripheralNo}</td>
 					<td><a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>" style="width:90px;"></td>
-					<td>${peripheral.peripheralTitle}</td>
+					<td><a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</td>
 					<td>${peripheral.peripheralSalePrice}원</td>
 					<td>${peripheral.peripheralCreateDate}</td>
 				</tr>

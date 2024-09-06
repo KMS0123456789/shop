@@ -15,11 +15,11 @@
             <br><br>
             <div class="form-group">
                 <label for="computerTitle">상품 제목</label>
-                <input type="text" id="title" name="computerTitle">
+                <input type="text" id="computerTitle" name="computerTitle">
             </div>
             <div class="form-group">
                 <label for="computerSalePrice">상품 가격</label>
-                <input type="text" id="computerSalePrice" name="computerSalePrice">
+                <input type="text" id="computerSalePrice" name="computerSalePrice" maxlength="10">
             </div>
             <div class="form-group">
                 <label for="cpu">cpu</label>
@@ -55,7 +55,7 @@
             </div>            
             <div class="form-group">
                 <label for="computerStock">상품 수량</label>
-                <input type="text" id="itemCount" name="computerStock">
+                <input type="text" id="computerStock" name="computerStock" maxlength="3">
             </div>
             <div class="form-group" id="fileDiv">
                 <label for="file">첨부파일</label>
@@ -73,7 +73,7 @@
 </body>
 <script>
 	$("form").submit(function(){
-		let title = $("#title");
+		let computerTitle = $("#computerTitle");
 		let computerSalePrice=$("#computerSalePrice");
 		let cpu=$("#cpu");
 		let ssd=$("#ssd");
@@ -83,11 +83,11 @@
 		let bCase =$("#bCase");
 		let ram = $("#ram");
 		let cooler = $("#cooler");
-		let itemCount = $("#itemCount");
+		let computerStock = $("#computerStock");
 		
-		if(title.val().trim() == ""){
+		if(computerTitle.val().trim() == ""){
 			alert("제목은 필수 입력 항목 입니다.");
-			title.focus();
+			computerTitle.focus();
 			return false;
 		}
 		if(computerSalePrice.val().trim() == ""){
@@ -140,9 +140,9 @@
 			cooler.focus();
 			return false;
 		}
-		if(itemCount.val().trim() == ""){
-			alert("itemCount은 필수 입력 항목 입니다.");
-			itemCount.focus();
+		if(computerStock.val().trim() == ""){
+			alert("computerStock은 필수 입력 항목 입니다.");
+			computerStock.focus();
 			return false;
 		}				
 		
