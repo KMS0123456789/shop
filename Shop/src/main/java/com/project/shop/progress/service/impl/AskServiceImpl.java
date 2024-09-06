@@ -64,6 +64,17 @@ public class AskServiceImpl implements AskService{
 	public int count(String searchType, String keyword) {
 		return repository.count(searchType, keyword); //AskRepository의 메서드 count 실행
 	}
+	
+	//ask 전체 조회
+		@Override
+		public Page<AskVO> deliveryAll(Pageable pageable, String searchType, String keyword){
+			return repository.askAll(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
+		}
+		//ask 전체 개수 조회
+		@Override
+		public int deliveryCount(String searchType, String keyword) {
+			return repository.count(searchType, keyword); //AskRepository의 메서드 count 실행
+		}
 
 	@Override
 	public List<AskVO> myOnedate() {
@@ -116,4 +127,17 @@ public class AskServiceImpl implements AskService{
 		// TODO Auto-generated method stub
 		return repository.buyOk(vo);
 	}
+	
+	@Override
+	public int askStateModify(AskVO vo) {
+		// TODO Auto-generated method stub
+		return repository.askStateModify(vo);
+	}
+	
+	@Override
+	public int deliveryComplete(AskVO vo) {
+		// TODO Auto-generated method stub
+		return repository.deliveryComplete(vo);
+	}
+	
 }

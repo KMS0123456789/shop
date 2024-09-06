@@ -45,6 +45,24 @@ public class AskRepository {
 		map.put("keyword", keyword);
 		return template.selectOne(NAME_SPACE + ".count", map); //AskMapper의 count 메서드 실행
 	}
+	public Page<AskVO> deliveryAll(Pageable pageable, String searchType, String keyword){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = deliveryCount(searchType, keyword);
+		List<AskVO> deliverys = template.selectList(NAME_SPACE + ".deliveryAll",map);  //AskMapper의 askAll 메서드 실행
+		return new PageImpl<AskVO>(deliverys, pageable, total);
+	}
+	//주문 개수 조회
+	public int deliveryCount(String searchType, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return template.selectOne(NAME_SPACE + ".deliveryCount", map); //AskMapper의 count 메서드 실행
+	}
+	
 	
 	
 	public List<AskVO> myOnedate(){
@@ -85,5 +103,12 @@ public class AskRepository {
 	// 구매확정으로 업데이트
 	public int buyOk (AskVO vo) {
 		return template.update(NAME_SPACE+ ".buyOk", vo);
+	}
+	public int askStateModify (AskVO vo) {
+		return template.update(NAME_SPACE+ ".askStateModify", vo);
+	}
+	
+	public int deliveryComplete (AskVO vo) {
+		return template.update(NAME_SPACE+ ".deliveryComplete", vo);
 	}
 }

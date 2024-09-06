@@ -247,17 +247,13 @@
 	</select>
 	
 	<select id="peripheralmanager" resultMap="peripheralMap">
-		(select * from peripheral left join file on peripheral.peripheral_no = file.peripheral_no where peripheral_category = 0 order by peripheral.peripheral_no desc limit 0,5)
-		union
-		(select * from peripheral left join file on peripheral.peripheral_no = file.peripheral_no where peripheral_category = 1 order by peripheral.peripheral_no desc limit 0,5)
-		union
-		(select * from peripheral left join file on peripheral.peripheral_no = file.peripheral_no where peripheral_category = 2 order by peripheral.peripheral_no desc limit 0,5)
+		select * from peripheral left join file on peripheral.peripheral_no = file.peripheral_no 
 		<where>
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>
 		</where>
-		order by computer_no desc
+		order by peripheral.peripheral_no desc
 		limit #{offset}, #{limit}
 	</select>
 	

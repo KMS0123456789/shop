@@ -92,13 +92,13 @@ public class AskController {
 	
 	//배송 목록 조회
 	@RequestMapping(value="/managerdelivery.do", method = RequestMethod.GET)
-		public String managerdeliver(Model model,
+		public String managerdelivery(Model model,
 				@RequestParam(name="page", required=false, defaultValue = "1") int page,
 				@RequestParam(name="searchType", required=false) String searchType,
 				@RequestParam(name="keyword", required=false) String keyword,
 				HttpSession session) {
 		PageRequest pageable =  PageRequest.of(page-1, 10); //한 페이지에 뜰 게시물 갯수(10개)
-		Page<AskVO> data = service.askAll(pageable, searchType, keyword);  //data에 service.askAll 값 넣기
+		Page<AskVO> data = service.deliveryAll(pageable, searchType, keyword);  //data에 service.askAll 값 넣기
 		model.addAttribute("ask",data.getContent()); //ask 키에 조회할 페이지 정보 넣어 보내기
 		model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
 		model.addAttribute("totalPage", data.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
@@ -200,6 +200,29 @@ public class AskController {
     		return "redirect:/ask/myorder.do";
     	}else {
     		return "redirect:/ask/myorder.do";
+    	}
+    }
+    @RequestMapping(value = "/askStateModify.do", method = RequestMethod.GET)
+    public String askStateModify(AskVO vo , Model model, int askNo) {
+    	
+    	int askStateModify = service.askStateModify(vo);
+    	
+    	if(askStateModify > 0) {
+    		return "redirect:/user/manager.do";
+    	}else {
+    		return "redirect:/user/manager.do";
+    	}
+    }
+    
+    @RequestMapping(value = "/deliveryComplete.do", method = RequestMethod.GET)
+    public String deliveryComplete(AskVO vo , Model model, int askNo) {
+    	
+    	int deliveryComplete = service.deliveryComplete(vo);
+    	
+    	if(deliveryComplete > 0) {
+    		return "redirect:/user/manager.do";
+    	}else {
+    		return "redirect:/user/manager.do";
     	}
     }
 }

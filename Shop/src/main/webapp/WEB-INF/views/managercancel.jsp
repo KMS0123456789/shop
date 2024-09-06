@@ -25,25 +25,53 @@
 							<th>판매가</th>
 						</tr>
 					</thead>
-					<c:forEach items="${ask}" var="ask">
+					<c:forEach items="${ask}" var="ask">						
 						<tbody>
 							<tr>
 								<td>${ask.askNo}</td>
 								<c:choose>
-									<c:when test="${ask.askDeleteFlag == 0}">
+									<c:when test="${ask.askStateFlag == 0 }">
 										<td>주문 취소 안함</td>
 									</c:when>
-									<c:when test="${ask.askDeleteFlag == 1 }">
+									<c:when test="${ask.askStateFlag ==  1}">
 										<td>주문 취소 요청</td>
 									</c:when>
-								</c:choose>									
+								</c:choose>								
 	                           	<td>${ask.askDate}</td>
-	                            <td>상품 이미지</td>
-	                            <td>1</td>
-	                            <td>1</td>
-	                            <td>판매가</td>                                                        
-							</tr>
-						</tbody>
+	                            <td>
+	                            <c:forEach items="${ask.files}" var="file">
+	                            		<div class="mainImg">
+											<img class="mainImg2" src='<c:url value="${file.filePath}" />' style="width:50px;">
+										</div>
+								</c:forEach>
+								</td>
+								<c:forEach items="${ask.computers}" var="com">
+									<c:if test="${com.computerNo != 0}">
+		                            	<td>${com.computerTitle}</td>
+		                       			<td><p>옵션${ask.ssdName} ${ask.hddName} ${ask.osName}</p></td>
+		                       			<c:if test="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice > 50000}">
+		                            		<td><f:formatNumber value="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice}" type="number" pattern="#,###"/>원</td>
+		                            	</c:if>
+		                            	<c:if test="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice < 50000}">
+		                            		<td><f:formatNumber value="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice +3000}" type="number" pattern="#,###"/>원</td>
+		                            	</c:if>
+		                            </c:if>
+	                            </c:forEach>
+	                            <c:forEach items="${ask.peripherals}" var="per"> 
+	                            	<c:if test="${per.peripheralNo != 0}">
+		                            	<td>${per.peripheralTitle}</td>
+		                            	<td>-</td>
+		                            	<c:choose>
+		                            		<c:when test="${per.peripheralSalePrice > 50000}">
+		                            			<td><f:formatNumber value="${per.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
+		                            		</c:when>
+		                            		<c:otherwise>
+		                            			<td><f:formatNumber value="${per.peripheralSalePrice + 3000}" type="number" pattern="#,###"/>원</td>
+		                            		</c:otherwise>
+		                            	</c:choose>
+		                            </c:if>
+	                            </c:forEach>                                                               
+							</tbody>
 					</c:forEach>
 				</table>
 				

@@ -16,6 +16,12 @@ import com.project.shop.progress.vo.AskVO;
 		//ask 전체 개수 조회
 		int count(String searchType, String keyword);
 		
+		//ask 전체 조회
+		Page<AskVO> deliveryAll(Pageable pageable, String searchType, String keyword);
+				
+		//askdelivery 전체 개수 조회
+		int deliveryCount(String searchType, String keyword);
+		
 		List<AskVO> myOnedate();
 		
 		List<AskVO> computerPost(int computerNo);
@@ -36,5 +42,9 @@ import com.project.shop.progress.vo.AskVO;
 		
 		// 구매확정으로 업데이트
 		int buyOk(AskVO vo);
+		
+		int askStateModify(AskVO vo);
+		
+		int deliveryComplete(AskVO vo);
 	}
 	
