@@ -342,7 +342,18 @@
  	
 	/* 카카오페이 구현 */
 	document.getElementById('payment').addEventListener('click', function() {
-	     kakaoPay(username, useremail);
+	     
+	    const recipientName = document.getElementById('recipient-name').value.trim();
+	    const postalCode = document.getElementById('postal-code').value.trim();
+	    const addressBasic = document.getElementById('address-basic').value.trim();
+	    const addressDetail = document.getElementById('address-detail').value.trim();
+	    
+	    if (!recipientName || !postalCode || !addressBasic || !addressDetail) {
+	        alert('받는 사람 정보와 주소를 모두 입력해 주세요.');
+	        return;  // 결제 실행을 막음
+	    }
+	    
+	    kakaoPay(username, useremail);
 	});
 	 
 	let lastUsedMerchantUid = null;
