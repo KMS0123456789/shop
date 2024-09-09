@@ -11,6 +11,12 @@
 	    <result property="optOs" column="opt_os"/>
 	    <result property="itemCount" column="item_count"/>
 	    <result property="itemCategory" column="item_category"/>
+	    <result property="ssdName" column="ssd_name"/>
+		<result property="hddName" column="hdd_name"/>
+		<result property="osName" column="os_name"/>
+		<result property="ssdPrice" column="ssd_price"/>
+		<result property="hddPrice" column="hdd_price"/>
+		<result property="osPrice" column="os_price"/>
 	    <collection property="computers" ofType="com.project.shop.computer.vo.ComputerVO">
 	        <id property="computerNo" column="computer_no"/>
 	        <result property="computerTitle" column="computer_title"/>
@@ -39,38 +45,54 @@
 	        <result property="peripheralSaleDate" column="peripheral_sale_date"/>
 	        <result property="peripheralCreateDate" column="peripheral_create_date"/>
 	    </collection>
+	    <collection property="opts" ofType="com.project.shop.computer.vo.OptVO">
+	        <id property="optNo" column="opt_no"/>
+	        <result property="optCategory" column="opt_category"/>
+	        <result property="optName" column="opt_name"/>
+	        <result property="optStock" column="opt_stock"/>
+	        <result property="optSalePrice" column="opt_sale_price"/>
+	    </collection>
 	</resultMap>
 
 	<!-- 장바구니 아이템 조회 -->
 	<select id="getCartItemsWithDetails" parameterType="string" resultMap="cartMap">
-	    SELECT *
-	    FROM cart c
-	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
-	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
-	    WHERE c.cart_user = #{cartUser}
+		SELECT *,
+		  (select opt_name from opt where c.opt_ssd = opt.opt_no) as ssd_name,
+		  (select opt_name from opt where c.opt_hdd = opt.opt_no) as hdd_name,
+		  (select opt_name from opt where c.opt_os = opt.opt_no) as os_name,
+		  (select opt_sale_price from opt where opt.opt_no = c.opt_ssd and opt_category = 0) as ssd_price,
+		  (select opt_sale_price from opt where opt.opt_no = c.opt_hdd and opt_category = 1) as hdd_price,
+		  (select opt_sale_price from opt where opt.opt_no = c.opt_os and opt_category = 2) as os_price
+		FROM cart c
+		LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
+		LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
+		WHERE c.cart_user = #{cartUser}
 	</select>
 
 	<!-- 주문 아이템 조회 -->
     <select id="getCartItemsByUser" parameterType="string" resultMap="cartMap" >
-        SELECT *
+        SELECT *,
+		  (select opt_name from opt where c.opt_ssd = opt.opt_no) as ssd_name,
+		  (select opt_name from opt where c.opt_hdd = opt.opt_no) as hdd_name,
+		  (select opt_name from opt where c.opt_os = opt.opt_no) as os_name,
+		  (select opt_sale_price from opt where opt.opt_no = c.opt_ssd and opt_category = 0) as ssd_price,
+		  (select opt_sale_price from opt where opt.opt_no = c.opt_hdd and opt_category = 1) as hdd_price,
+		  (select opt_sale_price from opt where opt.opt_no = c.opt_os and opt_category = 2) as os_price
 	    FROM cart c
 	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
 	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
 	    WHERE c.cart_user = #{cartUser}
 	</select>
 
-		<!-- cartNo로 아이템을 조회 -->
+	<!-- cartNo로 아이템을 조회 -->
     <select id="selectItemByCartNo" parameterType="int" resultType="com.project.shop.progress.vo.CartVO">
-        SELECT 
-            c.cart_no as cartNo,
-            c.cart_user as cartUser,
-            c.computer_no as computerNo,
-            c.peripheral_no as peripheralNo,
-            c.opt_ssd as optSsd,
-            c.opt_hdd as optHdd,
-            c.opt_os as optOs,
-            c.item_count as itemCount,
-            c.item_category as itemCategory
+        SELECT *,
+		  (select opt_name from opt where c.opt_ssd = opt.opt_no) as ssd_name,
+		  (select opt_name from opt where c.opt_hdd = opt.opt_no) as hdd_name,
+		  (select opt_name from opt where c.opt_os = opt.opt_no) as os_name,
+		  (select opt_sale_price from opt where opt.opt_no = c.opt_ssd and opt_category = 0) as ssd_price,
+		  (select opt_sale_price from opt where opt.opt_no = c.opt_hdd and opt_category = 1) as hdd_price,
+		  (select opt_sale_price from opt where opt.opt_no = c.opt_os and opt_category = 2) as os_price
         FROM 
             cart c
             LEFT JOIN computer com ON c.computer_no = com.computer_no

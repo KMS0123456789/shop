@@ -44,48 +44,53 @@
                 </tr>
             </thead>
 				<tbody>
-				    <c:forEach var="item" items="${askDetails}">
-				        <tr>
-				            <td class="product-info">
-				            	<img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
-				                <%-- <img src="<c:url value='/resources/image/${item.filePath}' />" alt="Product"> --%>
-				                <div>
-				                    <h3>
-				                        <c:choose>
-				                            <c:when test="${item.itemCategory == 0}">
-				                                ${item.computers[0].computerTitle}
-				                            </c:when>
-				                            <c:otherwise>
-				                                ${item.peripherals[0].peripheralTitle}
-				                            </c:otherwise>
-				                        </c:choose>
-				                    </h3>
-				                    <c:if test="${item.itemCategory == 0}">
-				                        <p>옵션: SSD ${item.ssdName} ${item.optSsd}GB, 
-			                                    HDD ${item.hddName} ${item.optHdd}GB, 
-			                                    OS ${item.optOs == 0 ? '미포함' : item.osName}</p>
-				                    </c:if>
-				                </div>
-				            </td>
-				            <td>
-				                <div class="quantity-control">
-				                    <p>${item.itemCount}</p>
-				                </div>
-				            </td>
-				            <td class="price" style="text-align: center">
-				                <strong>
-				                    <c:choose>
-				                        <c:when test="${item.itemCategory == 0}">
-				                            <fmt:formatNumber value="${item.computers[0].computerSalePrice + item.ssdPrice + item.hddPrice + item.osPrice}" type="number" pattern="#,###"/>원
-				                        </c:when>
-				                        <c:otherwise>
-				                            <fmt:formatNumber value="${item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
-				                        </c:otherwise>
-				                    </c:choose>
-				                </strong>
-				            </td>
-				        </tr>
-				    </c:forEach>
+<c:forEach var="item" items="${askDetails}">
+    <tr>
+        <td class="product-info">
+            <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
+            <div>
+                <h3>
+                    <c:choose>
+                        <c:when test="${item.itemCategory == 0}">
+                            ${item.computers[0].computerTitle}
+                        </c:when>
+                        <c:otherwise>
+                            ${item.peripherals[0].peripheralTitle}
+                        </c:otherwise>
+                    </c:choose>
+                </h3>
+                <c:if test="${item.itemCategory == 0}">
+                    <p>옵션: SSD ${item.ssdName} ${item.optSsd}GB, 
+                       HDD ${item.hddName} ${item.optHdd}GB, 
+                       OS ${item.optOs == 0 ? '미포함' : item.osName}</p>
+                </c:if>
+            </div>
+        </td>
+        <td>
+            <div class="quantity-control">
+                <p>${item.itemCount}</p>
+            </div>
+        </td>
+        <td class="price" style="text-align: center">
+            <strong>
+                <c:choose>
+                    <c:when test="${item.itemCategory == 0}">
+                        <fmt:formatNumber value="${item.computers[0].computerSalePrice + 
+                                                   (empty item.ssdPrice ? 0 : item.ssdPrice) + 
+                                                   (empty item.hddPrice ? 0 : item.hddPrice) + 
+                                                   (empty item.osPrice ? 0 : item.osPrice)}" 
+                                          type="number" pattern="#,###"/>원
+                    </c:when>
+                    <c:otherwise>
+                        <fmt:formatNumber value="${item.peripherals[0].peripheralSalePrice}" 
+                                          type="number" pattern="#,###"/>원
+                    </c:otherwise>
+                </c:choose>
+            </strong>
+        </td>
+    </tr>
+</c:forEach>
+
 				</tbody>
         </table>
 			<p>총 결제 금액: 

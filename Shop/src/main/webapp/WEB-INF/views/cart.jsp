@@ -26,40 +26,51 @@
                             <th style="text-align: center">가격</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <c:forEach var="item" items="${cartItems}">
-                            <tr data-cart-no="${item.cartNo}">
-                                <td>
-                                    <input type="checkbox" class="item-checkbox" name="checkedItem" 
-                                           value="${item.cartNo}" 
-                                           data-price="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}">
-                                </td>
-								<td class="product-info">
-									<%-- <c:forEach items="${computer.files}" var="file">
-					            		 <img src="<c:url value='${file.filePath}' />" alt="Product">
-					            	</c:forEach> --%>
-								    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
-								    <div>
-								        <h3>${item.itemCategory == 0 ? item.computers[0].computerTitle : item.peripherals[0].peripheralTitle}</h3>
-								        <c:if test="${item.itemCategory == 0}">
-								            <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '미포함' : '포함'}</p>
-								        </c:if>
-								    </div>
-								</td>
-                                <td>
-                                    <div class="quantity-control">
-                                        <p>${item.itemCount}</p>
-                                    </div>
-                                </td>
-                                <td class="price">
-                                    <strong>
-                                        <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
-                                    </strong>
-                                </td>
-                                <td><button type="button" class="btn-remove">×</button></td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
+					<tbody>
+					    <c:forEach var="item" items="${cartItems}">
+					        <tr data-cart-no="${item.cartNo}">
+					            <td>
+					                <input type="checkbox" class="item-checkbox" name="checkedItem" 
+					                       value="${item.cartNo}" 
+					                       data-price="${item.itemCategory == 0 ? 
+					                           (item.computers[0].computerSalePrice + 
+					                            (empty item.ssdPrice ? 0 : item.ssdPrice) + 
+					                            (empty item.hddPrice ? 0 : item.hddPrice) + 
+					                            (empty item.osPrice ? 0 : item.osPrice)) : 
+					                           item.peripherals[0].peripheralSalePrice}">
+					            </td>
+					            <td class="product-info">
+					                <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
+					                <div>
+					                    <h3>${item.itemCategory == 0 ? item.computers[0].computerTitle : item.peripherals[0].peripheralTitle}</h3>
+					                    <c:if test="${item.itemCategory == 0}">
+					                        <p>옵션: 
+					                           SSD ${not empty item.ssdName ? item.ssdName : '-'}, 
+					                           HDD ${not empty item.hddName ? item.hddName : '-'}, 
+					                           OS ${not empty item.osName ? item.osName : '미포함'}
+					                        </p>
+					                    </c:if>
+					                </div>
+					            </td>
+					            <td>
+					                <div class="quantity-control">
+					                    <p>${item.itemCount}</p>
+					                </div>
+					            </td>
+					            <td class="price">
+					                <strong>
+					                    <fmt:formatNumber value="${item.itemCategory == 0 ? 
+					                        (item.computers[0].computerSalePrice + 
+					                         (empty item.ssdPrice ? 0 : item.ssdPrice) + 
+					                         (empty item.hddPrice ? 0 : item.hddPrice) + 
+					                         (empty item.osPrice ? 0 : item.osPrice)) : 
+					                        item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
+					                </strong>
+					            </td>
+					            <td><button type="button" class="btn-remove">×</button></td>
+					        </tr>
+					    </c:forEach>
+					</tbody>
                 </table>
 	            <div class="cart-actions">
 			        <button type="button" class="btn-delete-selected">선택상품 삭제</button>

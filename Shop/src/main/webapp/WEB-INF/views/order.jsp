@@ -54,10 +54,14 @@
 							<td class="product-info">
 							    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
 							    <div>
-							        <h3>${item.itemCategory == 0 ? item.computers[0].computerTitle : item.peripherals[0].peripheralTitle}</h3>
-							        <c:if test="${item.itemCategory == 0}">
-							            <p>옵션: SSD ${item.optSsd}GB, HDD ${item.optHdd}GB, OS ${item.optOs == 0 ? '미포함' : '포함'}</p>
-							        </c:if>
+				                    <h3>${item.itemCategory == 0 ? item.computers[0].computerTitle : item.peripherals[0].peripheralTitle}</h3>
+				                    <c:if test="${item.itemCategory == 0}">
+				                        <p>옵션: 
+				                           SSD ${not empty item.ssdName ? item.ssdName : '-'}, 
+				                           HDD ${not empty item.hddName ? item.hddName : '-'}, 
+				                           OS ${not empty item.osName ? item.osName : '미포함'}
+				                        </p>
+				                    </c:if>
 							    </div>
 							</td>
 			            <td>
@@ -67,7 +71,12 @@
 			            </td>
 			            <td class="price" style="text-align: center">
 			                <strong>
-			                    <fmt:formatNumber value="${item.itemCategory == 0 ? item.computers[0].computerSalePrice : item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
+			                    <fmt:formatNumber value="${item.itemCategory == 0 ? 
+			                        (item.computers[0].computerSalePrice + 
+			                         (empty item.ssdPrice ? 0 : item.ssdPrice) + 
+			                         (empty item.hddPrice ? 0 : item.hddPrice) + 
+			                         (empty item.osPrice ? 0 : item.osPrice)) : 
+			                        item.peripherals[0].peripheralSalePrice}" type="number" pattern="#,###"/>원
 			                </strong>
 			            </td>
 			        </tr>

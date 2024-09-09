@@ -3,6 +3,7 @@ package com.project.shop.progress.vo;
 import java.util.List;
 
 import com.project.shop.computer.vo.ComputerVO;
+import com.project.shop.computer.vo.OptVO;
 import com.project.shop.computer.vo.PeripheralVO;
 
 public class CartVO {
@@ -15,9 +16,59 @@ public class CartVO {
 	private int optOs;
 	private int itemCount;
 	private int itemCategory;
+	private String ssdName;
+	private String hddName;
+	private String osName;
+	private int ssdPrice;
+	private int hddPrice;
+	private int osPrice;
 	private List<ComputerVO> computers; // 여러 컴퓨터
     private List<PeripheralVO> peripherals; // 여러 주변기기
+    private List<OptVO> opts;
+	
+	public String getSsdName() {
+		return ssdName;
+	}
+	public String getHddName() {
+		return hddName;
+	}
+	public String getOsName() {
+		return osName;
+	}
+	public int getSsdPrice() {
+		return ssdPrice;
+	}
+	public int getHddPrice() {
+		return hddPrice;
+	}
+	public int getOsPrice() {
+		return osPrice;
+	}
+	public void setSsdName(String ssdName) {
+		this.ssdName = ssdName;
+	}
+	public void setHddName(String hddName) {
+		this.hddName = hddName;
+	}
+	public void setOsName(String osName) {
+		this.osName = osName;
+	}
+	public void setSsdPrice(int ssdPrice) {
+		this.ssdPrice = ssdPrice;
+	}
+	public void setHddPrice(int hddPrice) {
+		this.hddPrice = hddPrice;
+	}
+	public void setOsPrice(int osPrice) {
+		this.osPrice = osPrice;
+	}
 
+	public List<OptVO> getOpts() {
+		return opts;
+	}
+	public void setOpts(List<OptVO> opts) {
+		this.opts = opts;
+	}
 	public List<ComputerVO> getComputers() {
 		return computers;
 	}
