@@ -70,7 +70,7 @@
 						<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
 							<c:choose>
 								<c:when test="${currentPage == pageNum}">
-									<a id="page">${pageNum}</a>
+									<a>${pageNum}</a>
 								</c:when>
 								<c:otherwise>
 									<a href="<c:url value="/user/myboard.do?email=${email}&page=${pageNum}" />">${pageNum}</a>
@@ -135,7 +135,7 @@
 						<c:forEach begin="${startPage1}" end="${endPage1 > totalPage2 ? totalPage2 : endPage1}" var="pageNum2">
 							<c:choose>
 								<c:when test="${currentPage2 == pageNum2}">
-									<a id="page">${pageNum2}</a>
+									<a>${pageNum2}</a>
 								</c:when>
 								<c:otherwise>
 									<a href="<c:url value="/user/myboard.do?email=${email2}&page2=${pageNum2}" />">${pageNum2}</a>
