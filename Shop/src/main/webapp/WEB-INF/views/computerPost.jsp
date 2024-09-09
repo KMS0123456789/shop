@@ -327,7 +327,7 @@
 		<div id="reviewModal" class="reviewModal" style="display: none;">
 		    <div class="modal-content">
 		        <h2>별점 및 리뷰 작성</h2>
-		        <form id="review" action='<c:url value="/review/reviewComputer.do"/>' method="post">
+		        <form id="reviewSubmit" action='<c:url value="/review/reviewComputer.do"/>' method="post">
 		            <input type="hidden" name="computerNo" value="${computer.computerNo}">
 		            <input type="hidden" name="reviewUser" value="${sessionScope.user.email}">
 		            <input type="hidden" name="starUser" value="${sessionScope.user.email}">
@@ -344,9 +344,9 @@
 						</div>
 		                        본문
                    	<br>
-		            <textarea rows="20px" cols="40px" name="reviewBody" style="resize: none;"></textarea>
+		            <textarea rows="20px" cols="40px" name="reviewBody" style="resize: none;" id="reviewBody"></textarea>
 		            <br><br>
-		            <button type="submit" style="margin-left: 200px" id="reviewSubmit">작성하기</button>
+		            <button type="submit" style="margin-left: 200px">작성하기</button>
 		            <button type="button" onclick="reviewCloseModal()" style="text-align: right">취소</button>
 		        </form>
 		    </div>
@@ -527,12 +527,12 @@
 				return true;
 			})
 			
-			$("#review").submit(function(){
-				let starRating = $("#star_rating");
+			$("#reviewSubmit").submit(function(){
+				let starRating = $("input[name='starCount']");
 				let reviewBody = $("#reviewBody");
 				
 				
-				if(starRating.val().trim() == ""){
+				if($("input[name='starCount']:checked").val() == undefined){
 					alert("별점은 필수 입력 항목 입니다.");
 					return false;
 				}
