@@ -231,6 +231,18 @@
 													<td>${question.questionUser}</td>
 													<td>${question.questionCreateDate}</td>
 												</tr>
+												<tr>
+													<c:forEach items="${peripheral.answers}" var="answer">
+														<c:choose>
+															<c:when test="${question.questionNo == answer.questionNo and question.questionFlag == 2 and question.questionUser == sessionScope.user.email}">
+																<td>-></td>
+																<td>${answer.answerBody}</td>
+																<td>관리자</td>
+																<td>${answer.answerDate}</td>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+												</tr>
 											</tbody>
 										</c:forEach>
 									</table>
