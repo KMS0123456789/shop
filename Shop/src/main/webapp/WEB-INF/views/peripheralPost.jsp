@@ -267,10 +267,10 @@
 		            <input type="hidden" name="peripheralNo" value="${peripheral.peripheralNo}">
 		            <input type="hidden" name="questionUser" value="${sessionScope.user.email}">
 	            	제목<br>
-                     	<input type="text" name="questionTitle" class="qnatitle"><br>
+                     	<input type="text" name="questionTitle" class="qnatitle" id="questionTitle"><br>
 		                        본문<br>
-		            <textarea rows="20px" cols="40px" name="questionBody" style="resize: none;"></textarea><br><br>
-		            <button type="submit" style="margin-left: 200px">작성하기</button>
+		            <textarea rows="20px" cols="40px" name="questionBody" style="resize: none;" id="questionBody"></textarea><br><br>
+		            <button type="submit" style="margin-left: 200px" id="questionSubmit">작성하기</button>
 		            <button type="button" onclick="closeModal()" style="text-align: right">취소</button>
 		        </form>
 		    </div>
@@ -295,9 +295,9 @@
 						</div>
 		                        본문
                    	<br>
-		            <textarea rows="20px" cols="40px" name="reviewBody" style="resize: none;"></textarea>
+		            <textarea rows="20px" cols="40px" name="reviewBody" style="resize: none;" id="reviewBody"></textarea>
 		            <br><br>
-		            <button type="submit" style="margin-left: 200px">작성하기</button>
+		            <button type="submit" style="margin-left: 200px" id="reviewSubmit">작성하기</button>
 		            <button type="button" onclick="reviewCloseModal()" style="text-align: right">취소</button>
 		        </form>
 		    </div>
@@ -431,7 +431,41 @@
 					alert("로그인 해주세요");
 					return;
 				};
-			};﻿
+			};
+			
+			$("#questionSubmit").submit(function(){
+				let questionTitle = $("#questionTitle");
+				let questionBody=$("#questionBody");
+				
+				
+				if(questionTitle.val().trim() == ""){
+					alert("제목은 필수 입력 항목 입니다.");
+					return false;
+				}
+				if(questionBody.val().trim() == ""){
+					alert("내용은 필수 입력 항목 입니다.");
+					return false;
+				}
+
+				return true;
+			})
+			
+			$("#reviewSubmit").submit(function(){
+				let starRating = $("#star_rating");
+				let reviewBody =$("#reviewBody");
+				
+				
+				if(starRating.val().trim() == ""){
+					alert("별점은 필수 입력 항목 입니다.");
+					return false;
+				}
+				if(reviewBody.val().trim() == ""){
+					alert("내용은 필수 입력 항목 입니다.");
+					return false;
+				}
+
+				return true;
+			});﻿
 		</script>
 	</body>
 </html>

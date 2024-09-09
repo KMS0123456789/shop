@@ -23,12 +23,12 @@
 	
 	<insert id="reviewComputer" parameterType="com.project.shop.user.vo.ReviewVO">
 		insert into review(review_user, computer_no, review_body, item_category)
-					values(#{reviewUser}, #{computerNo}, #{reviewBody}, 0)
+					values(#{reviewUser}, #{computerNo}, #{reviewBody}, 1)
 	</insert>
 	
 	<insert id="reviewPeripheral" parameterType="com.project.shop.user.vo.ReviewVO">
 		insert into review(review_user, peripheral_no, review_body, item_category)
-					values(#{reviewUser}, #{peripheralNo}, #{reviewBody}, 1)
+					values(#{reviewUser}, #{peripheralNo}, #{reviewBody}, 2)
 	</insert>
 	
 	<!-- 리뷰 전체 개수 조회 -->
