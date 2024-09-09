@@ -76,6 +76,15 @@
 			<result property="askStateFlag" column="ask_state_flag"/>
 			<result property="askDeleteFlag" column="ask_delete_flag"/>
 		</collection>
+		<collection property="reviews" ofType="com.project.shop.user.vo.ReviewVO">
+			<id property="reviewNo" column="review_no"/>
+			<result property="reviewUser" column="review_user"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="reviewBody" column="review_body"/>
+			<result property="reviewCreateDate" column="review_create_date"/>
+			<result property="itemCategory" column="item_category"/>
+		</collection>
 	</resultMap>
 	
 	<select id="getAskDetailsByAskNo" resultMap="askDetailMap">
@@ -229,7 +238,8 @@
 			left join ask a on d.ask_no = a.ask_no 
 			left join computer c on d.computer_no = c.computer_no 
 			left join peripheral p on d.peripheral_no = p.peripheral_no 
-			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no 
+			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no
+			left join review r on d.computer_no = r.computer_no or d.peripheral_no = r.peripheral_no
 			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 DAY ) AND NOW() and d.ask_detail_user = #{email}
 			and a.ask_state_flag > 0
 			order by d.ask_no desc limit #{offset}, #{limit};
