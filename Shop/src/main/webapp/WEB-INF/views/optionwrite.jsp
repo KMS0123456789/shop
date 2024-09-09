@@ -19,15 +19,15 @@
 			</select>
 				 <div class="form-group">
 	                <label for="optName">옵션 이름</label>
-	                <input type="text" id="optName" name="optName">
+	                <input type="text" id="optName" name="optName" maxlength="100">
 	            </div> 
 	            <div class="form-group">
 	                <label for="optStock">옵션 재고</label>
-	                <input type="number" id="optStock" name="optStock" max="10">
+	                <input type="number" id="optStock" name="optStock"  oninput='handleOnInput(this,4)'>
 	            </div>
 	            <div class="form-group">
 	                <label for="optSalePrice">옵션 가격</label>
-	                <input type="number" id="optSalePrice" name="optSalePrice" max="7">
+	                <input type="number" id="optSalePrice" name="optSalePrice"  oninput='handleOnInput(this,10)'>
 	            </div>	
 	            <div class="footer">
 	                <button type="submit" class="button">옵션 등록</button>
@@ -62,5 +62,11 @@ $("form").submit(function(){
 	}
 	return true;
 })
+function handleOnInput(el, maxlength) {
+  if(el.value.length > maxlength)  {
+    el.value 
+      = el.value.substr(0, maxlength);
+  }
+}
 </script>
 </html>

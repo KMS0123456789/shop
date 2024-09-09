@@ -20,19 +20,19 @@
             <br><br>
             <div class="form-group">
                 <label for="peripheralTitle">상품 제목</label>
-                <input type="text" id="peripheralTitle" name="peripheralTitle" maxlength="30">
+                <input type="text" id="peripheralTitle" name="peripheralTitle" maxlength="100">
             </div>
             <div class="form-group">
                 <label for="peripheralSalePrice">상품 가격</label>
-                <input type="number" id="peripheralSalePrice" name="peripheralSalePrice" max="10">
+                <input type="number" id="peripheralSalePrice" name="peripheralSalePrice" oninput='handleOnInput(this,10)'>
             </div>
             <div class="form-group">
                 <label for="peripheralName">상품명</label>
-                <input type="text" id="peripheralName" name="peripheralName" maxlength="30">
+                <input type="text" id="peripheralName" name="peripheralName" maxlength="100">
             </div>
             <div class="form-group">
                 <label for="peripheral_stock">상품 수량</label>
-                <input type="number" id="peripheral_stock" name="peripheral_stock"  min="2" max="5">
+                <input type="number" id="peripheral_stock" name="peripheral_stock" oninput='handleOnInput(this,5)'>
             </div>
             <div class="form-group" id="fileDiv">
                 <label for="file">첨부파일</label>
@@ -81,6 +81,13 @@
 			return false;
 		}
 		return true;
-	})
+	})	
+	
+		function handleOnInput(el, maxlength) {
+  if(el.value.length > maxlength)  {
+    el.value 
+      = el.value.substr(0, maxlength);
+  }
+}
 </script>
 </html>

@@ -15,47 +15,47 @@
             <br><br>
             <div class="form-group">
                 <label for="computerTitle">상품 제목</label>
-                <input type="text" id="computerTitle" name="computerTitle">
+                <input type="text" id="computerTitle" name="computerTitle" maxlength="100">
             </div>
             <div class="form-group">
                 <label for="computerSalePrice">상품 가격</label>
-                <input type="number" id="computerSalePrice" name="computerSalePrice" max="8">
+                <input type="number" id="computerSalePrice" name="computerSalePrice" oninput='handleOnInput(this,10)'  >
             </div>
             <div class="form-group">
                 <label for="cpu">cpu</label>
-                <input type="text" id="cpu" name="cpu">
+                <input type="text" id="cpu" name="cpu" maxlength="30">
             </div>
             <div class="form-group">
                 <label for="ssd">ssd</label>
-                <input type="text" id="ssd" name="ssd">
+                <input type="text" id="ssd" name="ssd" maxlength="30">
             </div>
             <div class="form-group">
                 <label for="mainBoard">mainBoard</label>
-                <input type="text" id="mainBoard" name="mainBoard">
+                <input type="text" id="mainBoard" name="mainBoard" maxlength="30">
             </div>
             <div class="form-group">
                 <label for="gpu">gpu</label>
-                <input type="text" id="gpu" name="gpu">
+                <input type="text" id="gpu" name="gpu" maxlength="30">
             </div>
             <div class="form-group">
                 <label for="power">power</label>
-                <input type="text" id="power" name="power">
+                <input type="text" id="power" name="power" maxlength="30">
             </div>
             <div class="form-group">
                 <label for="bCase">bCase</label>
-                <input type="text" id="bCase" name="bCase">
+                <input type="text" id="bCase" name="bCase" maxlength="30">
             </div>
             <div class="form-group">
                 <label for="ram">ram</label>
-                <input type="text" id="ram" name="ram">
+                <input type="text" id="ram" name="ram" maxlength="30">
             </div>
             <div class="form-group">
                 <label for="cooler">cooler</label>
-                <input type="text" id="cooler" name="cooler">
+                <input type="text" id="cooler" name="cooler" maxlength="30">
             </div>            
             <div class="form-group">
                 <label for="computerStock">상품 수량</label>
-                <input type="text" id="computerStock" name="computerStock" max="3">
+                <input type="number" id="computerStock" name="computerStock" oninput='handleOnInput(this,5)'>
             </div>
             <div class="form-group" id="fileDiv">
                 <label for="file">첨부파일</label>
@@ -148,5 +148,11 @@
 		
 		return true;
 	})
+	function handleOnInput(el, maxlength) {
+  if(el.value.length > maxlength)  {
+    el.value 
+      = el.value.substr(0, maxlength);
+  }
+}
 </script>
 </html>
