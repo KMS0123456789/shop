@@ -23,9 +23,9 @@
 				<li class="menu-item"><a href="<c:url value="/opt/optionwrite.do"/>">옵션등록</a></li>
 				<li class="menu-item"><a href="<c:url value="/question/managerQnA.do"/>">Q&A 목록</a></li>
 				<li class="menu-item"><a href="<c:url value="/user/blacklist.do"/>">유저 관리</a></li>
-				<li class="menu-item"><a href="<c:url value="/ask/managerAsk.do"/>">주문 목록</a></li>
-				<li class="menu-item"><a href="<c:url value="/ask/managercancel.do"/>">취소/교환</a></li>
-				<li class="menu-item"><a href="<c:url value="/ask/managerdelivery.do"/>">배송 관리</a></li>
+				<li class="menu-item"><a href="<c:url value="/askdetail/managerAsk.do"/>">주문 목록</a></li>
+				<li class="menu-item"><a href="<c:url value="/askdetail/managercancel.do"/>">취소/교환</a></li>
+				<li class="menu-item"><a href="<c:url value="/askdetail/managerdelivery.do"/>">배송 관리</a></li>
 			</ul>
 		</div>
 		<table>
@@ -51,7 +51,7 @@
 							<td>${computer.computerNo}</td>
 							<td><a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>" style="width:90px;"></td>
 							<td><a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'>${computer.computerTitle}</td>
-							<td>${computer.computerSalePrice}원</td>
+							<td><f:formatNumber value="${computer.computerSalePrice}" type="number" pattern="#,###"/>원</td>
 							<td>${computer.computerCreateDate}</td>
 						</tr>
 					</c:forEach>
@@ -104,7 +104,7 @@
 					<td>${peripheral.peripheralNo}</td>
 					<td><a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>" style="width:90px;"></td>
 					<td><a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</td>
-					<td>${peripheral.peripheralSalePrice}원</td>
+					<td><f:formatNumber value="${peripheral.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
 					<td>${peripheral.peripheralCreateDate}</td>
 				</tr>
 			</c:forEach>

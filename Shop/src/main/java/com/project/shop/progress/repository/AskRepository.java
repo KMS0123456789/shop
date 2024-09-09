@@ -40,45 +40,7 @@ public class AskRepository {
     // Ask 테이블에 데이터 삽입
     public void insertAsk(AskVO ask) {
         template.insert(NAME_SPACE + ".insertAsk", ask);
-    }
-
-	//주문 전체 조회
-	public Page<AskVO> askAll(Pageable pageable, String searchType, String keyword){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("offset", pageable.getOffset());
-		map.put("limit", pageable.getPageSize());
-		map.put("searchType", searchType);
-		map.put("keyword", keyword);
-		int total = count(searchType, keyword);
-		List<AskVO> asks = template.selectList(NAME_SPACE + ".askAll",map);  //AskMapper의 askAll 메서드 실행
-		return new PageImpl<AskVO>(asks, pageable, total);
-	}
-	//주문 개수 조회
-	public int count(String searchType, String keyword) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("searchType", searchType);
-		map.put("keyword", keyword);
-		return template.selectOne(NAME_SPACE + ".count", map); //AskMapper의 count 메서드 실행
-	}
-	public Page<AskVO> deliveryAll(Pageable pageable, String searchType, String keyword){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("offset", pageable.getOffset());
-		map.put("limit", pageable.getPageSize());
-		map.put("searchType", searchType);
-		map.put("keyword", keyword);
-		int total = deliveryCount(searchType, keyword);
-		List<AskVO> deliverys = template.selectList(NAME_SPACE + ".deliveryAll",map);  //AskMapper의 askAll 메서드 실행
-		return new PageImpl<AskVO>(deliverys, pageable, total);
-	}
-	//주문 개수 조회
-	public int deliveryCount(String searchType, String keyword) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("searchType", searchType);
-		map.put("keyword", keyword);
-		return template.selectOne(NAME_SPACE + ".deliveryCount", map); //AskMapper의 count 메서드 실행
-	}
-	
-	
+    }		
 	
 	public List<AskVO> myOnedate(){
 		return template.selectList(NAME_SPACE + ".myOnedate");

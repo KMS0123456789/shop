@@ -14,7 +14,7 @@
 				<table>
 					<thead>
 						<tr>
-							<th>주문 번호</th>
+							 <th>주문 번호</th>
 							<th>처리 상태</th>
 							<th>주문 일자</th>
 							<th>상품 이미지</th>
@@ -23,22 +23,31 @@
 							<th>판매가</th>
 							<th>변경</th>
 						</tr>
-					</thead>					
-					<c:forEach items="${ask}" var="ask">						
+					</thead>
+					<c:forEach items="${ask}" var="ask">
+						<c:forEach items="${ask.asks}" var="asks">	
 						<tbody>
 							<tr>
-                                <td>${ask.askNo}</td>	
+                                <td>${asks.askNo}</td>	
+                                <td>
 								<c:choose>
-									<c:when test="${ask.askStateFlag ==  2}">
-										<td>배송 준비중</td>
+									<c:when test="${asks.askStateFlag == 1 }">
+										결제완료
 									</c:when>
-									<c:when test="${ask.askStateFlag== 3 }">
-										<td>배송완료</td>
+									<c:when test="${asks.askStateFlag ==  2}">
+										배송 준비중
 									</c:when>
-								</c:choose>							
-	                           	<td>${ask.askDate}</td>
+									<c:when test="${asks.askStateFlag== 3 }">
+										배송완료
+									</c:when>
+									<c:when test="${asks.askStateFlag== 4 }">
+										구매확정
+									</c:when>
+								</c:choose>
+								</td>								
+	                           	<td>${asks.askDate}</td>
 	                            <td>
-	                            <c:forEach items="${ask.files}" var="file">
+	                            <c:forEach items="${asks.files}" var="file">
 	                            		<div class="mainImg">
 											<img class="mainImg2" src='<c:url value="${file.filePath}" />' style="width:50px;">
 										</div>
@@ -54,56 +63,59 @@
 		                            	<c:if test="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice < 50000}">
 		                            		<td><f:formatNumber value="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice +3000}" type="number" pattern="#,###"/>원</td>
 		                            	</c:if>
-		                            	<td>
+		                          
+		                            <td>
 		                            	<c:choose>
-			                            	<c:when test="${ask.askStateFlag ==1}">
-				                            	<form action="<c:url value='/ask/askStateModify.do'/>">
+		                            		<c:when test="${asks.askStateFlag == 1}">
+		                            			<form action="<c:url value='/ask/askStateModify.do'/>">
 		                                			<input type="hidden" value="${ask.askNo}" name="askNo">
 		                                			<input type="submit" value="배송준비중 변경" class="btn">
 		                                		</form>
-	                                		</c:when>
-	                                		<c:when test="${ask.askStateFlag ==2}">
-				                            	<form action="<c:url value='/ask/deliveryComplete.do'/>">
+		                            		</c:when>
+		                            		<c:when test="${asks.askStateFlag == 2}">
+		                            			<form action="<c:url value='/ask/deliveryComplete.do'/>">
 		                                			<input type="hidden" value="${ask.askNo}" name="askNo">
 		                                			<input type="submit" value="배송완료변경" class="btn">
 		                                		</form>
-	                                		</c:when>
-                                		</c:choose>
-		                            </td>  
-		                            </c:if>
-	                            </c:forEach>
-	                            <c:forEach items="${ask.peripherals}" var="per"> 
-	                            	<c:if test="${per.peripheralNo != 0}">
-		                            	<td>${per.peripheralTitle}</td>
-		                            	<td>-</td>
-		                            	<c:choose>
-		                            		<c:when test="${per.peripheralSalePrice > 50000}">
-		                            			<td><f:formatNumber value="${per.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
 		                            		</c:when>
-		                            		<c:otherwise>
-		                            			<td><f:formatNumber value="${per.peripheralSalePrice + 3000}" type="number" pattern="#,###"/>원</td>
-		                            		</c:otherwise>
 		                            	</c:choose>
-		                            	<td>
-		                            		<c:choose>
-			                            	<c:when test="${ask.askStateFlag ==1}">
-				                            	<form action="<c:url value='/ask/askStateModify.do'/>">
+		                            </td>
+		                              </c:if>
+		                            </c:forEach>
+	                           <c:forEach items="${ask.peripherals}" var="per">
+									<c:if test="${per.peripheralNo != 0}">
+		                            	<td>${per.peripheralTitle}</td>
+		                       			<td></td>
+		                       			<c:if test="${per.peripheralSalePrice> 50000}">
+		                            		<td><f:formatNumber value="${per.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
+		                            	</c:if>
+		                            	<c:if test="${per.peripheralSalePrice < 50000}">
+		                            		<td><f:formatNumber value="${per.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
+		                            	</c:if>
+		                           
+		                           
+		                            <td>
+		                            	<c:choose>
+		                            		<c:when test="${asks.askStateFlag == 1}">
+		                            			<form action="<c:url value='/ask/askStateModify.do'/>">
 		                                			<input type="hidden" value="${ask.askNo}" name="askNo">
-		                                			<input type="submit" value="배송준비중 변경" class="btnNormal">
+		                                			<input type="submit" value="배송준비중 변경" class="btn">
 		                                		</form>
-	                                		</c:when>
-	                                		<c:when test="${ask.askStateFlag ==2}">
-				                            	<form action="<c:url value='/ask/deliveryComplete.do'/>">
+		                            		</c:when>
+		                            		<c:when test="${asks.askStateFlag == 2}">
+		                            			<form action="<c:url value='/ask/deliveryComplete.do'/>">
 		                                			<input type="hidden" value="${ask.askNo}" name="askNo">
-		                                			<input type="submit" value="배송완료변경" class="btnNormal">
+		                                			<input type="submit" value="배송완료변경" class="btn">
 		                                		</form>
-	                                		</c:when>
-                                		</c:choose>
-		                            	</td>
-		                            </c:if>
-	                            </c:forEach>                                                               
+		                            		</c:when>
+		                            	</c:choose>
+		                            </td>
+		                             </c:if>
+		                             </c:forEach>
+		                            	</tr>                                    
 							</tbody>
-					</c:forEach>
+							</c:forEach>
+						</c:forEach>
 				</table>
 				
 

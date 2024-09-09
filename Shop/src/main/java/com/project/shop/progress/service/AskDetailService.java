@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.project.shop.progress.vo.AskDetailVO;
+import com.project.shop.progress.vo.AskVO;
 
 public interface AskDetailService {
 	void completePay(AskDetailVO detail) throws Exception;
@@ -53,4 +54,17 @@ public interface AskDetailService {
 	
 	// 특정 유저 6달 개수 조회
 	int mySixMonthcount(String searchType, String keyword,  AskDetailVO vo );
+	
+	//ask 전체 조회
+	Page<AskDetailVO> askAll(Pageable pageable, String searchType, String keyword);
+	
+	//ask 전체 개수 조회
+	int count(String searchType, String keyword);
+	
+	//ask 전체 조회
+	Page<AskDetailVO> deliveryAll(Pageable pageable, String searchType, String keyword);
+			
+	//askdelivery 전체 개수 조회
+	int deliveryCount(String searchType, String keyword);
+
 }

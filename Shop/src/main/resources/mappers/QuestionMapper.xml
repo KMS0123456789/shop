@@ -28,6 +28,7 @@
 		select * from question
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
+			and question_flag = 1
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
 			</if>

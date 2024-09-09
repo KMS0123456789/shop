@@ -49,28 +49,6 @@ public class AskServiceImpl implements AskService{
     public AskVO getAskById(AskVO vo) {
         return repository.getAskById(vo);
     }
-    
-	//ask 전체 조회
-	@Override
-	public Page<AskVO> askAll(Pageable pageable, String searchType, String keyword){
-		return repository.askAll(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
-	}
-	//ask 전체 개수 조회
-	@Override
-	public int count(String searchType, String keyword) {
-		return repository.count(searchType, keyword); //AskRepository의 메서드 count 실행
-	}
-	
-	//ask 전체 조회
-		@Override
-		public Page<AskVO> deliveryAll(Pageable pageable, String searchType, String keyword){
-			return repository.deliveryAll(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
-		}
-		//ask 전체 개수 조회
-		@Override
-		public int deliveryCount(String searchType, String keyword) {
-			return repository.deliveryCount(searchType, keyword); //AskRepository의 메서드 count 실행
-		}
 
 	@Override
 	public List<AskVO> myOnedate() {
@@ -135,5 +113,4 @@ public class AskServiceImpl implements AskService{
 		// TODO Auto-generated method stub
 		return repository.deliveryComplete(vo);
 	}
-	
 }

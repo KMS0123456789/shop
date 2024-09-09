@@ -171,5 +171,40 @@ public class AskDetailRepository {
 	  		map.put("email", vo.getAskDetailUser());
 	  		return template.selectOne(NAME_SPACE + ".mySixMonthcount", map); //ComputerMapper의 count 메서드 실행
 	  	}
-    
+	    
+		//주문 전체 조회
+		public Page<AskDetailVO> askAll(Pageable pageable, String searchType, String keyword){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("offset", pageable.getOffset());
+			map.put("limit", pageable.getPageSize());
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			int total = count(searchType, keyword);
+			List<AskDetailVO> asks = template.selectList(NAME_SPACE + ".askAll",map);  //AskMapper의 askAll 메서드 실행
+			return new PageImpl<AskDetailVO>(asks, pageable, total);
+		}
+		//주문 개수 조회
+		public int count(String searchType, String keyword) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			return template.selectOne(NAME_SPACE + ".count", map); //AskMapper의 count 메서드 실행
+		}
+		public Page<AskDetailVO> deliveryAll(Pageable pageable, String searchType, String keyword){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("offset", pageable.getOffset());
+			map.put("limit", pageable.getPageSize());
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			int total = deliveryCount(searchType, keyword);
+			List<AskDetailVO> deliverys = template.selectList(NAME_SPACE + ".deliveryAll",map);  //AskMapper의 askAll 메서드 실행
+			return new PageImpl<AskDetailVO>(deliverys, pageable, total);
+		}
+		//주문 개수 조회
+		public int deliveryCount(String searchType, String keyword) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			return template.selectOne(NAME_SPACE + ".deliveryCount", map); //AskMapper의 count 메서드 실행
+		}
 }

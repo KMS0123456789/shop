@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.project.shop.progress.repository.AskDetailRepository;
 import com.project.shop.progress.service.AskDetailService;
 import com.project.shop.progress.vo.AskDetailVO;
+import com.project.shop.progress.vo.AskVO;
 
 @Service
 public class AskDetailServiceImpl implements AskDetailService{
@@ -127,4 +128,27 @@ public class AskDetailServiceImpl implements AskDetailService{
 		// TODO Auto-generated method stub
 		return repository.mySixMonthcount(searchType, keyword, vo);
 	}
+	
+	//ask 전체 조회
+	@Override
+	public Page<AskDetailVO> askAll(Pageable pageable, String searchType, String keyword){
+		return repository.askAll(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
+	}
+	//ask 전체 개수 조회
+	@Override
+	public int count(String searchType, String keyword) {
+		return repository.count(searchType, keyword); //AskRepository의 메서드 count 실행
+	}
+	
+	//ask 전체 조회
+		@Override
+		public Page<AskDetailVO> deliveryAll(Pageable pageable, String searchType, String keyword){
+			return repository.deliveryAll(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
+		}
+		//ask 전체 개수 조회
+		@Override
+		public int deliveryCount(String searchType, String keyword) {
+			return repository.deliveryCount(searchType, keyword); //AskRepository의 메서드 count 실행
+		}		
+		
 }

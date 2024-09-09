@@ -27,20 +27,22 @@
 	           		<tr>
 						<td>${question.questionNo}</td>
 						<td>${question.questionUser}</td>
-							<c:choose>
-								<c:when test="${question.itemCategory ==1}">
-									<td>컴퓨터<td>
-								</c:when>
-								<c:when test="${question.itemCategory ==2}">
-									<td>마우스<td>
-								</c:when>
-								<c:when test="${question.itemCategory ==3}">
-									<td>키보드<td>
-								</c:when>
-								<c:when test="${question.itemCategory ==4}">
-									<td>모니터<td>
-								</c:when>
-							</c:choose>							
+						<td>
+						<c:choose>
+							<c:when test="${question.itemCategory ==1}">
+								컴퓨터
+							</c:when>
+							<c:when test="${question.itemCategory ==2}">
+								마우스
+							</c:when>
+							<c:when test="${question.itemCategory ==3}">
+								키보드
+							</c:when>
+							<c:when test="${question.itemCategory ==4}">
+								모니터
+							</c:when>
+						</c:choose>
+						</td>		
 						<td><a href='<c:url value="/question/questionPost.do/${question.questionNo}"/>'>${question.questionTitle}</a></td>
 						<td>${question.questionCreateDate}</td>
 					</tr>
