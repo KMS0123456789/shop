@@ -5,6 +5,7 @@ import java.util.List;
 import com.project.shop.computer.vo.ComputerVO;
 import com.project.shop.computer.vo.OptVO;
 import com.project.shop.computer.vo.PeripheralVO;
+import com.project.shop.user.vo.ReviewVO;
 
 public class AskDetailVO {
 	private int askDetailNo;
@@ -33,9 +34,14 @@ public class AskDetailVO {
 	private List<PeripheralVO> peripherals;
 	private List<FileVO> files;
 	private List<OptVO> opts;
+	private List<ReviewVO> reviews;
 	
-	
-	
+	public List<ReviewVO> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<ReviewVO> reviews) {
+		this.reviews = reviews;
+	}
 	public List<AskVO> getAsks() {
 		return asks;
 	}

@@ -231,10 +231,10 @@
 		                    </c:if>
 		                    <c:if test="${asks.askStateFlag  == 4}">
 		                    	<td>
-		                    		<c:if test="${week.computerNo != 0 }">
+		                    		<c:if test="${week.computerNo != 0}">
 		                    			<a href="<c:url value="/computer/computer.do/${week.computerNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
-		                    		<c:if test="${week.peripheralNo != 0 }">
+		                    		<c:if test="${week.peripheralNo != 0}">
 		                    			<a href="<c:url value="/peripheral/peripheral.do/${week.peripheralNo}" />" class="re">리뷰 쓰기</a>
 		                    		</c:if>
 		                    	</td>
