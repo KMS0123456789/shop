@@ -12,6 +12,8 @@ public interface CartService {
     //장바구니 상품 리스트 조회
     List<CartVO> getCartItemsWithDetails(String userId);
     
+    void clearCart(String userEmail) throws Exception;
+    
     void deleteCartItem(int cartNo);
 
     void deleteSelectedItems(List<Integer> cartNos);

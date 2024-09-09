@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.shop.progress.service.AskDetailService;
 import com.project.shop.progress.service.AskService;
+import com.project.shop.progress.service.CartService;
 import com.project.shop.progress.vo.AskDetailVO;
 import com.project.shop.progress.vo.AskVO;
 import com.project.shop.user.vo.UserVO;
@@ -37,6 +38,9 @@ public class AskController {
 	
 	@Autowired
 	private AskDetailService detailService;
+	
+    @Autowired
+    private CartService cartService;
 	
 	@PostMapping(value = "/completePay.do", produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -54,6 +58,9 @@ public class AskController {
                     detailService.completePay(detail);
                 }
             }
+            // 장바구니 비우기
+            cartService.clearCart(user.getEmail());
+            
             response.put("status", 200);
             response.put("message", "결제가 완료되었습니다.");
             return ResponseEntity.ok(response);

@@ -38,6 +38,10 @@ public class CartRepository {
         return template.selectList(NAME_SPACE + ".getCartItemsWithDetails", user);
     }
     
+    public void deleteAllByUserEmail(String userEmail) {
+        template.delete(NAME_SPACE + ".deleteAllByUserEmail", userEmail);
+    }
+    
     // 개별 상품 삭제
     public void deleteCartItem(int cartNo) {
         template.delete(NAME_SPACE + ".deleteCartItem", cartNo);

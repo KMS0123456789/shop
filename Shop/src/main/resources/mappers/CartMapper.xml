@@ -41,6 +41,24 @@
 	    </collection>
 	</resultMap>
 
+	<!-- 장바구니 아이템 조회 -->
+	<select id="getCartItemsWithDetails" parameterType="string" resultMap="cartMap">
+	    SELECT *
+	    FROM cart c
+	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
+	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
+	    WHERE c.cart_user = #{cartUser}
+	</select>
+
+	<!-- 주문 아이템 조회 -->
+    <select id="getCartItemsByUser" parameterType="string" resultMap="cartMap" >
+        SELECT *
+	    FROM cart c
+	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
+	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
+	    WHERE c.cart_user = #{cartUser}
+	</select>
+
 		<!-- cartNo로 아이템을 조회 -->
     <select id="selectItemByCartNo" parameterType="int" resultType="com.project.shop.progress.vo.CartVO">
         SELECT 
@@ -60,6 +78,10 @@
         WHERE 
             c.cart_no = #{cartNo}
     </select>
+
+    <delete id="deleteAllByUserEmail" parameterType="string">
+        DELETE FROM CART WHERE cart_user = #{cartUser}
+    </delete>
     
     <select id="selectComputerByNo" parameterType="int" resultType="com.project.shop.computer.vo.ComputerVO">
 	    SELECT * FROM computer WHERE computer_no = #{computerNo}
@@ -67,15 +89,6 @@
 	
 	<select id="selectPeripheralByNo" parameterType="int" resultType="com.project.shop.computer.vo.PeripheralVO">
 	    SELECT * FROM peripheral WHERE peripheral_no = #{peripheralNo}
-	</select>
-
-	<!-- 주문 아이템 조회 -->
-    <select id="getCartItemsByUser" parameterType="string" resultMap="cartMap" >
-        SELECT *
-	    FROM cart c
-	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
-	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
-	    WHERE c.cart_user = #{value}
 	</select>
 	
 	<!-- 개별 상품 삭제 -->
@@ -95,15 +108,6 @@
     <delete id="deleteAllItems">
         DELETE FROM cart WHERE cart_user = #{cartUser}
     </delete>
-
-    <!-- 장바구니 아이템 조회 -->
-	<select id="getCartItemsWithDetails" parameterType="string" resultMap="cartMap" >
-	    SELECT *
-	    FROM cart c
-	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
-	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
-	    WHERE c.cart_user = #{value}
-	</select>
 	
 	<!-- 컴퓨터 상세페이지에서 장바구니 담기 -->
 	<insert id="cartComputer" parameterType="com.project.shop.progress.vo.CartVO">

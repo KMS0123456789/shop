@@ -78,11 +78,13 @@
 		</collection>
 	</resultMap>
 	
-    <select id="getAskDetailsByAskNo" resultMap="askDetailMap">
-        SELECT *
-        FROM ask_detail
-        WHERE ask_no = #{askNo}
-    </select>
+	<select id="getAskDetailsByAskNo" resultMap="askDetailMap">
+	    SELECT ad.*, c.computer_title, c.computer_sale_price, p.peripheral_title, p.peripheral_sale_price
+	    FROM ask_detail ad
+	    LEFT JOIN computer c ON ad.computer_no = c.computer_no
+	    LEFT JOIN peripheral p ON ad.peripheral_no = p.peripheral_no
+	    WHERE ad.ask_no = #{askNo}
+	</select>
 	
 	<!-- 주문 상세입력-->
     <insert id="completePay" parameterType="com.project.shop.progress.vo.AskDetailVO">

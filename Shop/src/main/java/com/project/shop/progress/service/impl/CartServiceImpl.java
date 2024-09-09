@@ -49,6 +49,11 @@ public class CartServiceImpl implements CartService{
     public List<CartVO> getCartItemsWithDetails(String userId) {
         return repository.getCartItemsWithDetails(userId);
     }
+    
+    @Override
+    public void clearCart(String userEmail) throws Exception {
+        repository.deleteAllByUserEmail(userEmail);
+    }
 	
     // 개별 상품 삭제
     @Override
