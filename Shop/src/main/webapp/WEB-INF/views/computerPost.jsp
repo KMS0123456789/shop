@@ -319,7 +319,7 @@
                      	<input type="text" name="questionTitle" class="qnatitle" id="questionTitle"><br>
 		                        본문<br>
 		            <textarea rows="20px" cols="40px" name="questionBody" style="resize: none;" id="questionBody"></textarea><br><br>
-		            <button type="submit" style="margin-left: 200px" id="questionSubmit">작성하기</button>
+		            <button type="submit" style="margin-left: 200px">작성하기</button>
 		            <button type="button" onclick="closeModal()" style="text-align: right">취소</button>
 		        </form>
 		    </div>
@@ -344,7 +344,7 @@
 						</div>
 		                        본문
                    	<br>
-		            <textarea rows="20px" cols="40px" name="reviewBody" style="resize: none;" id="reviewBody"></textarea>
+		            <textarea rows="20px" cols="40px" name="reviewBody" style="resize: none;"></textarea>
 		            <br><br>
 		            <button type="submit" style="margin-left: 200px" id="reviewSubmit">작성하기</button>
 		            <button type="button" onclick="reviewCloseModal()" style="text-align: right">취소</button>
@@ -510,9 +510,9 @@
 				};
 			};
 			
-			$("#questionSubmit").submit(function(){
+			$("#question").submit(function(){
 				let questionTitle = $("#questionTitle");
-				let questionBody=$("#questionBody");
+				let questionBody= $("#questionBody");
 				
 				
 				if(questionTitle.val().trim() == ""){
@@ -527,9 +527,9 @@
 				return true;
 			})
 			
-			$("#reviewSubmit").submit(function(){
+			$("#review").submit(function(){
 				let starRating = $("#star_rating");
-				let reviewBody =$("#reviewBody");
+				let reviewBody = $("#reviewBody");
 				
 				
 				if(starRating.val().trim() == ""){

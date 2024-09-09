@@ -433,9 +433,9 @@
 				};
 			};
 			
-			$("#questionSubmit").submit(function(){
+			$("#question").submit(function(){
 				let questionTitle = $("#questionTitle");
-				let questionBody=$("#questionBody");
+				let questionBody= $("#questionBody");
 				
 				
 				if(questionTitle.val().trim() == ""){
@@ -450,9 +450,9 @@
 				return true;
 			})
 			
-			$("#reviewSubmit").submit(function(){
+			$("#review").submit(function(){
 				let starRating = $("#star_rating");
-				let reviewBody =$("#reviewBody");
+				let reviewBody = $("#reviewBody");
 				
 				
 				if(starRating.val().trim() == ""){
