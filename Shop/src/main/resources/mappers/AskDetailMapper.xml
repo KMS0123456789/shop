@@ -357,7 +357,7 @@
 				left join file f on ask_detail.computer_no = f.computer_no or ask_detail.peripheral_no =f.peripheral_no
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
-			and ask_state_flag > 1 and  ask_state_flag !=4
+			and ask_state_flag > 0 and  ask_state_flag !=4
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%') and
 			</if>
@@ -370,7 +370,7 @@
 		select count(*) from ask_detail
 		left join ask on ask_detail.ask_no =ask.ask_no
 		<where>
-			and ask_state_flag > 1 and  ask_state_flag !=4
+			and ask_state_flag > 0 and  ask_state_flag !=4
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%') 
 			</if>

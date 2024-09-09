@@ -30,8 +30,8 @@
 						<td>${asks.askNo}</td>	
 						<td>
 							<c:choose>
-								<c:when test="${asks.askStateFlag == 1 }">
-								결제완료
+								<c:when test="${asks.askStateFlag ==  1}">
+								결제 완료
 								</c:when>
 								<c:when test="${asks.askStateFlag ==  2}">
 								배송 준비중
@@ -67,7 +67,7 @@
 						<c:forEach items="${ask.peripherals}" var="per">
 							<c:if test="${per.peripheralNo != 0}">
 								<td>${per.peripheralTitle}</td>
-								<td></td>
+								<td>-</td>
 								<c:if test="${per.peripheralSalePrice> 50000}">
 									<td><f:formatNumber value="${per.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
 								</c:if>

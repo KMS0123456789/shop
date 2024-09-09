@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label for="computerSalePrice">상품 가격</label>
-                <input type="text" id="computerSalePrice" name="computerSalePrice" maxlength="10">
+                <input type="number" id="computerSalePrice" name="computerSalePrice" max="8">
             </div>
             <div class="form-group">
                 <label for="cpu">cpu</label>
@@ -55,7 +55,7 @@
             </div>            
             <div class="form-group">
                 <label for="computerStock">상품 수량</label>
-                <input type="text" id="computerStock" name="computerStock" maxlength="3">
+                <input type="text" id="computerStock" name="computerStock" max="3">
             </div>
             <div class="form-group" id="fileDiv">
                 <label for="file">첨부파일</label>

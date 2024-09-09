@@ -23,11 +23,11 @@
 	            </div> 
 	            <div class="form-group">
 	                <label for="optStock">옵션 재고</label>
-	                <input type="number" id="optStock" name="optStock" maxlength="3">
+	                <input type="number" id="optStock" name="optStock" max="10">
 	            </div>
 	            <div class="form-group">
 	                <label for="optSalePrice">옵션 가격</label>
-	                <input type="number" id="optSalePrice" name="optSalePrice" maxlength="10">
+	                <input type="number" id="optSalePrice" name="optSalePrice" max="7">
 	            </div>	
 	            <div class="footer">
 	                <button type="submit" class="button">옵션 등록</button>

@@ -20,19 +20,19 @@
             <br><br>
             <div class="form-group">
                 <label for="peripheralTitle">상품 제목</label>
-                <input type="text" id="peripheralTitle" name="peripheralTitle">
+                <input type="text" id="peripheralTitle" name="peripheralTitle" maxlength="30">
             </div>
             <div class="form-group">
                 <label for="peripheralSalePrice">상품 가격</label>
-                <input type="number" id="peripheralSalePrice" name="peripheralSalePrice" maxlength="10">
+                <input type="number" id="peripheralSalePrice" name="peripheralSalePrice" max="10">
             </div>
             <div class="form-group">
                 <label for="peripheralName">상품명</label>
-                <input type="text" id="peripheralName" name="peripheralName">
+                <input type="text" id="peripheralName" name="peripheralName" maxlength="30">
             </div>
             <div class="form-group">
                 <label for="peripheral_stock">상품 수량</label>
-                <input type="number" id="peripheral_stock" name="peripheral_stock" maxlength="3">
+                <input type="number" id="peripheral_stock" name="peripheral_stock"  min="2" max="5">
             </div>
             <div class="form-group" id="fileDiv">
                 <label for="file">첨부파일</label>
@@ -52,31 +52,31 @@
 
 		$("form").submit(function(){
 	
-		let title = $("#peripheralTitle");
+		let peripheralTitle = $("#peripheralTitle");
 		let peripheralSalePrice = $("#peripheralSalePrice");
 		let peripheralName = $("#peripheralName");
 		let peripheral_stock = $("#peripheral_stock")		
 		
 		if(peripheralTitle.val().trim() == ""){
-			alert("제목은 필수 입력 항목 입니다.");
+			alert("상품제목은 필수 입력 항목 입니다.");
 			peripheralTitle.focus();
 			return false;
 		}
 		
 		if(peripheralSalePrice.val().trim() == ""){
-			alert("peripheralSalePrice는 필수 입력 항목 입니다.");
+			alert("상품가격은 필수 입력 항목 입니다.");
 			peripheralSalePrice.focus();
 			return false;
 		}
 		
 		if(peripheralName.val().trim() == ""){
-			alert("peripheralName는 필수 입력 항목 입니다.");
+			alert("상품명은 필수 입력 항목 입니다.");
 			peripheralName.focus();
 			return false;
 		}
 		
 		if(peripheral_stock.val().trim() == ""){
-			alert("peripheral_stock은 필수 입력 항목 입니다.");
+			alert("상품재고는 필수 입력 항목 입니다.");
 			peripheral_stock.focus();
 			return false;
 		}

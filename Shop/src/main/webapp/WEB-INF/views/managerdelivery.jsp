@@ -31,8 +31,8 @@
 						<td>${asks.askNo}</td>	
 						<td>
 							<c:choose>
-								<c:when test="${asks.askStateFlag == 1 }">
-								결제완료
+								<c:when test="${asks.askStateFlag ==  1}">
+								결제 완료
 								</c:when>
 								<c:when test="${asks.askStateFlag ==  2}">
 								배송 준비중
@@ -44,7 +44,7 @@
 								구매확정
 								</c:when>
 							</c:choose>
-						</td>								
+						</td>									
 						<td>${asks.askDate}</td>
 						<td>
 							<c:forEach items="${asks.files}" var="file">
@@ -54,65 +54,71 @@
 							</c:forEach>
 						</td>
 						<c:forEach items="${ask.computers}" var="com">
-<c:if test="${com.computerNo != 0}">
-<td>${com.computerTitle}</td>
-<td><p>옵션${ask.ssdName} ${ask.hddName} ${ask.osName}</p></td>
-<c:if test="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice > 50000}">
-<td><f:formatNumber value="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice}" type="number" pattern="#,###"/>원</td>
-</c:if>
-<c:if test="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice < 50000}">
-<td><f:formatNumber value="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice +3000}" type="number" pattern="#,###"/>원</td>
-</c:if>
-<td>
-<c:choose>
-<c:when test="${asks.askStateFlag == 1}">
-<form action="<c:url value='/ask/askStateModify.do'/>">
-<input type="hidden" value="${ask.askNo}" name="askNo">
-<input type="submit" value="배송준비중 변경" class="btn">
-</form>
-</c:when>
-<c:when test="${asks.askStateFlag == 2}">
-<form action="<c:url value='/ask/deliveryComplete.do'/>">
-<input type="hidden" value="${ask.askNo}" name="askNo">
-<input type="submit" value="배송완료변경" class="btn">
-</form>
-</c:when>
-</c:choose>
-</td>
-  </c:if>
-</c:forEach>
-<c:forEach items="${ask.peripherals}" var="per">
-<c:if test="${per.peripheralNo != 0}">
-<td>${per.peripheralTitle}</td>
-<td></td>
-<c:if test="${per.peripheralSalePrice> 50000}">
-<td><f:formatNumber value="${per.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
-</c:if>
-<c:if test="${per.peripheralSalePrice < 50000}">
-<td><f:formatNumber value="${per.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
-</c:if>
-<td>
-<c:choose>
-<c:when test="${asks.askStateFlag == 1}">
-<form action="<c:url value='/ask/askStateModify.do'/>">
-<input type="hidden" value="${ask.askNo}" name="askNo">
-<input type="submit" value="배송준비중 변경" class="btn">
-</form>
-</c:when>
-<c:when test="${asks.askStateFlag == 2}">
-<form action="<c:url value='/ask/deliveryComplete.do'/>">
-<input type="hidden" value="${ask.askNo}" name="askNo">
-<input type="submit" value="배송완료변경" class="btn">
-</form>
-</c:when>
-</c:choose>
-</td>
- </c:if>
-</c:forEach>
-</tr>                                    
-</tbody>
-</c:forEach>
-</c:forEach>
+							<c:if test="${com.computerNo != 0}">
+								<td>${com.computerTitle}</td>
+								<td><p>옵션${ask.ssdName} ${ask.hddName} ${ask.osName}</p></td>
+								<c:if test="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice > 50000}">
+									<td><f:formatNumber value="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice}" type="number" pattern="#,###"/>원</td>
+								</c:if>
+								<c:if test="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice < 50000}">
+									<td><f:formatNumber value="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice +3000}" type="number" pattern="#,###"/>원</td>
+								</c:if>
+								<td>
+								<c:choose>
+									<c:when test="${asks.askStateFlag == 0}">
+										<form action="<c:url value='/ask/deliveryComplete.do'/>">
+											<input type="hidden" value="${ask.askNo}" name="askNo">
+											<input type="submit" value="배변경" class="btn">
+										</form>
+									</c:when>
+									<c:when test="${asks.askStateFlag == 1}">
+										<form action="<c:url value='/ask/askStateModify.do'/>">
+											<input type="hidden" value="${ask.askNo}" name="askNo">
+											<input type="submit" value="배송준비중 변경" class="btn">
+										</form>
+									</c:when>
+									<c:when test="${asks.askStateFlag == 2}">
+										<form action="<c:url value='/ask/deliveryComplete.do'/>">
+											<input type="hidden" value="${ask.askNo}" name="askNo">
+											<input type="submit" value="배송완료변경" class="btn">
+										</form>
+									</c:when>
+								</c:choose>
+								</td>
+  							</c:if>
+						</c:forEach>
+							<c:forEach items="${ask.peripherals}" var="per">
+								<c:if test="${per.peripheralNo != 0}">
+									<td>${per.peripheralTitle}</td>
+									<td>-</td>
+									<c:if test="${per.peripheralSalePrice> 50000}">
+										<td><f:formatNumber value="${per.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
+									</c:if>
+									<c:if test="${per.peripheralSalePrice < 50000}">
+										<td><f:formatNumber value="${per.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
+									</c:if>
+									<td>
+									<c:choose>
+										<c:when test="${asks.askStateFlag == 1}">
+											<form action="<c:url value='/ask/askStateModify.do'/>">
+												<input type="hidden" value="${ask.askNo}" name="askNo">
+												<input type="submit" value="배송준비중 변경" class="btn">
+											</form>
+										</c:when>
+										<c:when test="${asks.askStateFlag == 2}">
+											<form action="<c:url value='/ask/deliveryComplete.do'/>">
+												<input type="hidden" value="${ask.askNo}" name="askNo">
+												<input type="submit" value="배송완료변경" class="btn">
+											</form>
+										</c:when>
+									</c:choose>
+									</td>
+ 								</c:if>
+							</c:forEach>
+						</tr>                                    
+					</tbody>
+				</c:forEach>
+			</c:forEach>
 </table>
 	
 
