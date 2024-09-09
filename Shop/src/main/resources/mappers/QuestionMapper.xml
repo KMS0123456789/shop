@@ -47,15 +47,9 @@
 		</where>
 	</select>
 	
-	<!-- 질문 전체 개수 조회 -->
+	<!-- 특정 유저 질문 전체 개수 조회 -->
 	<select id="mycount" resultType="int">
-		select count(*) from question
-		<where>
-			and question_user = #{email}
-			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
-				and ${searchType} like concat('%',#{keyword},'%')
-			</if>
-		</where>
+		select count(*) from question where question_user = #{email}
 	</select>
 	
 	<!-- 완제품 상세페이지에서 문의글 쓰기 -->

@@ -52,6 +52,7 @@ public class ReviewRepository {
 	    	Map<String, Object> map = new HashMap<String, Object>();
 			map.put("searchType", searchType);
 			map.put("keyword", keyword);
+			map.put("email", email);
 			return template.selectOne(NAME_SPACE + ".mycount" , map); //ComputerMapper의 count 메서드 실행
 	}
 	    

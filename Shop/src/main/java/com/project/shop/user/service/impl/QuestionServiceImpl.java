@@ -33,7 +33,7 @@ public class QuestionServiceImpl implements QuestionService{
 	//question 유저별 개수 조회
 		@Override
 		public int mycount(String searchType, String keyword, String email) {
-			return repository.mycount(searchType, keyword, email); //ComputerRepository의 메서드 count 실행
+			return repository.mycount(searchType, keyword, email); //Repository의 메서드 count 실행
 		}
 
 	//완제품 상세페이지에서 문의글 쓰기
