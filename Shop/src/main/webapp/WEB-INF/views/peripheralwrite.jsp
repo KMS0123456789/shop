@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="peripheral_stock">상품 수량</label>
-                <input type="number" id="peripheral_stock" name="peripheral_stock" oninput='handleOnInput(this,5)'>
+                <input type="number" id="peripheral_stock" name="peripheralStock" oninput='handleOnInput(this,5)'>
             </div>
             <div class="form-group" id="fileDiv">
                 <label for="file">첨부파일</label>

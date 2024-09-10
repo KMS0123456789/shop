@@ -26,6 +26,7 @@
 				<li class="menu-item"><a href="<c:url value="/askdetail/managerAsk.do"/>">주문 목록</a></li>
 				<li class="menu-item"><a href="<c:url value="/askdetail/managercancel.do"/>">취소/교환</a></li>
 				<li class="menu-item"><a href="<c:url value="/askdetail/managerdelivery.do"/>">배송 관리</a></li>
+				<li class="menu-item"><a href="<c:url value="/opt/optList.do"/>">옵션 목록</a></li>
 			</ul>
 		</div>
 		<table>
@@ -49,7 +50,7 @@
 					<c:forEach items="${computer.files}" var="file">
 						<tr>		   		 			
 							<td>${computer.computerNo}</td>
-							<td><a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>" style="width:55px;"></td>
+							<td><a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>" style="width:30px;"></td>
 							<td><a href='<c:url value="/computer/computer.do/${computer.computerNo}"/>'>${computer.computerTitle}</td>
 							<td><f:formatNumber value="${computer.computerSalePrice}" type="number" pattern="#,###"/>원</td>
 							<td>${computer.computerCreateDate}</td>
@@ -102,7 +103,7 @@
 			<c:forEach items="${peripheral.files}" var="file">
 				<tr>
 					<td>${peripheral.peripheralNo}</td>
-					<td><a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>" style="width:55px;"></td>
+					<td><a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>" style="width:30px;"></td>
 					<td><a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'>${peripheral.peripheralTitle}</td>
 					<td><f:formatNumber value="${peripheral.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
 					<td>${peripheral.peripheralCreateDate}</td>

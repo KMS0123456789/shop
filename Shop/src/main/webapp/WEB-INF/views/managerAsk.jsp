@@ -31,22 +31,22 @@
 						<td>
 							<c:choose>
 								<c:when test="${asks.askStateFlag ==  1}">
-								결제 완료
+									결제 완료
 								</c:when>
 								<c:when test="${asks.askStateFlag ==  2}">
-								배송 준비중
+									배송 준비중
 								</c:when>
 								<c:when test="${asks.askStateFlag== 3 }">
-								배송완료
+									배송완료
 								</c:when>
 								<c:when test="${asks.askStateFlag== 4 }">
-								구매확정
+									구매확정
 								</c:when>
 							</c:choose>
 						</td>								
 		                <td>${asks.askDate}</td>
 						<td>
-							<c:forEach items="${asks.files}" var="file">
+							<c:forEach items="${ask.files}" var="file">
 								<div class="mainImg">
 									<img class="mainImg2" src='<c:url value="${file.filePath}" />' style="width:50px;">
 								</div>
@@ -85,10 +85,10 @@
 		<f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
 			<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
 			<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
-				<c:if test="${currentPage > 1}">
-					<a class="first" href="<c:url value="/askdetail/managerAsk.do?page=1" />">&lt;&lt;</a>
-					<a class="prev" href="<c:url value="/askdetail/managerAsk.do?page=${currentPage-1}" />">&lt;</a>
-				</c:if>
+			<c:if test="${currentPage > 1}">
+				<a class="first" href="<c:url value="/askdetail/managerAsk.do?page=1" />">&lt;&lt;</a>
+				<a class="prev" href="<c:url value="/askdetail/managerAsk.do?page=${currentPage-1}" />">&lt;</a>
+			</c:if>
 		<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
 			<c:choose>
 				<c:when test="${currentPage == pageNum}">
