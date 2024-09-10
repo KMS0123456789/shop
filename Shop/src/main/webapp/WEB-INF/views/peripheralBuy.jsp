@@ -123,11 +123,11 @@
 				    <div class="form-group">
 				        <label>주소</label>
 				        <div class="address-inputs">
-				            <input id="postal-code" placeholder="우편번호" value="">
+				            <input id="postal-code" placeholder="우편번호" value="" readonly>
 				            <input type="button" class="postcode" onclick="DaumPostcode()" value="우편번호"><br>
-				            <input type="text" id="address-basic" placeholder="기본주소" value=""><br>
+				            <input type="text" id="address-basic" placeholder="기본주소" value="" readonly><br>
 				            <input type="text" id="address-detail" placeholder="상세주소" value="">
-				            <input type="text" id="address-extra" placeholder="추가입력" value="">
+				            <input type="text" id="address-extra" placeholder="추가입력" value="" readonly>
 				        </div>
 				    </div>
 				    <div class="form-group">
