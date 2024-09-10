@@ -33,7 +33,7 @@
 							</td>
 						</c:forEach>								
 		                <td>${computer.computerStock}</td>
-						<td>${computer.computerSalePrice}</td>
+						<td><f:formatNumber value="${computer.computerSalePrice}" type="number" pattern="#,###"/>원</td>
 						<td>
 							<form action="<c:url value='/computer/computerDelete.do'/>">
 								<input type="hidden" value="${computer.computerNo}" name="computerNo">

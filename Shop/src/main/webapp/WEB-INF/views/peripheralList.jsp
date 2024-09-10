@@ -32,8 +32,8 @@
 								<a href='<c:url value="/peripheral/peripheral.do/${peripheral.peripheralNo}"/>'><img class="image" src="<c:url value='${file.filePath}'/>" style="width:50px;">
 							</td>
 						</c:forEach>								
-		                <td>${peirpheral.peripheralStock}</td>
-						<td>${peripheral.peripheralSalePrice}</td>
+		                <td>${peripheral.peripheralStock}</td>
+						<td><f:formatNumber value="${peripheral.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
 						<td>
 							<form action="<c:url value='/peripheral/peripheralDelete.do'/>">
 								<input type="hidden" value="${peripheral.peripheralNo}" name="peripheralNo">

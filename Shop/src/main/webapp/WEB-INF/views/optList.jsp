@@ -27,7 +27,7 @@
 						<td>${opt.optNo}</td>	
 						<td>${opt.optName}</td>								
 		                <td>${opt.optStock}</td>
-						<td>${opt.optSalePrice}</td>
+						<td><f:formatNumber value="${opt.optSalePrice}" type="number" pattern="#,###"/>원</td>
 						<td>
 							<form action="<c:url value='/opt/optDelete.do'/>">
 								<input type="hidden" value="${opt.optNo}" name="optNo">
