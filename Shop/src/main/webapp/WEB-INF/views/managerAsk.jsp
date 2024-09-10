@@ -48,7 +48,7 @@
 						<td>
 							<c:forEach items="${ask.files}" var="file">
 								<div class="mainImg">
-									<img class="mainImg2" src='<c:url value="${file.filePath}" />' style="width:30px;">
+									<img class="mainImg2" src='<c:url value="${file.filePath}" />' style="width:50px;">
 								</div>
 							</c:forEach>
 						</td>

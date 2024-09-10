@@ -64,4 +64,14 @@ public class ComputerServiceImpl implements ComputerService{
 		// TODO Auto-generated method stub
 		return repository.computerManager(pageable, searchType, keyword);
 	}
+	
+	@Override
+	public Page<ComputerVO> computerList(Pageable pageable, String searchType, String keyword) {
+		return repository.computerList(pageable, searchType, keyword); //ComputerRepository의 메서드 computer 실행
+	}
+	@Override
+		public int computerDelete(ComputerVO vo) {
+			return repository.computerDelete(vo);
+		}	
+
 }

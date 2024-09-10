@@ -266,4 +266,21 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="peripheralList" resultMap="peripheralMap">
+		select * from peripheral
+		left join file on peripheral.peripheral_no = file.peripheral_no
+		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by peripheral.peripheral_no desc
+		limit #{offset}, #{limit}
+	</select>
+
+	<delete id="peripheralDelete" parameterType="com.project.shop.computer.vo.PeripheralVO">
+		delete from peripheral where peripheral_no=#{peripheralNo}<!-- 특정 배송주소 외에 addr_flag 1로 바꿈. -->
+	</delete>
 </mapper>

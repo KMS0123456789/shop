@@ -209,4 +209,21 @@
 		order by computer.computer_no desc
 		limit #{offset}, #{limit}
 	</select>
+	
+	<select id="computerList" resultMap="computerMap">
+		select * from computer
+		left join file on computer.computer_no = file.computer_no
+		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by computer.computer_no desc
+		limit #{offset}, #{limit}
+	</select>
+
+	<delete id="computerDelete" parameterType="com.project.shop.computer.vo.ComputerVO">
+		delete from computer where computer_no=#{computerNo}<!--컴퓨터 게시글 삭제-->
+	</delete>
 </mapper>

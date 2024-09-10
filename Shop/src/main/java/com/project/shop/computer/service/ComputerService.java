@@ -32,4 +32,8 @@ public interface ComputerService {
 
 	Page<ComputerVO> computerManager(Pageable pageable, String searchType, String keyword);
 	
+	Page<ComputerVO> computerList(Pageable pageable, String searchType, String keyword);
+
+	int computerDelete(ComputerVO vo);
+	
 }

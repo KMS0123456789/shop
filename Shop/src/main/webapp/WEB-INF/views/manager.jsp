@@ -26,7 +26,9 @@
 				<li class="menu-item"><a href="<c:url value="/askdetail/managerAsk.do"/>">주문 목록</a></li>
 				<li class="menu-item"><a href="<c:url value="/askdetail/managercancel.do"/>">취소/교환</a></li>
 				<li class="menu-item"><a href="<c:url value="/askdetail/managerdelivery.do"/>">배송 관리</a></li>
-				<li class="menu-item"><a href="<c:url value="/opt/optList.do"/>">옵션 목록</a></li>
+				<li class="menu-item"><a href="<c:url value="/computer/computerList.do"/>">등록된 컴퓨터 목록</a></li>
+				<li class="menu-item"><a href="<c:url value="/peripheral/peripheralList.do"/>">등록된 주변기기 목록</a></li>
+				<li class="menu-item"><a href="<c:url value="/opt/optList.do"/>">등록된 옵션 목록</a></li>				
 			</ul>
 		</div>
 		<table>

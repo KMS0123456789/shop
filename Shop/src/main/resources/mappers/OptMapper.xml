@@ -14,8 +14,33 @@
 	<select id="computerPost" resultMap="optMap">
 		select * from opt;
 	</select>
+	
 	<insert id="optionInsert" parameterType="com.project.shop.computer.vo.OptVO" >
 		insert into opt(opt_category,opt_name,opt_stock,opt_sale_price)
 		values(#{optCategory},#{optName},#{optStock},#{optSalePrice});
 	</insert>
+	
+	<select id="optList" resultMap="optMap">
+		select * from opt
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+		order by opt_no desc
+		limit #{offset}, #{limit}
+	</select>
+	
+	<select id="optCount" resultType="int">
+		select count(*) from opt
+		<where>
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>	
+	
+	<delete id="optDelete" parameterType="com.project.shop.computer.vo.OptVO">
+		delete from opt where opt_no=#{optNo}<!-- 특정 배송주소 외에 addr_flag 1로 바꿈. -->
+	</delete>
 </mapper>

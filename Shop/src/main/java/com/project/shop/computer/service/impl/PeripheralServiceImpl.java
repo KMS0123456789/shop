@@ -100,4 +100,13 @@ public class PeripheralServiceImpl implements PeripheralService{
 		// TODO Auto-generated method stub
 		return repository.peripheralcount(searchType, keyword);
 	}
+	
+	@Override
+	public Page<PeripheralVO> peripheralList(Pageable pageable, String searchType, String keyword) {
+		return repository.peripheralList(pageable, searchType, keyword); //ComputerRepository의 메서드 computer 실행
+	}
+	@Override
+	public int peripheralDelete(PeripheralVO vo) {
+		return repository.peripheralDelete(vo);
+	}	
 }

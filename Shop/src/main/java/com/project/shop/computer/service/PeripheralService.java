@@ -48,4 +48,8 @@ public interface PeripheralService {
 	Page<PeripheralVO> peripheralmanager(Pageable pageable, String searchType, String keyword);
 
 	int peripheralcount(String searchType, String keyword);
+	
+	Page<PeripheralVO> peripheralList(Pageable pageable, String searchType, String keyword);
+
+	int peripheralDelete(PeripheralVO vo);
 }

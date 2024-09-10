@@ -101,5 +101,22 @@ public class ComputerRepository {
     	List<ComputerVO> computerManagers = template.selectList(NAME_SPACE+".computerManager", map);
 		return new PageImpl<ComputerVO>(computerManagers, pageable, total);
     }
+	
+	public Page<ComputerVO> computerList(Pageable pageable, String searchType, String keyword){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("offset", pageable.getOffset());
+		map.put("limit", pageable.getPageSize());
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		int total = count(searchType, keyword);
+		List<ComputerVO> computers = template.selectList(NAME_SPACE + ".computerList", map); //ComputerMapper의 computer 메서드 실행
+		return new PageImpl<ComputerVO>(computers, pageable, total);
+	}
+
+
+	public int computerDelete (ComputerVO vo) {
+		return template.update(NAME_SPACE+ ".computerDelete", vo);
+	}
+
 
 }
