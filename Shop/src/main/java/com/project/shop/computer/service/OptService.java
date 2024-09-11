@@ -11,12 +11,15 @@ import com.project.shop.computer.vo.OptVO;
 public interface OptService {
 	List<OptVO> computerPost();
 	
+	//opt 등록
 	int optionInsert(OptVO vo);
 	
+	//opt 목록 조회
 	Page<OptVO> optList(Pageable pageable, String searchType, String keyword);
 	
-	//ask 전체 개수 조회
+	//opt 전체 개수 조회
 	int optCount(String searchType, String keyword);
 	
+	//opt 삭제
 	int optDelete(OptVO vo);
 }

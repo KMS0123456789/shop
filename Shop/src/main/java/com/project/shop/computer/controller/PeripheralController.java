@@ -293,15 +293,16 @@ public class PeripheralController {
 		return "peripheralList"; //peripheralList.jsp로 보냄
 	}
 	
+	//주변기기 삭제
 	@RequestMapping(value = "/peripheralDelete.do", method = RequestMethod.GET)
     public String peripheralDelete(PeripheralVO vo , Model model) {
     	
-    	int peripheralDelete = service.peripheralDelete(vo);
+    	int peripheralDelete = service.peripheralDelete(vo); //peripheralDelete에 service.peripheralDelete의 값 넣어주기
     	
     	if(peripheralDelete > 0) {
-    		return "redirect:/peripheral/peripheralList.do";
+    		return "redirect:/peripheral/peripheralList.do"; //성공 시 /peripheral/peripheralList.do으로 이동
     	}else {
-    		return "redirect:/user/manager.do";
+    		return "redirect:/user/manager.do"; //실패 시 /user/manager.do으로 이동
     	}
     }
 

@@ -15,11 +15,13 @@
 		select * from opt;
 	</select>
 	
+	<!-- 옵션 등록 쿼리 -->
 	<insert id="optionInsert" parameterType="com.project.shop.computer.vo.OptVO" >
 		insert into opt(opt_category,opt_name,opt_stock,opt_sale_price)
 		values(#{optCategory},#{optName},#{optStock},#{optSalePrice});
 	</insert>
 	
+	<!-- 옵션 조회 + 페이징 기능 -->
 	<select id="optList" resultMap="optMap">
 		select * from opt
 		<where>
@@ -31,6 +33,7 @@
 		limit #{offset}, #{limit}
 	</select>
 	
+	<!-- 옵션 개수 -->
 	<select id="optCount" resultType="int">
 		select count(*) from opt
 		<where>
@@ -40,6 +43,7 @@
 		</where>
 	</select>	
 	
+	<!-- 옵션 삭제 -->
 	<delete id="optDelete" parameterType="com.project.shop.computer.vo.OptVO">
 		delete from opt where opt_no=#{optNo}<!-- 특정 배송주소 외에 addr_flag 1로 바꿈. -->
 	</delete>

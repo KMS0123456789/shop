@@ -26,9 +26,13 @@ public class OptRepository {
 	public List<OptVO> computerPost(){
 		return template.selectList(NAME_SPACE+".computerPost");
 	}
+	
+	//OptMapper의 optionInsert 메서드 실행
 	public int optionInsert(OptVO vo){
 		return template.insert(NAME_SPACE+".optionInsert", vo);
 	}
+	
+	//OptMapper의 optList 메서드 실행
 	public Page<OptVO> optList(Pageable pageable, String searchType, String keyword){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", pageable.getOffset());
@@ -39,12 +43,16 @@ public class OptRepository {
 		List<OptVO> optList = template.selectList(NAME_SPACE + ".optList",map);  //AskMapper의 askAll 메서드 실행
 		return new PageImpl<OptVO>(optList, pageable, total);
 	}
+	
+	//OptMapper의 optCount 메서드 실행
 	public int optCount(String searchType, String keyword) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
 		return template.selectOne(NAME_SPACE + ".optCount", map); //AskMapper의 count 메서드 실행
 	}
+	
+	//OptMapper의 optionDelete 메서드 실행
 	public int optDelete (OptVO vo) {
 		return template.update(NAME_SPACE+ ".optDelete", vo);
 	}

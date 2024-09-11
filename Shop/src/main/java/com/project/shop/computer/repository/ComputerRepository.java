@@ -102,6 +102,7 @@ public class ComputerRepository {
 		return new PageImpl<ComputerVO>(computerManagers, pageable, total);
     }
 	
+	//등록된 컴퓨터 목록 조회
 	public Page<ComputerVO> computerList(Pageable pageable, String searchType, String keyword){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", pageable.getOffset());
@@ -112,8 +113,8 @@ public class ComputerRepository {
 		List<ComputerVO> computers = template.selectList(NAME_SPACE + ".computerList", map); //ComputerMapper의 computer 메서드 실행
 		return new PageImpl<ComputerVO>(computers, pageable, total);
 	}
-
-
+	
+	//등록된 컴퓨터 삭제
 	public int computerDelete (ComputerVO vo) {
 		return template.update(NAME_SPACE+ ".computerDelete", vo);
 	}

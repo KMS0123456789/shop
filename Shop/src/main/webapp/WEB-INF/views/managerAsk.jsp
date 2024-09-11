@@ -16,6 +16,7 @@
 			<tr>
 				<th>주문 번호</th>
 				<th>처리 상태</th>
+				<th>구매자</th>
 				<th>주문 일자</th>
 				<th>상품 이미지</th>
 				<th>상품 명</th>
@@ -43,7 +44,8 @@
 									구매확정
 								</c:when>
 							</c:choose>
-						</td>								
+						</td>
+						<td>${asks.askUser}</td>								
 		                <td>${asks.askDate}</td>
 						<td>
 							<c:forEach items="${ask.files}" var="file">

@@ -31,16 +31,20 @@ public class OptController {
 	@Autowired
 	private OptRepository repository;
 	
+	//opt 등록 페이지 조회
 	@RequestMapping(value="/optionwrite.do", method=RequestMethod.GET)
 	public String optionwrite() {
 		return "optionwrite";
 	}
+	//opt등록 페이지 결과값 반환
 	@RequestMapping(value="/optionwrite.do",method=RequestMethod.POST)
 	public String optionwriteOk(OptVO vo){
 
 		repository.optionInsert(vo);
 		return "redirect:/user/manager.do";
 	}
+	
+	//등록된 opt 조회
 	@RequestMapping(value="/optList.do",method =RequestMethod.GET)
 	public String optList(Model model,
 			@RequestParam(name="page", required=false, defaultValue = "1") int page,
@@ -55,15 +59,17 @@ public class OptController {
 	model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
 	return"optList";
 	}
+	
+	//등록된 opt 삭제
 	@RequestMapping(value = "/optDelete.do", method = RequestMethod.GET)
-    public String optDelete(OptVO vo , Model model) {
+    public String optDelete(OptVO vo) {
     	
-    	int optDelete = service.optDelete(vo);
+    	int optDelete = service.optDelete(vo);  //service.optDelete의 값을 optDelete에 넣어준다.
     	
     	if(optDelete > 0) {
-    		return "redirect:/opt/optList.do";
+    		return "redirect:/opt/optList.do"; //		opt/optList.do로 이동
     	}else {
-    		return "redirect:/user/manager.do";
+    		return "redirect:/user/manager.do";//	user/manager.do로 이동
     	}
     }
 }

@@ -157,6 +157,7 @@ public class PeripheralRepository {
 		return new PageImpl<PeripheralVO>(monitors, pageable, total);
 	}
 	
+	//주변기기 목록 조회
 	public Page<PeripheralVO> peripheralmanager(Pageable pageable, String searchType, String keyword){
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("offset", pageable.getOffset());
@@ -168,13 +169,14 @@ public class PeripheralRepository {
 		return new PageImpl<PeripheralVO>(peripheralmanagers, pageable, total);
     }
 	
+	//주변기기 개수 조회
 	public int peripheralcount(String searchType, String keyword) {
     	Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchType", searchType);
 		map.put("keyword", keyword);
 		return template.selectOne(NAME_SPACE +".peripheralcount", map); //ComputerMapper의 count 메서드 실행
 	}
-	
+	//등록된 주변기기 목록 조회
 	public Page<PeripheralVO> peripheralList(Pageable pageable, String searchType, String keyword){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("offset", pageable.getOffset());
@@ -185,10 +187,9 @@ public class PeripheralRepository {
 		List<PeripheralVO> peripherals = template.selectList(NAME_SPACE + ".peripheralList", map); //ComputerMapper의 computer 메서드 실행
 		return new PageImpl<PeripheralVO>(peripherals, pageable, total);
 	}
-
+	
+	//등록된 주변기기 삭제
 	public int peripheralDelete (PeripheralVO vo) {
 		return template.update(NAME_SPACE+ ".peripheralDelete", vo);
-	}
-
-	
+	}	
 }

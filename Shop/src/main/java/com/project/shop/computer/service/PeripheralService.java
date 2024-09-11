@@ -44,12 +44,16 @@ public interface PeripheralService {
 	
 	//모니터 낮은 가격순 조회
 	Page<PeripheralVO> monitorLowPrice(Pageable pageable, String searchType, String keyword, int peripheralCategory);
-
+	
+	//주변기기 목록 조회
 	Page<PeripheralVO> peripheralmanager(Pageable pageable, String searchType, String keyword);
-
+	
+	//주변기기 개수 조회
 	int peripheralcount(String searchType, String keyword);
 	
+	//등록된 주변기기 목록 조회
 	Page<PeripheralVO> peripheralList(Pageable pageable, String searchType, String keyword);
-
+	
+	//주변기기 삭제
 	int peripheralDelete(PeripheralVO vo);
 }

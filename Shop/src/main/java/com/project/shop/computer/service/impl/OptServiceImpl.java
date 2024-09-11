@@ -23,18 +23,26 @@ public class OptServiceImpl implements OptService{
 	public List<OptVO> computerPost() {
 		return repository.computerPost();
 	}
+	
+	//repository의 optionInsert 메서드 실행
 	@Override
 	public int optionInsert(OptVO vo) {
 		return repository.optionInsert(vo);
 	}
+	
+	//repository의 optList 메서드 실행
 	@Override
 	public Page<OptVO>optList(Pageable pageable, String searchType, String keyword){
 		return repository.optList(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
 	}
-@Override
+	
+	//repository의 optCount 메서드 실행
+	@Override
 	public int optCount(String searchType, String keyword) {
 		return repository.optCount(searchType, keyword); //AskRepository의 메서드 count 실행
 	}
+	
+	//repository의 optDelete 메서드 실행
 	@Override
 	public int optDelete(OptVO vo) {
 		return repository.optDelete(vo);

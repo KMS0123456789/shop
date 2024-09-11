@@ -89,22 +89,26 @@ public class PeripheralServiceImpl implements PeripheralService{
 		return repository.monitorLowPrice(pageable, searchType, keyword, peripheralCategory);
 	}
 	
+	//주변기기 목록 조회
 	@Override
 	public Page<PeripheralVO> peripheralmanager(Pageable pageable , String searchType, String keyword) {
 		// TODO Auto-generated method stub
 		return repository.peripheralmanager(pageable, searchType, keyword);
 	}
-
+	
+	//주변기기 개수 조회
 	@Override
 	public int peripheralcount(String searchType, String keyword) {
 		// TODO Auto-generated method stub
 		return repository.peripheralcount(searchType, keyword);
 	}
-	
+	//주변기기 목록 조회
 	@Override
 	public Page<PeripheralVO> peripheralList(Pageable pageable, String searchType, String keyword) {
 		return repository.peripheralList(pageable, searchType, keyword); //ComputerRepository의 메서드 computer 실행
 	}
+	
+	//주변기기 삭제
 	@Override
 	public int peripheralDelete(PeripheralVO vo) {
 		return repository.peripheralDelete(vo);

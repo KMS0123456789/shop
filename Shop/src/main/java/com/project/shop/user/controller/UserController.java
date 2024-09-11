@@ -93,7 +93,7 @@ public class UserController {
 		HttpSession session) {
 	PageRequest pageable = PageRequest.of(page-1, 10);
 	Page<UserVO> data = userService.userAll(pageable, searchType, keyword);//data에 service.blacklist 값 넣기
-	model.addAttribute("user", data.getContent()); //question키에 조회할 페이지 정보 넣어 보내기
+	model.addAttribute("user", data.getContent()); //user키에 조회할 페이지 정보 넣어 보내기
 	model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
 	model.addAttribute("totalPage", data.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
 	model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
@@ -147,6 +147,8 @@ public class UserController {
         session.invalidate();  // 세션 무효화 (로그아웃)
         return "redirect:/?logoutSuccess=true";  // 로그아웃 후 홈으로 리다이렉트하면서 로그아웃 성공 여부 전달
     }
+    
+    //컴퓨터 상품 조회
     @RequestMapping(value ="/manager.do", method = RequestMethod.GET)
 	public String manager(Model model,
 			@RequestParam(name="page", required=false, defaultValue = "1") int page,
@@ -154,17 +156,17 @@ public class UserController {
 			@RequestParam(name="searchType", required=false) String searchType,
 			@RequestParam(name="keyword", required=false) String keyword,
 				HttpSession session) {
-    	Pageable pageable = PageRequest.of(page-1, 5);
-		Pageable pageable2 = PageRequest.of(page2-1, 5);
-		Page<ComputerVO> computer = computerService.computerManager(pageable2, searchType, keyword);
-    	Page<PeripheralVO> peripheral = perpheralService.peripheralmanager(pageable, searchType, keyword); 
-    	model.addAttribute("computer", computer.getContent());
-    	model.addAttribute("peripheral", peripheral.getContent());
-    	model.addAttribute("currentPage2", page2); //currentPage 키에 페이지 수 넣어 보내기
-    	model.addAttribute("currentPage", page); //currentPage2 키에 페이지 수 넣어 보내기
-		model.addAttribute("totalPage2", computer.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
-		model.addAttribute("totalPage", peripheral.getTotalPages()); //totalPage2 키에 총 페이지 수 넣어 보내기		model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
-		return "manager";
+    	Pageable pageable = PageRequest.of(page-1, 5); //5개씩 조회
+		Pageable pageable2 = PageRequest.of(page2-1, 5);//5개씩 조회
+		Page<ComputerVO> computer = computerService.computerManager(pageable2, searchType, keyword);			//computer에 computerService.computerManager 넣어준다.
+    	Page<PeripheralVO> peripheral = perpheralService.peripheralmanager(pageable, searchType, keyword); 		//peripheral에 peripheralService.peripheralmanager 넣어준다.
+    	model.addAttribute("computer", computer.getContent()); //computer에  조회할 페이지 정보 넣어 보내기
+    	model.addAttribute("peripheral", peripheral.getContent());//peripheral에 조회할 페이지 정보 넣어 보내기
+    	model.addAttribute("currentPage2", page2); //currentPage2 키에 페이지 수 넣어 보내기
+    	model.addAttribute("currentPage", page); //currentPage1 키에 페이지 수 넣어 보내기
+		model.addAttribute("totalPage2", computer.getTotalPages()); //totalPage2 키에 총 페이지 수 넣어 보내기
+		model.addAttribute("totalPage", peripheral.getTotalPages()); //totalPage1 키에 총 페이지 수 넣어 보내기
+		return "manager"; //manager.jsp로 보내준다.
 	}
     
 }

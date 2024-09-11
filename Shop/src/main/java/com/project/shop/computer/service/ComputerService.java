@@ -29,11 +29,14 @@ public interface ComputerService {
 	Page<ComputerVO> computerLowPrice(Pageable pageable, String searchType, String keyword);
 	
 	Page<ComputerVO> search(Pageable pageable, String keyword);
-
+	
+	//컴퓨터 상품 조회
 	Page<ComputerVO> computerManager(Pageable pageable, String searchType, String keyword);
 	
+	//등록된 컴퓨터 목록 조회
 	Page<ComputerVO> computerList(Pageable pageable, String searchType, String keyword);
-
+	
+	//등록된 컴퓨터 삭제
 	int computerDelete(ComputerVO vo);
 	
 }

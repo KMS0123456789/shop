@@ -198,7 +198,9 @@
 		group by sumCount;
 		
 	</select>
-		<select id="computerManager" resultMap="computerMap">
+	
+	<!-- 컴퓨터 목록 조회 -->
+	<select id="computerManager" resultMap="computerMap">
 		select * from computer 
 		left join file on computer.computer_no = file.computer_no
 		<where>
@@ -210,6 +212,7 @@
 		limit #{offset}, #{limit}
 	</select>
 	
+	<!-- 등록된 컴퓨터 목록 조회 -->
 	<select id="computerList" resultMap="computerMap">
 		select * from computer
 		left join file on computer.computer_no = file.computer_no
@@ -222,8 +225,9 @@
 		order by computer.computer_no desc
 		limit #{offset}, #{limit}
 	</select>
-
+	
+	<!-- 등록된 컴퓨터 삭제 -->
 	<delete id="computerDelete" parameterType="com.project.shop.computer.vo.ComputerVO">
-		delete from computer where computer_no=#{computerNo}<!--컴퓨터 게시글 삭제-->
+		delete from computer where computer_no=#{computerNo}
 	</delete>
 </mapper>
