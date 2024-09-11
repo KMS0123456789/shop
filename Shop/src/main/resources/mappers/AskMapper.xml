@@ -157,10 +157,18 @@
 	</update>
 	
 	<update id="askStateModify" parameterType="com.project.shop.progress.vo.AskVO">
-		update ask set ask_state_flag = 2 where ask_no= #{askNo} <!-- 특정 배송주소 외에 addr_flag 1로 바꿈. -->
+		update ask set ask_state_flag = 2 where ask_no= #{askNo} 
 	</update>
 	
 	<update id="deliveryComplete" parameterType="com.project.shop.progress.vo.AskVO">
-		update ask set ask_state_flag = 3 where ask_no= #{askNo} <!-- 특정 배송주소 외에 addr_flag 1로 바꿈. -->
+		update ask set ask_state_flag = 3 where ask_no= #{askNo} 
+	</update>
+	
+	<update id="cancelOk">
+		update ask set ask_delete_flag = 1 where ask_no = #{askNo}
+	</update>
+	
+	<update id="changeOk">
+		update ask set ask_delete_flag = 2 where ask_no = #{askNo}
 	</update>
 </mapper>

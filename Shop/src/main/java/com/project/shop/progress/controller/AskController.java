@@ -86,23 +86,11 @@ public class AskController {
         return "orderComplete";  // 주문 완료 페이지로 이동
     }	
 	
-	@RequestMapping(value="/myOnedate.do",method =RequestMethod.GET)
-	public String myOnedate(Model model) {
-		List<AskVO> myOnedate = service.myOnedate();
-		model.addAttribute("date",myOnedate);
-		return "myorder";
-	}
-	
-	@RequestMapping(value = "/myorder_cancel.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/myorder_cancel.do", method = RequestMethod.GET)
     public String myorder_cancel() {
         return "myorder_cancel";
     }
-    
-    @RequestMapping(value = "/myorder_past.do", method = RequestMethod.POST)
-    public String myorder_past() {
-        return "myorder_past";
-    }
-	
+
     @RequestMapping(value = "/myorder.do", method = RequestMethod.GET)
     public String myorder() {
         return "myorder";
@@ -202,6 +190,34 @@ public class AskController {
     		return "redirect:/askdetail/managerdelivery.do";
     	}else {
     		return "redirect:/askdetail/managerdelivery.do";
+    	}
+    }
+    
+    // 주문 취소
+    @RequestMapping(value = "/cancelOk.do", method = RequestMethod.GET)
+    public String cancelOk(AskVO vo , Model model, int askNo) {
+    	
+    	System.out.println(askNo);
+    	int cancelOk = service.cancelOk(vo);
+    	
+    	if(cancelOk > 0) {
+    		return "redirect:/ask/myorder_cancel.do";
+    	}else {
+    		return "redirect:/ask/myorder_cancel.do";
+    	}
+    }
+    
+    // 상품 교환
+    @RequestMapping(value = "/changeOk.do", method = RequestMethod.GET)
+    public String changeOk(AskVO vo , Model model, int askNo) {
+    	
+    	System.out.println(askNo);
+    	int changeOk = service.changeOk(vo);
+    	
+    	if(changeOk > 0) {
+    		return "redirect:/ask/myorder_cancel.do";
+    	}else {
+    		return "redirect:/ask/myorder_cancel.do";
     	}
     }
 }

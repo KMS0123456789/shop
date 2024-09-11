@@ -166,6 +166,7 @@
 		<where>
 			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 DAY ) AND NOW()
 			and a.ask_state_flag > 0
+			and a.ask_delete_flag = 0
 			and d.ask_detail_user = #{email};
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
@@ -179,6 +180,7 @@
 		<where>
 			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
 			and a.ask_state_flag > 0
+			and a.ask_delete_flag = 0
 			and d.ask_detail_user = #{email};
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
@@ -193,6 +195,7 @@
 		<where>
 			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()
 			and a.ask_state_flag > 0
+			and a.ask_delete_flag = 0
 			and d.ask_detail_user = #{email};
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
@@ -207,6 +210,7 @@
 		<where>
 			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH ) AND NOW()
 			and a.ask_state_flag > 0
+			and a.ask_delete_flag = 0
 			and d.ask_detail_user = #{email};
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
@@ -221,6 +225,7 @@
 		<where>
 			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -6 MONTH ) AND NOW()
 			and a.ask_state_flag > 0
+			and a.ask_delete_flag = 0
 			and d.ask_detail_user = #{email};
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%')
@@ -242,6 +247,7 @@
 			left join review r on d.computer_no = r.computer_no or d.peripheral_no = r.peripheral_no
 			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 DAY ) AND NOW() and d.ask_detail_user = #{email}
 			and a.ask_state_flag > 0
+			and a.ask_delete_flag = 0
 			order by d.ask_no desc limit #{offset}, #{limit};
 	</select>
 	
@@ -258,6 +264,7 @@
 			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no 
 			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW() and d.ask_detail_user = #{email}
 			and a.ask_state_flag > 0
+			and a.ask_delete_flag = 0
 			order by d.ask_no desc limit #{offset}, #{limit};
 	</select>
 	
@@ -274,6 +281,7 @@
 			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no 
 			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW() and d.ask_detail_user = #{email}
 			and a.ask_state_flag > 0
+			and a.ask_delete_flag = 0
 			order by d.ask_no desc limit #{offset}, #{limit};
 	</select>
 	
@@ -290,6 +298,7 @@
 			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no 
 			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH ) AND NOW() and d.ask_detail_user = #{email}
 			and a.ask_state_flag > 0
+			and a.ask_delete_flag = 0
 			order by d.ask_no desc limit #{offset}, #{limit};
 	</select>
 	
@@ -305,6 +314,7 @@
 			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no 
 			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -6 MONTH ) AND NOW() and d.ask_detail_user = #{email}
 			and a.ask_state_flag > 0
+			and a.ask_delete_flag = 0
 			order by d.ask_no desc limit #{offset}, #{limit};
 	</select>
 	
@@ -375,5 +385,160 @@
 				and ${searchType} like concat('%',#{keyword},'%') 
 			</if>
 		</where>
+	</select>
+	
+	<!-- 특정유저 하루 취소 내역 개수 조회 쿼리 -->
+	<select id="mydayCancelcount" resultType="int">
+		select count(*) from ask_detail d 
+			left join ask a on d.ask_no = a.ask_no 
+		<where>
+			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 DAY ) AND NOW()
+			and a.ask_delete_flag >= 1
+			and d.ask_detail_user = #{email};
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 특정유저 일주일 취소 내역 개수 조회 쿼리 -->
+	<select id="myweekCancelcount" resultType="int">
+		select count(*) from ask_detail d 
+			left join ask a on d.ask_no = a.ask_no 
+		<where>
+			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
+			and a.ask_delete_flag >= 1
+			and d.ask_detail_user = #{email};
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 특정유저 한달 취소 내역 개수 조회 쿼리 -->
+	<select id="mymonthCancelcount" resultType="int">
+		select count(*) from ask_detail d 
+			left join ask a on d.ask_no = a.ask_no 
+		<where>
+			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW()
+			and a.ask_delete_flag >= 1
+			and d.ask_detail_user = #{email};
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 특정유저 세달 취소 내역 개수 조회 쿼리 -->
+	<select id="myThreemonthCancelcount" resultType="int">
+		select count(*) from ask_detail d 
+			left join ask a on d.ask_no = a.ask_no 
+		<where>
+			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH ) AND NOW()
+			and a.ask_delete_flag >= 1
+			and d.ask_detail_user = #{email};
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 특정유저 6달 취소 내역 개수 조회 쿼리 -->
+	<select id="mySixmonthCancelcount" resultType="int">
+		select count(*) from ask_detail d 
+			left join ask a on d.ask_no = a.ask_no 
+		<where>
+			and a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -6 MONTH ) AND NOW()
+			and a.ask_delete_flag >= 1
+			and d.ask_detail_user = #{email};
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%')
+			</if>
+		</where>
+	</select>
+	
+	<!-- 특정유저 하루 취소 주문내역 조회 쿼리 -->
+    <select id="myOnecanceldate" resultMap="askDetailMap">
+		select  *,
+			(select opt_name from opt where d.opt_ssd = opt.opt_no) as ssd_name,
+			(select opt_name from opt where d.opt_hdd = opt.opt_no) as hdd_name,
+			(select opt_name from opt where d.opt_os = opt.opt_no) as os_name
+			from ask_detail d 
+			left join ask a on d.ask_no = a.ask_no 
+			left join computer c on d.computer_no = c.computer_no 
+			left join peripheral p on d.peripheral_no = p.peripheral_no 
+			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no
+			left join review r on d.computer_no = r.computer_no or d.peripheral_no = r.peripheral_no
+			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 DAY ) AND NOW() and d.ask_detail_user = #{email}
+			and a.ask_delete_flag >= 1
+			order by d.ask_no desc limit #{offset}, #{limit};
+	</select>
+	
+	<!-- 특정유저 일주일 취소 주문내역 조회 쿼리 -->
+    <select id="myOnecancelweek" resultMap="askDetailMap">
+		select  *,
+			(select opt_name from opt where d.opt_ssd = opt.opt_no) as ssd_name,
+			(select opt_name from opt where d.opt_hdd = opt.opt_no) as hdd_name,
+			(select opt_name from opt where d.opt_os = opt.opt_no) as os_name
+			from ask_detail d 
+			left join ask a on d.ask_no = a.ask_no 
+			left join computer c on d.computer_no = c.computer_no 
+			left join peripheral p on d.peripheral_no = p.peripheral_no 
+			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no
+			left join review r on d.computer_no = r.computer_no or d.peripheral_no = r.peripheral_no
+			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW() and d.ask_detail_user = #{email}
+			and a.ask_delete_flag >= 1
+			order by d.ask_no desc limit #{offset}, #{limit};
+	</select>
+	
+	<!-- 특정유저 한달 취소 주문내역 조회 쿼리 -->
+    <select id="myOnemonthcancel" resultMap="askDetailMap">
+		select  *,
+			(select opt_name from opt where d.opt_ssd = opt.opt_no) as ssd_name,
+			(select opt_name from opt where d.opt_hdd = opt.opt_no) as hdd_name,
+			(select opt_name from opt where d.opt_os = opt.opt_no) as os_name
+			from ask_detail d 
+			left join ask a on d.ask_no = a.ask_no 
+			left join computer c on d.computer_no = c.computer_no 
+			left join peripheral p on d.peripheral_no = p.peripheral_no 
+			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no
+			left join review r on d.computer_no = r.computer_no or d.peripheral_no = r.peripheral_no
+			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH ) AND NOW() and d.ask_detail_user = #{email}
+			and a.ask_delete_flag >= 1
+			order by d.ask_no desc limit #{offset}, #{limit};
+	</select>
+	
+	<!-- 특정유저 세달 취소 주문내역 조회 쿼리 -->
+    <select id="myThreemonthcancel" resultMap="askDetailMap">
+		select  *,
+			(select opt_name from opt where d.opt_ssd = opt.opt_no) as ssd_name,
+			(select opt_name from opt where d.opt_hdd = opt.opt_no) as hdd_name,
+			(select opt_name from opt where d.opt_os = opt.opt_no) as os_name
+			from ask_detail d 
+			left join ask a on d.ask_no = a.ask_no 
+			left join computer c on d.computer_no = c.computer_no 
+			left join peripheral p on d.peripheral_no = p.peripheral_no 
+			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no
+			left join review r on d.computer_no = r.computer_no or d.peripheral_no = r.peripheral_no
+			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -3 MONTH ) AND NOW() and d.ask_detail_user = #{email}
+			and a.ask_delete_flag >= 1
+			order by d.ask_no desc limit #{offset}, #{limit};
+	</select>
+	
+	<!-- 특정유저 6달 취소 주문내역 조회 쿼리 -->
+    <select id="mySixmonthcancel" resultMap="askDetailMap">
+		select  *,
+			(select opt_name from opt where d.opt_ssd = opt.opt_no) as ssd_name,
+			(select opt_name from opt where d.opt_hdd = opt.opt_no) as hdd_name,
+			(select opt_name from opt where d.opt_os = opt.opt_no) as os_name
+			from ask_detail d 
+			left join ask a on d.ask_no = a.ask_no 
+			left join computer c on d.computer_no = c.computer_no 
+			left join peripheral p on d.peripheral_no = p.peripheral_no 
+			left join file f on d.computer_no = f.computer_no or d.peripheral_no = f.peripheral_no
+			left join review r on d.computer_no = r.computer_no or d.peripheral_no = r.peripheral_no
+			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -6 MONTH ) AND NOW() and d.ask_detail_user = #{email}
+			and a.ask_delete_flag >= 1
+			order by d.ask_no desc limit #{offset}, #{limit};
 	</select>
 </mapper>

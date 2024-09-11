@@ -113,4 +113,17 @@ public class AskServiceImpl implements AskService{
 		// TODO Auto-generated method stub
 		return repository.deliveryComplete(vo);
 	}
+	
+	// 주문취소로 업데이트
+	@Override
+	public int cancelOk(AskVO vo) {
+		// TODO Auto-generated method stub
+		return repository.cancelOk(vo);
+	}
+
+	@Override
+	public int changeOk(AskVO vo) {
+		// TODO Auto-generated method stub
+		return repository.changeOk(vo);
+	}
 }

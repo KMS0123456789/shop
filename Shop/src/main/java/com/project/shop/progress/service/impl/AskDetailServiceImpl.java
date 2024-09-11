@@ -141,14 +141,86 @@ public class AskDetailServiceImpl implements AskDetailService{
 	}
 	
 	//ask 전체 조회
-		@Override
-		public Page<AskDetailVO> deliveryAll(Pageable pageable, String searchType, String keyword){
-			return repository.deliveryAll(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
-		}
-		//ask 전체 개수 조회
-		@Override
-		public int deliveryCount(String searchType, String keyword) {
-			return repository.deliveryCount(searchType, keyword); //AskRepository의 메서드 count 실행
-		}		
-		
+	@Override
+	public Page<AskDetailVO> deliveryAll(Pageable pageable, String searchType, String keyword){
+		return repository.deliveryAll(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
+	}
+	//ask 전체 개수 조회
+	@Override
+	public int deliveryCount(String searchType, String keyword) {
+		return repository.deliveryCount(searchType, keyword); //AskRepository의 메서드 count 실행
+	}
+	// 특정 유저 취소 내역 하루 개수 조회
+	@Override
+	public int mydayCancelcount(String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.mydayCancelcount(searchType, keyword, vo);
+	}
+	
+	// 특정 유저 취소 내역 하루 조회
+	@Override
+	public Page<AskDetailVO> myOnecanceldate(Pageable pageable, String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myOnecanceldate(pageable, searchType, keyword, vo);
+	}
+	
+	// 특정 유저 취소 내역 일주일 개수 조회
+	@Override
+	public int myweekCancelcount(String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myweekCancelcount(searchType, keyword, vo);
+	}
+	
+	// 특정 유저 취소 내역 일주일 조회
+	@Override
+	public Page<AskDetailVO> myOnecancelweek(Pageable pageable, String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myOnecancelweek(pageable, searchType, keyword, vo);
+	}
+	
+	// 특정 유저 취소 내역 한달 개수 조회
+	@Override
+	public int mymonthCancelcount(String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.mymonthCancelcount(searchType, keyword, vo);
+	}
+	
+	// 특정 유저 취소 내역 한달 조회
+	@Override
+	public Page<AskDetailVO> myOnemonthcancel(Pageable pageable, String searchType, String keyword,
+			AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myOnemonthcancel(pageable, searchType, keyword, vo);
+	}
+
+	// 특정 유저 취소 내역 세달 개수 조회
+	@Override
+	public int myThreemonthCancelcount(String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myThreeMonthcount(searchType, keyword, vo);
+	}
+	
+	// 특정 유저 취소 내역 세달 조회
+	@Override
+	public Page<AskDetailVO> myThreemonthcancel(Pageable pageable, String searchType, String keyword,
+			AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.myThreemonthcancel(pageable, searchType, keyword, vo);
+	}
+	
+	// 특정 유저 취소 내역 여섯달 개수 조회
+	@Override
+	public int mySixmonthCancelcount(String searchType, String keyword, AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.mySixmonthCancelcount(searchType, keyword, vo);
+	}
+	
+	// 특정 유저 취소 내역 여섯달 조회
+	@Override
+	public Page<AskDetailVO> mySixmonthcancel(Pageable pageable, String searchType, String keyword,
+			AskDetailVO vo) {
+		// TODO Auto-generated method stub
+		return repository.mySixmonthcancel(pageable, searchType, keyword, vo);
+	}
+	
 }

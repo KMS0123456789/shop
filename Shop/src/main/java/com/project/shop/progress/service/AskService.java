@@ -38,6 +38,11 @@ import com.project.shop.progress.vo.AskVO;
 		int askStateModify(AskVO vo);
 		
 		int deliveryComplete(AskVO vo);
-				
+		
+		// 주문 취소로 업데이트
+		int cancelOk(AskVO vo);
+		
+		// 주문 취소로 업데이트
+		int changeOk(AskVO vo);
 	}
 	

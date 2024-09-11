@@ -66,5 +66,34 @@ public interface AskDetailService {
 			
 	//askdelivery 전체 개수 조회
 	int deliveryCount(String searchType, String keyword);
-
+	
+	// 특정 유저 하루 취소내역 개수 조회
+	int mydayCancelcount(String searchType, String keyword,  AskDetailVO vo );
+	
+	// 특정유저 하루 취소 주문내역 조회 쿼리 
+	Page<AskDetailVO> myOnecanceldate(Pageable pageable, String searchType, String keyword, AskDetailVO vo);
+	
+	// 특정 유저 일주일 취소내역 개수 조회
+	int myweekCancelcount(String searchType, String keyword,  AskDetailVO vo );
+	
+	// 특정유저 일주일 취소 주문내역 조회 쿼리 
+	Page<AskDetailVO> myOnecancelweek(Pageable pageable, String searchType, String keyword, AskDetailVO vo);
+	
+	// 특정 유저 한달 취소내역 개수 조회
+	int mymonthCancelcount(String searchType, String keyword,  AskDetailVO vo );
+	
+	// 특정유저 한달 취소 주문내역 조회 쿼리 
+	Page<AskDetailVO> myOnemonthcancel(Pageable pageable, String searchType, String keyword, AskDetailVO vo);
+		
+	// 특정 유저 세달 취소내역 개수 조회
+	int myThreemonthCancelcount(String searchType, String keyword,  AskDetailVO vo );
+	
+	// 특정유저 세달 취소 주문내역 조회 쿼리 
+	Page<AskDetailVO> myThreemonthcancel(Pageable pageable, String searchType, String keyword, AskDetailVO vo);
+	
+	// 특정 유저 세달 취소내역 개수 조회
+	int mySixmonthCancelcount(String searchType, String keyword,  AskDetailVO vo );
+	
+	// 특정유저 세달 취소 주문내역 조회 쿼리 
+	Page<AskDetailVO> mySixmonthcancel(Pageable pageable, String searchType, String keyword, AskDetailVO vo);
 }

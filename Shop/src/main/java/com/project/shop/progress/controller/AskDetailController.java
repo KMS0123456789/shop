@@ -162,5 +162,94 @@ public class AskDetailController {
 			return"managerdelivery";
 		}
 
-
+		
+		// 특정 유저 하루 조회.
+		@RequestMapping(value="/myOnecanceldate.do",method =RequestMethod.GET)
+		public String myOnecanceldate(Model model, HttpSession session, String email, AskDetailVO vo,
+										@RequestParam(name="page", required=false, defaultValue = "1") int page,
+										@RequestParam(name="searchType", required=false) String searchType,
+										@RequestParam(name="keyword", required=false) String keyword) {
+			Pageable pageable = PageRequest.of(page-1, 5);
+			UserVO user = (UserVO)session.getAttribute("user");
+			vo.setAskDetailUser(user.getEmail());
+			Page<AskDetailVO> myOnecanceldate = service.myOnecanceldate(pageable, searchType , keyword , vo);
+			model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
+			model.addAttribute("canceldate", myOnecanceldate.getContent());
+			model.addAttribute("totalPage", myOnecanceldate.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
+			model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+			model.addAttribute("email", vo.getAskDetailUser());
+			return "myorder_cancel";
+		}
+		
+		// 특정 유저 일주일 조회.
+		@RequestMapping(value="/myOnecancelweek.do",method =RequestMethod.GET)
+		public String myOnecancelweek(Model model, HttpSession session, String email, AskDetailVO vo,
+										@RequestParam(name="page", required=false, defaultValue = "1") int page,
+										@RequestParam(name="searchType", required=false) String searchType,
+										@RequestParam(name="keyword", required=false) String keyword) {
+			Pageable pageable = PageRequest.of(page-1, 5);
+			UserVO user = (UserVO)session.getAttribute("user");
+			vo.setAskDetailUser(user.getEmail());
+			Page<AskDetailVO> myOnecancelweek = service.myOnecancelweek(pageable, searchType , keyword , vo);
+			model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
+			model.addAttribute("cancelweek", myOnecancelweek.getContent());
+			model.addAttribute("totalPage", myOnecancelweek.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
+			model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+			model.addAttribute("email", vo.getAskDetailUser());
+			return "myorder_cancel";
+		}
+		
+		// 특정 유저 한달 조회.
+		@RequestMapping(value="/myOnemonthcancel.do",method =RequestMethod.GET)
+		public String myOnemonthcancel(Model model, HttpSession session, String email, AskDetailVO vo,
+										@RequestParam(name="page", required=false, defaultValue = "1") int page,
+										@RequestParam(name="searchType", required=false) String searchType,
+										@RequestParam(name="keyword", required=false) String keyword) {
+			Pageable pageable = PageRequest.of(page-1, 5);
+			UserVO user = (UserVO)session.getAttribute("user");
+			vo.setAskDetailUser(user.getEmail());
+			Page<AskDetailVO> myOnemonthcancel = service.myOnemonthcancel(pageable, searchType , keyword , vo);
+			model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
+			model.addAttribute("cancelmonth", myOnemonthcancel.getContent());
+			model.addAttribute("totalPage", myOnemonthcancel.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
+			model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+			model.addAttribute("email", vo.getAskDetailUser());
+			return "myorder_cancel";
+		}
+		
+		// 특정 유저 세달 조회.
+		@RequestMapping(value="/myThreemonthcancel.do",method =RequestMethod.GET)
+		public String myThreemonthcancel(Model model, HttpSession session, String email, AskDetailVO vo,
+										@RequestParam(name="page", required=false, defaultValue = "1") int page,
+										@RequestParam(name="searchType", required=false) String searchType,
+										@RequestParam(name="keyword", required=false) String keyword) {
+			Pageable pageable = PageRequest.of(page-1, 5);
+			UserVO user = (UserVO)session.getAttribute("user");
+			vo.setAskDetailUser(user.getEmail());
+			Page<AskDetailVO> myThreemonthcancel = service.myThreemonthcancel(pageable, searchType , keyword , vo);
+			model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
+			model.addAttribute("cancelThreemonth", myThreemonthcancel.getContent());
+			model.addAttribute("totalPage", myThreemonthcancel.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
+			model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+			model.addAttribute("email", vo.getAskDetailUser());
+			return "myorder_cancel";
+		}
+		
+		// 특정 유저 여섯달 조회.
+		@RequestMapping(value="/mySixmonthcancel.do",method =RequestMethod.GET)
+		public String mySixmonthcancel(Model model, HttpSession session, String email, AskDetailVO vo,
+										@RequestParam(name="page", required=false, defaultValue = "1") int page,
+										@RequestParam(name="searchType", required=false) String searchType,
+										@RequestParam(name="keyword", required=false) String keyword) {
+			Pageable pageable = PageRequest.of(page-1, 5);
+			UserVO user = (UserVO)session.getAttribute("user");
+			vo.setAskDetailUser(user.getEmail());
+			Page<AskDetailVO> mySixmonthcancel = service.mySixmonthcancel(pageable, searchType , keyword , vo);
+			model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기
+			model.addAttribute("cancelSixmonth", mySixmonthcancel.getContent());
+			model.addAttribute("totalPage", mySixmonthcancel.getTotalPages()); //totalPage 키에 총 페이지 수 넣어 보내기
+			model.addAttribute("pageSize", 10); //pageSize 키에 페이징 기능 최대 버튼 수 (10개) 보내기
+			model.addAttribute("email", vo.getAskDetailUser());
+			return "myorder_cancel";
+		}
 }

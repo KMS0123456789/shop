@@ -32,15 +32,9 @@
                 	</form>
                 </li>
                 <li id="ormenu">
-                	<form action="<c:url value='/ask/myorder_cancel.do'/>" method="post">
+                	<form action="<c:url value='/ask/myorder_cancel.do'/>" method="get">
                 		<input type="hidden" value="${sessionScope.user.email}" name="askUser">
                  		<button type="submit" id="order2"> 취소/교환 내역</button>
-                	</form>
-                </li>
-                <li id="ormenu">
-                	<form action="<c:url value='/ask/myorder_past.do'/>" method="post">
-                		<input type="hidden" value="${sessionScope.user.email}" name="askUser">
-                 		<button type="submit" id="order3">과거 주문 내역</button>
                 	</form>
                 </li>
             </ul>
@@ -60,7 +54,6 @@
                 <ul id="order_infor">
                     <li class="displaynone">기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 지난 주문내역을 조회하실 수 있습니다.</li>
                     <li class=" ">기본적으로 최근 3개월간의 자료가 조회되며, 기간 검색시 주문처리완료 후 36개월 이내의 주문내역을 조회하실 수 있습니다.</li>
-                    <li class=" ">완료 후 36개월 이상 경과한 주문은 <a href="<c:url value='/user/myorder_past.do'/>">[과거주문내역]</a>에서 확인할 수 있습니다.</li>
                     <li>주문번호를 클릭하시면 해당 주문에 대한 상세내역을 확인하실 수 있습니다.</li>
                     <li class="">취소/교환/반품 신청은 배송완료일 기준 7일까지 가능합니다.</li>
                 </ul>
@@ -88,7 +81,7 @@
                         <th scope="col">수량</th>
                         <th scope="col">상품구매금액</th>
                         <th scope="col">주문처리상태</th>
-                        <th scope="col">취소/교환/반품</th>
+                        <th scope="col">취소/교환</th>
                     </tr>
                 </thead>
                 <c:forEach items="${date}" var="date">
@@ -159,9 +152,31 @@
 		                    		</c:if>
 		                    	</td>
 		                    </c:if>
-		                    <c:if test="${asks.askDeleteFlag == 0}">
-		                    	 <td>-</td>
-		                    </c:if>
+	                    	 <td>
+	                    	 	<c:if test="${asks.askStateFlag  == 1 and asks.askDeleteFlag == 0}">
+	                    	 		<form action='<c:url value="/ask/cancelOk.do"/>' method="get">
+	                    				<c:forEach items="${date.asks }" var="ask">
+	                    					<input type="hidden" name="askNo" value="${ask.askNo}">
+	                    					<button type="submit"><span></span> <span></span><span></span><span></span>
+	                    						취소 신청
+	                    					</button>
+	                    				</c:forEach>
+	                    			</form>
+                    			 </c:if>
+	                    		<c:if test="${asks.askStateFlag  != 1 and asks.askDeleteFlag == 0 and asks.askStateFlag  != 3}">
+	                    	 		-
+	                   	 		</c:if>
+	                   	 		<c:if test="${asks.askStateFlag  == 3 and asks.askDeleteFlag == 0}">
+	                    	 		<form action='<c:url value="/ask/changeOk.do"/>' method="get">
+	                    				<c:forEach items="${date.asks }" var="ask">
+	                    					<input type="hidden" name="askNo" value="${ask.askNo}">
+	                    					<button type="submit"><span></span> <span></span><span></span><span></span>
+	                    						교환 신청
+	                    					</button>
+	                    				</c:forEach>
+	                    			</form>
+	                   	 		</c:if>
+	                    	 </td>
 		                    <c:if test="${asks.askDeleteFlag == 1}">
 		                    	 <td>취소</td>
 		                    </c:if>
@@ -239,9 +254,31 @@
 		                    		</c:if>
 		                    	</td>
 		                    </c:if>
-		                    <c:if test="${asks.askDeleteFlag == 0}">
-		                    	 <td>-</td>
-		                    </c:if>
+	                    	 <td>
+	                    	 	<c:if test="${asks.askStateFlag  == 1 and asks.askDeleteFlag == 0}">
+	                    	 		<form action='<c:url value="/ask/cancelOk.do"/>' method="get">
+	                    				<c:forEach items="${week.asks }" var="ask">
+	                    					<input type="hidden" name="askNo" value="${ask.askNo}">
+	                    					<button type="submit"><span></span> <span></span><span></span><span></span>
+	                    						취소 신청
+	                    					</button>
+	                    				</c:forEach>
+	                    			</form>
+                    			 </c:if>
+	                    		<c:if test="${asks.askStateFlag  != 1 and asks.askDeleteFlag == 0 and asks.askStateFlag  != 3}">
+	                    	 		-
+	                   	 		</c:if>
+	                   	 		<c:if test="${asks.askStateFlag  == 3 and asks.askDeleteFlag == 0}">
+	                    	 		<form action='<c:url value="/ask/changeOk.do"/>' method="get">
+	                    				<c:forEach items="${week.asks }" var="ask">
+	                    					<input type="hidden" name="askNo" value="${ask.askNo}">
+	                    					<button type="submit"><span></span> <span></span><span></span><span></span>
+	                    						교환 신청
+	                    					</button>
+	                    				</c:forEach>
+	                    			</form>
+	                   	 		</c:if>
+	                    	 </td>
 		                    <c:if test="${asks.askDeleteFlag == 1}">
 		                    	 <td>취소</td>
 		                    </c:if>
@@ -319,9 +356,31 @@
 		                    		</c:if>
 		                    	</td>
 		                    </c:if>
-		                    <c:if test="${asks.askDeleteFlag == 0}">
-		                    	 <td>-</td>
-		                    </c:if>
+		                   	<td>
+		                   		<c:if test="${asks.askStateFlag  == 1 and asks.askDeleteFlag == 0}">
+	                    	 		<form action='<c:url value="/ask/cancelOk.do"/>' method="get">
+	                    				<c:forEach items="${month.asks }" var="ask">
+	                    					<input type="hidden" name="askNo" value="${ask.askNo}">
+	                    					<button type="submit"><span></span> <span></span><span></span><span></span>
+	                    						취소 신청
+	                    					</button>
+	                    				</c:forEach>
+	                    			</form>
+                    			 </c:if>
+	                    		<c:if test="${asks.askStateFlag  != 1 and asks.askDeleteFlag == 0 and asks.askStateFlag  != 3}">
+	                    	 		-
+	                   	 		</c:if>
+	                   	 		<c:if test="${asks.askStateFlag  == 3 and asks.askDeleteFlag == 0}">
+	                    	 		<form action='<c:url value="/ask/changeOk.do"/>' method="get">
+	                    				<c:forEach items="${month.asks }" var="ask">
+	                    					<input type="hidden" name="askNo" value="${ask.askNo}">
+	                    					<button type="submit"><span></span> <span></span><span></span><span></span>
+	                    						교환 신청
+	                    					</button>
+	                    				</c:forEach>
+	                    			</form>
+	                   	 		</c:if>
+		                   	</td>
 		                    <c:if test="${asks.askDeleteFlag == 1}">
 		                    	 <td>취소</td>
 		                    </c:if>
@@ -399,9 +458,31 @@
 		                    		</c:if>
 		                    	</td>
 		                    </c:if>
-		                    <c:if test="${asks.askDeleteFlag == 0}">
-		                    	 <td>-</td>
-		                    </c:if>
+		                   	<td>
+		                   		<c:if test="${asks.askStateFlag  == 1 and asks.askDeleteFlag == 0}">
+	                    	 		<form action='<c:url value="/ask/cancelOk.do"/>' method="get">
+	                    				<c:forEach items="${three.asks }" var="ask">
+	                    					<input type="hidden" name="askNo" value="${ask.askNo}">
+	                    					<button type="submit"><span></span> <span></span><span></span><span></span>
+	                    						취소 신청
+	                    					</button>
+	                    				</c:forEach>
+	                    			</form>
+                    			 </c:if>
+	                    		<c:if test="${asks.askStateFlag  != 1 and asks.askDeleteFlag == 0 and asks.askStateFlag  != 3}">
+	                    	 		-
+	                   	 		</c:if>
+	                   	 		<c:if test="${asks.askStateFlag  == 3 and asks.askDeleteFlag == 0}">
+	                    	 		<form action='<c:url value="/ask/changeOk.do"/>' method="get">
+	                    				<c:forEach items="${three.asks }" var="ask">
+	                    					<input type="hidden" name="askNo" value="${ask.askNo}">
+	                    					<button type="submit"><span></span> <span></span><span></span><span></span>
+	                    						교환 신청
+	                    					</button>
+	                    				</c:forEach>
+	                    			</form>
+	                   	 		</c:if>
+		                   	</td>
 		                    <c:if test="${asks.askDeleteFlag == 1}">
 		                    	 <td>취소</td>
 		                    </c:if>
@@ -479,9 +560,31 @@
 		                    		</c:if>
 		                    	</td>
 		                    </c:if>
-		                    <c:if test="${asks.askDeleteFlag == 0}">
-		                    	 <td>-</td>
-		                    </c:if>
+		                    <td>
+		                    	<c:if test="${asks.askStateFlag  == 1 and asks.askDeleteFlag == 0}">
+	                    	 		<form action='<c:url value="/ask/cancelOk.do"/>' method="get">
+	                    				<c:forEach items="${six.asks }" var="ask">
+	                    					<input type="hidden" name="askNo" value="${ask.askNo}">
+	                    					<button type="submit"><span></span> <span></span><span></span><span></span>
+	                    						취소 신청
+	                    					</button>
+	                    				</c:forEach>
+	                    			</form>
+                    			 </c:if>
+	                    		<c:if test="${asks.askStateFlag  != 1 and asks.askDeleteFlag == 0 and asks.askStateFlag  != 3}">
+	                    	 		-
+	                   	 		</c:if>
+	                   	 		<c:if test="${asks.askStateFlag  == 3 and asks.askDeleteFlag == 0}">
+	                    	 		<form action='<c:url value="/ask/changeOk.do"/>' method="get">
+	                    				<c:forEach items="${six.asks }" var="ask">
+	                    					<input type="hidden" name="askNo" value="${ask.askNo}">
+	                    					<button type="submit"><span></span> <span></span><span></span><span></span>
+	                    						교환 신청
+	                    					</button>
+	                    				</c:forEach>
+	                    			</form>
+	                   	 		</c:if>
+		                    </td>
 		                    <c:if test="${asks.askDeleteFlag == 1}">
 		                    	 <td>취소</td>
 		                    </c:if>
@@ -618,9 +721,9 @@
 					</c:if>
 				</c:if>
 			</div>
-            <%-- <c:if test="${empty date}">
+            <c:if test="${week == null and date == null and month ==null and three == null and six == null}">
             	<p class="message ">주문 내역이 없습니다.</p>
-            </c:if> --%>
+            </c:if>
         </div>
     </div>
     <script type="text/javascript">

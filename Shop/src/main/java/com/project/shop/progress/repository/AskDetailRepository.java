@@ -207,4 +207,114 @@ public class AskDetailRepository {
 			map.put("keyword", keyword);
 			return template.selectOne(NAME_SPACE + ".deliveryCount", map); //AskMapper의 count 메서드 실행
 		}
+		
+		 // 특정유저가 취소한 상품 하루 조회.
+	    public Page<AskDetailVO> myOnecanceldate(Pageable pageable, String searchType, String keyword, AskDetailVO vo){
+	    	Map<String, Object> map = new HashMap<String, Object>();
+			map.put("offset", pageable.getOffset());
+			map.put("limit", pageable.getPageSize());
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			map.put("email", vo.getAskDetailUser());
+			int total = mydayCancelcount(searchType, keyword , vo);
+			List<AskDetailVO> myOnecanceldate = template.selectList(NAME_SPACE+".myOnecanceldate", map );
+	    	return new PageImpl<AskDetailVO>(myOnecanceldate, pageable, total);
+	    }
+	    
+	    // 특정유저가 취소한 상품 하루 개수 조회.
+		public int mydayCancelcount(String searchType, String keyword, AskDetailVO vo) {
+  			Map<String, Object> map = new HashMap<String, Object>();
+  			map.put("searchType", searchType);
+  			map.put("keyword", keyword);
+  			map.put("email", vo.getAskDetailUser());
+  			return template.selectOne(NAME_SPACE + ".mydayCancelcount", map); //AskMapper의 count 메서드 실행
+	  	}
+		
+		 // 특정유저가 취소한 상품 일주일 조회.
+	    public Page<AskDetailVO> myOnecancelweek(Pageable pageable, String searchType, String keyword, AskDetailVO vo){
+	    	Map<String, Object> map = new HashMap<String, Object>();
+			map.put("offset", pageable.getOffset());
+			map.put("limit", pageable.getPageSize());
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			map.put("email", vo.getAskDetailUser());
+			int total = myweekCancelcount(searchType, keyword , vo);
+			List<AskDetailVO> myOnecancelweek = template.selectList(NAME_SPACE+".myOnecancelweek", map );
+	    	return new PageImpl<AskDetailVO>(myOnecancelweek, pageable, total);
+	    }
+	    
+	    // 특정유저가 취소한 상품 일주일 개수 조회.
+		public int myweekCancelcount(String searchType, String keyword, AskDetailVO vo) {
+  			Map<String, Object> map = new HashMap<String, Object>();
+  			map.put("searchType", searchType);
+  			map.put("keyword", keyword);
+  			map.put("email", vo.getAskDetailUser());
+  			return template.selectOne(NAME_SPACE + ".myweekCancelcount", map); //AskMapper의 count 메서드 실행
+	  	}
+		
+		 // 특정유저가 취소한 상품 한달 조회.
+	    public Page<AskDetailVO> myOnemonthcancel(Pageable pageable, String searchType, String keyword, AskDetailVO vo){
+	    	Map<String, Object> map = new HashMap<String, Object>();
+			map.put("offset", pageable.getOffset());
+			map.put("limit", pageable.getPageSize());
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			map.put("email", vo.getAskDetailUser());
+			int total = mymonthCancelcount(searchType, keyword , vo);
+			List<AskDetailVO> myOnemonthcancel = template.selectList(NAME_SPACE+".myOnemonthcancel", map );
+	    	return new PageImpl<AskDetailVO>(myOnemonthcancel, pageable, total);
+	    }
+	    
+	    // 특정유저가 취소한 상품 한달 개수 조회.
+		public int mymonthCancelcount(String searchType, String keyword, AskDetailVO vo) {
+  			Map<String, Object> map = new HashMap<String, Object>();
+  			map.put("searchType", searchType);
+  			map.put("keyword", keyword);
+  			map.put("email", vo.getAskDetailUser());
+  			return template.selectOne(NAME_SPACE + ".mymonthCancelcount", map); //AskMapper의 count 메서드 실행
+	  	}
+		
+		 // 특정유저가 취소한 상품 세달 조회.
+	    public Page<AskDetailVO> myThreemonthcancel(Pageable pageable, String searchType, String keyword, AskDetailVO vo){
+	    	Map<String, Object> map = new HashMap<String, Object>();
+			map.put("offset", pageable.getOffset());
+			map.put("limit", pageable.getPageSize());
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			map.put("email", vo.getAskDetailUser());
+			int total = myThreemonthCancelcount(searchType, keyword , vo);
+			List<AskDetailVO> myThreemonthcancel = template.selectList(NAME_SPACE+".myThreemonthcancel", map );
+	    	return new PageImpl<AskDetailVO>(myThreemonthcancel, pageable, total);
+	    }
+	    
+	    // 특정유저가 취소한 상품 세달 개수 조회.
+		public int myThreemonthCancelcount(String searchType, String keyword, AskDetailVO vo) {
+  			Map<String, Object> map = new HashMap<String, Object>();
+  			map.put("searchType", searchType);
+  			map.put("keyword", keyword);
+  			map.put("email", vo.getAskDetailUser());
+  			return template.selectOne(NAME_SPACE + ".myThreemonthCancelcount", map); //AskMapper의 count 메서드 실행
+	  	}
+		
+		 // 특정유저가 취소한 상품 세달 조회.
+	    public Page<AskDetailVO> mySixmonthcancel(Pageable pageable, String searchType, String keyword, AskDetailVO vo){
+	    	Map<String, Object> map = new HashMap<String, Object>();
+			map.put("offset", pageable.getOffset());
+			map.put("limit", pageable.getPageSize());
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			map.put("email", vo.getAskDetailUser());
+			int total = mySixmonthCancelcount(searchType, keyword , vo);
+			List<AskDetailVO> mySixmonthcancel = template.selectList(NAME_SPACE+".mySixmonthcancel", map );
+	    	return new PageImpl<AskDetailVO>(mySixmonthcancel, pageable, total);
+	    }
+	    
+	    // 특정유저가 취소한 상품 세달 개수 조회.
+		public int mySixmonthCancelcount(String searchType, String keyword, AskDetailVO vo) {
+  			Map<String, Object> map = new HashMap<String, Object>();
+  			map.put("searchType", searchType);
+  			map.put("keyword", keyword);
+  			map.put("email", vo.getAskDetailUser());
+  			return template.selectOne(NAME_SPACE + ".mySixmonthCancelcount", map); //AskMapper의 count 메서드 실행
+	  	}
 }

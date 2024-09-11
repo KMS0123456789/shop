@@ -88,4 +88,12 @@ public class AskRepository {
 	public int deliveryComplete (AskVO vo) {
 		return template.update(NAME_SPACE+ ".deliveryComplete", vo);
 	}
+	
+	public int cancelOk (AskVO vo) {
+		return template.update(NAME_SPACE+ ".cancelOk", vo);
+	}
+	
+	public int changeOk (AskVO vo) {
+		return template.update(NAME_SPACE+ ".changeOk", vo);
+	}
 }
