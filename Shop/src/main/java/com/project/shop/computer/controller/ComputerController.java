@@ -193,7 +193,7 @@ public class ComputerController {
 			@RequestParam(name="searchType", required=false) String searchType,
 			@RequestParam(name="keyword", required=false) String keyword,
 			HttpSession session) {
-		Pageable pageable = PageRequest.of(page-1, 20); //한 페이지에 뜰 게시물 갯수(20개)
+		Pageable pageable = PageRequest.of(page-1, 10); //한 페이지에 뜰 게시물 갯수(10개)
 		Page<ComputerVO> data = service.computerList(pageable, searchType, keyword);//data에 service.computerList 값 넣기
 		model.addAttribute("computer", data.getContent()); //computer키에 조회할 페이지 정보 넣어 보내기
 		model.addAttribute("currentPage", page); //currentPage 키에 페이지 수 넣어 보내기

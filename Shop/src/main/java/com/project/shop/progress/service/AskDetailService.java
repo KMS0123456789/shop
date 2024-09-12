@@ -96,4 +96,12 @@ public interface AskDetailService {
 	
 	// 특정유저 세달 취소 주문내역 조회 쿼리 
 	Page<AskDetailVO> mySixmonthcancel(Pageable pageable, String searchType, String keyword, AskDetailVO vo);
+
+	Page<AskDetailVO> managercancel(Pageable pageable, String searchType, String keyword);
+	
+	int cancelcount(String searchType, String keyword);
+	
+	Page<AskDetailVO> changelist(Pageable pageable, String searchType, String keyword);
+	
+	int changecount(String searchType, String keyword);
 }

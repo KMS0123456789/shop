@@ -42,7 +42,12 @@ import com.project.shop.progress.vo.AskVO;
 		// 주문 취소로 업데이트
 		int cancelOk(AskVO vo);
 		
-		// 주문 취소로 업데이트
+		// 상품 교환으로 업데이트
 		int changeOk(AskVO vo);
+		
+		//상품 교환중으로 업데이트
+		int changing(AskVO vo);
+		
+		int changecomplete(AskVO vo);
 	}
 	

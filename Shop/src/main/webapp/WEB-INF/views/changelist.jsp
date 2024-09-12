@@ -37,6 +37,7 @@
 					<th>상품 명</th>
 					<th>옵션 명</th>
 					<th>판매가</th>
+					<th>교환</th>
 				</tr>
 			</thead>
 			<c:forEach items="${ask}" var="ask">
@@ -45,9 +46,17 @@
 						<tr>
 							<td>${asks.askNo}</td>	
 							<td>
-								<c:if test="${asks.askDeleteFlag ==  1}" >
-									구매취소
-								</c:if>
+								<c:choose>
+									<c:when test="${asks.askDeleteFlag ==  2}">
+										교환요청
+									</c:when>
+									<c:when test="${asks.askDeleteFlag ==  3}">
+										교환진행중
+									</c:when>
+									<c:when test="${asks.askDeleteFlag ==  4}">
+										교환완료
+									</c:when>
+								</c:choose>
 							</td>
 							<td>${asks.askUser}</td>										
 							<td>${asks.askDate}</td>
@@ -66,6 +75,22 @@
 									<c:if test="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice < 50000}">
 										<td><f:formatNumber value="${com.computerSalePrice + ask.ssdPrice + ask.hddPrice + ask.osPrice +3000}" type="number" pattern="#,###"/>원</td>
 									</c:if>
+									<td>
+										<c:choose>
+											<c:when test="${asks.askDeleteFlag == 2}">
+												<form action="<c:url value='/ask/changing.do'/>">
+													<input type="hidden" value="${ask.askNo}" name="askNo">
+													<input type="submit" value="교환진행중 " class="btn">
+												</form>
+											</c:when>
+											<c:when test="${asks.askDeleteFlag == 3}">
+												<form action="<c:url value='/ask/changecomplete.do'/>">
+													<input type="hidden" value="${ask.askNo}" name="askNo">
+													<input type="submit" value="교환완료변경" class="btn">
+												</form>
+											</c:when>
+										</c:choose>
+									</td>
 	  							</c:if>
 							</c:forEach>
 							<c:forEach items="${ask.peripherals}" var="per">
@@ -78,6 +103,22 @@
 									<c:if test="${per.peripheralSalePrice < 50000}">
 										<td><f:formatNumber value="${per.peripheralSalePrice}" type="number" pattern="#,###"/>원</td>
 									</c:if>
+									<td>
+										<c:choose>
+											<c:when test="${asks.askDeleteFlag == 2}">
+												<form action="<c:url value='/ask/askchanging.do'/>">
+													<input type="hidden" value="${ask.askNo}" name="askNo">
+													<input type="submit" value="교환진행중 " class="btn">
+												</form>
+											</c:when>
+											<c:when test="${asks.askDeleteFlag == 3}">
+												<form action="<c:url value='/ask/changecomplete.do'/>">
+													<input type="hidden" value="${ask.askNo}" name="askNo">
+													<input type="submit" value="교환완료변경" class="btn">
+												</form>
+											</c:when>
+										</c:choose>
+									</td>
  								</c:if>
 							</c:forEach>
 						</tr>                                    
@@ -90,8 +131,8 @@
 			<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
 			<c:set var="endPage" value="${(startPage + (10 - 1))}"></c:set>
 			<c:if test="${currentPage > 1}">
-				<a class="first" href="<c:url value="/askdetail/managercancel.do?page=1" />">&lt;&lt;</a>
-				<a class="prev" href="<c:url value="/askdetail/managercancel.do?page=${currentPage-1}" />">&lt;</a>
+				<a class="first" href="<c:url value="/askdetail/changelist.do?page=1" />">&lt;&lt;</a>
+				<a class="prev" href="<c:url value="/askdetail/changelist.do?page=${currentPage-1}" />">&lt;</a>
 			</c:if>
 			<c:forEach begin="${startPage}" end="${endPage > totalPage ? totalPage : endPage}" var="pageNum">
 				<c:choose>
@@ -99,13 +140,13 @@
 						<a>${pageNum}</a>
 					</c:when>
 					<c:otherwise>
-						<a href="<c:url value="/askdetail/managercancel.do?page=${pageNum}" />">${pageNum}</a>
+						<a href="<c:url value="/askdetail/changelist.do?page=${pageNum}" />">${pageNum}</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if test="${currentPage < totalPage}">
-				<a class="next" href="<c:url value="/askdetail/managercancel.do?page=${currentPage+1}" />">&gt;</a>
-				<a class="last" href="<c:url value="/askdetail/managercancel.do?page=${totalPage}" />">&gt;&gt;</a>
+				<a class="next" href="<c:url value="/askdetail/changelist.do?page=${currentPage+1}" />">&gt;</a>
+				<a class="last" href="<c:url value="/askdetail/changelist.do?page=${totalPage}" />">&gt;&gt;</a>
 			</c:if>
 		</div>
 </body>

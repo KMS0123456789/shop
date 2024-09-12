@@ -126,4 +126,16 @@ public class AskServiceImpl implements AskService{
 		// TODO Auto-generated method stub
 		return repository.changeOk(vo);
 	}
+	
+	@Override
+	public int changing(AskVO vo) {
+		// TODO Auto-generated method stub
+		return repository.changing(vo);
+	}
+	
+	@Override
+	public int changecomplete(AskVO vo) {
+		// TODO Auto-generated method stub
+		return repository.changecomplete(vo);
+	}
 }

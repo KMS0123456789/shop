@@ -223,4 +223,23 @@ public class AskDetailServiceImpl implements AskDetailService{
 		return repository.mySixmonthcancel(pageable, searchType, keyword, vo);
 	}
 	
+	@Override
+	public Page<AskDetailVO> managercancel(Pageable pageable, String searchType, String keyword){
+		return repository.managercancel(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
+	}
+	
+	@Override
+	public int cancelcount(String searchType, String keyword) {
+		return repository.cancelcount(searchType, keyword); //AskRepository의 메서드 count 실행
+	}
+	
+	@Override
+	public Page<AskDetailVO> changelist(Pageable pageable, String searchType, String keyword){
+		return repository.changelist(pageable, searchType, keyword); //AskRepository에서 askAll 메서드 실행
+	}
+	
+	@Override
+	public int changecount(String searchType, String keyword) {
+		return repository.changecount(searchType, keyword); //AskRepository의 메서드 count 실행
+	}
 }

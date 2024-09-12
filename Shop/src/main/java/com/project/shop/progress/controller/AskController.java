@@ -220,4 +220,28 @@ public class AskController {
     		return "redirect:/ask/myorder_cancel.do";
     	}
     }
+    
+    @RequestMapping(value = "/changing.do", method = RequestMethod.GET)
+    public String changing(AskVO vo) {
+    	
+    	int changing = service.changing(vo);
+    	
+    	if(changing > 0) {
+    		return "redirect:/askdetail/changelist.do";
+    	}else {
+    		return "redirect:/user/manager.do";
+    	}
+    }
+    
+    @RequestMapping(value = "/changecomplete.do", method = RequestMethod.GET)
+    public String changecomplete(AskVO vo) {
+    	
+    	int changecomplete = service.changecomplete(vo);
+    	
+    	if(changecomplete > 0) {
+    		return "redirect:/askdetail/changelist.do";
+    	}else {
+    		return "redirect:/user/manager.do";
+    	}
+    }
 }

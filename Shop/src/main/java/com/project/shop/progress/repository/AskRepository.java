@@ -96,4 +96,12 @@ public class AskRepository {
 	public int changeOk (AskVO vo) {
 		return template.update(NAME_SPACE+ ".changeOk", vo);
 	}
+	
+	public int changing (AskVO vo) {
+		return template.update(NAME_SPACE+ ".changing", vo);
+	}
+	
+	public int changecomplete (AskVO vo) {
+		return template.update(NAME_SPACE+ ".changecomplete", vo);
+	}
 }

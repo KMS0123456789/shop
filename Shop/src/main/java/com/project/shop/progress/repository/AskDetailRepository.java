@@ -317,4 +317,42 @@ public class AskDetailRepository {
   			map.put("email", vo.getAskDetailUser());
   			return template.selectOne(NAME_SPACE + ".mySixmonthCancelcount", map); //AskMapper의 count 메서드 실행
 	  	}
+		
+		//취소목록 리스트
+		public Page<AskDetailVO> managercancel(Pageable pageable, String searchType, String keyword){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("offset", pageable.getOffset());
+			map.put("limit", pageable.getPageSize());
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			int total = cancelcount(searchType, keyword);
+			List<AskDetailVO> cancels = template.selectList(NAME_SPACE + ".managercancel",map);  //AskMapper의 askAll 메서드 실행
+			return new PageImpl<AskDetailVO>(cancels, pageable, total);
+		}
+		
+		//취소목록 개수
+		public int cancelcount(String searchType, String keyword) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			return template.selectOne(NAME_SPACE + ".cancelcount", map); //AskMapper의 count 메서드 실행
+		}
+		
+		public Page<AskDetailVO> changelist(Pageable pageable, String searchType, String keyword){
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("offset", pageable.getOffset());
+			map.put("limit", pageable.getPageSize());
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			int total = changecount(searchType, keyword);
+			List<AskDetailVO> changelist = template.selectList(NAME_SPACE + ".changelist",map);  //AskMapper의 askAll 메서드 실행
+			return new PageImpl<AskDetailVO>(changelist, pageable, total);
+		}
+		
+		public int changecount(String searchType, String keyword) {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("searchType", searchType);
+			map.put("keyword", keyword);
+			return template.selectOne(NAME_SPACE + ".changecount", map); //AskMapper의 count 메서드 실행
+		}
 }

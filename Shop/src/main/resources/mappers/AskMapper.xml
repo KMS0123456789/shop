@@ -171,4 +171,12 @@
 	<update id="changeOk">
 		update ask set ask_delete_flag = 2 where ask_no = #{askNo}
 	</update>
+	
+	<update id="changing" parameterType="com.project.shop.progress.vo.AskVO">
+		update ask set ask_delete_flag = 3 where ask_no = #{askNo}
+	</update>
+	
+	<update id="changecomplete" parameterType="com.project.shop.progress.vo.AskVO">
+		update ask set ask_delete_flag =4 where ask_no = #{askNo}
+	</update>
 </mapper>

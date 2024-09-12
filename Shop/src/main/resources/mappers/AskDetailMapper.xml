@@ -345,7 +345,7 @@
 		select count(*) from ask_detail
 		left join ask on ask_detail.ask_no = ask.ask_no
 		<where>
-			and ask_state_flag >0 
+			and ask_state_flag >0  and ask_delete_flag =0
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%') 
 			</if>
@@ -367,7 +367,7 @@
 				left join file f on ask_detail.computer_no = f.computer_no or ask_detail.peripheral_no =f.peripheral_no
 		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
 		<where>
-			and ask_state_flag > 0 and  ask_state_flag !=4
+			and ask_state_flag > 0 and  ask_state_flag !=4 and ask_delete_flag = 0
 			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
 				and ${searchType} like concat('%',#{keyword},'%') and
 			</if>
@@ -540,5 +540,75 @@
 			where a.ask_date BETWEEN DATE_ADD(NOW(), INTERVAL -6 MONTH ) AND NOW() and d.ask_detail_user = #{email}
 			and a.ask_delete_flag >= 1
 			order by d.ask_no desc limit #{offset}, #{limit};
+	</select>
+	
+	<select id="managercancel" resultMap="askDetailMap">
+		select *,
+			(select opt_name from opt where ask_detail.opt_ssd = opt.opt_no) as ssd_name,
+			(select opt_name from opt where ask_detail.opt_hdd = opt.opt_no) as hdd_name,
+			(select opt_name from opt where ask_detail.opt_os = opt.opt_no) as os_name,
+			(select opt_sale_price from opt where opt.opt_no = ask_detail.opt_ssd and opt_category = 0) as ssd_price,
+			(select opt_sale_price from opt where opt.opt_no = ask_detail.opt_hdd and opt_category = 1) as hdd_price,
+			(select opt_sale_price from opt where opt.opt_no = ask_detail.opt_os and opt_category = 2) as os_price
+			 from ask_detail 
+				left join ask on ask_detail.ask_no =ask.ask_no
+				left join computer c on ask_detail.computer_no = c.computer_no
+				left join peripheral p on ask_detail.peripheral_no = p.peripheral_no
+				left join file f on ask_detail.computer_no = f.computer_no or ask_detail.peripheral_no =f.peripheral_no
+		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
+		<where>
+			and ask_delete_flag = 1
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%') and
+			</if>
+		</where>
+		order by ask.ask_no desc
+		limit #{offset}, #{limit}
+	</select>
+	
+	<select id="cancelcount" resultType="int">
+		select count(*) from ask_detail
+		left join ask on ask_detail.ask_no = ask.ask_no
+		<where>
+			and ask_delete_flag = 1 
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%') 
+			</if>
+		</where>
+	</select>
+	
+	<select id="changelist" resultMap="askDetailMap">
+		select *,
+			(select opt_name from opt where ask_detail.opt_ssd = opt.opt_no) as ssd_name,
+			(select opt_name from opt where ask_detail.opt_hdd = opt.opt_no) as hdd_name,
+			(select opt_name from opt where ask_detail.opt_os = opt.opt_no) as os_name,
+			(select opt_sale_price from opt where opt.opt_no = ask_detail.opt_ssd and opt_category = 0) as ssd_price,
+			(select opt_sale_price from opt where opt.opt_no = ask_detail.opt_hdd and opt_category = 1) as hdd_price,
+			(select opt_sale_price from opt where opt.opt_no = ask_detail.opt_os and opt_category = 2) as os_price
+			 from ask_detail 
+				left join ask on ask_detail.ask_no =ask.ask_no
+				left join computer c on ask_detail.computer_no = c.computer_no
+				left join peripheral p on ask_detail.peripheral_no = p.peripheral_no
+				left join file f on ask_detail.computer_no = f.computer_no or ask_detail.peripheral_no =f.peripheral_no
+		<!-- where 태그 쓸 때는 where가 있다 생각하고 and부터 쓴다 -->
+		<where>
+			and ask_delete_flag =2 or ask_delete_flag = 3 or ask_delete_flag = 4
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%') and
+			</if>
+		</where>
+		order by ask.ask_no desc
+		limit #{offset}, #{limit}
+	</select>
+	
+	<select id="changecount" resultType="int">
+		select count(*) from ask_detail
+		left join ask on ask_detail.ask_no = ask.ask_no
+		<where>
+			and ask_delete_flag = 2 or ask_delete_flag = 4
+			<if test="searchType != null and searchType != '' and keyword != null and keyword != ''">
+				and ${searchType} like concat('%',#{keyword},'%') 
+			</if>
+		</where>
 	</select>
 </mapper>
