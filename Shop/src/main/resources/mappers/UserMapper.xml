@@ -127,12 +127,12 @@
 		select *,
 		(select count(keep_user) from keep where keep_user = #{email}) as keep_count, <!-- keep 테이블에  특정 유저가 찜한 조회 개수 조회, 이름을 keep_count로 설정.-->
 		(select count(cart_user) from cart where cart_user = #{email}) as cart_count, <!-- cart 테이블에  특정 유저가 장바구니에 담은 개수 조회, 이름을 cart_count로 설정.-->
-		(select count(ask_user) from ask where ask_state_flag = 1 and ask_user = #{email}) as pay_count, <!-- ask 테이블에 특정 유저가 결제완료한 개수 조회, 이름을 pay_count로 설정.-->
+		(select count(ask_user) from ask where ask_state_flag = 1 and ask_delete_flag and ask_user = #{email}) as pay_count, <!-- ask 테이블에 특정 유저가 결제완료한 개수 조회, 이름을 pay_count로 설정.-->
 		(select count(ask_user) from ask where ask_state_flag = 2 and ask_user = #{email}) as dready_count, <!-- ask 테이블에 특정 유저가 배송준비중인 개수 조회, 이름을 dready_count로 설정.-->
 		(select count(ask_user) from ask where ask_state_flag = 3 and ask_user = #{email}) as clear_count, <!-- ask 테이블에 특정 유저가 배송완료된 개수 조회, 이름을 clear_count로 설정.--> 
 		(select count(ask_user) from ask where ask_state_flag = 4 and ask_user = #{email}) as buy_count, <!-- ask 테이블에 특정 유저가 배송완료된 개수 조회, 이름을 buy_count로 설정.--> 
-		(select count(ask_user) from ask where ask_delete_flag = 1 and ask_user = #{email}) as orcancel_count, <!-- ask 테이블에 특정 유저가 주문취소한 개수 조회, 이름을 orcancel_count로 설정.-->
-		(select count(ask_user) from ask where ask_delete_flag = 2 and ask_user = #{email}) as orchange_count <!-- ask 테이블에 특정 유저가 교환한 개수 조회, 이름을 orchange_count로 설정.-->
+		(select count(ask_user) from ask where ask_delete_flag = 1 and ask_state_flag = 1 and ask_user = #{email}) as orcancel_count, <!-- ask 테이블에 특정 유저가 주문취소한 개수 조회, 이름을 orcancel_count로 설정.-->
+		(select count(ask_user) from ask where ask_delete_flag = 4 and ask_state_flag = 3 and ask_user = #{email}) as orchange_count <!-- ask 테이블에 특정 유저가 교환한 개수 조회, 이름을 orchange_count로 설정.-->
 		from user where user.email = #{email}; <!-- user테이블에 특정 이메일로 입력한 것 조회. -->
 	</select>
 	
