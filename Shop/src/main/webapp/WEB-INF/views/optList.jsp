@@ -38,6 +38,7 @@
 				</tbody>
 			</c:forEach>
 		</table>
+		<button id="write"><a href="<c:url value="/opt/optionwrite.do"/>">옵션등록</a></button>
 		<div class="paging">
 			<f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
 				<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>

@@ -44,6 +44,7 @@
 				</tbody>
 			</c:forEach>
 		</table>
+		<button id="peripheralwrite"><a href="<c:url value="/peripheral/peripheralwrite.do"/>" >주변기기등록</a></button>
 		<div class="paging">
 			<f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
 				<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>

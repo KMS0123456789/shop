@@ -44,7 +44,7 @@
 				</tbody>
 			</c:forEach>
 		</table>
-		<button><a href="<c:url value="/computer/computerwrite.do"/>" id="computerwrite">컴퓨터등록</a></button>
+		<button id="write"><a href="<c:url value="/computer/computerwrite.do"/>" id="computerwrite">컴퓨터등록</a></button>
 		<div class="paging">
 			<f:parseNumber integerOnly="true" var="pageGroup" value="${(currentPage - 1) / 10}" />
 				<c:set var="startPage" value="${(pageGroup * 10 + 1)}"></c:set>
