@@ -60,8 +60,8 @@
 	                        <li id="d_state"><strong>구매 확정</strong><a href="<c:url value='/ask/myorder.do'/>"><span>${my.buyCount}</span></a></li>
 	                    </ul>
 	                    <ul id="re">
-	                        <li><strong>취소 : </strong><a href="<c:url value='/ask/myorder.do'/>"><span>${my.orcancelCount}</span></a></li>
-	                        <li><strong>교환 : </strong><a href="<c:url value='/ask/myorder.do'/>"><span>${my.orchangeCount}</span></a></li>
+	                        <li><strong>취소 : </strong><a href="<c:url value='/ask/myorder_cancel.do'/>"><span>${my.orcancelCount}</span></a></li>
+	                        <li><strong>교환 : </strong><a href="<c:url value='/ask/myorder_cancel.do'/>"><span>${my.orchangeCount}</span></a></li>
 	                    </ul>
 	                </div>
 	            </div>
