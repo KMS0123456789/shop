@@ -56,7 +56,7 @@ public class UserServiceImpl implements UserService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();  // 요청 파라미터를 담을 맵 생성
         params.add("grant_type", "authorization_code");  // 인증 코드 유형 설정
         params.add("client_id", "91452e14d92a8c67875cd1e2ec08fdd2");  // 클라이언트 ID 설정
-        params.add("redirect_uri", "http://localhost:8080/shop/user/kakao/callback.do");  // 리다이렉트 URI 설정
+        params.add("redirect_uri", "http://jjezen.cafe24.com/custompcshop/user/kakao/callback.do");  // 리다이렉트 URI 설정
         						/*http://jjezen.cafe24.com/custompcshop/user/kakao/callback.do
         						http://localhost:8080/shop/user/kakao/callback.do*/	
         params.add("code", code);  // 카카오에서 받은 인증 코드 설정
