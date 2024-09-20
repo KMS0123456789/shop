@@ -16,7 +16,7 @@
             <ul class="cancelAskList">
                 <li>
                 	<form action="<c:url value='/askdetail/managercancel.do'/>" method="get">
-                 		<button type="submit" id="list"> 주문 내역 조회</button>
+                 		<button type="submit" id="list"> 주문 취소 내역</button>
                 	</form>
                 </li>
                 <li>
