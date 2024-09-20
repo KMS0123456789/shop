@@ -29,10 +29,6 @@ public class CartRepository {
     public List<PeripheralVO> selectPeripheralByNo(int peripheralNo) {
         return template.selectList(NAME_SPACE + ".selectPeripheralByNo", peripheralNo);
     }
-	
-    public List<CartVO> getCartItemsByUser(String user) {
-        return template.selectList(NAME_SPACE + ".getCartItemsByUser", user);
-    }
 
     public List<CartVO> getCartItemsWithDetails(String user) {
         return template.selectList(NAME_SPACE + ".getCartItemsWithDetails", user);

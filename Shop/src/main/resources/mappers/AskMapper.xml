@@ -70,11 +70,24 @@
         VALUES (#{askUser}, 1, 0)
     </insert>
     
-    <select id="getAskById" resultType="com.project.shop.progress.vo.AskVO">
-        SELECT * 
-        FROM ask
-        WHERE ask_no = #{askNo}
-    </select>
+	<select id="getAskById" resultType="com.project.shop.progress.vo.AskVO" parameterType="hashmap">
+	    SELECT a.*, 
+	           d.opt_ssd, d.opt_hdd, d.opt_os,
+	           c.computer_title, c.computer_sale_price,
+	           p.peripheral_title, p.peripheral_sale_price,
+	           (SELECT opt_name FROM opt WHERE d.opt_ssd = opt.opt_no) AS ssd_name, 
+	           (SELECT opt_name FROM opt WHERE d.opt_hdd = opt.opt_no) AS hdd_name, 
+	           (SELECT opt_name FROM opt WHERE d.opt_os = opt.opt_no) AS os_name, 
+	           (SELECT opt_sale_price FROM opt WHERE opt.opt_no = d.opt_ssd AND opt.opt_category = 0) AS ssd_price, 
+	           (SELECT opt_sale_price FROM opt WHERE opt.opt_no = d.opt_hdd AND opt.opt_category = 1) AS hdd_price, 
+	           (SELECT opt_sale_price FROM opt WHERE opt.opt_no = d.opt_os AND opt.opt_category = 2) AS os_price
+	    FROM ask a
+		LEFT JOIN ask_detail d ON a.ask_no = d.ask_no 
+		LEFT JOIN computer c ON d.computer_no = c.computer_no AND d.item_category = 1
+		LEFT JOIN peripheral p ON d.peripheral_no = p.peripheral_no AND d.item_category = 2
+		LEFT JOIN file f ON (c.computer_no = f.computer_no OR p.peripheral_no = f.peripheral_no) 
+	    WHERE a.ask_no = #{askNo}
+	</select>
     
     <select id="selectlastone" resultType="com.project.shop.progress.vo.AskVO">
     	SELECT * 

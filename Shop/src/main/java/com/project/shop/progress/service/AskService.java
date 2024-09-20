@@ -12,7 +12,7 @@ import com.project.shop.progress.vo.AskVO;
 	    
 	    AskVO selectlastone();
 	    
-	    AskVO getAskById(AskVO vo); 
+	    List<AskVO> getAskById(AskVO askvo); 
 		
 		List<AskVO> myOnedate();
 		

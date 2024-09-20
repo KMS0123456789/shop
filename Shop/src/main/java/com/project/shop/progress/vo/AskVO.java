@@ -12,6 +12,19 @@ public class AskVO {
 	private String askDate;
 	private int askStateFlag;
 	private int askDeleteFlag;
+	private int cartNo;
+	private String cartUser;
+	private int computerNo;
+	private int peripheralNo;
+	private int optSsd;
+	private int optHdd;
+	private int optOs;
+	private int itemCount;
+	private int itemCategory;
+	private String computerTitle;
+	private int computerSalePrice;
+	private String peripheralTitle;
+	private int peripheralSalePrice;
 	private String ssdName;
 	private String hddName;
 	private String osName;
@@ -24,6 +37,109 @@ public class AskVO {
 	private List<PeripheralVO> peripherals;
 	private List<OptVO> opts;
 	
+	public int getCartNo() {
+		return cartNo;
+	}
+
+	public String getCartUser() {
+		return cartUser;
+	}
+
+	public int getComputerNo() {
+		return computerNo;
+	}
+
+	public int getPeripheralNo() {
+		return peripheralNo;
+	}
+
+	public int getOptSsd() {
+		return optSsd;
+	}
+
+	public int getOptHdd() {
+		return optHdd;
+	}
+
+	public int getOptOs() {
+		return optOs;
+	}
+
+	public int getItemCount() {
+		return itemCount;
+	}
+
+	public int getItemCategory() {
+		return itemCategory;
+	}
+
+	public String getComputerTitle() {
+		return computerTitle;
+	}
+
+	public int getComputerSalePrice() {
+		return computerSalePrice;
+	}
+
+	public String getPeripheralTitle() {
+		return peripheralTitle;
+	}
+
+	public int getPeripheralSalePrice() {
+		return peripheralSalePrice;
+	}
+
+	public void setCartNo(int cartNo) {
+		this.cartNo = cartNo;
+	}
+
+	public void setCartUser(String cartUser) {
+		this.cartUser = cartUser;
+	}
+
+	public void setComputerNo(int computerNo) {
+		this.computerNo = computerNo;
+	}
+
+	public void setPeripheralNo(int peripheralNo) {
+		this.peripheralNo = peripheralNo;
+	}
+
+	public void setOptSsd(int optSsd) {
+		this.optSsd = optSsd;
+	}
+
+	public void setOptHdd(int optHdd) {
+		this.optHdd = optHdd;
+	}
+
+	public void setOptOs(int optOs) {
+		this.optOs = optOs;
+	}
+
+	public void setItemCount(int itemCount) {
+		this.itemCount = itemCount;
+	}
+
+	public void setItemCategory(int itemCategory) {
+		this.itemCategory = itemCategory;
+	}
+
+	public void setComputerTitle(String computerTitle) {
+		this.computerTitle = computerTitle;
+	}
+
+	public void setComputerSalePrice(int computerSalePrice) {
+		this.computerSalePrice = computerSalePrice;
+	}
+
+	public void setPeripheralTitle(String peripheralTitle) {
+		this.peripheralTitle = peripheralTitle;
+	}
+
+	public void setPeripheralSalePrice(int peripheralSalePrice) {
+		this.peripheralSalePrice = peripheralSalePrice;
+	}
 	
 	public int getSsdPrice() {
 		return ssdPrice;

@@ -87,19 +87,29 @@
 		</collection>
 	</resultMap>
 	
-	<select id="getAskDetailsByAskNo" resultMap="askDetailMap">
-	    SELECT ad.*, c.computer_title, c.computer_sale_price, p.peripheral_title, p.peripheral_sale_price
-	    FROM ask_detail ad
-	    LEFT JOIN computer c ON ad.computer_no = c.computer_no
-	    LEFT JOIN peripheral p ON ad.peripheral_no = p.peripheral_no
-	    WHERE ad.ask_no = #{askNo}
-	</select>
-	
 	<!-- 주문 상세입력-->
     <insert id="completePay" parameterType="com.project.shop.progress.vo.AskDetailVO">
         INSERT INTO ask_detail (ask_no, ask_detail_user, computer_no, peripheral_no, opt_ssd, opt_hdd, opt_os, item_count, item_category)
         VALUES (#{askNo}, #{askDetailUser}, #{computerNo}, #{peripheralNo}, #{optSsd}, #{optHdd}, #{optOs}, #{itemCount}, #{itemCategory})
     </insert>
+    
+    <select id="getAskDetailsByAskNo" resultMap="askDetailMap">
+		select *
+		    ,(select opt_name from opt where opt.opt_no= a.opt_ssd) as ssd_name
+		    ,(select opt_name from opt where opt.opt_no= a.opt_hdd) as hdd_name
+		    ,(select opt_name from opt where opt.opt_no= a.opt_os) as os_name
+		    ,(select opt_sale_price from opt where opt.opt_no= a.opt_ssd) as ssd_price
+		    ,(select opt_sale_price from opt where opt.opt_no= a.opt_hdd) as hdd_price
+		    ,(select opt_sale_price from opt where opt.opt_no= a.opt_os) as os_price
+		from ask_detail a
+		left outer join computer c
+	    	on a.computer_no = c.computer_no
+		left outer join peripheral p
+	    	on a.peripheral_no = p.peripheral_no
+	    LEFT outer JOIN file f 
+			ON (c.computer_no = f.computer_no OR p.peripheral_no = f.peripheral_no) 
+	 	where ask_no = #{askNo}
+	</select>
     
     <insert id="computerBuy" parameterType="com.project.shop.progress.vo.AskDetailVO">
     	insert into ask_detail(ask_no, ask_detail_user, computer_no, opt_ssd, opt_hdd, opt_os, item_count, item_category)

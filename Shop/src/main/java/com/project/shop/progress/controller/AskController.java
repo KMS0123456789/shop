@@ -42,48 +42,64 @@ public class AskController {
     @Autowired
     private CartService cartService;
 	
-	@PostMapping(value = "/completePay.do", produces = "application/json; charset=UTF-8")
+    @PostMapping(value = "/completePay.do", produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> completePay(@RequestBody AskVO ask, HttpSession session) {
+    public ResponseEntity<Map<String, Object>> completePay(
+    		@RequestBody List<AskVO> askList, HttpSession session) {
         UserVO user = (UserVO) session.getAttribute("user");
-        ask.setAskUser(user.getEmail());
         Map<String, Object> response = new HashMap<>();
-
+        if (user == null) {
+            response.put("status", 400);
+            response.put("message", "로그인이 필요합니다.");
+            return ResponseEntity.badRequest().body(response);
+        }
         try {
-            service.completePay(ask);
-            if (ask.getAskDetails() != null) {
-                for (AskDetailVO detail : ask.getAskDetails()) {
-                    detail.setAskNo(ask.getAskNo());
-                    detail.setAskDetailUser(user.getEmail());
-                    detailService.completePay(detail);
+            for (AskVO ask : askList) {
+                ask.setAskUser(user.getEmail());
+                service.completePay(ask);  
+                if (ask.getAskDetails() != null) {
+                    for (AskDetailVO detail : ask.getAskDetails()) {
+                        detail.setAskNo(ask.getAskNo());  
+                        detail.setAskDetailUser(user.getEmail());
+                        detailService.completePay(detail);
+                    }
                 }
             }
-            // 장바구니 비우기
             cartService.clearCart(user.getEmail());
-            
             response.put("status", 200);
             response.put("message", "결제가 완료되었습니다.");
+            response.put("askList", askList);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
+            e.printStackTrace();
             response.put("status", 400);
             response.put("message", "결제 실패: " + e.getMessage());
+            response.put("errorDetails", e.getClass().getSimpleName());
             return ResponseEntity.badRequest().body(response);
         }
     }
 	
     @GetMapping("/orderComplete.do")
-    public String orderComplete(Model model, AskVO vo, AskDetailVO advo) {
-    	AskVO order = service.selectlastone();
-    	vo.setAskNo(order.getAskNo());
-    	advo.setAskNo(order.getAskNo());
-  
-    	AskVO ask = service.getAskById(vo);  // ask 데이터를 DB에서 가져옴
-
-        List<AskDetailVO> askDetails = detailService.getAskDetailsByAskNo(advo);  // askDetail 데이터도 가져옴
-
-        model.addAttribute("ask", ask);
-        model.addAttribute("askDetails", askDetails);
-        return "orderComplete";  // 주문 완료 페이지로 이동
+    public String orderComplete(Model model, AskVO askvo, AskDetailVO advo) {
+        AskVO order = service.selectlastone();
+        if (order != null) {
+            askvo.setAskNo(order.getAskNo());
+            advo.setAskNo(order.getAskNo());
+            
+            List<AskVO> askList = service.getAskById(askvo);
+            List<AskDetailVO> askDetails = detailService.getAskDetailsByAskNo(advo);
+            
+            if (!askList.isEmpty() && askDetails != null) {
+                
+                model.addAttribute("ask", order);
+                model.addAttribute("askList", askList);
+                model.addAttribute("askDetails", askDetails);
+                return "orderComplete";
+            }
+        }
+        
+        model.addAttribute("error", "주문 정보를 불러오는데 실패했습니다.");
+        return "error";
     }	
 	
 	@RequestMapping(value = "/myorder_cancel.do", method = RequestMethod.GET)

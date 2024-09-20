@@ -16,15 +16,78 @@ public class CartVO {
 	private int optOs;
 	private int itemCount;
 	private int itemCategory;
+	private String computerTitle;
+	private int computerSalePrice;
+	private String peripheralTitle;
+	private int peripheralSalePrice;
 	private String ssdName;
 	private String hddName;
 	private String osName;
 	private int ssdPrice;
 	private int hddPrice;
 	private int osPrice;
+	private int fileNo;
+	private String filePath;
 	private List<ComputerVO> computers; // 여러 컴퓨터
     private List<PeripheralVO> peripherals; // 여러 주변기기
     private List<OptVO> opts;
+    private List<FileVO> files;
+    
+	public int getFileNo() {
+		return fileNo;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	
+	public List<FileVO> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<FileVO> files) {
+		this.files = files;
+	}
+
+	public String getComputerTitle() {
+		return computerTitle;
+	}
+
+	public int getComputerSalePrice() {
+		return computerSalePrice;
+	}
+
+	public String getPeripheralTitle() {
+		return peripheralTitle;
+	}
+
+	public int getPeripheralSalePrice() {
+		return peripheralSalePrice;
+	}
+
+	public void setComputerTitle(String computerTitle) {
+		this.computerTitle = computerTitle;
+	}
+
+	public void setComputerSalePrice(int computerSalePrice) {
+		this.computerSalePrice = computerSalePrice;
+	}
+
+	public void setPeripheralTitle(String peripheralTitle) {
+		this.peripheralTitle = peripheralTitle;
+	}
+
+	public void setPeripheralSalePrice(int peripheralSalePrice) {
+		this.peripheralSalePrice = peripheralSalePrice;
+	}
 	
 	public String getSsdName() {
 		return ssdName;

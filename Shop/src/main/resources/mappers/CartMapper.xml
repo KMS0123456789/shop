@@ -52,6 +52,15 @@
 	        <result property="optStock" column="opt_stock"/>
 	        <result property="optSalePrice" column="opt_sale_price"/>
 	    </collection>
+	   	<collection property="files" ofType="com.project.shop.progress.vo.FileVO">
+			<id property="fileNo" column="file_no"/>
+			<result property="computerNo" column="computer_no"/>
+			<result property="peripheralNo" column="peripheral_no"/>
+			<result property="fileName" column="file_name"/>
+			<result property="filePath" column="file_path"/>
+			<result property="fileSize" column="file_size"/>
+			<result property="itemCategory" column="item_category"/>
+		</collection>
 	</resultMap>
 
 	<!-- 장바구니 아이템 조회 -->
@@ -64,24 +73,10 @@
 		  (select opt_sale_price from opt where opt.opt_no = c.opt_hdd and opt_category = 1) as hdd_price,
 		  (select opt_sale_price from opt where opt.opt_no = c.opt_os and opt_category = 2) as os_price
 		FROM cart c
-		LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
-		LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
+		LEFT outer JOIN computer co ON c.computer_no = co.computer_no 
+		LEFT outer JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no 
+		LEFT outer JOIN file f ON (c.computer_no = f.computer_no OR c.peripheral_no = f.peripheral_no)
 		WHERE c.cart_user = #{cartUser}
-	</select>
-
-	<!-- 주문 아이템 조회 -->
-    <select id="getCartItemsByUser" parameterType="string" resultMap="cartMap" >
-        SELECT *,
-		  (select opt_name from opt where c.opt_ssd = opt.opt_no) as ssd_name,
-		  (select opt_name from opt where c.opt_hdd = opt.opt_no) as hdd_name,
-		  (select opt_name from opt where c.opt_os = opt.opt_no) as os_name,
-		  (select opt_sale_price from opt where opt.opt_no = c.opt_ssd and opt_category = 0) as ssd_price,
-		  (select opt_sale_price from opt where opt.opt_no = c.opt_hdd and opt_category = 1) as hdd_price,
-		  (select opt_sale_price from opt where opt.opt_no = c.opt_os and opt_category = 2) as os_price
-	    FROM cart c
-	    LEFT JOIN computer co ON c.computer_no = co.computer_no AND c.item_category = 0
-	    LEFT JOIN peripheral pe ON c.peripheral_no = pe.peripheral_no AND c.item_category = 1
-	    WHERE c.cart_user = #{cartUser}
 	</select>
 
 	<!-- cartNo로 아이템을 조회 -->
@@ -92,26 +87,35 @@
 		  (select opt_name from opt where c.opt_os = opt.opt_no) as os_name,
 		  (select opt_sale_price from opt where opt.opt_no = c.opt_ssd and opt_category = 0) as ssd_price,
 		  (select opt_sale_price from opt where opt.opt_no = c.opt_hdd and opt_category = 1) as hdd_price,
-		  (select opt_sale_price from opt where opt.opt_no = c.opt_os and opt_category = 2) as os_price
+		  (select opt_sale_price from opt where opt.opt_no = c.opt_os and opt_category = 2) as os_price,
+		  f.file_path as filePath
         FROM 
             cart c
-            LEFT JOIN computer com ON c.computer_no = com.computer_no
-            LEFT JOIN peripheral per ON c.peripheral_no = per.peripheral_no
+            LEFT outer JOIN computer com ON c.computer_no = com.computer_no
+            LEFT outer JOIN peripheral per ON c.peripheral_no = per.peripheral_no
+            LEFT outer JOIN file f ON (c.computer_no = f.computer_no OR c.peripheral_no = f.peripheral_no)
         WHERE 
             c.cart_no = #{cartNo}
     </select>
+    
+    <select id="selectComputerByNo" parameterType="int" resultType="com.project.shop.computer.vo.ComputerVO">
+	    SELECT com.*, f.file_path AS filePath
+	    FROM computer com
+	    LEFT JOIN file f ON com.computer_no = f.computer_no
+	    WHERE com.computer_no = #{computerNo}
+	</select>
+		
+	<select id="selectPeripheralByNo" parameterType="int" resultType="com.project.shop.computer.vo.PeripheralVO">
+	    SELECT per.*, f.file_path AS filePath
+	    FROM peripheral per
+	    LEFT JOIN file f ON per.peripheral_no = f.peripheral_no
+	    WHERE per.peripheral_no = #{peripheralNo}
+	</select>
+    
 
     <delete id="deleteAllByUserEmail" parameterType="string">
         DELETE FROM CART WHERE cart_user = #{cartUser}
     </delete>
-    
-    <select id="selectComputerByNo" parameterType="int" resultType="com.project.shop.computer.vo.ComputerVO">
-	    SELECT * FROM computer WHERE computer_no = #{computerNo}
-	</select>
-	
-	<select id="selectPeripheralByNo" parameterType="int" resultType="com.project.shop.computer.vo.PeripheralVO">
-	    SELECT * FROM peripheral WHERE peripheral_no = #{peripheralNo}
-	</select>
 	
 	<!-- 개별 상품 삭제 -->
     <delete id="deleteCartItem">
@@ -134,12 +138,12 @@
 	<!-- 컴퓨터 상세페이지에서 장바구니 담기 -->
 	<insert id="cartComputer" parameterType="com.project.shop.progress.vo.CartVO">
 		insert into cart(cart_user, computer_no, opt_ssd, opt_hdd, opt_os, item_count, item_category)
-			values(#{cartUser}, #{computerNo}, #{optSsd}, #{optHdd}, #{optOs}, 1, 0)
+			values(#{cartUser}, #{computerNo}, #{optSsd}, #{optHdd}, #{optOs}, 1, 1)
 	</insert>
 	
 	<!-- 주변기기 상세페이지에서 장바구니 담기 -->
 	<insert id="cartPeripheral" parameterType="com.project.shop.progress.vo.CartVO">
 		insert into cart(cart_user, peripheral_no, item_count, item_category)
-			values(#{cartUser}, #{peripheralNo}, 1, 1)
+			values(#{cartUser}, #{peripheralNo}, 1, 2)
 	</insert>
 </mapper>

@@ -18,8 +18,12 @@ public class AskDetailVO {
 	private int optOs;
 	private int itemCount;
 	private int itemCategory;
+	private int cartNo;
+	private String cartUser;
 	private String computerTitle;
 	private int computerSalePrice;
+	private String peripheralTitle;
+	private int peripheralSalePrice;
 	private int ssdPrice;
 	private int hddPrice;
 	private int osPrice;
@@ -27,8 +31,6 @@ public class AskDetailVO {
 	private String ssdName;
 	private String hddName;
 	private String osName;
-	private String peripheralTitle;
-	private int peripheralSalePrice;
 	private List<AskVO> asks;
 	private List<ComputerVO> computers;
 	private List<PeripheralVO> peripherals;
@@ -36,6 +38,22 @@ public class AskDetailVO {
 	private List<OptVO> opts;
 	private List<ReviewVO> reviews;
 	
+	public int getCartNo() {
+		return cartNo;
+	}
+
+	public String getCartUser() {
+		return cartUser;
+	}
+
+	public void setCartNo(int cartNo) {
+		this.cartNo = cartNo;
+	}
+
+	public void setCartUser(String cartUser) {
+		this.cartUser = cartUser;
+	}
+
 	public List<ReviewVO> getReviews() {
 		return reviews;
 	}

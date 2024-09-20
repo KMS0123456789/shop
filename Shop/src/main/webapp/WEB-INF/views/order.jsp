@@ -52,16 +52,19 @@
 				<c:forEach var="item" items="${cartItems}">
 			        <tr data-computer-no="${item.computerNo}" data-peripheral-no="${item.peripheralNo}">
 							<td class="product-info">
-							    <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
+					            <img src="<c:url value='${item.filePath}' />" alt="Product" class="product">
 							    <div>
-				                    <h3>${item.itemCategory == 0 ? item.computers[0].computerTitle : item.peripherals[0].peripheralTitle}</h3>
-				                    <c:if test="${item.itemCategory == 0}">
-				                        <p>옵션: 
-				                           SSD ${not empty item.ssdName ? item.ssdName : '-'}, 
-				                           HDD ${not empty item.hddName ? item.hddName : '-'}, 
-				                           OS ${not empty item.osName ? item.osName : '미포함'}
+				                    <h3>${item.itemCategory == 1 ? item.computers[0].computerTitle : item.peripherals[0].peripheralTitle}</h3>
+				                    <c:if test="${item.itemCategory == 1}">
+				                        <p>옵션:<br>
+				                           SSD : ${not empty item.ssdName ? item.ssdName : '-'},<br> 
+				                           HDD : ${not empty item.hddName ? item.hddName : '-'},<br>
+				                           OS : ${not empty item.osName ? item.osName : '-'}
 				                        </p>
 				                    </c:if>
+				                    <input class="opt-ssd" type="hidden" value="${item.optSsd}">
+				                    <input class="opt-hdd" type="hidden" value="${item.optHdd}">
+				                    <input class="opt-os" type="hidden" value="${item.optOs}">
 							    </div>
 							</td>
 			            <td>
@@ -71,7 +74,7 @@
 			            </td>
 			            <td class="price" style="text-align: center">
 			                <strong>
-			                    <fmt:formatNumber value="${item.itemCategory == 0 ? 
+			                    <fmt:formatNumber value="${item.itemCategory == 1 ? 
 			                        (item.computers[0].computerSalePrice + 
 			                         (empty item.ssdPrice ? 0 : item.ssdPrice) + 
 			                         (empty item.hddPrice ? 0 : item.hddPrice) + 
@@ -438,18 +441,20 @@
 	    const items = [];
 	    document.querySelectorAll('.order-items tbody tr').forEach(function(row) {
 	        const productInfoDiv = row.querySelector('.product-info');
-	        const itemCategory = productInfoDiv.querySelector('h3').textContent.includes('컴퓨터') ? 0 : 1;
-	        const computerNo = itemCategory === 0 ? parseInt(row.dataset.computerNo) : null;
-	        const peripheralNo = itemCategory === 1 ? parseInt(row.dataset.peripheralNo) : null;
+	        const itemCategory = productInfoDiv.querySelector('h3').textContent.includes('컴퓨터') ? 1 : 2;
+	        const computerNo = itemCategory === 1 ? parseInt(row.dataset.computerNo) : null;
+	        const peripheralNo = itemCategory === 2 ? parseInt(row.dataset.peripheralNo) : null;
 	        
 	        let optSsd = null, optHdd = null, optOs = null;
 	        
 	        // 컴퓨터 항목일 경우에만 옵션 정보 추출
-	        if (itemCategory === 0) {
-	            const optionText = productInfoDiv.querySelector('p').textContent;
-	            optSsd = parseInt(optionText.match(/SSD (\d+)GB/)?.[1] || 0);
-	            optHdd = parseInt(optionText.match(/HDD (\d+)GB/)?.[1] || 0);
-	            optOs = optionText.includes('OS 포함') ? 1 : 0;
+	        if (itemCategory === 1) {
+	        	optSsd = productInfoDiv.querySelector('.opt-ssd').value
+	        	optHdd = productInfoDiv.querySelector('.opt-hdd').value
+	        	optOs = productInfoDiv.querySelector('.opt-os').value
+/* 	        	ssdName = productInfoDiv.querySelector('.opt-ssd-name').value
+	        	hddName = productInfoDiv.querySelector('.opt-hdd-name').value
+	        	osName = productInfoDiv.querySelector('.opt-os-name').value */
 	        }
 
 	        const item = {
@@ -469,44 +474,45 @@
 
 	    
 	function sendPaymentInfoToServer(paymentResult) {
-	    console.log('결제 정보 전송:', paymentResult); // 결제 정보 로그 출력
+	    console.log('결제 정보 전송:', paymentResult);
 
-	    // 장바구니 아이템 정보를 가져오는 함수 호출
-	    const cartItems = getCartItemsForServer(userEmail);
+	    const cartItems = getCartItemsForServer(useremail);
 
-	    // 각 아이템의 상세 정보를 설정
-	    const askDetails = cartItems.map(item => ({
-	        computerNo: item.computerNo,  // 아이템의 컴퓨터 번호
-	        peripheralNo: item.peripheralNo,  // 아이템의 주변기기 번호
-	        optSsd: item.optSsd,  // 아이템의 SSD 옵션
-	        optHdd: item.optHdd,  // 아이템의 HDD 옵션
-	        optOs: item.optOs,  // 아이템의 OS 옵션
-	        itemCount: item.itemCount,  // 아이템 수량
-	        itemCategory: item.itemCategory  // 아이템 카테고리
-	    }));
+	    // AskVO 객체 생성
+	    const askVO = {
+	        askUser: useremail,
+	        askDetails: cartItems.map(item => ({
+	            computerNo: item.computerNo,
+	            peripheralNo: item.peripheralNo,
+	            optSsd: item.optSsd,
+	            optHdd: item.optHdd,
+	            optOs: item.optOs,
+	            itemCount: item.itemCount,
+	            itemCategory: item.itemCategory,
+	            askDetailUser: userEmail
+	        }))
+	    };
 
-	    // 서버로 결제 정보와 주문 상세 정보 전송
+	    // 로그 출력
+	    console.log("주문 정보:", askVO);
+
 	    $.ajax({
 	        url: '<c:url value="/ask/completePay.do"/>',
 	        method: 'POST',
 	        contentType: 'application/json',
-	        data: JSON.stringify({
-	            paymentInfo: paymentResult,
-	            askDetails: askDetails  // 주문 상세 정보 포함
-	        }),
+	        data: JSON.stringify([askVO]), // List<AskVO>로 전송
 	        success: function(response) {
 	            console.log('서버 응답:', response);
-	            
+
 	            if (response.status === 200) {
 	                alert(response.message);
 	                
-	                // askNo 값을 서버로부터 받아서 사용
-	                const askNo = response.askNo; // 서버에서 askNo를 반환
-
-	                if (true) {
-	                    window.location.href = '<c:url value="/ask/orderComplete.do"/>';
+	                // askList에서 첫 번째 AskVO의 askNo를 사용
+	                const firstAsk = response.askList[0];
+	                if (firstAsk && firstAsk.askNo) {
+	                    window.location.href = '<c:url value="/ask/orderComplete.do"/>?askNo=' + firstAsk.askNo;
 	                } else {
-	                    console.error('askNo 값이 서버 응답에 포함되지 않았습니다.');
+	                    console.error('askNo 값을 찾을 수 없습니다.');
 	                    alert('문제가 발생했습니다. 관리자에게 문의해 주세요.');
 	                }
 	            } else {
@@ -515,21 +521,8 @@
 	            }
 	        },
 	        error: function(xhr, status, error) {
-	            console.error("서버 요청 실패:", xhr.responseText);
-	            console.error("상태:", status);
-	            console.error("오류:", error);
-	            
-	            let errorMessage = '서버 오류가 발생했습니다. 관리자에게 문의 바랍니다.';
-	            try {
-	                const errorResponse = JSON.parse(xhr.responseText);
-	                if (errorResponse && errorResponse.message) {
-	                    errorMessage = errorResponse.message;
-	                }
-	            } catch (e) {
-	                console.error('응답 파싱 실패:', e);
-	            }
-	            
-	            alert(errorMessage);
+	            console.error('서버 에러:', xhr.responseText);
+	            alert('결제 처리 중 오류가 발생했습니다.');
 	        }
 	    });
 	}
@@ -575,5 +568,7 @@
 	           }
 	       }).open();
 	}
+	
+	console.log("${cartItems}")
 	</script>
 </html>

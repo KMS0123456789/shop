@@ -46,8 +46,8 @@ public class AskServiceImpl implements AskService{
     }
     
     @Override
-    public AskVO getAskById(AskVO vo) {
-        return repository.getAskById(vo);
+    public List<AskVO> getAskById(AskVO askvo) {
+        return repository.getAskById(askvo);
     }
 
 	@Override

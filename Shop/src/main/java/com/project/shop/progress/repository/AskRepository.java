@@ -31,11 +31,11 @@ public class AskRepository {
     	return template.selectOne(NAME_SPACE + ".selectlastone");
     }
     
-	public AskVO getAskById(AskVO vo){
-		HashMap<String, Object> map=new HashMap<>();
-		map.put("askNo", vo.getAskNo());
-		return template.selectOne(NAME_SPACE + ".getAskById", map);
-	}
+    public List<AskVO> getAskById(AskVO askvo) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("askNo", askvo.getAskNo());
+        return template.selectList(NAME_SPACE + ".getAskById", map);
+    }
 	
     // Ask 테이블에 데이터 삽입
     public void insertAsk(AskVO ask) {

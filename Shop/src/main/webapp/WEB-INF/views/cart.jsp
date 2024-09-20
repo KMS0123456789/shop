@@ -32,7 +32,7 @@
 					            <td>
 					                <input type="checkbox" class="item-checkbox" name="checkedItem" 
 					                       value="${item.cartNo}" 
-					                       data-price="${item.itemCategory == 0 ? 
+					                       data-price="${item.itemCategory == 1 ? 
 					                           (item.computers[0].computerSalePrice + 
 					                            (empty item.ssdPrice ? 0 : item.ssdPrice) + 
 					                            (empty item.hddPrice ? 0 : item.hddPrice) + 
@@ -40,14 +40,15 @@
 					                           item.peripherals[0].peripheralSalePrice}">
 					            </td>
 					            <td class="product-info">
-					                <img src="<c:url value='/resources/image/' /><c:out value='${item.itemCategory == 0 ? "computer.png" : "peripheral.png"}' />" alt="Product">
+					            	<input type="hidden" name="filePath_${item.cartNo}" value="${item.files[0].filePath}" />
+					            	<img src="<c:url value='${item.files[0].filePath}' />" alt="Product" class="product">
 					                <div>
-					                    <h3>${item.itemCategory == 0 ? item.computers[0].computerTitle : item.peripherals[0].peripheralTitle}</h3>
-					                    <c:if test="${item.itemCategory == 0}">
-					                        <p>옵션: 
-					                           SSD ${not empty item.ssdName ? item.ssdName : '-'}, 
-					                           HDD ${not empty item.hddName ? item.hddName : '-'}, 
-					                           OS ${not empty item.osName ? item.osName : '미포함'}
+					                    <h3>${item.itemCategory == 1 ? item.computers[0].computerTitle : item.peripherals[0].peripheralTitle}</h3>
+					                    <c:if test="${item.itemCategory == 1}">
+					                        <p>옵션:<br>
+					                           SSD : ${not empty item.ssdName ? item.ssdName : '-'},<br> 
+					                           HDD : ${not empty item.hddName ? item.hddName : '-'},<br>
+					                           OS : ${not empty item.osName ? item.osName : '-'}
 					                        </p>
 					                    </c:if>
 					                </div>
@@ -59,7 +60,7 @@
 					            </td>
 					            <td class="price">
 					                <strong>
-					                    <fmt:formatNumber value="${item.itemCategory == 0 ? 
+					                    <fmt:formatNumber value="${item.itemCategory == 1 ? 
 					                        (item.computers[0].computerSalePrice + 
 					                         (empty item.ssdPrice ? 0 : item.ssdPrice) + 
 					                         (empty item.hddPrice ? 0 : item.hddPrice) + 
@@ -262,7 +263,7 @@
 		    }
 		});
 	    
-
+		// 총 가격 업데이트 함수
 	    function updateTotalPrice() {
 	        let totalProductPrice = 0;
 	        

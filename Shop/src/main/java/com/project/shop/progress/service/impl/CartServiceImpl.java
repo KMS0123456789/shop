@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.shop.computer.vo.ComputerVO;
+import com.project.shop.computer.vo.PeripheralVO;
 import com.project.shop.progress.repository.CartRepository;
 import com.project.shop.progress.service.CartService;
 import com.project.shop.progress.vo.CartVO;
@@ -28,10 +30,14 @@ public class CartServiceImpl implements CartService{
 	        CartVO item = repository.selectItemByCartNo(cartNo);
 	        if (item != null) {
 	            // 컴퓨터 또는 주변기기 정보 설정
-	            if (item.getItemCategory() == 0) {
-	                item.setComputers(repository.selectComputerByNo(item.getComputerNo()));
+	            if (item.getItemCategory() == 1) {
+	                List<ComputerVO> computers = repository.selectComputerByNo(item.getComputerNo());
+	                item.setComputers(computers);
+	                item.setFiles(computers.get(0).getFiles()); // 컴퓨터에 연결된 파일 설정
 	            } else {
-	                item.setPeripherals(repository.selectPeripheralByNo(item.getPeripheralNo()));
+	                List<PeripheralVO> peripherals = repository.selectPeripheralByNo(item.getPeripheralNo());
+	                item.setPeripherals(peripherals);
+	                item.setFiles(peripherals.get(0).getFiles()); // 주변기기에 연결된 파일 설정
 	            }
 	            selectedItems.add(item);
 	        }
@@ -39,11 +45,6 @@ public class CartServiceImpl implements CartService{
 	    
 	    return selectedItems;
 	}
-
-    @Override
-    public List<CartVO> getCartItemsByUser(String user) {
-        return repository.getCartItemsByUser(user);
-    }
     
     @Override
     public List<CartVO> getCartItemsWithDetails(String userId) {
