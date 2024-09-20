@@ -94,7 +94,6 @@ public class AskController {
                 model.addAttribute("ask", order);
                 model.addAttribute("askList", askList);
                 model.addAttribute("askDetails", askDetails);
-                System.out.println(askDetails);
                 return "orderComplete";
             }
         }
