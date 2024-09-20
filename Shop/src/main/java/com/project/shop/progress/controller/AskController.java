@@ -94,10 +94,10 @@ public class AskController {
                 model.addAttribute("ask", order);
                 model.addAttribute("askList", askList);
                 model.addAttribute("askDetails", askDetails);
+                System.out.println(askDetails);
                 return "orderComplete";
             }
         }
-        
         model.addAttribute("error", "주문 정보를 불러오는데 실패했습니다.");
         return "error";
     }	

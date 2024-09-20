@@ -50,7 +50,7 @@
             </thead>
             <tbody>
 				<c:forEach var="item" items="${cartItems}">
-			        <tr data-computer-no="${item.computerNo}" data-peripheral-no="${item.peripheralNo}">
+					<tr data-item-category="${item.itemCategory}" data-computer-no="${item.computerNo}" data-peripheral-no="${item.peripheralNo}">
 							<td class="product-info">
 					            <img src="<c:url value='${item.filePath}' />" alt="Product" class="product">
 							    <div>
@@ -441,9 +441,10 @@
 	    const items = [];
 	    document.querySelectorAll('.order-items tbody tr').forEach(function(row) {
 	        const productInfoDiv = row.querySelector('.product-info');
-	        const itemCategory = productInfoDiv.querySelector('h3').textContent.includes('컴퓨터') ? 1 : 2;
-	        const computerNo = itemCategory === 1 ? parseInt(row.dataset.computerNo) : null;
-	        const peripheralNo = itemCategory === 2 ? parseInt(row.dataset.peripheralNo) : null;
+	        const itemCategory = parseInt(row.dataset.itemCategory);
+	        const computerNo = row.dataset.computerNo ? parseInt(row.dataset.computerNo) : null;
+	        const peripheralNo = row.dataset.peripheralNo ? parseInt(row.dataset.peripheralNo) : null;
+	        
 	        
 	        let optSsd = null, optHdd = null, optOs = null;
 	        
@@ -452,9 +453,6 @@
 	        	optSsd = productInfoDiv.querySelector('.opt-ssd').value
 	        	optHdd = productInfoDiv.querySelector('.opt-hdd').value
 	        	optOs = productInfoDiv.querySelector('.opt-os').value
-/* 	        	ssdName = productInfoDiv.querySelector('.opt-ssd-name').value
-	        	hddName = productInfoDiv.querySelector('.opt-hdd-name').value
-	        	osName = productInfoDiv.querySelector('.opt-os-name').value */
 	        }
 
 	        const item = {

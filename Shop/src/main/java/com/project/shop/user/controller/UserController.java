@@ -120,7 +120,7 @@ public class UserController {
                 return "redirect:/?loginSuccess=true";  // 로그인 성공 후 홈으로 리다이렉트, 성공 여부 전달
             }
 
-            return "redirect:/user/login.do";  // 가입되지 않은 사용자는 로그인 페이지로 리다이렉트
+            return "redirect:/";  // 가입되지 않은 사용자는 홈으로 리다이렉트
         } catch (Exception e) {
             e.printStackTrace();  // 에러 발생 시 스택 트레이스를 출력
             return "error";  // 에러 페이지로 이동
