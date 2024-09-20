@@ -11,6 +11,9 @@
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.4.1/swiper-bundle.min.js"></script>
 	   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/7.4.1/swiper-bundle.css">
 	</head>
+	<script type="text/javascript">
+		alert("아이디 : 1414sell@naver.com 비밀번호 : 1q2w3e4r! 입니다")
+	</script>
 	<body>
 		<div class="wrap">
 			<%@ include file="./includes/homeheader.jsp" %>
